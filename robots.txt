@@ -1,0 +1,5 @@
+# https://sourdoughdatabase.com/robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://sourdoughdatabase.com/sitemap.xml

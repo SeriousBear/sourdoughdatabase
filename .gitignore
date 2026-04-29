@@ -1,0 +1,27 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if we add a build step later)
+node_modules/
+npm-debug.log*
+
+# Local env files (NEVER commit these — they contain secrets like Supabase keys)
+.env
+.env.local
+.env.*.local
+
+# Build output (if we add a build step later)
+dist/
+build/
+
+# Netlify local config
+.netlify/

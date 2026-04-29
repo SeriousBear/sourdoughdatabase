@@ -1,0 +1,47 @@
+# =================================================================
+# NETLIFY CONFIGURATION
+# Tells Netlify how to build and serve sourdoughdatabase.com
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+# =================================================================
+
+[build]
+  # We're not using a build tool yet (pure HTML/CSS), so just publish the root
+  publish = "."
+
+# =================================================================
+# SECURITY HEADERS
+# These get applied to every page served from your site.
+# =================================================================
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevents clickjacking — no other site can embed yours in an iframe
+    X-Frame-Options = "DENY"
+    # Stops browsers from MIME-sniffing (a small XSS hardening)
+    X-Content-Type-Options = "nosniff"
+    # Limits how much referrer info leaks to other sites
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Disables features your site doesn't use
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# =================================================================
+# CACHING
+# Tells the browser/CDN how long to cache static files.
+# Long cache for assets (they have hashed names if/when we build),
+# short cache for HTML so updates show up fast.
+# =================================================================
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# =================================================================
+# REDIRECTS
+# Netlify automatically serves 404.html for missing pages —
+# no explicit rule needed.
+# =================================================================
