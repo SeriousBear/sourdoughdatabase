@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hydration Calculator — The Sourdough Database</title>
+  <meta name="description" content="Two calculators in one notebook page: figure out your starter's hydration ratio, or do the full math on your bread recipe. With explanations, because the words in sourdough are confusing on purpose.">
+
+  <link rel="canonical" href="https://sourdoughdatabase.com/tools/hydration.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/tools/hydration.html">
+  <meta property="og:title" content="Hydration Calculator — The Sourdough Database">
+  <meta property="og:description" content="Starter or dough — get the math right, then learn what it means for your loaf.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hydration Calculator — The Sourdough Database">
+  <meta name="twitter:description" content="Starter or dough — get the math right, then learn what it means for your loaf.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+
+<div class="binding"></div>
+<div class="holes">
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+</div>
+
+<header>
+  <a href="/" class="logo">
+    The Sourdough Database<span class="dot"></span>
+  </a>
+  <nav class="nav">
+    <a href="/">home</a>
+    <a href="/#starters">starters</a>
+    <a href="/#flours">flours</a>
+    <a href="/#tools" class="active">tools</a>
+    <a href="/#journal">journal</a>
+  </nav>
+</header>
+
+<main class="tool-page">
+
+  <div class="tool-header">
+    <div class="breadcrumb">
+      <a href="/">home</a>
+      <span class="sep">/</span>
+      <a href="/#tools">tools</a>
+      <span class="sep">/</span>
+      <span>hydration calculator</span>
+    </div>
+
+    <h1>the <em>hydration</em> calculator</h1>
+    <p class="tool-tagline">
+      Two calculators in one notebook page. One for your starter, one for your dough — because they're
+      different things, and most people learn that the hard way.
+    </p>
+  </div>
+
+  <!-- INTRO / WHY THIS MATTERS -->
+  <section class="tool-intro">
+    <h2>What this is &amp; why it matters</h2>
+
+    <p>
+      Hydration is just a fancy word for <em>"how much water is in this thing, relative to flour?"</em> Bakers
+      use it because it travels: a 75% hydration loaf in your kitchen behaves the same as a 75% hydration loaf
+      in mine, even though our loaves are different sizes.
+    </p>
+
+    <p>
+      Two places this number shows up in sourdough — your <strong>starter</strong> (the jar of bubbly flour-water
+      goo) and your <strong>dough</strong> (the actual bread). They get measured separately because they do
+      different jobs. Pick a tab below for the one you need.
+    </p>
+
+    <div class="reassure">
+      ✎ A note: nobody nails this on the first try. Or the fifth. Hydration is the variable bakers spend
+      <em>years</em> learning to feel in their hands. The math is just the starting point — your kitchen, your
+      flour, your hands all weigh in too. (Unless you're my mom, in which case it'll be almost perfect on the
+      first try, and she'll act surprised.)
+    </div>
+  </section>
+
+  <!-- TAB STRIP -->
+  <div class="tab-strip" role="tablist">
+    <button class="tab active" role="tab" data-tab="starter" aria-selected="true">
+      <span class="num">tab 01</span>
+      Starter Hydration
+    </button>
+    <button class="tab" role="tab" data-tab="dough" aria-selected="false">
+      <span class="num">tab 02</span>
+      Dough Hydration
+    </button>
+  </div>
+
+  <!-- ============ STARTER PANEL ============ -->
+  <section class="tab-panel active" id="panel-starter" role="tabpanel">
+
+    <h3 class="panel-section-title">your <em>starter</em>, decoded</h3>
+    <p class="panel-explain">
+      A starter (or "levain" if you're feeling French) is just flour and water that's been encouraged to host wild
+      yeast and bacteria. Its hydration is the ratio of water to flour, by weight. Most American recipes assume
+      a <strong>100% hydration starter</strong> — equal weights of flour and water — which has the consistency
+      of thick pancake batter. Stiffer starters (50–65%) are common in Italy and behave differently: slower,
+      milder, longer-lasting between feeds.
+    </p>
+
+    <div class="calc-grid">
+
+      <!-- Inputs -->
+      <div class="calc-inputs">
+
+        <div class="input-group">
+          <label for="starter-flour">Flour fed to starter</label>
+          <span class="label-hint">when you do a feed, how many grams of flour go in?</span>
+          <div class="input-row">
+            <input type="number" id="starter-flour" min="0" step="1" value="50">
+            <span class="unit">grams</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="starter-water">Water fed to starter</label>
+          <span class="label-hint">how many grams of water at the same feed?</span>
+          <div class="input-row">
+            <input type="number" id="starter-water" min="0" step="1" value="50">
+            <span class="unit">grams</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>quick presets</label>
+          <div class="preset-row">
+            <button class="preset" data-flour="50" data-water="50" data-tab="starter">100% (standard)</button>
+            <button class="preset" data-flour="50" data-water="42" data-tab="starter">85% (a bit firmer)</button>
+            <button class="preset" data-flour="50" data-water="30" data-tab="starter">60% (stiff/Italian)</button>
+            <button class="preset" data-flour="40" data-water="50" data-tab="starter">125% (rye-style)</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Results -->
+      <div class="calc-results">
+
+        <div class="big-result">
+          <div class="label">Starter hydration</div>
+          <div class="value"><span id="starter-pct">100</span><span class="pct">%</span></div>
+        </div>
+
+        <div class="breakdown">
+          <div class="row">
+            <span class="label">Flour</span>
+            <span class="val"><span id="starter-flour-out">50</span> g</span>
+          </div>
+          <div class="row">
+            <span class="label">Water</span>
+            <span class="val"><span id="starter-water-out">50</span> g</span>
+          </div>
+          <div class="row total">
+            <span class="label">Total starter weight</span>
+            <span class="val"><span id="starter-total-out">100</span> g</span>
+          </div>
+        </div>
+
+        <div class="interpretation" id="starter-interp">
+          <strong>Standard liquid starter</strong>
+          You've got the all-purpose American sourdough starter. Fast, predictable, peaks in 4–6 hours at
+          room temp. What 90% of online recipes assume.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ADVANCED STARTER -->
+    <details class="advanced">
+      <summary>
+        <span><span class="a-num">advanced</span>I want a specific hydration — work backwards</span>
+      </summary>
+      <div class="a-body">
+        <p class="a-intro">
+          Trying to dial your starter to a specific hydration on purpose? Tell us how much flour you've got and
+          what hydration you're shooting for, and we'll calculate the water.
+        </p>
+
+        <div class="calc-grid">
+          <div class="calc-inputs">
+            <div class="input-group">
+              <label for="reverse-flour">Flour available</label>
+              <div class="input-row">
+                <input type="number" id="reverse-flour" min="0" step="1" value="100">
+                <span class="unit">grams</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="reverse-target">Target hydration</label>
+              <div class="input-row">
+                <input type="number" id="reverse-target" min="0" max="200" step="1" value="65">
+                <span class="unit">%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-results">
+            <div class="big-result">
+              <div class="label">Add this much water</div>
+              <div class="value"><span id="reverse-water">65</span></div>
+            </div>
+            <div class="breakdown">
+              <div class="row">
+                <span class="label">Flour</span>
+                <span class="val"><span id="reverse-flour-out">100</span> g</span>
+              </div>
+              <div class="row">
+                <span class="label">Water</span>
+                <span class="val"><span id="reverse-water-out">65</span> g</span>
+              </div>
+              <div class="row total">
+                <span class="label">Final starter weight</span>
+                <span class="val"><span id="reverse-total">165</span> g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- TIPS BLOCK -->
+    <div class="tips-block">
+      <h3>things worth trying</h3>
+      <ul>
+        <li><strong>Stiffer is sweeter.</strong> Drop your starter to ~65% for a few weeks. The yeast outpaces the bacteria, and your bread will taste milder, more wheat-forward, less tangy.</li>
+        <li><strong>Wetter is faster.</strong> Bump to 110–125% (especially with rye) and the starter will peak in half the time. Useful when you forgot to feed it.</li>
+        <li><strong>Match your feed schedule to hydration.</strong> A 100% starter wants feeding every 8–12 hours at room temp. A 60% starter will hold for 24+ hours. Pick what fits your life.</li>
+        <li><strong>Don't switch hydration mid-recipe.</strong> Recipes are written for a specific starter consistency. If yours is different, the dough hydration changes too. (Use Tab 02 to recalculate.)</li>
+      </ul>
+    </div>
+
+    <div class="encouragement">
+      <div class="scribble">
+        if your first starter is too wet, too dry,<br>
+        or just confusing — you're doing it right.
+      </div>
+      <div class="signoff">— xo, the kitchen</div>
+    </div>
+
+  </section>
+
+  <!-- ============ DOUGH PANEL ============ -->
+  <section class="tab-panel" id="panel-dough" role="tabpanel">
+
+    <h3 class="panel-section-title">your <em>dough</em>, by the numbers</h3>
+    <p class="panel-explain">
+      Dough hydration is the ratio of <em>all</em> the water in your dough to <em>all</em> the flour, by weight.
+      The catch most beginners miss: your starter contains both flour and water, and they count too. A 100g blob
+      of 100% starter is really 50g flour + 50g water in disguise. This calculator does the bookkeeping for you.
+      Higher hydration → wetter dough, more open crumb, harder to shape. Lower hydration → tighter crumb, easier
+      handling, denser bread.
+    </p>
+
+    <div class="calc-grid">
+
+      <!-- Inputs -->
+      <div class="calc-inputs">
+
+        <div class="input-group">
+          <label for="dough-flour">Main flour</label>
+          <span class="label-hint">the flour in the recipe (not counting starter)</span>
+          <div class="input-row">
+            <input type="number" id="dough-flour" min="0" step="1" value="500">
+            <span class="unit">grams</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="dough-water">Water added</label>
+          <span class="label-hint">water you pour into the bowl (not the starter's water)</span>
+          <div class="input-row">
+            <input type="number" id="dough-water" min="0" step="1" value="350">
+            <span class="unit">grams</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="dough-starter">Starter / levain weight</label>
+          <span class="label-hint">total weight of the starter you add</span>
+          <div class="input-row">
+            <input type="number" id="dough-starter" min="0" step="1" value="100">
+            <span class="unit">grams</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="dough-starter-hyd">Starter hydration</label>
+          <span class="label-hint">use Tab 01 if you don't know — defaults to 100%</span>
+          <div class="input-row">
+            <input type="number" id="dough-starter-hyd" min="0" max="200" step="1" value="100">
+            <span class="unit">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="dough-salt">Salt</label>
+          <span class="label-hint">most loaves are 1.8–2.2% — about 10g per 500g flour</span>
+          <div class="input-row">
+            <input type="number" id="dough-salt" min="0" step="0.5" value="10">
+            <span class="unit">grams</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Results -->
+      <div class="calc-results">
+
+        <div class="big-result">
+          <div class="label">Total dough hydration</div>
+          <div class="value"><span id="dough-pct">78</span><span class="pct">%</span></div>
+        </div>
+
+        <div class="breakdown">
+          <div class="row">
+            <span class="label">Total flour (incl. starter)</span>
+            <span class="val"><span id="dough-total-flour">550</span> g</span>
+          </div>
+          <div class="row">
+            <span class="label">Total water (incl. starter)</span>
+            <span class="val"><span id="dough-total-water">400</span> g</span>
+          </div>
+          <div class="row">
+            <span class="label">Starter contribution</span>
+            <span class="val">+50 g flour, +50 g water</span>
+          </div>
+          <div class="row">
+            <span class="label">Salt %</span>
+            <span class="val"><span id="dough-salt-pct">1.82</span>%</span>
+          </div>
+          <div class="row">
+            <span class="label">Levain %</span>
+            <span class="val"><span id="dough-levain-pct">18.2</span>%</span>
+          </div>
+          <div class="row total">
+            <span class="label">Total dough weight</span>
+            <span class="val"><span id="dough-total">960</span> g</span>
+          </div>
+        </div>
+
+        <div class="interpretation" id="dough-interp">
+          <strong>Sweet spot — open crumb territory</strong>
+          76–80% is where most modern country loaves live. Wet enough for big airy holes, dry enough to handle
+          if you've practiced your stretches and folds.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ADVANCED DOUGH -->
+    <details class="advanced">
+      <summary>
+        <span><span class="a-num">advanced</span>multi-flour blends, baker's percentages, scaling</span>
+      </summary>
+      <div class="a-body">
+        <p class="a-intro">
+          Real recipes mix flours — some bread flour, some whole wheat, a touch of rye. Add as many flours as
+          you want. We'll calculate the blended hydration and show baker's percentages for everything (every
+          ingredient as a % of total flour weight, the language professional recipes are written in).
+        </p>
+
+        <div id="flour-rows">
+          <div class="flour-row header">
+            <span class="h">flour name</span>
+            <span class="h">grams</span>
+            <span class="h"></span>
+          </div>
+          <div class="flour-row">
+            <input type="text" class="flour-input flour-name-input" value="Bread flour" placeholder="e.g. Bread flour">
+            <input type="number" class="flour-input flour-amount" value="450" min="0" step="1">
+            <button class="remove-row" title="Remove">×</button>
+          </div>
+          <div class="flour-row">
+            <input type="text" class="flour-input flour-name-input" value="Whole wheat" placeholder="e.g. Whole wheat">
+            <input type="number" class="flour-input flour-amount" value="50" min="0" step="1">
+            <button class="remove-row" title="Remove">×</button>
+          </div>
+        </div>
+        <button class="add-flour-btn" id="add-flour">+ add another flour</button>
+
+        <div style="margin-top: 32px;">
+          <h4 class="panel-section-title" style="font-size: 26px;">baker's <em>percentages</em></h4>
+          <div class="breakdown" id="bakers-pct" style="margin-top: 12px;">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- TIPS BLOCK -->
+    <div class="tips-block">
+      <h3>things worth trying</h3>
+      <ul>
+        <li><strong>Start at 70%.</strong> If you're new, your first loaves should sit at 68–72% hydration. The dough is forgiving, shapeable, and the loaf will still have nice open crumb. Push higher only after you've baked a few good ones.</li>
+        <li><strong>Whole grains drink more.</strong> If you swap bread flour for whole wheat or rye, add 3–5% more water. Whole grains absorb more — without that adjustment, your dough will feel weirdly stiff.</li>
+        <li><strong>Salt is non-negotiable.</strong> 1.8–2.2% of flour weight. Less and your bread tastes flat; more and the yeast sulks. The recipe knows.</li>
+        <li><strong>The starter hides water.</strong> 20% levain at 100% hydration adds 10% to your dough's water count. Forget this and your "75%" loaf is actually 82% — and you'll wonder why it's a puddle.</li>
+        <li><strong>Pay attention to the dough, not the recipe.</strong> Same hydration feels different on different days. Cold flour, dry winter air, a different brand — all of it matters. The math gets you to the parking lot. Your hands park the car.</li>
+      </ul>
+    </div>
+
+    <div class="encouragement">
+      <div class="scribble">
+        a flat first loaf is not a failed loaf.<br>
+        it's the loaf that taught you something.
+      </div>
+      <div class="signoff">— save the math, log the bake, try again Sunday</div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand">The Sourdough Database</div>
+      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
+    </div>
+    <div class="foot-col">
+      <h5>The Database</h5>
+      <ul>
+        <li><a href="/#starters">starter index</a></li>
+        <li><a href="/#flours">flours</a></li>
+        <li><a href="/#journal">journal</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Tools</h5>
+      <ul>
+        <li><a href="/tools/hydration.html">hydration solver</a></li>
+        <li>schedule builder <small style="opacity:0.6">(soon)</small></li>
+        <li>crumb analyzer <small style="opacity:0.6">(soon)</small></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="/">the story</a></li>
+        <li>contact</li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© MMXXVI · The Sourdough Database</span>
+    <span>set in caveat, special elite &amp; crimson pro</span>
+    <span>made with flour on our hands</span>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ============ TAB SWITCHER ============
+  const tabs = document.querySelectorAll('.tab-strip .tab');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => {
+        t.classList.toggle('active', t === tab);
+        t.setAttribute('aria-selected', t === tab);
+      });
+      panels.forEach(p => {
+        p.classList.toggle('active', p.id === 'panel-' + target);
+      });
+    });
+  });
+
+  // ============ STARTER CALCULATOR ============
+  const starterFlour = document.getElementById('starter-flour');
+  const starterWater = document.getElementById('starter-water');
+  const starterPct = document.getElementById('starter-pct');
+  const starterFlourOut = document.getElementById('starter-flour-out');
+  const starterWaterOut = document.getElementById('starter-water-out');
+  const starterTotalOut = document.getElementById('starter-total-out');
+  const starterInterp = document.getElementById('starter-interp');
+
+  function interpretStarterHyd(pct) {
+    if (pct < 50) {
+      return ['Very stiff', 'This is dryer than typical pasta dough — borderline impossible to mix by hand. Double-check your numbers, or you\'ve invented a new bread.'];
+    } else if (pct < 70) {
+      return ['Stiff starter (lievito madre territory)', 'Italian style. Slow fermentation, mild flavor, holds for 24+ hours between feeds. Excellent for panettone and brioche, gentle for everyday loaves.'];
+    } else if (pct < 90) {
+      return ['Firm liquid starter', 'In between. Slower than 100%, faster than stiff. Holds well, behaves predictably. A great middle ground.'];
+    } else if (pct <= 110) {
+      return ['Standard liquid starter', 'You\'ve got the all-purpose American sourdough starter. Fast, predictable, peaks in 4–6 hours at room temp. What 90% of online recipes assume.'];
+    } else if (pct <= 140) {
+      return ['Wet starter (rye-friendly)', 'On the wetter end. Common for rye starters, which need extra water to stay active. Faster fermentation, wider window between under and over.'];
+    } else {
+      return ['Soup', 'This is more water than flour, by a lot. Which is fine for some experimental rye or "old levain" methods, but unusual. Make sure you didn\'t reverse the numbers.'];
+    }
+  }
+
+  function updateStarter() {
+    const f = parseFloat(starterFlour.value) || 0;
+    const w = parseFloat(starterWater.value) || 0;
+    const pct = f > 0 ? (w / f) * 100 : 0;
+
+    starterPct.textContent = pct.toFixed(0);
+    starterFlourOut.textContent = f.toFixed(0);
+    starterWaterOut.textContent = w.toFixed(0);
+    starterTotalOut.textContent = (f + w).toFixed(0);
+
+    const [title, body] = interpretStarterHyd(pct);
+    starterInterp.innerHTML = '<strong>' + title + '</strong>' + body;
+  }
+
+  starterFlour.addEventListener('input', updateStarter);
+  starterWater.addEventListener('input', updateStarter);
+
+  // Starter presets
+  document.querySelectorAll('.preset[data-tab="starter"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      starterFlour.value = btn.dataset.flour;
+      starterWater.value = btn.dataset.water;
+      updateStarter();
+    });
+  });
+
+  // ============ REVERSE STARTER (advanced) ============
+  const reverseFlour = document.getElementById('reverse-flour');
+  const reverseTarget = document.getElementById('reverse-target');
+  const reverseWater = document.getElementById('reverse-water');
+  const reverseFlourOut = document.getElementById('reverse-flour-out');
+  const reverseWaterOut = document.getElementById('reverse-water-out');
+  const reverseTotal = document.getElementById('reverse-total');
+
+  function updateReverse() {
+    const f = parseFloat(reverseFlour.value) || 0;
+    const t = parseFloat(reverseTarget.value) || 0;
+    const w = (f * t) / 100;
+
+    reverseWater.textContent = w.toFixed(0);
+    reverseFlourOut.textContent = f.toFixed(0);
+    reverseWaterOut.textContent = w.toFixed(0);
+    reverseTotal.textContent = (f + w).toFixed(0);
+  }
+
+  reverseFlour.addEventListener('input', updateReverse);
+  reverseTarget.addEventListener('input', updateReverse);
+
+  // ============ DOUGH CALCULATOR ============
+  const doughFlour = document.getElementById('dough-flour');
+  const doughWater = document.getElementById('dough-water');
+  const doughStarter = document.getElementById('dough-starter');
+  const doughStarterHyd = document.getElementById('dough-starter-hyd');
+  const doughSalt = document.getElementById('dough-salt');
+
+  const doughPct = document.getElementById('dough-pct');
+  const doughTotalFlour = document.getElementById('dough-total-flour');
+  const doughTotalWater = document.getElementById('dough-total-water');
+  const doughSaltPct = document.getElementById('dough-salt-pct');
+  const doughLevainPct = document.getElementById('dough-levain-pct');
+  const doughTotal = document.getElementById('dough-total');
+  const doughInterp = document.getElementById('dough-interp');
+
+  function interpretDoughHyd(pct) {
+    if (pct < 60) {
+      return ['Very tight', 'This is bagel/pretzel territory. Excellent for chewy, dense breads but not what most country loaves want. If this was supposed to be sandwich bread, add water.'];
+    } else if (pct < 68) {
+      return ['Tight & forgiving', 'Easy to handle, tighter crumb, dense slice. Good for sandwich loaves, focaccia bases, beginners. Won\'t blow up like a balloon — won\'t fight you either.'];
+    } else if (pct < 75) {
+      return ['Beginner sweet spot', 'Where most home bakers find their groove. Manageable, with enough water for visible openness. Bake 5 of these before you push higher.'];
+    } else if (pct < 82) {
+      return ['Open crumb territory', '76–80% is where most modern country loaves live. Wet enough for big airy holes, dry enough to handle if you\'ve practiced your stretches and folds.'];
+    } else if (pct < 90) {
+      return ['High hydration', 'Slack dough, big bubbles, demands skill. The crumb that wins Instagram. Use a bench scraper, work cold, and trust the process — even if it looks like soup at first.'];
+    } else if (pct < 100) {
+      return ['Very wet — ciabatta land', 'Pancake-batter consistency. You\'re not shaping this so much as guiding it. Common for ciabatta, focaccia, and English muffins.'];
+    } else {
+      return ['Effectively a batter', 'Above 100% the dough won\'t hold any shape on its own. This is for poured doughs — crumpets, certain rye breads, pancakes. Probably not what you wanted for sandwich bread.'];
+    }
+  }
+
+  function updateDough() {
+    const flour = parseFloat(doughFlour.value) || 0;
+    const water = parseFloat(doughWater.value) || 0;
+    const starter = parseFloat(doughStarter.value) || 0;
+    const starterHyd = parseFloat(doughStarterHyd.value) || 0;
+    const salt = parseFloat(doughSalt.value) || 0;
+
+    // Starter breakdown: hydration is water/flour, so
+    // starter weight = flour_in_starter + water_in_starter
+    // water_in_starter = flour_in_starter * (hyd/100)
+    // -> flour_in_starter = starter / (1 + hyd/100)
+    const starterFlourPart = starter / (1 + starterHyd / 100);
+    const starterWaterPart = starter - starterFlourPart;
+
+    const totalFlour = flour + starterFlourPart;
+    const totalWater = water + starterWaterPart;
+    const totalDough = totalFlour + totalWater + salt;
+
+    const hyd = totalFlour > 0 ? (totalWater / totalFlour) * 100 : 0;
+    const saltPct = totalFlour > 0 ? (salt / totalFlour) * 100 : 0;
+    const levainPct = totalFlour > 0 ? (starter / totalFlour) * 100 : 0;
+
+    doughPct.textContent = hyd.toFixed(0);
+    doughTotalFlour.textContent = totalFlour.toFixed(0);
+    doughTotalWater.textContent = totalWater.toFixed(0);
+    doughSaltPct.textContent = saltPct.toFixed(2);
+    doughLevainPct.textContent = levainPct.toFixed(1);
+    doughTotal.textContent = totalDough.toFixed(0);
+
+    // Update the starter contribution line
+    const contribRow = document.querySelector('#panel-dough .breakdown .row:nth-child(3) .val');
+    if (contribRow) {
+      contribRow.textContent = '+' + starterFlourPart.toFixed(0) + ' g flour, +' + starterWaterPart.toFixed(0) + ' g water';
+    }
+
+    const [title, body] = interpretDoughHyd(hyd);
+    doughInterp.innerHTML = '<strong>' + title + '</strong>' + body;
+
+    updateBakersPct();
+  }
+
+  [doughFlour, doughWater, doughStarter, doughStarterHyd, doughSalt].forEach(el => {
+    el.addEventListener('input', updateDough);
+  });
+
+  // ============ MULTI-FLOUR BLEND (advanced) ============
+  const flourRows = document.getElementById('flour-rows');
+  const addFlourBtn = document.getElementById('add-flour');
+  const bakersPct = document.getElementById('bakers-pct');
+
+  function refreshRowListeners() {
+    flourRows.querySelectorAll('.flour-amount, .flour-name-input').forEach(input => {
+      input.removeEventListener('input', updateBakersPct);
+      input.addEventListener('input', updateBakersPct);
+    });
+    flourRows.querySelectorAll('.remove-row').forEach(btn => {
+      btn.onclick = () => {
+        const visibleRows = flourRows.querySelectorAll('.flour-row:not(.header)');
+        if (visibleRows.length > 1) {
+          btn.closest('.flour-row').remove();
+          updateBakersPct();
+        }
+      };
+    });
+  }
+
+  addFlourBtn.addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'flour-row';
+    row.innerHTML = `
+      <input type="text" class="flour-input flour-name-input" placeholder="e.g. Rye">
+      <input type="number" class="flour-input flour-amount" value="0" min="0" step="1">
+      <button class="remove-row" title="Remove">×</button>
+    `;
+    flourRows.appendChild(row);
+    refreshRowListeners();
+  });
+
+  function updateBakersPct() {
+    const rows = Array.from(flourRows.querySelectorAll('.flour-row:not(.header)'));
+    const flours = rows.map(r => ({
+      name: r.querySelector('.flour-name-input').value || 'Flour',
+      amount: parseFloat(r.querySelector('.flour-amount').value) || 0
+    }));
+
+    const totalFlour = flours.reduce((s, f) => s + f.amount, 0);
+    const water = parseFloat(doughWater.value) || 0;
+    const starter = parseFloat(doughStarter.value) || 0;
+    const starterHyd = parseFloat(doughStarterHyd.value) || 0;
+    const salt = parseFloat(doughSalt.value) || 0;
+
+    const starterFlourPart = starter / (1 + starterHyd / 100);
+    const starterWaterPart = starter - starterFlourPart;
+    const grandTotalFlour = totalFlour + starterFlourPart;
+    const totalWater = water + starterWaterPart;
+
+    let html = '';
+    flours.forEach(f => {
+      const pct = grandTotalFlour > 0 ? (f.amount / grandTotalFlour) * 100 : 0;
+      html += '<div class="row"><span class="label">' + f.name + '</span><span class="val">' + f.amount.toFixed(0) + ' g · ' + pct.toFixed(1) + '%</span></div>';
+    });
+    if (starterFlourPart > 0) {
+      const pct = grandTotalFlour > 0 ? (starterFlourPart / grandTotalFlour) * 100 : 0;
+      html += '<div class="row"><span class="label">Starter (flour portion)</span><span class="val">' + starterFlourPart.toFixed(0) + ' g · ' + pct.toFixed(1) + '%</span></div>';
+    }
+    html += '<div class="row total"><span class="label">Total flour</span><span class="val">' + grandTotalFlour.toFixed(0) + ' g · 100%</span></div>';
+    html += '<div class="row"><span class="label">Total water</span><span class="val">' + totalWater.toFixed(0) + ' g · ' + (grandTotalFlour > 0 ? (totalWater / grandTotalFlour * 100).toFixed(1) : 0) + '%</span></div>';
+    html += '<div class="row"><span class="label">Salt</span><span class="val">' + salt.toFixed(1) + ' g · ' + (grandTotalFlour > 0 ? (salt / grandTotalFlour * 100).toFixed(2) : 0) + '%</span></div>';
+    html += '<div class="row"><span class="label">Starter (whole)</span><span class="val">' + starter.toFixed(0) + ' g · ' + (grandTotalFlour > 0 ? (starter / grandTotalFlour * 100).toFixed(1) : 0) + '%</span></div>';
+
+    bakersPct.innerHTML = html;
+  }
+
+  refreshRowListeners();
+
+  // ============ INITIALIZE ============
+  updateStarter();
+  updateReverse();
+  updateDough();
+
+})();
+</script>
+
+</body>
+</html>
