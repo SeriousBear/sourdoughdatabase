@@ -234,10 +234,14 @@ h1.hero-title .word-3 {
   transform: rotate(28deg);
   background: var(--tape-pink);
 }
-.polaroid svg {
-  width: 100%; height: 220px;
+.polaroid svg,
+.polaroid img {
+  width: 100%;
+  height: 220px;
   background: #1a1108;
   display: block;
+  object-fit: cover;
+  object-position: center;
 }
 .polaroid-caption {
   font-family: 'Caveat', cursive;
