@@ -376,7 +376,7 @@ h1.hero-title .word-3 {
   font-weight: 700;
   float: left;
   line-height: 0.85;
-  margin: 6px 8px 0 -2px;
+  margin: 6px 14px 0 -2px;
   color: var(--pen-red);
 }
 .mom-letter .pull {
@@ -1618,7 +1618,7 @@ footer {
   font-weight: 700;
   float: left;
   line-height: 0.85;
-  margin: 6px 8px 0 -2px;
+  margin: 6px 14px 0 -2px;
   color: var(--pen-red);
 }
 .failure-blessing .pull {
