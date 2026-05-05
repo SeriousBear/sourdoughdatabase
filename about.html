@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About — The Sourdough Database</title>
+  <meta name="description" content="Why a gardener from NYC built a sourdough database, what his mom has to do with it, and what he's building toward.">
+  <link rel="canonical" href="https://sourdoughdatabase.com/about.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/about.html">
+  <meta property="og:title" content="About — The Sourdough Database">
+  <meta property="og:description" content="Why a gardener from NYC built a sourdough database, what his mom has to do with it, and what he's building toward.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About — The Sourdough Database">
+  <meta name="twitter:description" content="Why a gardener from NYC built a sourdough database, what his mom has to do with it, and what he's building toward.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <style>
+    /* ── About page specific styles ───────────────────────── */
+
+    .about-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 50px 80px 100px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      margin-bottom: 40px;
+    }
+    .breadcrumb a { color: var(--pen-blue); }
+    .breadcrumb a:hover { color: var(--pen-red); }
+    .breadcrumb .sep { margin: 0 10px; color: var(--rule-pink-strong); }
+
+    /* Page title */
+    .about-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(64px, 10vw, 110px);
+      font-weight: 700;
+      line-height: 0.9;
+      color: var(--ink);
+      transform: rotate(-1deg);
+      margin-bottom: 50px;
+      position: relative;
+    }
+    .about-title em {
+      color: var(--pen-red);
+      font-style: italic;
+      display: block;
+    }
+
+    /* Running ruled-line paper for prose sections */
+    .prose-section {
+      background-image: linear-gradient(
+        transparent 31px,
+        rgba(216, 163, 163, 0.35) 31px,
+        rgba(216, 163, 163, 0.35) 32px,
+        transparent 32px
+      );
+      background-size: 100% 32px;
+      background-position: 0 8px;
+      margin-bottom: 64px;
+    }
+
+    .prose-section p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .prose-section p:last-child { margin-bottom: 0; }
+
+    /* Drop cap on section openers */
+    .prose-section .opener::first-letter {
+      font-family: 'Caveat', cursive;
+      font-size: 4em;
+      font-weight: 700;
+      float: left;
+      line-height: 0.78;
+      margin: 8px 10px 0 -4px;
+      color: var(--pen-red);
+    }
+
+    /* Section headers — handwritten tab style */
+    .section-label {
+      display: inline-block;
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      background: var(--paper-aged);
+      border: 1.5px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 6px 18px 6px 12px;
+      transform: rotate(-0.8deg);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .section-label::before {
+      content: "§ ";
+      color: var(--pen-red);
+      font-size: 14px;
+    }
+
+    .section-heading {
+      font-family: 'Caveat', cursive;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--ink);
+      transform: rotate(-0.5deg);
+      margin-bottom: 24px;
+      display: block;
+    }
+    .section-heading em {
+      color: var(--pen-red);
+      font-style: italic;
+    }
+
+    /* Dividers */
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 64px 0;
+      color: var(--rule-pink-strong);
+      opacity: 0.7;
+    }
+    .divider-ornament .line {
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+    }
+    .divider-ornament .pip {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-red);
+      transform: rotate(-3deg);
+    }
+
+    /* Pinned recipe card */
+    .pinned-card {
+      background: #fffae8;
+      padding: 28px 30px 30px;
+      transform: rotate(1.8deg);
+      box-shadow: 0 8px 24px rgba(40, 25, 10, 0.15);
+      position: relative;
+      font-family: 'Special Elite', monospace;
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--ink);
+      margin: 0 0 48px;
+      background-image: linear-gradient(transparent 27px, rgba(216, 163, 163, 0.4) 27px, rgba(216, 163, 163, 0.4) 28px, transparent 28px);
+      background-size: 100% 28px;
+      background-position: 0 6px;
+    }
+    .pinned-card::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle at 30% 30%, #c44424, #6b1a08);
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+    }
+    .pinned-card::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      width: 70px;
+      height: 22px;
+      background: rgba(238, 218, 122, 0.55);
+      transform: rotate(28deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .pinned-card .card-title {
+      font-family: 'Caveat', cursive;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--pen-red);
+      margin-bottom: 12px;
+      line-height: 1;
+      transform: rotate(-1deg);
+      display: block;
+    }
+    .pinned-card .strike {
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+      color: var(--pencil);
+      opacity: 0.7;
+    }
+    .pinned-card .annotation {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--pen-blue);
+      display: block;
+      margin-left: 16px;
+      margin-top: -4px;
+      margin-bottom: 4px;
+      line-height: 1;
+      transform: rotate(-1deg);
+    }
+    .pinned-card .signoff {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      color: var(--pen-blue);
+      text-align: right;
+      margin-top: 16px;
+      transform: rotate(-2deg);
+      display: block;
+    }
+
+    /* Pull quote */
+    .pull {
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--pen-red);
+      line-height: 1.25;
+      padding-left: 28px;
+      border-left: 3px solid var(--pen-red);
+      margin: 32px 0;
+      transform: rotate(-0.4deg);
+    }
+
+    /* Gary section */
+    .gary-block {
+      background: #fdf8e3;
+      border: 1.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 28px 32px;
+      transform: rotate(0.5deg);
+      position: relative;
+      margin: 48px 0;
+    }
+    .gary-block::before {
+      content: "SPECIMEN № 0001";
+      position: absolute;
+      top: -11px;
+      left: 18px;
+      background: var(--paper);
+      padding: 0 10px;
+      font-family: 'Special Elite', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--pen-red);
+    }
+    .gary-block .gary-name {
+      font-family: 'Caveat', cursive;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .gary-block .gary-latin {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--pencil);
+      margin-bottom: 18px;
+    }
+    .gary-stats {
+      font-family: 'Special Elite', monospace;
+      font-size: 12.5px;
+      line-height: 1.9;
+    }
+    .gary-stats .stat-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted rgba(180, 130, 70, 0.4);
+    }
+    .gary-stats .stat-row .lbl {
+      color: var(--pencil);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 10.5px;
+    }
+    .gary-stats .stat-row .val { color: var(--ink); font-weight: 700; }
+    .gary-note {
+      margin-top: 16px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-blue);
+      line-height: 1.2;
+      transform: rotate(-1deg);
+    }
+
+    /* What this is building toward */
+    .forward-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .forward-list li {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      line-height: 1.6;
+      color: var(--ink);
+      padding-left: 32px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .forward-list li::before {
+      content: "✎";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-blue);
+    }
+    .forward-list li strong {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-red);
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    /* Sign-off section */
+    .sign-off {
+      margin-top: 70px;
+      padding-top: 40px;
+      border-top: 1.5px dashed var(--rule-pink-strong);
+      text-align: center;
+    }
+    .sign-off .closing {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--pen-blue);
+      line-height: 1.2;
+      transform: rotate(-1.5deg);
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .sign-off .sig-name {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      color: var(--ink);
+      transform: rotate(-1deg);
+      display: block;
+      margin-top: 8px;
+    }
+    .sign-off .sig-sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* Signup CTA */
+    .about-cta {
+      margin-top: 60px;
+      background: var(--paper-warm);
+      border: 1.5px dashed var(--rule-pink-strong);
+      padding: 32px 36px;
+      text-align: center;
+      position: relative;
+    }
+    .about-cta h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .about-cta h3 em { color: var(--pen-red); font-style: italic; }
+    .about-cta p {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+    }
+    .about-cta .form-row {
+      display: flex;
+      max-width: 460px;
+      margin: 0 auto;
+      border: 1.5px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      background: #fdf8e3;
+    }
+    .about-cta input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      background: transparent;
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--ink);
+      outline: none;
+    }
+    .about-cta input::placeholder { color: var(--pencil); opacity: 0.7; }
+    .about-cta button {
+      background: var(--pen-red);
+      color: #fdf8e3;
+      border: none;
+      padding: 14px 24px;
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      border-left: 1.5px solid var(--ink);
+      transition: background 0.2s;
+    }
+    .about-cta button:hover { background: var(--ink); }
+    .about-cta .note {
+      margin-top: 14px;
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: var(--pen-blue);
+    }
+
+    @media (max-width: 720px) {
+      .about-wrap { padding: 30px 24px 60px; }
+      .about-title { font-size: 64px; }
+      .section-heading { font-size: 40px; }
+      .pull { font-size: 26px; }
+      .pinned-card { transform: rotate(0deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="binding"></div>
+<div class="holes">
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+</div>
+
+<header>
+  <a href="/" class="logo">
+    The Sourdough Database<span class="dot"></span>
+  </a>
+  <nav class="nav">
+    <a href="/">home</a>
+    <a href="/#starters">starters</a>
+    <a href="/#flours">flours</a>
+    <a href="/#tools">tools</a>
+    <a href="/#journal">journal</a>
+    <a href="/about.html" class="active">about</a>
+  </nav>
+</header>
+
+<main class="about-wrap">
+
+  <div class="breadcrumb">
+    <a href="/">home</a>
+    <span class="sep">/</span>
+    <span>about</span>
+  </div>
+
+  <h1 class="about-title">
+    who made<br>
+    <em>this thing.</em>
+  </h1>
+
+  <!-- ── SECTION 1: WHO I AM ─────────────────────────────── -->
+  <span class="section-label">§ 01 — the person behind it</span>
+  <span class="section-heading">A gardener from <em>NYC.</em></span>
+
+  <div class="prose-section">
+    <p class="opener">My name is Kyle. I garden for a living — actual dirt, actual plants, actual New York City parks and backyards. Before that I spent years building websites for other people. Before that, who knows. The ADHD brain doesn't keep a clean timeline; it just picks up obsessions like shiny rocks and runs with them for months.</p>
+
+    <p>The current shiny rock is this. A recipe notebook for sourdough bakers, designed to feel like a field journal, built to function like a database. Hydration ratios, starter genealogies, flour protein percentages, fermentation timelines — the obsessive, nerdy, delightful math that goes into something that is, at its core, just flour and water left out to get interesting.</p>
+
+    <p>I'm not a professional baker. I'm not a food blogger. I'm a guy with a starter named Gary, a kitchen in New York, and a mom I call every time I pull something out of the oven — to report in, basically. She's been cooking since before I existed and I'm still trying to catch up.</p>
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── SECTION 2: THE MOM STORY ───────────────────────── -->
+  <span class="section-label">§ 02 — why this exists</span>
+  <span class="section-heading">My mom <em>taught me.</em></span>
+
+  <div class="prose-section">
+    <p class="opener">Some families pass down jewelry. Mine passes down recipes. For as long as I can remember, my mom and I have traded them — measurements yelled across the kitchen, photos texted at strange hours, recipe cards tucked into birthday cards. When I got into sourdough, she was the first person I called. She picked up on the second ring, already had opinions.</p>
+
+    <p>Cooking is the language we kept speaking when life got busy. I'd send her a voice note about a gummy crumb at 11 p.m. She'd send back a photo of her starter at 7 a.m. We have made each other better bakers. More to the point, we have made each other.</p>
+  </div>
+
+  <div class="pinned-card">
+    <span class="card-title">mom's country loaf</span>
+    <div>500g bread flour</div>
+    <div>50g whole wheat</div>
+    <div><span class="strike">375g water</span></div>
+    <span class="annotation">↑ try 390g — she was right, it's better</span>
+    <div>10g salt</div>
+    <div>100g levain (100% hydration)</div>
+    <div><span class="strike">bulk 5 hrs</span></div>
+    <span class="annotation">depends on your kitchen — watch the dough</span>
+    <div>cold retard overnight</div>
+    <div>500°F · dutch oven · 20 min covered</div>
+    <div>20 min uncovered til deep brown</div>
+    <span class="signoff">— call me when you pull it out. xo</span>
+  </div>
+
+  <div class="pull">
+    Every loaf I bake has a margin note from her in it somewhere.
+  </div>
+
+  <div class="prose-section">
+    <p>This site started as the thing those phone calls would look like if we wrote them down. Yes, it's a database — pH levels and protein percentages and all the obsessive bits. But it's also a place to track who taught us what. A place where every recipe has a person attached to it.</p>
+
+    <p>I built it with her in mind. And for everyone who has ever traded a recipe with someone they love and realized, somewhere in the middle of explaining bulk fermentation at midnight, that the bread was almost beside the point.</p>
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── SECTION 3: GARY ─────────────────────────────────── -->
+  <span class="section-label">§ 03 — the starter</span>
+  <span class="section-heading">Meet <em>Gary.</em></span>
+
+  <div class="gary-block">
+    <div class="gary-name">Gary</div>
+    <div class="gary-latin">var. <em>new yorkensis</em> · est. 2024</div>
+    <div class="gary-stats">
+      <div class="stat-row"><span class="lbl">age</span><span class="val">1 year</span></div>
+      <div class="stat-row"><span class="lbl">hydration</span><span class="val">100%</span></div>
+      <div class="stat-row"><span class="lbl">flour</span><span class="val">AP + 10% whole wheat</span></div>
+      <div class="stat-row"><span class="lbl">peak time (70°F)</span><span class="val">~5 hours</span></div>
+      <div class="stat-row"><span class="lbl">smell</span><span class="val">yogurt-y, slightly funky, good</span></div>
+      <div class="stat-row"><span class="lbl">mood</span><span class="val">reliable, occasionally dramatic</span></div>
+    </div>
+    <div class="gary-note">named Gary because he felt like a Gary.<br>no further explanation available.</div>
+  </div>
+
+  <div class="prose-section">
+    <p>Every baker's starter is its own thing. Same flour, same water, different apartment, different kitchen microbiome, different outcome. Gary tastes like New York in the way everything in New York ends up tasting a little like New York. I'm told this is a feature.</p>
+
+    <p>He's been in the fridge more than he should be, fed less regularly than recommended, and has still produced some of the best loaves I've made. Which is either a testament to his resilience or a sign that I've been overthinking it. Probably both.</p>
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── SECTION 4: WHAT'S BEING BUILT ──────────────────── -->
+  <span class="section-label">§ 04 — what this is building toward</span>
+  <span class="section-heading">A real <em>database.</em></span>
+
+  <div class="prose-section">
+    <p class="opener">The Sourdough Database is a work in progress. That's intentional. The goal isn't a finished product — it's a living thing that grows with the bakers who use it. Here's what's being built:</p>
+  </div>
+
+  <ul class="forward-list">
+    <li><strong>Starter Index.</strong> Documented strains with real data — pH at peak, hydration, generation count, origin story, behavior notes. Not just names and percentages but the people who kept them alive.</li>
+    <li><strong>Flour Compendium.</strong> Every flour worth baking with, catalogued by mill, protein content, ash percentage, and what it actually does to a loaf. Indexed by variety, not by brand.</li>
+    <li><strong>Working tools.</strong> A hydration calculator that explains what the numbers mean. A bake schedule builder that works backwards from when you want bread. A Trouble Atlas for when something goes wrong — searchable by symptom, not vibes.</li>
+    <li><strong>Field Notes.</strong> Essays from bakers who have something specific to say — about a technique, a flour, a failure, a discovery. Opinionated, first-person, not optimized for search.</li>
+    <li><strong>Bake logs.</strong> Eventually. A place to record your own bakes, track your starter over time, and compare against what other people are making in other kitchens. The database part of the database.</li>
+  </ul>
+
+  <div class="prose-section" style="margin-top: 32px;">
+    <p>This won't happen all at once. The ADHD brain works in sprints, not marathons. But each piece that gets built is built properly — because half a good tool is worse than no tool, and a recipe database with one recipe is just a recipe.</p>
+    <p>If you're a baker with something to contribute — a starter that should be documented, an essay that should exist, a flour that deserves a profile — find me. The contact is at the bottom of the page. I read everything, just not always quickly.</p>
+  </div>
+
+  <!-- ── SIGN OFF ─────────────────────────────────────────── -->
+  <div class="sign-off">
+    <span class="closing">
+      If you don't hear back,<br>
+      I'm probably outside.
+    </span>
+    <span class="sig-name">— Kyle Weber</span>
+    <span class="sig-sub">founder · gardener · Gary's primary caretaker · NYC</span>
+  </div>
+
+  <!-- ── CTA ─────────────────────────────────────────────── -->
+  <div class="about-cta">
+    <h3>get the <em>letter.</em></h3>
+    <p>One email a week. What I'm baking, what I'm building, occasionally what my mom said about it.</p>
+    <form class="form-row" name="newsletter" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <input type="email" name="email" placeholder="your.kitchen@email.com" required>
+      <button type="submit">sign me up</button>
+    </form>
+    <div class="note">unsubscribe at any oven temp.</div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-grid" style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding: 60px 80px 32px; border-bottom: 1.5px dashed var(--rule-pink-strong);">
+    <div>
+      <div class="foot-brand">The Sourdough Database</div>
+      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
+    </div>
+    <div class="foot-col">
+      <h5>The Database</h5>
+      <ul>
+        <li><a href="/#starters">starter index</a></li>
+        <li><a href="/#flours">flours</a></li>
+        <li><a href="/#journal">journal</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Tools</h5>
+      <ul>
+        <li><a href="/tools/hydration.html">hydration solver</a></li>
+        <li>schedule builder <small style="opacity:0.6">(soon)</small></li>
+        <li>crumb analyzer <small style="opacity:0.6">(soon)</small></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="/about.html">the story</a></li>
+        <li><a href="/privacy.html">privacy</a></li>
+        <li>contact</li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon" style="max-width: 1400px; margin: 24px auto 0; display: flex; justify-content: space-between; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--pencil); padding: 0 80px 40px; flex-wrap: wrap; gap: 12px;">
+    <span>© MMXXVI · The Sourdough Database</span>
+    <span>set in caveat, special elite &amp; crimson pro</span>
+    <span>made with flour on our hands</span>
+  </div>
+</footer>
+
+</body>
+</html>

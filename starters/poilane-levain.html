@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Poilâne Levain — Starter № 0508 — The Sourdough Database</title>
+  <meta name="description" content="The sourdough starter behind Paris's most famous bakery, kept alive since 1932. Three generations, one oven, one unbroken culture. The full documented history of the Poilâne levain.">
+  <link rel="canonical" href="https://sourdoughdatabase.com/starters/poilane-levain.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sourdoughdatabase.com/starters/poilane-levain.html">
+  <meta property="og:title" content="Poilâne Levain — The Sourdough Database">
+  <meta property="og:description" content="The sourdough starter behind Paris's most famous bakery, kept alive since 1932. Three generations, one oven, one unbroken culture.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Poilâne Levain — The Sourdough Database">
+  <meta name="twitter:description" content="The sourdough starter behind Paris's most famous bakery, kept alive since 1932.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <style>
+    /* ── Starter detail page ─────────────────────────────── */
+
+    .starter-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 50px 80px 100px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      margin-bottom: 36px;
+    }
+    .breadcrumb a { color: var(--pen-blue); }
+    .breadcrumb a:hover { color: var(--pen-red); }
+    .breadcrumb .sep { margin: 0 10px; color: var(--rule-pink-strong); }
+
+    /* Specimen header */
+    .specimen-header {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 64px;
+    }
+    .specimen-id {
+      font-family: 'Special Elite', monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      margin-bottom: 8px;
+    }
+    .specimen-name {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(64px, 10vw, 110px);
+      font-weight: 700;
+      line-height: 0.88;
+      color: var(--ink);
+      transform: rotate(-1deg);
+      margin-bottom: 10px;
+    }
+    .specimen-name em {
+      color: var(--pen-red);
+      font-style: italic;
+      display: block;
+    }
+    .specimen-origin {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--pencil);
+      margin-bottom: 24px;
+      font-variation-settings: "opsz" 36;
+    }
+    .specimen-tagline {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink);
+      max-width: 580px;
+      padding-left: 20px;
+      border-left: 3px solid var(--pen-red);
+      font-style: italic;
+    }
+
+    /* Spec card (right column) */
+    .spec-card {
+      background: #fdf8e3;
+      border: 1.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 24px 26px;
+      transform: rotate(1deg);
+      position: relative;
+    }
+    .spec-card::before {
+      content: "DATA SHEET";
+      position: absolute;
+      top: -11px;
+      left: 16px;
+      background: var(--paper);
+      padding: 0 10px;
+      font-family: 'Special Elite', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--pen-red);
+    }
+    .spec-card::after {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      width: 70px;
+      height: 20px;
+      background: rgba(238, 218, 122, 0.55);
+      transform: rotate(4deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .spec-table {
+      width: 100%;
+      font-family: 'Special Elite', monospace;
+      font-size: 12px;
+      border-collapse: collapse;
+    }
+    .spec-table tr {
+      border-bottom: 1px dotted rgba(180, 130, 70, 0.45);
+    }
+    .spec-table td {
+      padding: 9px 0;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+    .spec-table td:first-child {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      width: 44%;
+      padding-right: 10px;
+    }
+    .spec-table td:last-child { color: var(--ink); font-weight: 700; }
+    .spec-table .accent { color: var(--pen-red); }
+    .spec-note {
+      margin-top: 16px;
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--pen-blue);
+      line-height: 1.2;
+      transform: rotate(-1deg);
+    }
+
+    /* Rating stars */
+    .stars {
+      font-family: 'Kalam', cursive;
+      font-size: 20px;
+      color: var(--pen-red);
+      letter-spacing: 2px;
+    }
+
+    /* Dividers */
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 56px 0;
+      color: var(--rule-pink-strong);
+      opacity: 0.7;
+    }
+    .divider-ornament .line { flex: 1; height: 1px; background: currentColor; }
+    .divider-ornament .pip {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-red);
+      transform: rotate(-3deg);
+    }
+
+    /* Section labels */
+    .section-label {
+      display: block;
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      background: var(--paper-aged);
+      border: 1.5px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 6px 18px 6px 12px;
+      transform: rotate(-0.8deg);
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .section-label::before { content: "§ "; color: var(--pen-red); font-size: 14px; }
+
+    .section-heading {
+      font-family: 'Caveat', cursive;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--ink);
+      transform: rotate(-0.5deg);
+      margin-bottom: 24px;
+      display: block;
+    }
+    .section-heading em { color: var(--pen-red); font-style: italic; }
+
+    /* Prose */
+    .prose p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: 20px;
+      max-width: 720px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose .opener::first-letter {
+      font-family: 'Caveat', cursive;
+      font-size: 4em;
+      font-weight: 700;
+      float: left;
+      line-height: 0.78;
+      margin: 8px 10px 0 -4px;
+      color: var(--pen-red);
+    }
+
+    /* Pull quotes */
+    .pull {
+      font-family: 'Caveat', cursive;
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--pen-red);
+      line-height: 1.25;
+      padding-left: 28px;
+      border-left: 3px solid var(--pen-red);
+      margin: 32px 0;
+      transform: rotate(-0.4deg);
+      max-width: 640px;
+    }
+
+    /* Annotation scribble */
+    .margin-note {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-blue);
+      line-height: 1.2;
+      transform: rotate(-2deg);
+      display: inline-block;
+      margin: 24px 0;
+    }
+
+    /* Timeline */
+    .timeline {
+      margin: 36px 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--rule-pink-strong);
+      opacity: 0.6;
+    }
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .timeline-year {
+      font-family: 'Special Elite', monospace;
+      font-size: 12px;
+      color: var(--pen-red);
+      text-align: center;
+      padding-top: 4px;
+      line-height: 1.1;
+      position: relative;
+    }
+    .timeline-year::after {
+      content: "";
+      position: absolute;
+      right: -14px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background: var(--pen-red);
+      border-radius: 50%;
+      border: 2px solid var(--paper);
+      box-shadow: 0 0 0 2px var(--pen-red);
+    }
+    .timeline-content {
+      background: #fdf8e3;
+      border: 1.5px solid var(--ink);
+      padding: 18px 22px;
+      position: relative;
+    }
+    .timeline-content::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 12px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 10px solid var(--ink);
+    }
+    .timeline-content::after {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 13px;
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 9px solid #fdf8e3;
+    }
+    .timeline-content h4 {
+      font-family: 'Caveat', cursive;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .timeline-content p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .timeline-content .tag {
+      display: inline-block;
+      font-family: 'Special Elite', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      background: rgba(165, 48, 32, 0.1);
+      border: 1px solid rgba(165, 48, 32, 0.3);
+      padding: 2px 8px;
+      margin-bottom: 8px;
+    }
+
+    /* The bread specs */
+    .bread-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 32px 0;
+    }
+    .bread-card {
+      background: var(--paper-warm);
+      border: 1.5px solid var(--ink);
+      padding: 22px 24px;
+      position: relative;
+    }
+    .bread-card:nth-child(odd) { transform: rotate(-0.5deg); }
+    .bread-card:nth-child(even) { transform: rotate(0.5deg); }
+    .bread-card h4 {
+      font-family: 'Special Elite', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      margin-bottom: 8px;
+    }
+    .bread-card .val {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .bread-card .desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--pencil);
+      font-style: italic;
+    }
+
+    /* Flour profile card */
+    .flour-profile {
+      background: #fdf8e3;
+      border: 1.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 28px 32px;
+      transform: rotate(-0.5deg);
+      position: relative;
+      margin: 36px 0;
+    }
+    .flour-profile::before {
+      content: "FLOUR SPECIFICATION";
+      position: absolute;
+      top: -11px;
+      left: 18px;
+      background: var(--paper);
+      padding: 0 10px;
+      font-family: 'Special Elite', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--pen-red);
+    }
+    .flour-profile h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .flour-profile .sub {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--pencil);
+      margin-bottom: 20px;
+    }
+    .flour-stats {
+      font-family: 'Special Elite', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .flour-stats .row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted rgba(180, 130, 70, 0.45);
+      padding: 5px 0;
+    }
+    .flour-stats .lbl {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 10.5px;
+      color: var(--pencil);
+    }
+    .flour-stats .val { color: var(--ink); font-weight: 700; }
+    .flour-note {
+      margin-top: 16px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--pen-blue);
+      line-height: 1.2;
+      transform: rotate(-1deg);
+    }
+
+    /* Quality control block */
+    .qc-block {
+      background: var(--paper-warm);
+      border-left: 4px solid var(--pen-red);
+      padding: 24px 28px;
+      margin: 32px 0;
+      max-width: 720px;
+    }
+    .qc-block .qc-label {
+      font-family: 'Special Elite', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      margin-bottom: 10px;
+    }
+    .qc-block p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* Source footnotes */
+    .sources {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1.5px dashed var(--rule-pink-strong);
+    }
+    .sources h4 {
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      margin-bottom: 14px;
+    }
+    .sources ul {
+      list-style: none;
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      line-height: 1.9;
+      color: var(--pencil);
+    }
+    .sources ul a {
+      color: var(--pen-blue);
+    }
+    .sources ul a:hover { color: var(--pen-red); }
+
+    /* Next / Prev nav */
+    .specimen-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 0 0;
+      border-top: 1.5px solid var(--ink);
+      margin-top: 64px;
+    }
+    .specimen-nav a {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--pen-blue);
+    }
+    .specimen-nav a:hover { color: var(--pen-red); }
+    .specimen-nav .back {
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      text-align: center;
+    }
+
+    @media (max-width: 820px) {
+      .starter-wrap { padding: 30px 24px 60px; }
+      .specimen-header { grid-template-columns: 1fr; gap: 32px; }
+      .spec-card { transform: rotate(0deg); }
+      .specimen-name { font-size: 64px; }
+      .bread-grid { grid-template-columns: 1fr; gap: 18px; }
+      .bread-card { transform: rotate(0deg) !important; }
+      .timeline::before { display: none; }
+      .timeline-entry { grid-template-columns: 50px 1fr; gap: 10px; }
+      .section-heading { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="binding"></div>
+<div class="holes">
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+</div>
+
+<header>
+  <a href="/" class="logo">
+    The Sourdough Database<span class="dot"></span>
+  </a>
+  <nav class="nav">
+    <a href="/">home</a>
+    <a href="/#starters" class="active">starters</a>
+    <a href="/#flours">flours</a>
+    <a href="/#tools">tools</a>
+    <a href="/#journal">journal</a>
+    <a href="/about.html">about</a>
+  </nav>
+</header>
+
+<main class="starter-wrap">
+
+  <div class="breadcrumb">
+    <a href="/">home</a>
+    <span class="sep">/</span>
+    <a href="/#starters">starter index</a>
+    <span class="sep">/</span>
+    <span>Poilâne Levain</span>
+  </div>
+
+  <!-- ── SPECIMEN HEADER ─────────────────────────────────── -->
+  <div class="specimen-header">
+
+    <div>
+      <div class="specimen-id">Specimen № 0508 · Wheat Levain · Paris, France</div>
+      <h1 class="specimen-name">
+        Poilâne
+        <em>Levain.</em>
+      </h1>
+      <div class="specimen-origin">var. <em>parisensis</em> · established 1932 · 94 years in continuous use</div>
+      <p class="specimen-tagline">
+        The unbroken culture behind Paris's most storied bakery. Kept alive through three generations, two world-famous bakers, one helicopter crash, and a Harvard dorm room.
+      </p>
+      <div class="stars" style="margin-top: 20px;">★ ★ ★ ★ ★</div>
+    </div>
+
+    <div class="spec-card">
+      <table class="spec-table">
+        <tr>
+          <td>established</td>
+          <td class="accent">1932</td>
+        </tr>
+        <tr>
+          <td>age</td>
+          <td>94 years</td>
+        </tr>
+        <tr>
+          <td>location</td>
+          <td>8 Rue du Cherche-Midi, Paris 6e</td>
+        </tr>
+        <tr>
+          <td>type</td>
+          <td>Stiff wheat levain</td>
+        </tr>
+        <tr>
+          <td>hydration</td>
+          <td>~50–60% (stiff)</td>
+        </tr>
+        <tr>
+          <td>flour</td>
+          <td>85% extraction grey wheat</td>
+        </tr>
+        <tr>
+          <td>salt</td>
+          <td>Guérande sea salt, Brittany</td>
+        </tr>
+        <tr>
+          <td>water</td>
+          <td>Paris tap water</td>
+        </tr>
+        <tr>
+          <td>loaf weight</td>
+          <td>~1.9 kg per miche</td>
+        </tr>
+        <tr>
+          <td>daily output</td>
+          <td>~5,000 loaves</td>
+        </tr>
+        <tr>
+          <td>ships to</td>
+          <td>40+ countries</td>
+        </tr>
+        <tr>
+          <td>steward</td>
+          <td class="accent">Apollonia Poilâne, 3rd gen.</td>
+        </tr>
+      </table>
+      <div class="spec-note">every loaf is a direct<br>descendant of Pierre's first. ✎</div>
+    </div>
+
+  </div>
+
+  <!-- ── OVERVIEW ─────────────────────────────────────────── -->
+  <span class="section-label">§ 01 — overview</span>
+  <span class="section-heading">94 years, <em>unbroken.</em></span>
+
+  <div class="prose">
+    <p class="opener">There are older starters in the world, though most of them come with caveats — oral histories, approximate dates, cultures that were dried and reconstituted along the way. The Poilâne levain is different. It is not the oldest. It is among the best-documented: a working sourdough culture, maintained continuously since 1932, by three generations of the same family, in the same basement, on the same street in Paris.</p>
+
+    <p>Each loaf produced at Poilâne is made with a piece of the previous batch held back as the next. This is how sourdough has always worked. But at Poilâne it has worked this way without interruption for 94 years — through the German occupation of Paris, through Lionel Poilâne's death, through a Harvard student running one of the world's most famous bakeries from her dorm room. The culture survived all of it.</p>
+  </div>
+
+  <div class="pull">
+    "In this sense, sourdough is an ever-reproducing organism, and each loaf Poilâne makes is a direct descendant of the very first miche baked by Pierre back in the 1930s."
+    <div style="font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--pencil);margin-top:10px;">— Apollonia Poilâne</div>
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── THE FAMILY TIMELINE ──────────────────────────────── -->
+  <span class="section-label">§ 02 — the family</span>
+  <span class="section-heading">Three <em>generations.</em></span>
+
+  <div class="prose" style="margin-bottom: 36px;">
+    <p>The Poilâne levain is inseparable from the people who kept it alive. To understand the culture is to understand the family — each generation building on the last, each one facing a crisis that might have ended the whole thing.</p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-entry">
+      <div class="timeline-year">1932</div>
+      <div class="timeline-content">
+        <span class="tag">Founder</span>
+        <h4>Pierre Poilâne</h4>
+        <p>The son of Normandy farmers, Pierre had wanted to be an architect. His parents couldn't afford university. An interest in the mechanics of wood-fired ovens led him to baking instead, and after apprenticing in several boulangeries around France, he opened at 8 Rue du Cherche-Midi in Paris's 6th arrondissement at age 23. The building had once been a convent — the oven in the basement dates to the 1700s. Pierre's move was deliberately counter-cultural: in 1932, the baguette was king. He baked the bread he'd known as a child in Normandy — large round country loaves leavened naturally, made with stone-ground grey flour. Within years, it was the smallest of five bakeries on the street. It is now the only one still there.</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="timeline-year">1970</div>
+      <div class="timeline-content">
+        <span class="tag">Second generation</span>
+        <h4>Lionel Poilâne</h4>
+        <p>Lionel began working in his father's bakery at age 14. By 1970 he had taken over entirely, and over the following three decades he turned a small Parisian boulangerie into an international institution. He invented what he called "retro-innovation" — combining traditional baking with practical modern thinking — and built the Bièvres manufactory outside Paris in the 1980s: 24 wood-burning ovens, each an exact replica of the original rue du Cherche-Midi oven, organized in a sun-ray pattern around a pile of cherry wood at the center. Quality control was meticulous: every day, one loaf from each of the 24 ovens was labeled with the baker's first name and shipped to headquarters for inspection. Lionel was knighted in 1993 for services to the French economy. He opened a London location in 2000, the bakery's first expansion outside France. His signature: a cursive "P" scored into the top of every loaf, a tradition he introduced around the turn of the millennium to return to the old custom of signing bread in a communal oven.</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="timeline-year">2002</div>
+      <div class="timeline-content">
+        <span class="tag">The crash</span>
+        <h4>October 31, 2002</h4>
+        <p>On Halloween, Lionel Poilâne, his wife Irena, and their dog were killed when the helicopter Lionel was piloting crashed into the bay of Cancale, off the coast of Brittany. He was 57. His daughter Apollonia was 18 years old and about to begin her studies at Harvard. Lionel's brother Max, who had parted ways with the family in 1976 to open his own bakeries, continued separately. There was no question of closing. The levain kept going.</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="timeline-year">2002–<br>2007</div>
+      <div class="timeline-content">
+        <span class="tag">Third generation</span>
+        <h4>Apollonia Poilâne, Harvard '07</h4>
+        <p>Apollonia took over the business without pausing her education. She flew to Paris monthly to fulfill her duties while completing her degree, a schedule that her advisors reportedly found implausible and that she executed without apparent drama. Under her stewardship the company now employs 150 people, ships to 40+ countries, and produces between 8 and 10 tonnes of bread per day. Annual revenue exceeds $12 million. In a 2023 interview with The Harvard Crimson, she confirmed what bakers already knew: the starter her grandfather mixed in 1932 has never been replaced. "That's how sourdough works," she said. "That's how sourdough lives on."</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="margin-note">
+    "I really want to change the way people look at bread.<br>
+    It's all the culture it carries." — Apollonia
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── THE BREAD ─────────────────────────────────────────── -->
+  <span class="section-label">§ 03 — the bread</span>
+  <span class="section-heading">The <em>Miche.</em></span>
+
+  <div class="prose">
+    <p class="opener">The bread Poilâne makes is not a sourdough in the American sense — tangy, open-crumbed, dramatic. It is a miche (French for "round loaf"), and it is deliberately dense, dark, and long-lasting. Pierre's goal was to revive the bread of the Normandy countryside: large, nourishing, built to keep. Lionel made it famous. Apollonia has kept it exactly the same.</p>
+  </div>
+
+  <div class="bread-grid">
+    <div class="bread-card">
+      <h4>Weight</h4>
+      <div class="val">1.9 kg</div>
+      <div class="desc">Each loaf is handmade, so weight varies slightly — about 4 pounds</div>
+    </div>
+    <div class="bread-card">
+      <h4>Shape</h4>
+      <div class="val">Round boule</div>
+      <div class="desc">Scored with a cursive "P" — a tradition begun by Lionel ca. 2000</div>
+    </div>
+    <div class="bread-card">
+      <h4>Crumb</h4>
+      <div class="val">Dense, even</div>
+      <div class="desc">Not open like Tartine. Intentionally tight — designed for slicing and keeping</div>
+    </div>
+    <div class="bread-card">
+      <h4>Flavor</h4>
+      <div class="val">Mildly tangy</div>
+      <div class="desc">Peaks on day 3. Keeps at room temp for close to a week in a paper bag</div>
+    </div>
+    <div class="bread-card">
+      <h4>Crust</h4>
+      <div class="val">Dark, tough</div>
+      <div class="desc">Wood-fired. Deep brown, earthy color. The crust cracks when you cut it</div>
+    </div>
+    <div class="bread-card">
+      <h4>Oven</h4>
+      <div class="val">Wood-fired</div>
+      <div class="desc">The basement oven at Rue du Cherche-Midi dates to the 1700s. Bièvres has 24 exact replicas</div>
+    </div>
+  </div>
+
+  <div class="qc-block">
+    <div class="qc-label">Quality Control · daily ritual</div>
+    <p>Every day, one loaf from each of the 24 ovens at the Bièvres manufactory is labeled with the head baker's first name and shipped to rue du Cherche-Midi for inspection. Apollonia examines each loaf — looking at its aesthetic, smelling it, tasting it. It is the system Lionel designed, unchanged since the 1980s. Each loaf stands or falls on its baker's name.</p>
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── THE FLOUR ─────────────────────────────────────────── -->
+  <span class="section-label">§ 04 — the flour</span>
+  <span class="section-heading">Grey flour, <em>specifically.</em></span>
+
+  <div class="prose" style="margin-bottom: 28px;">
+    <p>Most of the confusion about what Poilâne bread is made from comes from calling it "whole wheat," which is inaccurate — or "white," which is also wrong. The flour is neither. It is a stone-ground wheat of approximately 85% extraction, meaning that about 15% of the bran has been removed during milling. This produces a flour that sits between white and wholemeal: grey in color, nutritionally dense, with enough bran to develop flavor and enough extraction to have structure.</p>
+  </div>
+
+  <div class="flour-profile">
+    <h3>Type 85 Grey Wheat</h3>
+    <div class="sub">stone-ground · stiff levain · Guérande sea salt · Paris tap water</div>
+    <div class="flour-stats">
+      <div class="row"><span class="lbl">extraction rate</span><span class="val">85%</span></div>
+      <div class="row"><span class="lbl">bran removed</span><span class="val">~15%</span></div>
+      <div class="row"><span class="lbl">milling method</span><span class="val">stone-ground</span></div>
+      <div class="row"><span class="lbl">color</span><span class="val">grey (not white, not brown)</span></div>
+      <div class="row"><span class="lbl">salt</span><span class="val">Guérande sea salt, Brittany</span></div>
+      <div class="row"><span class="lbl">water</span><span class="val">Paris municipal tap water</span></div>
+      <div class="row"><span class="lbl">leavening</span><span class="val">Levain only — no commercial yeast</span></div>
+    </div>
+    <div class="flour-note">
+      on the water: "contrary to what some people say,<br>
+      you don't need special water. that's bullshit." — Apollonia ✎
+    </div>
+  </div>
+
+  <div class="divider-ornament">
+    <div class="line"></div>
+    <span class="pip">✎</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- ── BAKER'S NOTES ─────────────────────────────────────── -->
+  <span class="section-label">§ 05 — baker's notes</span>
+  <span class="section-heading">What to know if you <em>bake it.</em></span>
+
+  <div class="prose">
+    <p class="opener">Most home adaptations of the Poilâne miche substitute a blend of sifted whole wheat and all-purpose flour to approximate the 85% extraction grey flour, which is not commonly available outside France. The ratio most commonly cited: roughly 80% whole wheat to 20% bread flour, sifted to remove the coarsest bran.</p>
+
+    <p>The levain is stiff — lower hydration than most American starter protocols, closer to 50-60% rather than the 100% that most English-language recipes assume. This matters. A stiffer levain ferments more slowly, produces more lactic acids than acetic, and results in a milder, sweeter sourness — the Poilâne flavor profile. If you run the same miche formula with a liquid starter, you'll get a tangier, more acidic loaf. Not wrong. Just different.</p>
+
+    <p>The miche does not have an open crumb. This is intentional. Apollonia has described the hydration of the dough as deliberately restrained: "A wetter dough is less stiff, allowing the air bubbles in the dough to expand more. Our dough is not overly hydrated, so a Poilâne miche has a more dense, even crumb." If you are hoping for the irregular, lacey holes of a Tartine country loaf, this is not the bread. If you want something that keeps for a week, slices clean, makes excellent toast on day four, and tastes unmistakably of itself — it is the bread.</p>
+
+    <p>Finally: the flavor peaks on day 3. Resist cutting into it too soon.</p>
+  </div>
+
+  <div class="pull">
+    The loaf's precise flavor depends on the blend of bread flours, environmental factors, and variations in preparation. The beauty of sourdough is that it has a distinctive flavor. It keeps your bread longer; it gives it a more specific aromatic signature.
+    <div style="font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--pencil);margin-top:10px;">— Apollonia Poilâne, MasterClass</div>
+  </div>
+
+  <!-- ── SOURCES ───────────────────────────────────────────── -->
+  <div class="sources">
+    <h4>Sources &amp; further reading</h4>
+    <ul>
+      <li>Poilâne, Apollonia. <em>Poilâne: The Secrets of the World-Famous Bread Bakery.</em> Houghton Mifflin, 2019.</li>
+      <li><a href="https://www.thecrimson.com/column/the-vanguard-of-global-cuisine/article/2023/2/28/vanguard-of-global-cuisine-poilane/" target="_blank" rel="noopener">The Harvard Crimson · "Apollonia Poilâne and the Culture of Bread," 2023</a></li>
+      <li><a href="https://www.poilane.com/en/pages/notre-histoire" target="_blank" rel="noopener">Poilâne official history · poilane.com</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Lionel_Poil%C3%A2ne" target="_blank" rel="noopener">Wikipedia · Lionel Poilâne</a></li>
+      <li><a href="https://www.cooksinfo.com/pain-poilane" target="_blank" rel="noopener">CooksInfo · Pain Poilâne (detailed flour and recipe analysis)</a></li>
+      <li>Rushton, Susie. "Apollonia Poilâne." <em>The Gentlewoman,</em> Issue 4, Autumn &amp; Winter 2011.</li>
+      <li>Robertson, Chad. <em>Tartine Bread.</em> Chronicle Books, 2010. (for comparative miche context)</li>
+    </ul>
+  </div>
+
+  <!-- ── SPECIMEN NAV ──────────────────────────────────────── -->
+  <div class="specimen-nav">
+    <a href="/#starters">← back to starter index</a>
+    <div class="back">Specimen № 0508 of 847</div>
+    <a href="#">next specimen →</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-grid" style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding:60px 80px 32px;border-bottom:1.5px dashed var(--rule-pink-strong);">
+    <div>
+      <div class="foot-brand">The Sourdough Database</div>
+      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
+    </div>
+    <div class="foot-col">
+      <h5>The Database</h5>
+      <ul>
+        <li><a href="/#starters">starter index</a></li>
+        <li><a href="/#flours">flours</a></li>
+        <li><a href="/#journal">journal</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Tools</h5>
+      <ul>
+        <li><a href="/tools/hydration.html">hydration solver</a></li>
+        <li>schedule builder <small style="opacity:0.6">(soon)</small></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="/about.html">the story</a></li>
+        <li><a href="/privacy.html">privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon" style="max-width:1400px;margin:24px auto 0;display:flex;justify-content:space-between;font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.1em;color:var(--pencil);padding:0 80px 40px;flex-wrap:wrap;gap:12px;">
+    <span>© MMXXVI · The Sourdough Database</span>
+    <span>set in caveat, special elite &amp; crimson pro</span>
+    <span>made with flour on our hands</span>
+  </div>
+</footer>
+
+</body>
+</html>
