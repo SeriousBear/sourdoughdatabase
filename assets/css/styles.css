@@ -395,7 +395,7 @@ h1.hero-title .word-3 {
   font-size: 36px;
   color: var(--pen-blue);
   transform: rotate(-2deg);
-  line-height: 1;
+  line-height: 1.75;
 }
 .signature .editable-name {
   border-bottom: 1.5px dashed var(--pen-blue);
