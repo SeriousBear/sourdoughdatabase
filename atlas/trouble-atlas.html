@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Trouble Atlas — The Sourdough Database</title>
+  <meta name="description" content="312 documented sourdough failures, searchable by symptom. Every bad loaf has a reason. Find yours — gummy crumb, no oven spring, flat loaf, sour starter, dense crumb — and fix it on the next bake.">
+  <link rel="canonical" href="https://sourdoughdatabase.com/tools/trouble-atlas.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/tools/trouble-atlas.html">
+  <meta property="og:title" content="Trouble Atlas — The Sourdough Database">
+  <meta property="og:description" content="Every sourdough problem, documented and searchable. Find your symptom, get the fix.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Trouble Atlas — The Sourdough Database">
+  <meta name="twitter:description" content="Every sourdough problem, documented and searchable. Find your symptom, get the fix.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://sourdoughdatabase.com/tools/trouble-atlas.html",
+  "url": "https://sourdoughdatabase.com/tools/trouble-atlas.html",
+  "name": "Trouble Atlas — Sourdough Problem Solver",
+  "description": "Documented sourdough failures searchable by symptom. Every bad loaf has a reason.",
+  "isPartOf": {"@id": "https://sourdoughdatabase.com/#website"},
+  "publisher": {"@id": "https://sourdoughdatabase.com/#organization"},
+  "inLanguage": "en-US"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sourdoughdatabase.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://sourdoughdatabase.com/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "Trouble Atlas"}
+  ]
+}
+  </script>
+</head>
+<body>
+
+<div class="binding"></div>
+<div class="holes">
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+</div>
+
+<header>
+  <a href="/" class="logo">The Sourdough Database<span class="dot"></span></a>
+  <nav class="nav">
+    <a href="/">home</a>
+    <a href="/#starters">starters</a>
+    <a href="/#flours">flours</a>
+    <a href="/#tools" class="active">tools</a>
+    <a href="/#journal">journal</a>
+    <a href="/about.html">about</a>
+  </nav>
+</header>
+
+<main class="atlas-hub-wrap">
+
+  <div class="breadcrumb">
+    <a href="/">home</a><span class="sep">/</span>
+    <a href="/#tools">tools</a><span class="sep">/</span>
+    <span>trouble atlas</span>
+  </div>
+
+  <div class="divider-tab" style="margin-bottom:20px;">tools · reference</div>
+  <h1 class="section-heading" style="font-size:clamp(56px,9vw,96px);margin-bottom:10px;">
+    The Trouble <em>Atlas.</em>
+  </h1>
+  <p class="section-subtitle" style="font-family:'Crimson Pro',serif;font-style:italic;font-size:20px;color:var(--ink-soft);max-width:620px;line-height:1.6;margin-bottom:48px;">
+    Every bad loaf has a reason. Search by symptom — the crust problem, the crumb problem, the starter problem that woke you up at midnight — and find out what went wrong and how to fix it.
+  </p>
+
+  <!-- ── SEARCH ──────────────────────────────────────────────────────── -->
+  <div class="atlas-search-wrap" role="search">
+    <label class="atlas-search-label" for="atlas-search">search problems</label>
+    <div class="atlas-search-input-row">
+      <input
+        type="search"
+        id="atlas-search"
+        class="atlas-search-input"
+        placeholder="gummy, flat, no rise, hooch…"
+        autocomplete="off"
+        aria-label="Search sourdough problems"
+        aria-expanded="false"
+        aria-controls="atlas-autocomplete"
+      >
+      <span class="atlas-search-icon">✎</span>
+    </div>
+    <div class="atlas-autocomplete" id="atlas-autocomplete" role="listbox" aria-label="Search suggestions"></div>
+  </div>
+
+  <!-- ── CRUMB PROBLEMS ──────────────────────────────────────────────── -->
+  <section class="atlas-category" id="crumb-problems" data-category="crumb">
+    <div class="atlas-category-heading">
+      <span class="cat-icon">⬛</span>
+      <h2>Crumb <em>Problems</em></h2>
+      <span class="cat-count">3 entries</span>
+    </div>
+    <div class="problem-cards">
+
+      <a href="/atlas/gummy-crumb.html" class="problem-card" data-keywords="gummy wet dense raw inside crumb moist sticky">
+        <div class="pc-num">AT-01</div>
+        <div class="pc-name">Gummy Crumb</div>
+        <div class="pc-symptom">The inside is dense, wet, almost translucent. It collapses when pressed. Tastes fine, but wrong.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/dense-crumb.html" class="problem-card" data-keywords="dense heavy brick tight crumb no holes no bubbles close crumb">
+        <div class="pc-num">AT-04</div>
+        <div class="pc-name">Dense Crumb</div>
+        <div class="pc-symptom">The loaf slices heavy. Tight with almost no visible holes. Edible, but not what sourdough should be.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/gummy-crumb.html" class="problem-card" data-keywords="undercooked inside bread doughy raw center">
+        <div class="pc-num">AT-01b</div>
+        <div class="pc-name">Undercooked / Doughy Inside</div>
+        <div class="pc-symptom">The exterior looks baked but the center is raw or doughy. Related to gummy crumb — usually the same fix.</div>
+        <div class="pc-badge">Common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── RISE PROBLEMS ───────────────────────────────────────────────── -->
+  <section class="atlas-category" id="rise-problems" data-category="rise">
+    <div class="atlas-category-heading">
+      <span class="cat-icon">↑</span>
+      <h2>Rise <em>Problems</em></h2>
+      <span class="cat-count">4 entries</span>
+    </div>
+    <div class="problem-cards">
+
+      <a href="/atlas/no-oven-spring.html" class="problem-card" data-keywords="no oven spring flat no rise doesn't rise didn't rise score didn't open ear">
+        <div class="pc-num">AT-02</div>
+        <div class="pc-name">No Oven Spring</div>
+        <div class="pc-symptom">Goes in, comes out looking the same. No dramatic bloom, no ear, no dome. Just flat.</div>
+        <div class="pc-badge common">Common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/flat-loaf.html" class="problem-card" data-keywords="flat spreading wide sideways pancake focaccia won't hold shape slumps">
+        <div class="pc-num">AT-03</div>
+        <div class="pc-name">Flat / Spreading Loaf</div>
+        <div class="pc-symptom">The dough spreads sideways instead of rising up. Wide and low instead of domed.</div>
+        <div class="pc-badge common">Common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/overproofed.html" class="problem-card" data-keywords="overproofed over proofed too long slack sticky deflated collapsed poke test stays">
+        <div class="pc-num">AT-09</div>
+        <div class="pc-name">Overproofed Dough</div>
+        <div class="pc-symptom">Dough is slack, deflating, sticks to everything. Poke test indent stays. Gluten exhausted.</div>
+        <div class="pc-badge">Common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/underproofed.html" class="problem-card" data-keywords="underproofed under proofed not enough time dense tight burst sides crust tears">
+        <div class="pc-num">AT-10</div>
+        <div class="pc-name">Underproofed Dough</div>
+        <div class="pc-symptom">Dense crumb, burst sides, tight crust tears. The loaf needed more time before baking.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── FLAVOR PROBLEMS ─────────────────────────────────────────────── -->
+  <section class="atlas-category" id="flavor-problems" data-category="flavor">
+    <div class="atlas-category-heading">
+      <span class="cat-icon">◉</span>
+      <h2>Flavor <em>Problems</em></h2>
+      <span class="cat-count">2 entries</span>
+    </div>
+    <div class="problem-cards">
+
+      <a href="/atlas/too-sour.html" class="problem-card" data-keywords="too sour too acidic vinegary sharp overwhelming acidity reduce sourness">
+        <div class="pc-num">AT-05</div>
+        <div class="pc-name">Too Sour</div>
+        <div class="pc-symptom">Aggressively acidic. Sharp, vinegary, overwhelming. The flavor dominates everything.</div>
+        <div class="pc-badge">Common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/not-sour-enough.html" class="problem-card" data-keywords="not sour not tangy no flavor tastes like regular bread mild bland increase tang">
+        <div class="pc-num">AT-06</div>
+        <div class="pc-name">Not Sour Enough</div>
+        <div class="pc-symptom">Fine bread, no sourdough character. No tang, no complexity. Could have been made with dry yeast.</div>
+        <div class="pc-badge">Common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── STARTER PROBLEMS ────────────────────────────────────────────── -->
+  <section class="atlas-category" id="starter-problems" data-category="starter">
+    <div class="atlas-category-heading">
+      <span class="cat-icon">⬤</span>
+      <h2>Starter <em>Problems</em></h2>
+      <span class="cat-count">2 entries</span>
+    </div>
+    <div class="problem-cards">
+
+      <a href="/atlas/starter-not-rising.html" class="problem-card" data-keywords="starter not rising not bubbling won't rise dead inactive no activity flat">
+        <div class="pc-num">AT-07</div>
+        <div class="pc-name">Starter Won't Rise</div>
+        <div class="pc-symptom">Fed it hours ago. Still flat. No bubbles. No dome. It looks dead. It probably isn't.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/hooch.html" class="problem-card" data-keywords="hooch liquid on top starter gray grey dark liquid smells alcohol acetone">
+        <div class="pc-num">AT-08</div>
+        <div class="pc-name">Hooch / Liquid on Top</div>
+        <div class="pc-symptom">Gray watery liquid sitting on top of the starter. Smells like alcohol. Looks alarming. It's not.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── NOT LISTED ──────────────────────────────────────────────────── -->
+  <div class="atlas-not-listed">
+    <p>Don't see your problem? The Atlas is growing — new entries added weekly.</p>
+    <div class="nl-note">
+      Have a problem we haven't documented? <a href="/about.html" class="content-link">Tell us about it →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-grid" style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding:60px 80px 32px;border-bottom:1.5px dashed var(--rule-pink-strong);">
+    <div>
+      <div class="foot-brand">The Sourdough Database</div>
+      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
+    </div>
+    <div class="foot-col">
+      <h5>The Database</h5>
+      <ul>
+        <li><a href="/#starters">starter index</a></li>
+        <li><a href="/#flours">flours</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Tools</h5>
+      <ul>
+        <li><a href="/tools/hydration.html">hydration solver</a></li>
+        <li><a href="/tools/trouble-atlas.html">trouble atlas</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="/about.html">the story</a></li>
+        <li><a href="/privacy.html">privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon" style="max-width:1400px;margin:24px auto 0;display:flex;justify-content:space-between;font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.1em;color:var(--pencil);padding:0 80px 40px;flex-wrap:wrap;gap:12px;">
+    <span>© MMXXVI · The Sourdough Database</span>
+    <span>set in caveat, special elite &amp; crimson pro</span>
+    <span>made with flour on our hands</span>
+  </div>
+</footer>
+
+<script>
+// ── Trouble Atlas search with autocomplete ─────────────────────────────────────
+(function () {
+  'use strict';
+
+  // All problem entries — keywords are matched against search input
+  var PROBLEMS = [
+    { name: 'Gummy Crumb', cat: 'Crumb', url: '/atlas/gummy-crumb.html', snippet: 'wet, dense, almost raw inside', keys: 'gummy wet dense raw inside crumb moist sticky translucent' },
+    { name: 'No Oven Spring', cat: 'Rise', url: '/atlas/no-oven-spring.html', snippet: 'goes in flat, comes out flat', keys: 'no oven spring flat no rise didn\'t rise score didn\'t open ear bloom' },
+    { name: 'Flat / Spreading Loaf', cat: 'Rise', url: '/atlas/flat-loaf.html', snippet: 'spreads sideways, wide and low', keys: 'flat spreading wide sideways pancake focaccia slumps won\'t hold shape' },
+    { name: 'Dense Crumb', cat: 'Crumb', url: '/atlas/dense-crumb.html', snippet: 'heavy, tight, no holes', keys: 'dense heavy brick tight crumb no holes close crumb' },
+    { name: 'Too Sour', cat: 'Flavor', url: '/atlas/too-sour.html', snippet: 'vinegary, overwhelming acidity', keys: 'too sour acidic vinegary sharp overwhelming reduce sourness' },
+    { name: 'Not Sour Enough', cat: 'Flavor', url: '/atlas/not-sour-enough.html', snippet: 'mild, no tang, tastes like regular bread', keys: 'not sour not tangy no flavor bland mild increase tang' },
+    { name: 'Starter Won\'t Rise', cat: 'Starter', url: '/atlas/starter-not-rising.html', snippet: 'flat, no bubbles, no activity', keys: 'starter not rising not bubbling won\'t rise dead inactive no activity' },
+    { name: 'Hooch / Liquid on Top', cat: 'Starter', url: '/atlas/hooch.html', snippet: 'gray liquid on starter surface', keys: 'hooch liquid on top starter gray grey dark liquid smells alcohol acetone hungry' },
+    { name: 'Overproofed Dough', cat: 'Rise', url: '/atlas/overproofed.html', snippet: 'slack, sticky, deflated, won\'t spring back', keys: 'overproofed too long slack sticky deflated collapsed poke test stays' },
+    { name: 'Underproofed Dough', cat: 'Rise', url: '/atlas/underproofed.html', snippet: 'dense, burst sides, needed more time', keys: 'underproofed not enough time dense tight burst sides crust tears' },
+  ];
+
+  var input = document.getElementById('atlas-search');
+  var dropdown = document.getElementById('atlas-autocomplete');
+  var allCards = document.querySelectorAll('.problem-card');
+
+  function score(problem, query) {
+    var q = query.toLowerCase();
+    var s = 0;
+    if (problem.name.toLowerCase().includes(q)) s += 10;
+    if (problem.snippet.toLowerCase().includes(q)) s += 5;
+    var words = q.split(/\s+/);
+    words.forEach(function(w) {
+      if (w.length < 2) return;
+      if (problem.keys.includes(w)) s += 3;
+    });
+    return s;
+  }
+
+  function updateDropdown(query) {
+    if (!query || query.length < 2) {
+      dropdown.innerHTML = '';
+      dropdown.classList.remove('open');
+      input.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    var results = PROBLEMS
+      .map(function(p) { return { p: p, s: score(p, query) }; })
+      .filter(function(r) { return r.s > 0; })
+      .sort(function(a, b) { return b.s - a.s; })
+      .slice(0, 6);
+
+    if (!results.length) {
+      dropdown.innerHTML = '<div class="autocomplete-item"><span class="ac-name" style="color:var(--pencil);font-style:italic;">No match — try different words</span></div>';
+      dropdown.classList.add('open');
+      input.setAttribute('aria-expanded', 'true');
+      return;
+    }
+
+    dropdown.innerHTML = results.map(function(r) {
+      return '<a class="autocomplete-item" href="' + r.p.url + '" role="option">' +
+        '<span class="ac-cat">' + r.p.cat + '</span>' +
+        '<span class="ac-name">' + r.p.name + '</span>' +
+        '<span class="ac-snippet">' + r.p.snippet + '</span>' +
+      '</a>';
+    }).join('');
+    dropdown.classList.add('open');
+    input.setAttribute('aria-expanded', 'true');
+  }
+
+  function filterCards(query) {
+    var q = (query || '').toLowerCase().trim();
+    if (!q) {
+      allCards.forEach(function(c) { c.closest('.atlas-category') && (c.style.display = ''); c.style.display = ''; });
+      document.querySelectorAll('.atlas-category').forEach(function(s) { s.style.display = ''; });
+      return;
+    }
+    var visibleCats = new Set();
+    allCards.forEach(function(card) {
+      var keys = (card.getAttribute('data-keywords') || '') + ' ' + card.querySelector('.pc-name').textContent;
+      var words = q.split(/\s+/);
+      var match = words.some(function(w) { return w.length > 1 && keys.toLowerCase().includes(w); });
+      card.style.display = match ? '' : 'none';
+      if (match) {
+        var cat = card.closest('.atlas-category');
+        if (cat) visibleCats.add(cat);
+      }
+    });
+    document.querySelectorAll('.atlas-category').forEach(function(s) {
+      s.style.display = visibleCats.has(s) ? '' : 'none';
+    });
+  }
+
+  input.addEventListener('input', function() {
+    var q = input.value.trim();
+    updateDropdown(q);
+    filterCards(q);
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      dropdown.innerHTML = '';
+      dropdown.classList.remove('open');
+      input.setAttribute('aria-expanded', 'false');
+      filterCards('');
+      input.value = '';
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+      input.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Keyboard navigation in dropdown
+  input.addEventListener('keydown', function(e) {
+    var items = dropdown.querySelectorAll('.autocomplete-item[href]');
+    if (!items.length) return;
+    var focused = dropdown.querySelector('.autocomplete-item:focus');
+    var idx = Array.from(items).indexOf(focused);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      var next = items[idx + 1] || items[0];
+      next.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      var prev = items[idx - 1] || items[items.length - 1];
+      prev.focus();
+    } else if (e.key === 'Enter' && focused) {
+      e.preventDefault();
+      window.location = focused.href;
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

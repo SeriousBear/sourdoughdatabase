@@ -395,7 +395,7 @@ h1.hero-title .word-3 {
   font-size: 36px;
   color: var(--pen-blue);
   transform: rotate(-2deg);
-  line-height: 1.75;
+  line-height: 1;
 }
 .signature .editable-name {
   border-bottom: 1.5px dashed var(--pen-blue);
@@ -3143,4 +3143,660 @@ footer {
 .content-link:hover {
   color: var(--pen-red);
   border-bottom-color: var(--pen-red);
+}
+
+/* ============ TROUBLE ATLAS — HUB PAGE ============ */
+
+.atlas-hub-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 80px 100px;
+}
+
+/* Search bar */
+.atlas-search-wrap {
+  position: relative;
+  margin-bottom: 56px;
+}
+.atlas-search-label {
+  display: block;
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pen-red);
+  margin-bottom: 10px;
+}
+.atlas-search-input-row {
+  display: flex;
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  background: #fdf8e3;
+  position: relative;
+}
+.atlas-search-input {
+  flex: 1;
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  outline: none;
+}
+.atlas-search-input::placeholder { color: var(--pencil); opacity: 0.6; }
+.atlas-search-icon {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  color: var(--pen-red);
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+}
+.atlas-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  background: #fdf8e3;
+  border: 2px solid var(--ink);
+  border-top: none;
+  box-shadow: 5px 5px 0 var(--ink);
+  z-index: 100;
+  display: none;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.atlas-autocomplete.open { display: block; }
+.autocomplete-item {
+  padding: 14px 20px;
+  border-bottom: 1px dashed var(--rule-pink);
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  transition: background 0.15s;
+}
+.autocomplete-item:hover { background: var(--paper-warm); }
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item .ac-name {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.autocomplete-item .ac-cat {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pen-red);
+}
+.autocomplete-item .ac-snippet {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--pencil);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Category sections */
+.atlas-category {
+  margin-bottom: 56px;
+}
+.atlas-category-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink);
+}
+.atlas-category-heading .cat-icon {
+  font-family: 'Caveat', cursive;
+  font-size: 36px;
+  color: var(--pen-red);
+  line-height: 1;
+  transform: rotate(-3deg);
+}
+.atlas-category-heading h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  transform: rotate(-0.5deg);
+}
+.atlas-category-heading h2 em { color: var(--pen-red); font-style: italic; }
+.atlas-category-heading .cat-count {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  margin-left: auto;
+}
+
+.problem-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.problem-card {
+  background: #fdf8e3;
+  border: 1.5px solid var(--ink);
+  padding: 20px 22px 24px;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.problem-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.problem-card:nth-child(odd) { transform: rotate(-0.4deg); }
+.problem-card:nth-child(even) { transform: rotate(0.4deg); }
+.problem-card:nth-child(odd):hover,
+.problem-card:nth-child(even):hover { transform: translate(-2px, -2px) rotate(0deg); }
+.problem-card .pc-num {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pen-red);
+  margin-bottom: 6px;
+}
+.problem-card .pc-name {
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.problem-card .pc-symptom {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--pencil);
+  margin-bottom: 12px;
+}
+.problem-card .pc-badge {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid var(--rule-pink-strong);
+  color: var(--pencil);
+  display: inline-block;
+}
+.problem-card .pc-badge.common { border-color: var(--pen-red); color: var(--pen-red); }
+.problem-card .pc-cta {
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  color: var(--pen-blue);
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+}
+
+/* "Not listed" note */
+.atlas-not-listed {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: var(--paper-warm);
+  border: 1.5px dashed var(--rule-pink-strong);
+  text-align: center;
+}
+.atlas-not-listed p {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.atlas-not-listed .nl-note {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: var(--pen-blue);
+}
+
+@media (max-width: 900px) {
+  .atlas-hub-wrap { padding: 30px 24px 60px; }
+  .problem-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .problem-card { transform: rotate(0deg) !important; }
+}
+@media (max-width: 560px) {
+  .problem-cards { grid-template-columns: 1fr; }
+  .atlas-search-input { font-size: 22px; }
+}
+
+/* ============ TROUBLE ATLAS — INDIVIDUAL PROBLEM PAGES ============ */
+
+.atlas-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 50px 80px 100px;
+}
+
+/* Problem header */
+.problem-id {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pen-red);
+  margin-bottom: 8px;
+}
+.problem-title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(56px, 9vw, 96px);
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--ink);
+  transform: rotate(-1deg);
+  margin-bottom: 10px;
+}
+.problem-title em { color: var(--pen-red); font-style: italic; display: block; }
+.problem-tagline {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 620px;
+  padding-left: 20px;
+  border-left: 3px solid var(--pen-red);
+  margin-bottom: 32px;
+}
+
+/* Quick stats bar */
+.quick-stats {
+  display: flex;
+  gap: 0;
+  border: 1.5px solid var(--ink);
+  background: #fdf8e3;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.qs-item {
+  flex: 1;
+  padding: 14px 18px;
+  border-right: 1px dashed var(--rule-pink-strong);
+  min-width: 120px;
+}
+.qs-item:last-child { border-right: none; }
+.qs-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  margin-bottom: 4px;
+}
+.qs-value {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+.qs-value.red { color: var(--pen-red); }
+.qs-value.blue { color: var(--pen-blue); }
+
+/* Visual block */
+.visual-block {
+  margin: 36px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.visual-block.single { grid-template-columns: 1fr; max-width: 560px; }
+
+/* Video facade card */
+.video-card {
+  display: block;
+  text-decoration: none;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+.video-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.video-card:hover img { opacity: 1; }
+.video-card .vc-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 17, 8, 0.55);
+  transition: background 0.2s;
+}
+.video-card:hover .vc-overlay { background: rgba(26, 17, 8, 0.4); }
+.vc-play {
+  width: 52px;
+  height: 52px;
+  background: var(--pen-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.vc-play svg { fill: #fdf8e3; margin-left: 3px; }
+.vc-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fdf8e3;
+  text-align: center;
+  padding: 0 12px;
+}
+.vc-sub {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: rgba(253, 248, 227, 0.7);
+  margin-top: 4px;
+}
+/* Placeholder when no specific video chosen */
+.video-facade-placeholder {
+  display: block;
+  text-decoration: none;
+  background: var(--rye, #2c1d10);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1.5px solid var(--ink);
+  transition: background 0.2s;
+}
+.video-facade-placeholder:hover { background: var(--pen-red); }
+.video-facade-placeholder .vfp-icon {
+  width: 48px; height: 48px;
+  background: rgba(253, 248, 227, 0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.video-facade-placeholder .vfp-icon svg { fill: #fdf8e3; margin-left: 3px; }
+.video-facade-placeholder .vfp-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fdf8e3;
+  text-align: center;
+  padding: 0 16px;
+  line-height: 1.5;
+}
+.video-facade-placeholder .vfp-sub {
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  color: rgba(253, 248, 227, 0.65);
+}
+
+/* Own photo (hidden by default, uncomment to activate) */
+.own-photo {
+  margin: 0;
+  border: 1.5px solid var(--ink);
+  overflow: hidden;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.own-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.own-photo figcaption {
+  padding: 12px 16px;
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--pencil);
+  background: #fdf8e3;
+  border-top: 1px dashed var(--rule-pink-strong);
+}
+
+/* Cause list */
+.cause-list {
+  list-style: none;
+  margin: 20px 0;
+  counter-reset: causes;
+}
+.cause-list li {
+  counter-increment: causes;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--rule-pink);
+}
+.cause-list li:last-child { border-bottom: none; }
+.cause-list li::before {
+  content: counter(causes);
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--pen-red);
+  line-height: 1;
+  text-align: center;
+}
+.cause-list .cause-name {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cause-list .cause-body {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.cause-list .cause-likelihood {
+  font-family: 'Special Elite', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pen-red);
+  margin-bottom: 6px;
+}
+
+/* Fix steps */
+.fix-steps {
+  list-style: none;
+  margin: 20px 0;
+  counter-reset: fixes;
+}
+.fix-steps li {
+  counter-increment: fixes;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 16px;
+  padding: 18px 0 18px;
+  border-bottom: 1px dotted var(--rule-pink);
+}
+.fix-steps li:last-child { border-bottom: none; }
+.fix-steps li::before {
+  content: counter(fixes);
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--pen-blue);
+  background: rgba(42, 71, 116, 0.12);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.fix-steps .fix-name {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pen-blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.fix-steps .fix-body {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* Quick checklist */
+.quick-checklist {
+  background: #fdf8e3;
+  border: 1.5px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 24px 28px;
+  transform: rotate(-0.4deg);
+  position: relative;
+  margin: 32px 0;
+}
+.quick-checklist::before {
+  content: "QUICK CHECKLIST";
+  position: absolute;
+  top: -11px; left: 18px;
+  background: var(--paper);
+  padding: 0 10px;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--pen-red);
+}
+.quick-checklist h3 {
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+.checklist-items { list-style: none; }
+.checklist-items li {
+  font-family: 'Special Elite', monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-left: 28px;
+  position: relative;
+  border-bottom: 1px dotted var(--rule-pink);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.checklist-items li::before {
+  content: "☐";
+  position: absolute;
+  left: 0;
+  color: var(--pen-red);
+  font-size: 16px;
+  top: 8px;
+}
+
+/* Related problems */
+.related-problems {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1.5px dashed var(--rule-pink-strong);
+}
+.related-problems h3 {
+  font-family: 'Caveat', cursive;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+  transform: rotate(-0.5deg);
+  display: inline-block;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.related-card {
+  background: var(--paper-warm);
+  border: 1.5px solid var(--ink);
+  padding: 14px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+.related-card:hover { background: #fdf8e3; }
+.related-card .rc-cat {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pen-red);
+  margin-bottom: 4px;
+}
+.related-card .rc-name {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+
+/* Atlas nav */
+.atlas-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 0 0;
+  border-top: 1.5px solid var(--ink);
+  margin-top: 56px;
+}
+.atlas-nav a {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--pen-blue);
+}
+.atlas-nav a:hover { color: var(--pen-red); }
+.atlas-nav .an-center {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .atlas-wrap { padding: 30px 24px 60px; }
+  .visual-block { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr 1fr; }
+  .cause-list li, .fix-steps li { grid-template-columns: 28px 1fr; }
+  .problem-title { font-size: 56px; }
 }
