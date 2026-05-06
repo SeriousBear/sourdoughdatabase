@@ -3131,3 +3131,16 @@ footer {
   .timeline-entry { grid-template-columns: 50px 1fr; gap: 10px; }
   .section-heading { font-size: 40px; }
 }
+
+/* ============ INLINE BODY LINKS ============ */
+/* Used for contextual internal links within prose/body copy */
+.content-link {
+  color: var(--pen-blue);
+  border-bottom: 1px dashed var(--pen-blue);
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.content-link:hover {
+  color: var(--pen-red);
+  border-bottom-color: var(--pen-red);
+}
