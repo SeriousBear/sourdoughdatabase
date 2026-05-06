@@ -96,7 +96,7 @@ header {
   width: 8px; height: 8px;
   background: var(--pen-red);
   border-radius: 50%;
-  margin: 0 4px 4px 0;
+  margin: 0 4px 4px 8px;
   transform: translateY(-2px);
 }
 .nav {
@@ -2412,11 +2412,11 @@ footer {
 .prose-section p:last-child { margin-bottom: 0; }
 .prose-section .opener::first-letter {
   font-family: 'Caveat', cursive;
-  font-size: 4em;
+  font-size: 3em;
   font-weight: 700;
   float: left;
-  line-height: 0.78;
-  margin: 6px 14px 0 -4px;
+  line-height: 0.85;
+  margin: 6px 14px 0 -2px;
   color: var(--pen-red);
 }
 
@@ -2670,6 +2670,7 @@ footer {
   transform: rotate(-1deg);
   display: block;
   margin-top: 8px;
+  line-height: 1.75;
 }
 .sign-off .sig-sub {
   font-family: 'Special Elite', monospace;
@@ -2865,11 +2866,11 @@ footer {
 .prose p:last-child { margin-bottom: 0; }
 .prose .opener::first-letter {
   font-family: 'Caveat', cursive;
-  font-size: 4em;
+  font-size: 3em;
   font-weight: 700;
   float: left;
-  line-height: 0.78;
-  margin: 6px 14px 0 -4px;
+  line-height: 0.85;
+  margin: 6px 14px 0 -2px;
   color: var(--pen-red);
 }
 
