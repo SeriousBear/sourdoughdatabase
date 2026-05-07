@@ -4065,20 +4065,19 @@ footer {
       color: var(--pen-red);
     }
 
-    /* F/C toggle — top right of panel */
+    /* F/C toggle — inline with temp label */
     .unit-toggle {
-      position: absolute;
-      top: 18px; right: 24px;
       display: flex;
       border: 1.5px solid var(--ink);
       overflow: hidden;
       background: var(--paper);
+      flex-shrink: 0;
     }
     .unit-toggle button {
       font-family: 'Special Elite', monospace;
       font-size: 11px;
       letter-spacing: 0.1em;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border: none;
       background: transparent;
       cursor: pointer;
@@ -4090,11 +4089,18 @@ footer {
       color: #fdf8e3;
     }
 
+    /* Input divider */
+    .input-divider {
+      height: 1px;
+      background: var(--rule-pink-strong);
+      opacity: 0.4;
+      margin: 24px 0;
+    }
+
     /* Input rows */
     .input-row {
-      margin-bottom: 28px;
+      margin-bottom: 0;
     }
-    .input-row:last-child { margin-bottom: 0; }
 
     .input-label {
       font-family: 'Special Elite', monospace;
@@ -4106,31 +4112,59 @@ footer {
       margin-bottom: 10px;
     }
 
-    /* Date/time pickers */
-    .datetime-row {
+    /* Date/time pickers — stacked */
+    .datetime-stack {
       display: flex;
+      flex-direction: column;
       gap: 12px;
-      flex-wrap: wrap;
+      margin-bottom: 16px;
     }
-    .datetime-row input {
+    .datetime-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .dt-sublabel {
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pencil);
+    }
+    .datetime-field input {
       font-family: 'Caveat', cursive;
       font-size: 22px;
       color: var(--ink);
       background: var(--paper);
       border: 1.5px solid var(--ink);
       padding: 10px 14px;
-      flex: 1;
-      min-width: 160px;
       outline: none;
+      width: 100%;
+      box-sizing: border-box;
     }
-    .datetime-row input:focus { border-color: var(--pen-blue); }
+    .datetime-field input:focus { border-color: var(--pen-blue); }
+
+    /* Temperature — label row with toggle inline */
+    .temp-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .temp-label-row .input-label { margin-bottom: 0; }
 
     /* Temperature slider */
     .temp-display {
       display: flex;
-      align-items: baseline;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+    }
+    .temp-left {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
     }
     .temp-big {
       font-family: 'Caveat', cursive;
@@ -4145,18 +4179,24 @@ footer {
       color: var(--pencil);
     }
     .temp-bulk-preview {
-      font-family: 'Crimson Pro', serif;
-      font-style: italic;
-      font-size: 17px;
-      color: var(--pen-blue);
-      margin-left: auto;
       text-align: right;
+    }
+    .tbp-label {
+      display: block;
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      margin-bottom: 3px;
     }
     .temp-bulk-preview strong {
       font-family: 'Caveat', cursive;
-      font-style: normal;
-      font-size: 22px;
+      font-size: 28px;
+      font-weight: 700;
       color: var(--pen-red);
+      display: block;
+      line-height: 1;
     }
 
     .temp-slider {
@@ -4193,8 +4233,9 @@ footer {
       font-family: 'Special Elite', monospace;
       font-size: 10px;
       color: var(--pencil);
-      letter-spacing: 0.08em;
-      margin-top: 6px;
+      letter-spacing: 0.06em;
+      margin-top: 8px;
+      opacity: 0.75;
     }
 
     /* Proof method toggle */
@@ -4592,7 +4633,7 @@ footer {
       .schedule-wrap { padding: 30px 24px 60px; }
       .schedule-title { font-size: 56px; }
       .input-panel { padding: 24px 20px; transform: rotate(0deg); }
-      .unit-toggle { position: static; margin-bottom: 16px; width: fit-content; }
+      .unit-toggle { width: fit-content; }
       .step-card { grid-template-columns: 6px 90px 1fr; }
       .step-time-main { font-size: 20px; }
       .step-name { font-size: 22px; }

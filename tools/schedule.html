@@ -142,43 +142,56 @@
   <!-- ── INPUT PANEL ──────────────────────────────────────────────── -->
   <div class="input-panel">
 
-    <div class="unit-toggle" id="unit-toggle">
-      <button class="active" id="btn-f" onclick="setUnit('F')">°F</button>
-      <button id="btn-c" onclick="setUnit('C')">°C</button>
-    </div>
-
     <!-- Target time -->
     <div class="input-row">
       <label class="input-label" for="target-date">I want fresh bread on</label>
-      <div class="datetime-row">
-        <input type="date" id="target-date">
-        <input type="time" id="target-time" value="08:00">
+      <div class="datetime-stack">
+        <div class="datetime-field">
+          <span class="dt-sublabel">day</span>
+          <input type="date" id="target-date">
+        </div>
+        <div class="datetime-field">
+          <span class="dt-sublabel">time</span>
+          <input type="time" id="target-time" value="08:00">
+        </div>
       </div>
-      <button class="from-now-btn" onclick="setFromNow()" style="margin-top:12px;">
-        ✎ or — plan from right now
+      <button class="from-now-btn" onclick="setFromNow()">
+        ✎ or — figure out when I'll have bread if I start right now
       </button>
     </div>
 
+    <div class="input-divider"></div>
+
     <!-- Temperature -->
     <div class="input-row">
-      <label class="input-label" for="temp-slider">Kitchen temperature</label>
+      <div class="temp-label-row">
+        <label class="input-label" for="temp-slider">Kitchen temperature</label>
+        <div class="unit-toggle" id="unit-toggle">
+          <button class="active" id="btn-f" onclick="setUnit('F')">°F</button>
+          <button id="btn-c" onclick="setUnit('C')">°C</button>
+        </div>
+      </div>
       <div class="temp-display">
-        <span class="temp-big" id="temp-display">72</span>
-        <span class="temp-unit" id="temp-unit-label">°F</span>
-        <span class="temp-bulk-preview" id="bulk-preview">
-          bulk fermentation<br>
+        <div class="temp-left">
+          <span class="temp-big" id="temp-display">72</span>
+          <span class="temp-unit" id="temp-unit-label">°F</span>
+        </div>
+        <div class="temp-bulk-preview" id="bulk-preview">
+          <span class="tbp-label">bulk fermentation at this temp</span>
           <strong id="bulk-preview-time">4.5–5.75 hrs</strong>
-        </span>
+        </div>
       </div>
       <input type="range" class="temp-slider" id="temp-slider"
              min="64" max="86" value="72" step="1"
              oninput="onTempChange(this.value)">
       <div class="temp-scale" id="temp-scale">
-        <span>64°F<br><small>cold</small></span>
-        <span style="text-align:center">72°F<br><small>typical</small></span>
-        <span style="text-align:right">86°F<br><small>hot</small></span>
+        <span>64°F · cold</span>
+        <span>72°F · typical</span>
+        <span>86°F · hot</span>
       </div>
     </div>
+
+    <div class="input-divider"></div>
 
     <!-- Proof method -->
     <div class="input-row">
@@ -814,15 +827,43 @@ function setProof(method) {
 }
 
 function setFromNow() {
-  var now = new Date();
-  // Target: bread ready 20 hours from now (reasonable estimate)
-  var target = new Date(now.getTime() + 20 * 3600000);
-  var dateStr = target.toISOString().split('T')[0];
-  var h = target.getHours();
-  var m = target.getMinutes();
-  var timeStr = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
-  document.getElementById('target-date').value = dateStr;
-  document.getElementById('target-time').value = timeStr;
+  // Forward calculation: if I start RIGHT NOW, when will bread be ready?
+  // Starter feeds now → peaks → mix → bulk → shape → proof → preheat → bake → cool
+  var now = Date.now();
+  var tempF = state.tempF;
+  var proofMethod = state.proofMethod;
+
+  var peak   = interpolate(STARTER_PEAK_DATA, tempF);
+  var bulk   = interpolate(BULK_DATA, tempF);
+
+  // Starter peaks in peak.center minutes from now
+  // Autolyse (30 min) runs in parallel with starter peak, so mix starts at peak
+  var mixStart    = now + peak.center * 60000;
+  var bulkEnd     = mixStart + 30 * 60000 + bulk.center * 60000; // 30min autolyse + bulk
+  var shapeEnd    = bulkEnd + 40 * 60000;  // pre-shape + bench rest + shape
+
+  var bakeStart;
+  if (proofMethod === 'cold') {
+    var coldProofEnd = shapeEnd + 720 * 60000; // 12hr cold proof
+    bakeStart = coldProofEnd + 60 * 60000;     // 60min preheat
+  } else {
+    var proof = interpolate(SAME_DAY_PROOF_DATA, tempF);
+    bakeStart = shapeEnd + proof.center * 60000 + 60 * 60000; // proof + preheat overlap
+  }
+
+  // bake covered 20min + uncovered 22min + cool 90min
+  var breadReady = bakeStart + (20 + 22 + 90) * 60000;
+
+  var target = new Date(breadReady);
+  // Use local date string to avoid timezone shifts
+  var y = target.getFullYear();
+  var mo = String(target.getMonth() + 1).padStart(2, '0');
+  var d  = String(target.getDate()).padStart(2, '0');
+  var h  = String(target.getHours()).padStart(2, '0');
+  var m  = String(target.getMinutes()).padStart(2, '0');
+
+  document.getElementById('target-date').value = y + '-' + mo + '-' + d;
+  document.getElementById('target-time').value = h + ':' + m;
   render();
 }
 
