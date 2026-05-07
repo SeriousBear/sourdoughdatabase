@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bake Schedule Builder — The Sourdough Database</title>
+  <meta name="description" content="Build a complete sourdough bake schedule backwards from when you want fresh bread. Temperature-aware bulk fermentation times, visual timeline, sleep protection. The most detailed free sourdough scheduler online.">
+  <link rel="canonical" href="https://sourdoughdatabase.com/tools/schedule.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/tools/schedule.html">
+  <meta property="og:title" content="Bake Schedule Builder — The Sourdough Database">
+  <meta property="og:description" content="Build a complete sourdough bake schedule backwards from when you want fresh bread. Temperature-aware, visual timeline, sleep protection.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bake Schedule Builder — The Sourdough Database">
+  <meta name="twitter:description" content="Temperature-aware sourdough bake schedule builder with visual timeline and sleep protection.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TNFRKVWVW');
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://sourdoughdatabase.com/tools/schedule.html",
+  "url": "https://sourdoughdatabase.com/tools/schedule.html",
+  "name": "Sourdough Bake Schedule Builder",
+  "description": "Temperature-aware sourdough bake schedule builder. Works backwards from your target bread time. Includes visual timeline, flexibility windows, and sleep protection.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "publisher": {"@id": "https://sourdoughdatabase.com/#organization"},
+  "isPartOf": {"@id": "https://sourdoughdatabase.com/#website"},
+  "inLanguage": "en-US"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sourdoughdatabase.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://sourdoughdatabase.com/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "Bake Schedule Builder"}
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does sourdough bulk fermentation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bulk fermentation time depends heavily on kitchen temperature. At 72°F it takes approximately 4.5–5.75 hours. At 68°F expect 6–7.5 hours. At 76°F as little as 3.5–4.5 hours. Temperature is the single biggest variable — always watch the dough, not the clock."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I do a cold proof or same-day proof for sourdough?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cold proof (overnight in the refrigerator) is recommended for most bakers. It's more forgiving, produces better flavor through extended fermentation, and makes the dough easier to score cold. Same-day proofing is faster but requires more precise timing and produces a milder loaf."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I feed my sourdough starter before baking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Feed your starter 4–8 hours before you plan to mix your dough, depending on kitchen temperature. At 72°F, a 1:5:5 ratio feed will peak in approximately 5–7 hours. Use the starter when it's domed and just starting to show signs of falling — at maximum activity."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<div class="binding"></div>
+<div class="holes">
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+</div>
+
+<header>
+  <a href="/" class="logo">The Sourdough Database<span class="dot"></span></a>
+  <nav class="nav">
+    <a href="/">home</a>
+    <a href="/#starters">starters</a>
+    <a href="/#flours">flours</a>
+    <a href="/#tools" class="active">tools</a>
+    <a href="/#journal">journal</a>
+    <a href="/about.html">about</a>
+  </nav>
+</header>
+
+<main class="schedule-wrap">
+
+  <div class="breadcrumb">
+    <a href="/">home</a><span class="sep">/</span>
+    <a href="/#tools">tools</a><span class="sep">/</span>
+    <span>bake schedule</span>
+  </div>
+
+  <h1 class="schedule-title">
+    Bake Schedule
+    <em>Builder.</em>
+  </h1>
+  <p class="schedule-subtitle">
+    Tell it when you want fresh bread. It tells you everything else — when to feed your starter, when bulk finishes, when to shape, when to sleep. Adjusts in real time as your kitchen temperature changes.
+  </p>
+
+  <!-- ── INPUT PANEL ──────────────────────────────────────────────── -->
+  <div class="input-panel">
+
+    <div class="unit-toggle" id="unit-toggle">
+      <button class="active" id="btn-f" onclick="setUnit('F')">°F</button>
+      <button id="btn-c" onclick="setUnit('C')">°C</button>
+    </div>
+
+    <!-- Target time -->
+    <div class="input-row">
+      <label class="input-label" for="target-date">I want fresh bread on</label>
+      <div class="datetime-row">
+        <input type="date" id="target-date">
+        <input type="time" id="target-time" value="08:00">
+      </div>
+      <button class="from-now-btn" onclick="setFromNow()" style="margin-top:12px;">
+        ✎ or — plan from right now
+      </button>
+    </div>
+
+    <!-- Temperature -->
+    <div class="input-row">
+      <label class="input-label" for="temp-slider">Kitchen temperature</label>
+      <div class="temp-display">
+        <span class="temp-big" id="temp-display">72</span>
+        <span class="temp-unit" id="temp-unit-label">°F</span>
+        <span class="temp-bulk-preview" id="bulk-preview">
+          bulk fermentation<br>
+          <strong id="bulk-preview-time">4.5–5.75 hrs</strong>
+        </span>
+      </div>
+      <input type="range" class="temp-slider" id="temp-slider"
+             min="64" max="86" value="72" step="1"
+             oninput="onTempChange(this.value)">
+      <div class="temp-scale" id="temp-scale">
+        <span>64°F<br><small>cold</small></span>
+        <span style="text-align:center">72°F<br><small>typical</small></span>
+        <span style="text-align:right">86°F<br><small>hot</small></span>
+      </div>
+    </div>
+
+    <!-- Proof method -->
+    <div class="input-row">
+      <span class="input-label">Proof method</span>
+      <div class="proof-toggle" id="proof-toggle">
+        <button class="active" onclick="setProof('cold')" id="btn-cold">
+          ❄ Overnight cold proof
+          <span class="pt-sub">recommended · more flavor</span>
+        </button>
+        <button onclick="setProof('same')" id="btn-same">
+          ☀ Same-day proof
+          <span class="pt-sub">faster · milder flavor</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── OUTPUT ────────────────────────────────────────────────────── -->
+  <div class="schedule-output" id="schedule-output">
+
+    <!-- Summary -->
+    <div class="schedule-summary" id="schedule-summary">
+      <span class="summary-lead" id="summary-text">Loading…</span>
+      <span class="summary-total" id="summary-total"></span>
+    </div>
+
+    <!-- Sleep warning -->
+    <div class="sleep-warning" id="sleep-warning">
+      <span class="sw-icon">☽</span>
+      <div class="sw-text">
+        <strong id="sw-title">Late-night step detected</strong>
+        <span id="sw-body"></span>
+      </div>
+    </div>
+
+    <!-- Visual timeline -->
+    <div class="timeline-section">
+      <div class="timeline-section-label">Your bake — visual timeline</div>
+      <div class="timeline-container">
+        <div style="padding: 24px 0 32px; min-width: 700px;">
+          <div class="timeline-track" id="timeline-track"></div>
+        </div>
+      </div>
+      <div class="timeline-legend" id="timeline-legend"></div>
+    </div>
+
+    <!-- Step cards -->
+    <div class="steps-section">
+      <div class="steps-label">Step-by-step schedule</div>
+      <div class="step-cards" id="step-cards"></div>
+    </div>
+
+    <!-- Print -->
+    <div class="print-row">
+      <span class="recalc-note">Change any input above to recalculate ✎</span>
+      <button class="print-btn" onclick="window.print()">Print schedule</button>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-grid" style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding:60px 80px 32px;border-bottom:1.5px dashed var(--rule-pink-strong);">
+    <div>
+      <div class="foot-brand">The Sourdough Database</div>
+      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
+    </div>
+    <div class="foot-col">
+      <h5>The Database</h5>
+      <ul>
+        <li><a href="/#starters">starter index</a></li>
+        <li><a href="/#flours">flours</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Tools</h5>
+      <ul>
+        <li><a href="/tools/hydration.html">hydration solver</a></li>
+        <li><a href="/tools/trouble-atlas.html">trouble atlas</a></li>
+        <li><a href="/tools/schedule.html">bake schedule</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>About</h5>
+      <ul>
+        <li><a href="/about.html">the story</a></li>
+        <li><a href="/privacy.html">privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon" style="max-width:1400px;margin:24px auto 0;display:flex;justify-content:space-between;font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.1em;color:var(--pencil);padding:0 80px 40px;flex-wrap:wrap;gap:12px;">
+    <span>© MMXXVI · The Sourdough Database</span>
+    <span>set in caveat, special elite &amp; crimson pro</span>
+    <span>made with flour on our hands</span>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  THE SOURDOUGH DATABASE — BAKE SCHEDULE BUILDER
+//  Temperature-aware, works backwards from target time
+//  Sleep guardian, visual timeline, flex windows on every step
+// ═══════════════════════════════════════════════════════════════════
+
+// ── STATE ──────────────────────────────────────────────────────────
+var state = {
+  unit: 'F',
+  proofMethod: 'cold',
+  tempF: 72,
+};
+
+// ── TEMPERATURE LOOKUP TABLES ──────────────────────────────────────
+// All values in minutes. Format: [temp_F, center_minutes, half_range_minutes]
+// Based on 20% levain at 100% hydration, standard white flour blend.
+
+var BULK_DATA = [
+  [64, 540, 60], [66, 465, 45], [68, 405, 45], [70, 352, 37],
+  [72, 307, 37], [74, 270, 30], [76, 240, 30], [78, 210, 28],
+  [80, 187, 22], [82, 165, 15], [84, 150, 15], [86, 132, 12]
+];
+
+var STARTER_PEAK_DATA = [
+  [64, 600, 120], [66, 510, 90], [68, 450, 90], [70, 390, 75],
+  [72, 330, 60], [74, 300, 60], [76, 255, 45], [78, 210, 45],
+  [80, 180, 30], [82, 150, 30], [84, 120, 25], [86, 90, 20]
+];
+
+var SAME_DAY_PROOF_DATA = [
+  [64, 180, 30], [66, 165, 27], [68, 150, 25], [70, 135, 22],
+  [72, 120, 20], [74, 105, 18], [76, 90, 15], [78, 78, 12],
+  [80, 68, 10], [82, 58, 8], [84, 50, 8], [86, 42, 7]
+];
+
+function interpolate(data, tempF) {
+  if (tempF <= data[0][0]) return { center: data[0][1], range: data[0][2] };
+  if (tempF >= data[data.length-1][0]) {
+    var last = data[data.length-1];
+    return { center: last[1], range: last[2] };
+  }
+  for (var i = 0; i < data.length - 1; i++) {
+    if (tempF >= data[i][0] && tempF <= data[i+1][0]) {
+      var t = (tempF - data[i][0]) / (data[i+1][0] - data[i][0]);
+      return {
+        center: Math.round(data[i][1] + t * (data[i+1][1] - data[i][1])),
+        range: Math.round(data[i][2] + t * (data[i+1][2] - data[i][2]))
+      };
+    }
+  }
+  return { center: 300, range: 30 };
+}
+
+// ── UNIT CONVERSION ────────────────────────────────────────────────
+function toF(val, unit) {
+  if (unit === 'F') return val;
+  return Math.round(val * 9/5 + 32);
+}
+function toDisplay(tempF, unit) {
+  if (unit === 'F') return tempF;
+  return Math.round((tempF - 32) * 5/9);
+}
+function sliderToF(sliderVal) {
+  return state.unit === 'F' ? sliderVal : toF(sliderVal, 'C');
+}
+
+// ── FORMATTING HELPERS ─────────────────────────────────────────────
+function fmtTime(date) {
+  var h = date.getHours();
+  var m = date.getMinutes();
+  var ampm = h >= 12 ? 'p.m.' : 'a.m.';
+  var h12 = h % 12 || 12;
+  return h12 + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+}
+function fmtDay(date) {
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  return days[date.getDay()];
+}
+function fmtDayShort(date) {
+  var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  return days[date.getDay()];
+}
+function fmtDuration(mins) {
+  if (mins < 60) return mins + ' min';
+  var h = Math.floor(mins / 60);
+  var m = mins % 60;
+  return m > 0 ? h + 'h ' + m + 'm' : h + 'h';
+}
+function fmtBulkRange(tempF) {
+  var b = interpolate(BULK_DATA, tempF);
+  var lo = b.center - b.range;
+  var hi = b.center + b.range;
+  var loH = (lo/60).toFixed(1).replace('.0','');
+  var hiH = (hi/60).toFixed(1).replace('.0','');
+  return loH + '–' + hiH + ' hrs';
+}
+function isNighttime(date) {
+  var h = date.getHours();
+  return h >= 0 && h < 6;
+}
+
+// ── SCHEDULE CALCULATION ENGINE ────────────────────────────────────
+// Works backwards from targetDateTime, returns array of step objects.
+function calculateSchedule(targetMs, tempF, proofMethod) {
+  var steps = [];
+  var cursor = targetMs;
+
+  function addStep(cfg) {
+    var dur = cfg.duration; // minutes, center
+    var rng = cfg.range || 0;
+    var end = cursor;
+    var start = cursor - dur * 60000;
+    var startEarly = start - rng * 60000;
+    var startLate  = start + rng * 60000;
+    steps.unshift({
+      name: cfg.name,
+      phase: cfg.phase,
+      icon: cfg.icon || '·',
+      start: start,
+      end: end,
+      startEarly: startEarly,
+      startLate: startLate,
+      duration: dur,
+      range: rng,
+      description: cfg.description,
+      lookFor: cfg.lookFor,
+      passive: cfg.passive || false,
+    });
+    cursor = start;
+  }
+
+  // 1. COOLING
+  addStep({
+    name: 'Cool the loaf', phase: 'cool', icon: '○',
+    duration: 90, range: 30,
+    description: 'Transfer to a wire rack. Do not cut in. The loaf finishes baking as it cools — the crumb is still setting.',
+    lookFor: 'Minimum 1 hour. 90 minutes is better. The bottom sounds hollow when tapped. The crack along the score should look dry, not shiny. Cutting early is the #1 cause of gummy crumb.',
+  });
+
+  // 2. BAKE UNCOVERED
+  addStep({
+    name: 'Bake uncovered', phase: 'bake', icon: '◉',
+    duration: 22, range: 3,
+    description: 'Remove Dutch oven lid. Continue at 450°F. This is when the crust gets its color and crackling character.',
+    lookFor: 'Pull when deeply mahogany, not just golden. Internal temperature: 205–210°F at the thickest point. When in doubt, give it 3 more minutes. An over-dark crust is better than a gummy crumb.',
+  });
+
+  // 3. BAKE COVERED
+  addStep({
+    name: 'Bake covered', phase: 'bake', icon: '◉',
+    duration: 20, range: 2,
+    description: 'Load scored dough into screaming-hot Dutch oven. Cover immediately. Reduce oven to 450°F.',
+    lookFor: 'Don\'t lift the lid — the steam from the dough is creating oven spring. You\'ll hear sizzling. That\'s correct. Leave it alone for the full 20 minutes.',
+  });
+
+  // 4. SCORE + LOAD
+  addStep({
+    name: 'Score and load', phase: 'bake', icon: '⟋',
+    duration: 8, range: 2,
+    description: 'Set oven to 500°F at this point. Turn dough out of banneton. One confident score at 30–45° angle, 1cm deep. Load immediately into Dutch oven.',
+    lookFor: 'Work fast. Every second with the Dutch oven open loses heat. Score → load → lid on → oven closed in under 60 seconds if possible. Cold dough scores cleaner.',
+  });
+
+  // 5. PREHEAT
+  addStep({
+    name: 'Preheat oven + Dutch oven', phase: 'preheat', icon: '△',
+    duration: 60, range: 15,
+    description: 'Place empty Dutch oven inside cold oven. Set to 500°F. Allow a full hour — not less.',
+    lookFor: 'The Dutch oven mass must be fully saturated with heat. 45 minutes heats the oven air; 60 minutes heats the cast iron. This difference directly determines your oven spring. Use an oven thermometer — dials lie.',
+  });
+
+  // 6. PROOF (varies by method)
+  if (proofMethod === 'cold') {
+    // Preheat start = take from fridge time (passive step)
+    // The cold proof ends when preheat starts
+    addStep({
+      name: 'Cold proof — fridge', phase: 'proof', icon: '❄',
+      duration: 720, range: 240, passive: true,
+      description: 'Cover banneton tightly (shower cap or plastic wrap). Place in refrigerator. Bakes straight from cold.',
+      lookFor: 'Minimum 8 hours, maximum 16 hours. This is your most flexible step — adjust to your schedule. Longer cold proof = more complex sourness. No attention needed during this time.',
+    });
+  } else {
+    var proof = interpolate(SAME_DAY_PROOF_DATA, tempF);
+    addStep({
+      name: 'Final proof at room temp', phase: 'proof', icon: '○',
+      duration: proof.center, range: proof.range,
+      description: 'Shaped dough rests seam-side up in a floured banneton at room temperature. Cover loosely.',
+      lookFor: 'Poke test: a gentle indent should spring back slowly (2–3 seconds). Too fast = underproofed. Stays = overproofed. Watch the dough, not the clock.',
+    });
+  }
+
+  // 7. SHAPE
+  addStep({
+    name: 'Pre-shape, bench rest + shape', phase: 'shape', icon: '⬟',
+    duration: 40, range: 10,
+    description: 'Turn bulk onto unfloured bench. Pre-shape into a rough round. 20 min bench rest. Final shape with tension. Transfer seam-side up to floured banneton.',
+    lookFor: 'The surface should feel taut — like a drum skin. If dough tears, give it 5 more minutes. If it\'s warm and slack, work quickly. Cold dough is easier to shape — don\'t let it warm up.',
+  });
+
+  // 8. BULK FERMENTATION
+  var bulk = interpolate(BULK_DATA, tempF);
+  var tempLabel = state.unit === 'F' ? tempF + '°F' : toDisplay(tempF, 'C') + '°C';
+  addStep({
+    name: 'Bulk fermentation', phase: 'bulk', icon: '⟳',
+    duration: bulk.center, range: bulk.range,
+    description: 'At ' + tempLabel + ': ' + fmtDuration(bulk.center - bulk.range) + ' to ' + fmtDuration(bulk.center + bulk.range) + '. Perform 4 sets of stretch-and-folds spaced 30 min apart during the first 2 hours, then leave it alone.',
+    lookFor: 'Don\'t use time as your guide — watch the dough. Ready when: 50–75% larger, jiggles like jello when shaken, bubbles visible through bowl sides, domed surface, feels airy and alive. These signs beat any timer.',
+  });
+
+  // 9. AUTOLYSE
+  addStep({
+    name: 'Autolyse — mix flour + water', phase: 'mix', icon: '+',
+    duration: 30, range: 15,
+    description: 'Combine all flour and all water. Mix until no dry flour remains. Cover tightly. Do not add starter or salt yet.',
+    lookFor: 'The dough looks shaggy and rough — correct. After 30 minutes it will look and feel meaningfully smoother. Gluten is hydrating on its own. The autolyse is doing the work so your hands don\'t have to.',
+  });
+
+  // 10. STARTER at peak (the autolyse start = when starter should be ready)
+  // Starter feed time is calculated separately
+  var starterPeakMs = cursor; // cursor is now at autolyse start
+  var peak = interpolate(STARTER_PEAK_DATA, tempF);
+  var starterFeedMs = starterPeakMs - peak.center * 60000;
+  var starterFeedEarlyMs = starterPeakMs - (peak.center + peak.range) * 60000;
+  var starterFeedLateMs  = starterPeakMs - (peak.center - peak.range) * 60000;
+
+  steps.unshift({
+    name: 'Feed your starter',
+    phase: 'starter', icon: '★',
+    start: starterFeedMs,
+    end: starterFeedMs + 20 * 60000,
+    startEarly: starterFeedEarlyMs,
+    startLate: starterFeedLateMs,
+    duration: 20,
+    range: peak.range,
+    description: 'Feed at 1:5:5 ratio (starter : flour : water by weight). At ' + tempLabel + ', it will peak in ~' + fmtDuration(peak.center - peak.range) + '–' + fmtDuration(peak.center + peak.range) + '. Use it domed, just at or before its peak.',
+    lookFor: 'At peak: domed surface, bubbles throughout, just starting to pull away from jar sides. Float test: drop a small blob in water — it should float. A risen and fallen starter can still work but is less reliable.',
+    passive: false,
+  });
+
+  return steps;
+}
+
+// ── RENDER TIMELINE ────────────────────────────────────────────────
+var PHASE_COLORS = {
+  starter: '#2a4774', mix: '#8b6914', bulk: '#c47a3c',
+  shape: '#5a6e2a', proof: '#3a6a8a', preheat: '#7a3a2a',
+  bake: '#a53020', cool: '#4a4a4a'
+};
+var PHASE_NAMES = {
+  starter: 'Starter', mix: 'Mix / Autolyse', bulk: 'Bulk Ferment',
+  shape: 'Shape', proof: 'Proof', preheat: 'Preheat',
+  bake: 'Bake', cool: 'Cool'
+};
+
+function renderTimeline(steps) {
+  var track = document.getElementById('timeline-track');
+  track.innerHTML = '';
+
+  if (!steps.length) return;
+
+  var totalStart = steps[0].startEarly;
+  var totalEnd   = steps[steps.length - 1].end + 90 * 60000; // add cooling buffer for labels
+  var totalSpan  = totalEnd - totalStart;
+  if (totalSpan <= 0) return;
+
+  function pct(ms) {
+    return ((ms - totalStart) / totalSpan * 100).toFixed(3) + '%';
+  }
+  function widthPct(ms1, ms2) {
+    return (Math.max(0, ms2 - ms1) / totalSpan * 100).toFixed(3) + '%';
+  }
+
+  // Day boundary lines + labels
+  var dayMs = 24 * 60 * 60 * 1000;
+  var startDay = new Date(totalStart);
+  startDay.setHours(0, 0, 0, 0);
+  for (var d = startDay.getTime(); d < totalEnd; d += dayMs) {
+    var dayDate = new Date(d);
+    if (d > totalStart && d < totalEnd) {
+      var line = document.createElement('div');
+      line.className = 'tl-day-line';
+      line.style.left = pct(d);
+      track.appendChild(line);
+    }
+    // Day label
+    var dayLabel = document.createElement('div');
+    dayLabel.className = 'tl-day-label';
+    var labelPos = Math.max(d, totalStart);
+    dayLabel.style.left = pct(labelPos + 30 * 60000);
+    var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    dayLabel.textContent = days[dayDate.getDay()];
+    track.appendChild(dayLabel);
+  }
+
+  // Time labels on bottom axis — every 2-3 hours
+  var labelInterval = totalSpan > 20 * 3600000 ? 3 * 3600000 : 2 * 3600000;
+  var firstLabel = new Date(totalStart);
+  firstLabel.setMinutes(0, 0, 0);
+  firstLabel.setHours(firstLabel.getHours() + 1);
+  for (var t = firstLabel.getTime(); t < totalEnd; t += labelInterval) {
+    var d2 = new Date(t);
+    var lbl = document.createElement('div');
+    lbl.className = 'tl-time-label';
+    lbl.style.left = pct(t);
+    var h = d2.getHours();
+    var ampm = h >= 12 ? 'pm' : 'am';
+    lbl.textContent = (h % 12 || 12) + ampm;
+    track.appendChild(lbl);
+  }
+
+  // Step bars
+  steps.forEach(function(step) {
+    // Window bar (lighter, behind)
+    if (step.range > 0) {
+      var win = document.createElement('div');
+      win.className = 'tl-window phase-' + step.phase;
+      win.style.left = pct(step.startEarly);
+      win.style.width = widthPct(step.startEarly, step.end + step.range * 60000);
+      track.appendChild(win);
+    }
+    // Main bar
+    var bar = document.createElement('div');
+    bar.className = 'tl-bar phase-' + step.phase;
+    var barStart = step.start;
+    var barEnd   = step.end;
+    if (barEnd <= barStart) barEnd = barStart + 15 * 60000;
+    bar.style.left  = pct(barStart);
+    bar.style.width = widthPct(barStart, barEnd);
+    var label = document.createElement('span');
+    label.className = 'tl-bar-label';
+    label.textContent = step.name;
+    bar.appendChild(label);
+    bar.title = step.name + '\n' + fmtTime(new Date(step.start));
+    track.appendChild(bar);
+  });
+
+  // Legend
+  var legend = document.getElementById('timeline-legend');
+  legend.innerHTML = '';
+  var seenPhases = {};
+  steps.forEach(function(s) { seenPhases[s.phase] = true; });
+  Object.keys(seenPhases).forEach(function(phase) {
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML =
+      '<div class="legend-swatch phase-' + phase + '"></div>' +
+      (PHASE_NAMES[phase] || phase);
+    legend.appendChild(item);
+  });
+}
+
+// ── RENDER STEP CARDS ──────────────────────────────────────────────
+function renderSteps(steps) {
+  var container = document.getElementById('step-cards');
+  container.innerHTML = '';
+
+  steps.forEach(function(step, i) {
+    var card = document.createElement('div');
+    card.className = 'step-card' + (step.passive ? ' passive' : '');
+
+    // Phase bar
+    var phaseBar = document.createElement('div');
+    phaseBar.className = 'step-phase-bar';
+    phaseBar.style.background = PHASE_COLORS[step.phase] || '#555';
+    card.appendChild(phaseBar);
+
+    // Time column
+    var timeCol = document.createElement('div');
+    timeCol.className = 'step-time-col';
+
+    var mainTime = document.createElement('div');
+    mainTime.className = 'step-time-main';
+    mainTime.textContent = fmtTime(new Date(step.start));
+    timeCol.appendChild(mainTime);
+
+    var daySpan = document.createElement('div');
+    daySpan.className = 'step-time-day';
+    daySpan.textContent = fmtDay(new Date(step.start));
+    timeCol.appendChild(daySpan);
+
+    if (step.range > 0) {
+      var winSpan = document.createElement('div');
+      winSpan.className = 'step-time-window';
+      winSpan.innerHTML = 'window:<br>' +
+        fmtTime(new Date(step.startEarly)) + '–' +
+        fmtTime(new Date(step.startLate));
+      timeCol.appendChild(winSpan);
+    }
+
+    if (step.duration > 0) {
+      var durSpan = document.createElement('div');
+      durSpan.className = 'step-time-duration';
+      durSpan.textContent = fmtDuration(step.duration);
+      timeCol.appendChild(durSpan);
+    }
+
+    card.appendChild(timeCol);
+
+    // Content column
+    var content = document.createElement('div');
+    content.className = 'step-content';
+
+    var nameEl = document.createElement('div');
+    nameEl.className = 'step-name';
+    nameEl.innerHTML = '<span class="step-num">step ' + (i + 1) + ' · ' + (PHASE_NAMES[step.phase] || '') + '</span>' + step.name;
+    content.appendChild(nameEl);
+
+    var descEl = document.createElement('div');
+    descEl.className = 'step-description';
+    descEl.textContent = step.description;
+    content.appendChild(descEl);
+
+    if (step.lookFor) {
+      var lookEl = document.createElement('div');
+      lookEl.className = 'step-look-for';
+      lookEl.innerHTML = '<div class="lf-label">what to look for</div><p>' + step.lookFor + '</p>';
+      content.appendChild(lookEl);
+    }
+
+    card.appendChild(content);
+
+    // Passive badge
+    if (step.passive) {
+      var badge = document.createElement('div');
+      badge.className = 'step-passive-badge';
+      badge.textContent = 'no attention needed';
+      card.appendChild(badge);
+    }
+
+    container.appendChild(card);
+  });
+}
+
+// ── SLEEP GUARDIAN ─────────────────────────────────────────────────
+function checkSleep(steps) {
+  var warning = document.getElementById('sleep-warning');
+  var nightSteps = steps.filter(function(s) {
+    return !s.passive && isNighttime(new Date(s.start));
+  });
+  if (nightSteps.length > 0) {
+    var names = nightSteps.map(function(s) { return '"' + s.name + '" at ' + fmtTime(new Date(s.start)); });
+    document.getElementById('sw-title').textContent = 'Late-night step in your schedule';
+    document.getElementById('sw-body').textContent =
+      'The following step' + (names.length > 1 ? 's require' : ' requires') +
+      ' your attention between midnight and 6 a.m.: ' + names.join(', ') +
+      '. Consider adjusting your target time to shift these steps to waking hours.';
+    warning.classList.add('visible');
+  } else {
+    warning.classList.remove('visible');
+  }
+}
+
+// ── MAIN RENDER ────────────────────────────────────────────────────
+function render() {
+  var dateVal = document.getElementById('target-date').value;
+  var timeVal = document.getElementById('target-time').value;
+  if (!dateVal || !timeVal) return;
+
+  var targetMs = new Date(dateVal + 'T' + timeVal).getTime();
+  if (isNaN(targetMs)) return;
+
+  var steps = calculateSchedule(targetMs, state.tempF, state.proofMethod);
+
+  // Summary line
+  var firstStep = steps[0];
+  var summaryText = document.getElementById('summary-text');
+  var targetDate = new Date(targetMs);
+  summaryText.innerHTML =
+    'Start on <strong>' + fmtDay(new Date(firstStep.start)) + ' at ' +
+    fmtTime(new Date(firstStep.start)) + '</strong> — bread ready ' +
+    fmtDay(targetDate) + ' at ' + fmtTime(targetDate) + '.';
+
+  // Total time
+  var totalHours = ((targetMs - firstStep.start) / 3600000).toFixed(1);
+  document.getElementById('summary-total').textContent =
+    'Total: ~' + totalHours + ' hours\n' + steps.length + ' steps';
+
+  renderTimeline(steps);
+  renderSteps(steps);
+  checkSleep(steps);
+
+  document.getElementById('schedule-output').classList.add('visible');
+}
+
+// ── INPUT HANDLERS ─────────────────────────────────────────────────
+function setUnit(unit) {
+  state.unit = unit;
+  document.getElementById('btn-f').classList.toggle('active', unit === 'F');
+  document.getElementById('btn-c').classList.toggle('active', unit === 'C');
+
+  var slider = document.getElementById('temp-slider');
+  if (unit === 'C') {
+    slider.min = 18; slider.max = 30; slider.step = 1;
+    var cVal = Math.round((state.tempF - 32) * 5/9);
+    slider.value = cVal;
+    document.getElementById('temp-display').textContent = cVal;
+    document.getElementById('temp-unit-label').textContent = '°C';
+    document.getElementById('temp-scale').innerHTML =
+      '<span>18°C<br><small>cold</small></span>' +
+      '<span style="text-align:center">22°C<br><small>typical</small></span>' +
+      '<span style="text-align:right">30°C<br><small>hot</small></span>';
+  } else {
+    slider.min = 64; slider.max = 86; slider.step = 1;
+    slider.value = state.tempF;
+    document.getElementById('temp-display').textContent = state.tempF;
+    document.getElementById('temp-unit-label').textContent = '°F';
+    document.getElementById('temp-scale').innerHTML =
+      '<span>64°F<br><small>cold</small></span>' +
+      '<span style="text-align:center">72°F<br><small>typical</small></span>' +
+      '<span style="text-align:right">86°F<br><small>hot</small></span>';
+  }
+  updateBulkPreview();
+  render();
+}
+
+function onTempChange(sliderVal) {
+  var displayVal = parseInt(sliderVal);
+  state.tempF = state.unit === 'F' ? displayVal : Math.round(displayVal * 9/5 + 32);
+  document.getElementById('temp-display').textContent = displayVal;
+  updateBulkPreview();
+  render();
+}
+
+function updateBulkPreview() {
+  document.getElementById('bulk-preview-time').textContent = fmtBulkRange(state.tempF);
+}
+
+function setProof(method) {
+  state.proofMethod = method;
+  document.getElementById('btn-cold').classList.toggle('active', method === 'cold');
+  document.getElementById('btn-same').classList.toggle('active', method === 'same');
+  render();
+}
+
+function setFromNow() {
+  var now = new Date();
+  // Target: bread ready 20 hours from now (reasonable estimate)
+  var target = new Date(now.getTime() + 20 * 3600000);
+  var dateStr = target.toISOString().split('T')[0];
+  var h = target.getHours();
+  var m = target.getMinutes();
+  var timeStr = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  document.getElementById('target-date').value = dateStr;
+  document.getElementById('target-time').value = timeStr;
+  render();
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
+(function init() {
+  // Default: tomorrow at 8am
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(8, 0, 0, 0);
+  var dateStr = tomorrow.toISOString().split('T')[0];
+  document.getElementById('target-date').value = dateStr;
+  document.getElementById('target-time').value = '08:00';
+
+  // Wire up inputs — recalculate on any change
+  document.getElementById('target-date').addEventListener('change', render);
+  document.getElementById('target-time').addEventListener('change', render);
+
+  updateBulkPreview();
+  render(); // Render immediately with defaults
+})();
+</script>
+
+</body>
+</html>
