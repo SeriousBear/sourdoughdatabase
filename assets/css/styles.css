@@ -4649,3 +4649,50 @@ footer {
       .timeline-container { overflow: visible; }
       body { background: white; }
     }
+
+/* ============ COMING SOON CARDS ============ */
+
+.starter-card.coming-soon,
+.tool-card.coming-soon {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+  position: relative;
+  filter: grayscale(30%);
+  /* Subtle diagonal sketch hatching */
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 9px,
+      rgba(42, 31, 20, 0.04) 9px,
+      rgba(42, 31, 20, 0.04) 10px
+    );
+}
+
+/* The hand-drawn "coming soon" stamp */
+.starter-card.coming-soon::after,
+.tool-card.coming-soon::after {
+  content: "coming soon ✎";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pen-red);
+  white-space: nowrap;
+  padding: 5px 16px 6px;
+  /* Rough stamp border — two-layer trick for hand-drawn feel */
+  border: 2px solid var(--pen-red);
+  outline: 1px solid var(--pen-red);
+  outline-offset: 3px;
+  background: rgba(244, 234, 208, 0.9);
+  letter-spacing: 0.04em;
+  z-index: 2;
+  pointer-events: none;
+  /* Slight opacity variation to look inked, not printed */
+  box-shadow: 1px 1px 0 rgba(165, 48, 32, 0.25),
+              -1px -1px 0 rgba(165, 48, 32, 0.1);
+}
