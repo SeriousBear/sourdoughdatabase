@@ -126,16 +126,16 @@
   <!-- ── INPUT PANEL ──────────────────────────────────────────────── -->
   <div class="input-panel">
 
-    <!-- Target time -->
-    <div class="input-row">
-      <label class="input-label" for="target-date">I want fresh bread on</label>
-      <div class="datetime-stack">
-        <div class="datetime-field">
-          <span class="dt-sublabel">day</span>
+    <!-- ── I WANT FRESH BREAD ON ────────────────────────── -->
+    <div class="sched-section">
+      <span class="sched-label">I want fresh bread on</span>
+      <div class="sched-datetime">
+        <div class="sched-field">
+          <span class="sched-sublabel">day</span>
           <input type="date" id="target-date">
         </div>
-        <div class="datetime-field">
-          <span class="dt-sublabel">time</span>
+        <div class="sched-field">
+          <span class="sched-sublabel">time</span>
           <input type="time" id="target-time" value="08:00">
         </div>
       </div>
@@ -146,25 +146,25 @@
 
     <div class="input-divider"></div>
 
-    <!-- Temperature -->
-    <div class="input-row">
-      <div class="temp-label-row">
-        <label class="input-label" for="temp-slider">Kitchen temperature</label>
+    <!-- ── KITCHEN TEMPERATURE ──────────────────────────── -->
+    <div class="sched-section">
+      <div class="sched-temp-header">
+        <span class="sched-label">Kitchen temperature</span>
         <div class="unit-toggle" id="unit-toggle">
           <button class="active" id="btn-f" onclick="setUnit('F')">°F</button>
           <button id="btn-c" onclick="setUnit('C')">°C</button>
         </div>
       </div>
-      <div class="temp-display">
-        <div class="temp-left">
-          <span class="temp-big" id="temp-display">72</span>
-          <span class="temp-unit" id="temp-unit-label">°F</span>
-        </div>
-        <div class="temp-bulk-preview" id="bulk-preview">
-          <span class="tbp-label">bulk fermentation at this temp</span>
+
+      <div class="sched-temp-readout">
+        <span class="sched-temp-number" id="temp-display">72</span>
+        <span class="sched-temp-deg" id="temp-unit-label">°F</span>
+        <div class="sched-bulk-preview">
+          <span class="sbp-label">bulk fermentation at this temp</span>
           <strong id="bulk-preview-time">4.5–5.75 hrs</strong>
         </div>
       </div>
+
       <input type="range" class="temp-slider" id="temp-slider"
              min="64" max="86" value="72" step="1"
              oninput="onTempChange(this.value)">
@@ -177,9 +177,9 @@
 
     <div class="input-divider"></div>
 
-    <!-- Proof method -->
-    <div class="input-row">
-      <span class="input-label">Proof method</span>
+    <!-- ── PROOF METHOD ──────────────────────────────────── -->
+    <div class="sched-section">
+      <span class="sched-label">Proof method</span>
       <div class="proof-toggle" id="proof-toggle">
         <button class="active" onclick="setProof('cold')" id="btn-cold">
           ❄ Overnight cold proof
@@ -639,6 +639,13 @@ function hideTlTooltip() {
 function renderSteps(steps) {
   var container = document.getElementById('step-cards');
   container.innerHTML = '';
+
+  // Phase label mapping for step cards
+  var PHASE_NAMES = {
+    starter: 'Starter', mix: 'Mix / Autolyse', bulk: 'Bulk Ferment',
+    shape: 'Shape', proof: 'Proof', preheat: 'Preheat',
+    bake: 'Bake', cool: 'Cool'
+  };
 
   steps.forEach(function(step, i) {
     var card = document.createElement('div');

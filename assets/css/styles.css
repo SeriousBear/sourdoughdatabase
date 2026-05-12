@@ -4066,7 +4066,7 @@ footer {
       color: var(--pen-red);
     }
 
-    /* F/C toggle — inline with temp label */
+    /* ── UNIT TOGGLE (°F / °C) ──────────────────────────────────── */
     .unit-toggle {
       display: flex;
       border: 1.5px solid var(--ink);
@@ -4078,7 +4078,7 @@ footer {
       font-family: 'Special Elite', monospace;
       font-size: 11px;
       letter-spacing: 0.1em;
-      padding: 6px 14px;
+      padding: 7px 16px;
       border: none;
       background: transparent;
       cursor: pointer;
@@ -4090,99 +4090,113 @@ footer {
       color: #fdf8e3;
     }
 
-    /* Input divider */
+    /* ── INPUT PANEL SECTIONS ───────────────────────────────────── */
+    .sched-section {
+      padding: 32px 0;
+    }
+    .sched-section:first-child { padding-top: 4px; }
+    .sched-section:last-child  { padding-bottom: 4px; }
+
     .input-divider {
       height: 1px;
       background: var(--rule-pink-strong);
-      opacity: 0.4;
-      margin: 24px 0;
+      opacity: 0.35;
     }
 
-    /* Input rows */
-    .input-row {
-      margin-bottom: 0;
-    }
-
-    .input-label {
+    .sched-label {
+      display: block;
       font-family: 'Special Elite', monospace;
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--pen-red);
-      display: block;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
-    /* Date/time pickers — stacked */
-    .datetime-stack {
+    /* ── DATE / TIME INPUTS ─────────────────────────────────────── */
+    .sched-datetime {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 14px;
+      margin-bottom: 20px;
     }
-    .datetime-field {
+    .sched-field {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
-    .dt-sublabel {
+    .sched-sublabel {
       font-family: 'Special Elite', monospace;
-      font-size: 9px;
-      letter-spacing: 0.16em;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--pencil);
     }
-    .datetime-field input {
+    .sched-field input {
       font-family: 'Caveat', cursive;
-      font-size: 22px;
+      font-size: 26px;
       color: var(--ink);
       background: var(--paper);
       border: 1.5px solid var(--ink);
-      padding: 10px 14px;
+      padding: 12px 16px;
       outline: none;
       width: 100%;
       box-sizing: border-box;
     }
-    .datetime-field input:focus { border-color: var(--pen-blue); }
+    .sched-field input:focus { border-color: var(--pen-blue); }
 
-    /* Temperature — label row with toggle inline */
-    .temp-label-row {
+    .from-now-btn {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--pen-blue);
+      background: none;
+      border: none;
+      border-top: 1.5px dashed var(--rule-pink-strong);
+      padding: 16px 0 0;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: left;
+      transition: color 0.15s;
+    }
+    .from-now-btn:hover { color: var(--pen-red); }
+
+    /* ── TEMPERATURE ────────────────────────────────────────────── */
+    .sched-temp-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 20px;
     }
-    .temp-label-row .input-label { margin-bottom: 0; }
+    .sched-temp-header .sched-label { margin-bottom: 0; }
 
-    /* Temperature slider */
-    .temp-display {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-    .temp-left {
+    .sched-temp-readout {
       display: flex;
       align-items: baseline;
       gap: 6px;
+      margin-bottom: 4px;
     }
-    .temp-big {
+    .sched-temp-number {
       font-family: 'Caveat', cursive;
-      font-size: 64px;
+      font-size: 96px;
       font-weight: 700;
       color: var(--ink);
       line-height: 1;
     }
-    .temp-unit {
+    .sched-temp-deg {
       font-family: 'Special Elite', monospace;
-      font-size: 16px;
+      font-size: 28px;
       color: var(--pencil);
+      align-self: flex-end;
+      margin-bottom: 12px;
     }
-    .temp-bulk-preview {
+    .sched-bulk-preview {
+      margin-left: auto;
       text-align: right;
+      align-self: flex-end;
+      margin-bottom: 10px;
     }
-    .tbp-label {
+    .sbp-label {
       display: block;
       font-family: 'Special Elite', monospace;
       font-size: 9px;
@@ -4191,12 +4205,11 @@ footer {
       color: var(--pencil);
       margin-bottom: 3px;
     }
-    .temp-bulk-preview strong {
+    .sched-bulk-preview strong {
       font-family: 'Caveat', cursive;
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
       color: var(--pen-red);
-      display: block;
       line-height: 1;
     }
 
@@ -4204,7 +4217,7 @@ footer {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 14px;
+      height: 16px;
       background: linear-gradient(to right,
         #7ab0d0 0%,
         #b8cfd8 25%,
@@ -4215,20 +4228,21 @@ footer {
       outline: none;
       border: 1.5px solid var(--ink);
       cursor: ew-resize;
+      margin-top: 16px;
     }
     .temp-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 8px;
-      height: 30px;
+      height: 32px;
       background: var(--ink);
       cursor: ew-resize;
       border: 2px solid #fdf8e3;
-      box-shadow: 0 0 0 1.5px var(--ink), 2px 2px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 0 0 1.5px var(--ink), 2px 2px 4px rgba(0,0,0,0.25);
     }
     .temp-slider::-moz-range-thumb {
       width: 6px;
-      height: 28px;
+      height: 30px;
       background: var(--ink);
       cursor: ew-resize;
       border: 2px solid #fdf8e3;
@@ -4243,30 +4257,31 @@ footer {
       color: var(--pencil);
       letter-spacing: 0.06em;
       margin-top: 8px;
-      opacity: 0.75;
+      opacity: 0.7;
     }
 
-    /* Proof method toggle */
+    /* ── PROOF METHOD TOGGLE ────────────────────────────────────── */
     .proof-toggle {
       display: flex;
       border: 1.5px solid var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
       overflow: hidden;
+      width: 100%;
     }
     .proof-toggle button {
       flex: 1;
       font-family: 'Caveat', cursive;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 600;
-      padding: 14px 20px;
+      padding: 20px 16px;
       border: none;
-      background: transparent;
+      background: var(--paper);
       cursor: pointer;
       color: var(--pencil);
       border-right: 1.5px solid var(--ink);
       transition: background 0.15s, color 0.15s;
       text-align: center;
+      line-height: 1.2;
     }
     .proof-toggle button:last-child { border-right: none; }
     .proof-toggle button.active {
@@ -4279,25 +4294,11 @@ footer {
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      opacity: 0.75;
-      margin-top: 2px;
+      opacity: 0.7;
+      margin-top: 4px;
     }
 
-    /* From-now button */
-    .from-now-btn {
-      font-family: 'Caveat', cursive;
-      font-size: 20px;
-      color: var(--pen-blue);
-      background: none;
-      border: 1.5px dashed var(--pen-blue);
-      padding: 10px 20px;
-      cursor: pointer;
-      margin-top: 12px;
-      transition: background 0.15s, color 0.15s;
-    }
-    .from-now-btn:hover { background: var(--pen-blue); color: #fdf8e3; }
-
-    /* ── OUTPUT SECTION ─────────────────────────────────────────────── */
+        /* ── OUTPUT SECTION ─────────────────────────────────────────────── */
     .schedule-output { display: none; }
     .schedule-output.visible { display: block; }
 
