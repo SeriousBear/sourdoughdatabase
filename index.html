@@ -1,1263 +1,621 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- ============ PRIMARY META TAGS ============ -->
-        <title>The Sourdough Database — a recipe notebook for bakers</title>
-        <meta
-            name="title"
-            content="The Sourdough Database — a recipe notebook for bakers"
-        />
-        <meta
-            name="description"
-            content="Hydration ratios. Starter genealogies. Flour protein percentages. A living archive of wild bread, built by bakers, for bakers."
-        />
-        <meta
-            name="keywords"
-            content="sourdough, sourdough database, sourdough recipes, sourdough starter, bread baking, hydration calculator, flour database, baker's percentage, levain"
-        />
-        <meta name="author" content="The Sourdough Database" />
-        <link rel="canonical" href="https://sourdoughdatabase.com/" />
+  <!-- ============ PRIMARY META TAGS ============ -->
+  <title>The Sourdough Database — a recipe notebook for bakers</title>
+  <meta name="title" content="The Sourdough Database — a recipe notebook for bakers">
+  <meta name="description" content="Hydration ratios. Starter genealogies. Flour protein percentages. A living archive of wild bread, built by bakers, for bakers.">
+  <meta name="keywords" content="sourdough, sourdough database, sourdough recipes, sourdough starter, bread baking, hydration calculator, flour database, baker's percentage, levain">
+  <meta name="author" content="The Sourdough Database">
+  <link rel="canonical" href="https://sourdoughdatabase.com/">
 
-        <!-- ============ OPEN GRAPH (Facebook, iMessage, Slack) ============ -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sourdoughdatabase.com/" />
-        <meta
-            property="og:title"
-            content="The Sourdough Database — a recipe notebook for bakers"
-        />
-        <meta
-            property="og:description"
-            content="Hydration ratios. Starter genealogies. Flour protein percentages. A living archive of wild bread, built by bakers, for bakers."
-        />
-        <meta
-            property="og:image"
-            content="https://sourdoughdatabase.com/assets/images/og-image.png"
-        />
-        <meta property="og:site_name" content="The Sourdough Database" />
+  <!-- ============ OPEN GRAPH (Facebook, iMessage, Slack) ============ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/">
+  <meta property="og:title" content="The Sourdough Database — a recipe notebook for bakers">
+  <meta property="og:description" content="Hydration ratios. Starter genealogies. Flour protein percentages. A living archive of wild bread, built by bakers, for bakers.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
 
-        <!-- ============ TWITTER ============ -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://sourdoughdatabase.com/" />
-        <meta
-            name="twitter:title"
-            content="The Sourdough Database — a recipe notebook for bakers"
-        />
-        <meta
-            name="twitter:description"
-            content="Hydration ratios. Starter genealogies. Flour protein percentages. A living archive of wild bread, built by bakers, for bakers."
-        />
-        <meta
-            name="twitter:image"
-            content="https://sourdoughdatabase.com/assets/images/og-image.png"
-        />
+  <!-- ============ TWITTER ============ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://sourdoughdatabase.com/">
+  <meta name="twitter:title" content="The Sourdough Database — a recipe notebook for bakers">
+  <meta name="twitter:description" content="Hydration ratios. Starter genealogies. Flour protein percentages. A living archive of wild bread, built by bakers, for bakers.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
 
-        <!-- ============ FAVICON ============ -->
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="/assets/images/favicon.svg"
-        />
-        <link rel="alternate icon" href="/assets/images/favicon.ico" />
-        <link
-            rel="apple-touch-icon"
-            href="/assets/images/apple-touch-icon.png"
-        />
+  <!-- ============ FAVICON ============ -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
-        <!-- ============ THEME ============ -->
-        <meta name="theme-color" content="#f4ead0" />
+  <!-- ============ THEME ============ -->
+  <meta name="theme-color" content="#f4ead0">
 
-        <!-- ============ FONTS ============ -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap"
-            rel="stylesheet"
-        />
+  <!-- ============ FONTS ============ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
-        <!-- ============ SHARED STYLESHEET ============ -->
-        <link rel="stylesheet" href="/assets/css/styles.css" />
+  <!-- ============ SHARED STYLESHEET ============ -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
 
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "@id": "https://sourdoughdatabase.com/#website",
-                "url": "https://sourdoughdatabase.com/",
-                "name": "The Sourdough Database",
-                "description": "A recipe notebook for bakers. Hydration ratios, starter genealogies, flour protein percentages, and the history behind the loaves.",
-                "publisher": {
-                    "@id": "https://sourdoughdatabase.com/#organization"
-                },
-                "inLanguage": "en-US"
-            }
-        </script>
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "@id": "https://sourdoughdatabase.com/#organization",
-                "name": "The Sourdough Database",
-                "url": "https://sourdoughdatabase.com/",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://sourdoughdatabase.com/assets/images/favicon.svg"
-                },
-                "founder": {
-                    "@type": "Person",
-                    "name": "Kyle Weber",
-                    "jobTitle": "Founder",
-                    "url": "https://sourdoughdatabase.com/about.html"
-                },
-                "sameAs": []
-            }
-        </script>
-        <!-- Google AdSense -->
-        <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633"
-            crossorigin="anonymous"
-        ></script>
-        <!-- Google Analytics 4 -->
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"
-        ></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-            gtag("config", "G-7TNFRKVWVW");
-        </script>
-    </head>
-    <body>
-        <div class="binding"></div>
-        <div class="holes">
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-        </div>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://sourdoughdatabase.com/#website",
+  "url": "https://sourdoughdatabase.com/",
+  "name": "The Sourdough Database",
+  "description": "A recipe notebook for bakers. Hydration ratios, starter genealogies, flour protein percentages, and the history behind the loaves.",
+  "publisher": {
+    "@id": "https://sourdoughdatabase.com/#organization"
+  },
+  "inLanguage": "en-US"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://sourdoughdatabase.com/#organization",
+  "name": "The Sourdough Database",
+  "url": "https://sourdoughdatabase.com/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://sourdoughdatabase.com/assets/images/favicon.svg"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Kyle Weber",
+    "jobTitle": "Founder",
+    "url": "https://sourdoughdatabase.com/about.html"
+  },
+  "sameAs": []
+}
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633"
+       crossorigin="anonymous"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TNFRKVWVW');
+  </script>
+</head>
+<body>
 
-        <header>
-            <div class="logo">
-                The Sourdough Database<span class="dot"></span>
-            </div>
-            <nav class="nav">
-                <a href="/" class="active">home</a>
-                <a href="#starters">starters</a>
-                <a href="#flours">flours</a>
-                <a href="#tools">tools</a>
-                <a href="#journal">journal</a>
-                <a href="/about.html">about</a>
-            </nav>
-        </header>
+<div id="site-header"></div>
 
-        <section class="hero">
-            <div class="hero-grid">
-                <div class="hero-main">
-                    <div class="date-stamp fade-up d1">
-                        tuesday, april 28th — kitchen, 10:22 p.m.
-                    </div>
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-main">
+      <div class="date-stamp fade-up d1">tuesday, april 28th — kitchen, 10:22 p.m.</div>
 
-                    <h1 class="hero-title fade-up d2">
-                        <span class="word-1">a recipe</span>
-                        <span class="word-2">notebook</span>
-                        <span class="word-3">for bread.</span>
-                        <svg
-                            class="squiggle-under"
-                            viewBox="0 0 320 14"
-                            preserveAspectRatio="none"
-                        >
-                            <path
-                                d="M2,7 Q40,2 80,8 T160,7 T240,8 T318,6"
-                                stroke="#a53020"
-                                stroke-width="2.5"
-                                fill="none"
-                                stroke-linecap="round"
-                            />
-                        </svg>
-                    </h1>
+      <h1 class="hero-title fade-up d2">
+        <span class="word-1">a recipe</span>
+        <span class="word-2">notebook</span>
+        <span class="word-3">for bread.</span>
+        <svg class="squiggle-under" viewBox="0 0 320 14" preserveAspectRatio="none">
+          <path d="M2,7 Q40,2 80,8 T160,7 T240,8 T318,6" stroke="#a53020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </h1>
 
-                    <p class="hero-deck fade-up d3">
-                        Hydration ratios. Starter genealogies. Flour protein
-                        percentages and the way the kitchen smells at 4 a.m.
-                        when something is finally rising. Bakers have always
-                        kept notebooks. This one's just a little easier to
-                        share.
-                    </p>
+      <p class="hero-deck fade-up d3">
+        Hydration ratios. Starter genealogies. Flour protein percentages and the way the kitchen smells at 4 a.m. when something is finally rising. Bakers have always kept notebooks. This one's just a little easier to share.
+      </p>
 
-                    <div class="hero-margin-note fade-up d4">
-                        <svg
-                            width="60"
-                            height="80"
-                            viewBox="0 0 60 80"
-                            style="display: block; margin: 0 auto 6px"
-                        >
-                            <path
-                                d="M30,8 Q40,30 25,55 Q15,68 30,72"
-                                stroke="#2a4774"
-                                stroke-width="2"
-                                fill="none"
-                                stroke-linecap="round"
-                            />
-                            <polygon
-                                points="22,68 30,76 36,66"
-                                fill="#2a4774"
-                            />
-                        </svg>
-                        <span class="arrow-label"
-                            >started for<br />my mom!</span
-                        >
-                    </div>
-                </div>
+      <div class="hero-margin-note fade-up d4">
+        <svg width="60" height="80" viewBox="0 0 60 80" style="display:block;margin:0 auto 6px;">
+          <path d="M30,8 Q40,30 25,55 Q15,68 30,72" stroke="#2a4774" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <polygon points="22,68 30,76 36,66" fill="#2a4774"/>
+        </svg>
+        <span class="arrow-label">started for<br>my mom!</span>
+      </div>
+    </div>
 
-                <aside class="polaroid fade-up d4">
-                    <img
-                        src="/assets/images/mom-sourdough.jpg"
-                        alt="Sunday's sourdough loaf, sliced on a wooden cutting board with butter and flour dusted around"
-                        loading="lazy"
-                        width="900"
-                        height="491"
-                    />
-                    <div class="polaroid-caption">
-                        Sunday's bake — finally!
-                        <small>78% hydration · spring at last</small>
-                    </div>
-                </aside>
-            </div>
-        </section>
+    <aside class="polaroid fade-up d4">
+      <img src="/assets/images/mom-sourdough.jpg" alt="Sunday's sourdough loaf, sliced on a wooden cutting board with butter and flour dusted around" loading="lazy" width="900" height="491">
+      <div class="polaroid-caption">
+        Sunday's bake — finally!
+        <small>78% hydration · spring at last</small>
+      </div>
+    </aside>
+  </div>
+</section>
 
-        <section class="mom-section">
-            <svg class="mom-stains" viewBox="0 0 110 110">
-                <ellipse
-                    cx="55"
-                    cy="55"
-                    rx="50"
-                    ry="48"
-                    fill="#7a4818"
-                    opacity="0.1"
-                />
-                <ellipse
-                    cx="55"
-                    cy="55"
-                    rx="42"
-                    ry="40"
-                    fill="none"
-                    stroke="#7a4818"
-                    stroke-width="1.5"
-                    opacity="0.18"
-                />
-                <ellipse
-                    cx="80"
-                    cy="35"
-                    rx="14"
-                    ry="12"
-                    fill="#7a4818"
-                    opacity="0.08"
-                />
-            </svg>
+<section class="mom-section">
+  <svg class="mom-stains" viewBox="0 0 110 110">
+    <ellipse cx="55" cy="55" rx="50" ry="48" fill="#7a4818" opacity="0.1"/>
+    <ellipse cx="55" cy="55" rx="42" ry="40" fill="none" stroke="#7a4818" stroke-width="1.5" opacity="0.18"/>
+    <ellipse cx="80" cy="35" rx="14" ry="12" fill="#7a4818" opacity="0.08"/>
+  </svg>
 
-            <div class="mom-grid">
-                <div class="mom-photo-stack">
-                    <div class="recipe-card-pinned">
-                        <h4>mom's country loaf</h4>
-                        <ul>
-                            <li>500g bread flour</li>
-                            <li>50g whole wheat</li>
-                            <li><span class="strike">375g water</span></li>
-                            <span class="annotation">↑ try 390g — better!</span>
-                            <li>10g salt</li>
-                            <li>100g levain</li>
-                            <li><span class="strike">bulk 5 hrs</span></li>
-                            <span class="annotation">depends on kitchen</span>
-                            <li>cold retard overnight</li>
-                            <li>500°F · dutch oven · 20 cov.</li>
-                            <li>20 uncov. til deep brown</li>
-                        </ul>
-                        <div class="signoff">
-                            — call me when you bake it. xo
-                        </div>
-                    </div>
-                </div>
+  <div class="mom-grid">
 
-                <div class="mom-letter">
-                    <span class="heading">Why this exists</span>
-                    <div class="subheading">a note from the founder</div>
+    <div class="mom-photo-stack">
+      <div class="recipe-card-pinned">
+        <h4>mom's country loaf</h4>
+        <ul>
+          <li>500g bread flour</li>
+          <li>50g whole wheat</li>
+          <li><span class="strike">375g water</span></li>
+          <span class="annotation">↑ try 390g — better!</span>
+          <li>10g salt</li>
+          <li>100g levain</li>
+          <li><span class="strike">bulk 5 hrs</span></li>
+          <span class="annotation">depends on kitchen</span>
+          <li>cold retard overnight</li>
+          <li>500°F · dutch oven · 20 cov.</li>
+          <li>20 uncov. til deep brown</li>
+        </ul>
+        <div class="signoff">— call me when you bake it. xo</div>
+      </div>
+    </div>
 
-                    <p>
-                        Some families pass down jewelry. Mine passes down
-                        recipes — and memories. For as long as I can remember,
-                        cooking has been the thread running through all of it.
-                        My grandfather's pierogi, made every year like
-                        clockwork, so good it felt almost rude to talk about
-                        anything else at the table. My mother trying out a new
-                        recipe and quietly blowing the minds of everyone in the
-                        room. The endless restaurants, the wild world of food.
-                        This is what I live for — not just because I need it,
-                        but because nothing, not once, has ever failed to bring
-                        people together the way a good meal does.
-                    </p>
+    <div class="mom-letter">
+      <span class="heading">Why this exists</span>
+      <div class="subheading">a note from the founder</div>
 
-                    <p class="pull">"Every loaf is a reminder."</p>
+      <p>
+        Some families pass down jewelry. Mine passes down recipes — and memories. For as long as I can remember, cooking has been the thread running through all of it. My grandfather's pierogi, made every year like clockwork, so good it felt almost rude to talk about anything else at the table. My mother trying out a new recipe and quietly blowing the minds of everyone in the room. The endless restaurants, the wild world of food. This is what I live for — not just because I need it, but because nothing, not once, has ever failed to bring people together the way a good meal does.
+      </p>
 
-                    <p>
-                        When I got into sourdough, my mother was the first
-                        person I called. Of course she was. She's the one who
-                        got me into it in the first place.
-                    </p>
+      <p class="pull">
+        "Every loaf is a reminder."
+      </p>
 
-                    <p>
-                        Cooking is the language we kept speaking when life got
-                        busy. I'd send her a voice note about a gummy crumb at
-                        11 p.m.; she'd send back a photo of her starter at 7
-                        a.m. We have made each other better bakers. More to the
-                        point, we have made each other.
-                    </p>
+      <p>
+        When I got into sourdough, my mother was the first person I called. Of course she was. She's the one who got me into it in the first place.
+      </p>
 
-                    <p>
-                        This site is what those phone calls would look like if
-                        we wrote them down. Yes, it's a database — pH and
-                        <a href="/tools/hydration.html" class="content-link"
-                            >hydration</a
-                        >
-                        and protein percentages and all the obsessive bits we
-                        love. But it's also a place to keep track of who taught
-                        us what. A place where every recipe has a person
-                        attached to it.
-                    </p>
+      <p>
+        Cooking is the language we kept speaking when life got busy. I'd send her a voice note about a gummy crumb at 11 p.m.; she'd send back a photo of her starter at 7 a.m. We have made each other better bakers. More to the point, we have made each other.
+      </p>
 
-                    <p>
-                        I built it with her in mind. And for everyone who has
-                        ever shared a recipe with someone they love.
-                    </p>
+      <p>
+        This site is what those phone calls would look like if we wrote them down. Yes, it's a database — pH and <a href="/tools/hydration.html" class="content-link">hydration</a> and protein percentages and all the obsessive bits we love. But it's also a place to keep track of who taught us what. A place where every recipe has a person attached to it.
+      </p>
 
-                    <div class="signature">
-                        Kyle
-                        <small>— founder, loving son, kitchen apprentice</small>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <p>
+        I built it with her in mind. And for everyone who has ever shared a recipe with someone they love.
+      </p>
 
-        <div class="divider" id="starters">
-            <span class="divider-tab">tab 01 — starter index</span>
-            <h2>the starter <em>pages</em></h2>
-            <p class="subtitle">
-                847 documented strains. Pick a name, see how it behaves, save it
-                to your shelf.
-            </p>
-            <div class="divider-meta">last updated <br />14 minutes ago ✎</div>
-        </div>
+      <div class="signature">
+        Kyle
+        <small>— founder, loving son, kitchen apprentice</small>
+      </div>
+    </div>
 
-        <section class="starters">
-            <div class="starter-grid">
-                <a
-                    href="/starters/poilane-levain.html"
-                    class="starter-card"
-                    style="text-decoration: none; display: block"
-                >
-                    <div class="id">№ 0508 / WHEAT</div>
-                    <h4>Poilâne Levain</h4>
-                    <div class="origin">Paris, 1932</div>
-                    <div class="starter-stats">
-                        <div class="row">
-                            <span class="label">age</span
-                            ><span class="val">94 yrs</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">generation</span
-                            ><span class="val">3,201</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">pH at peak</span
-                            ><span class="val">3.88</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">hydration</span
-                            ><span class="val">90%</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">peak time</span
-                            ><span class="val">4h 50m</span>
-                        </div>
-                    </div>
-                    <div class="stars">★ ★ ★ ★ ★</div>
-                    <div class="scribble">a real darling</div>
-                </a>
+  </div>
+</section>
 
-                <a
-                    href="/starters/carl-griffith-1847.html"
-                    class="starter-card"
-                    style="text-decoration: none; display: block"
-                >
-                    <div class="id">№ 0142 / WHEAT</div>
-                    <h4>Carl's 1847</h4>
-                    <div class="origin">Oregon Trail, est. 1847</div>
-                    <div class="starter-stats">
-                        <div class="row">
-                            <span class="label">age</span
-                            ><span class="val">~179 yrs</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">generation</span
-                            ><span class="val">~4,800+</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">hydration</span
-                            ><span class="val">100%</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">flavor</span
-                            ><span class="val">mild &amp; lactic</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">available</span
-                            ><span class="val">free via mail</span>
-                        </div>
-                    </div>
-                    <div class="stars">★ ★ ★ ★ ★</div>
-                    <div class="scribble">free to anyone ✎</div>
-                </a>
+<div class="divider" id="starters">
+  <span class="divider-tab">tab 01 — the culture index</span>
+  <h2>The <em>Culture Index</em></h2>
+  <p class="subtitle">Documented sourdough cultures — their origins, characters, and the people who kept them alive. Not recipes. Something better.</p>
+  <div class="divider-meta">these are field reports,<br>not formulas ✎</div>
+</div>
 
-                <a
-                    href="/starters/blackley-ancient-egyptian.html"
-                    class="starter-card"
-                    style="text-decoration: none; display: block"
-                >
-                    <div class="id">№ 0001 / ANCIENT WHEAT</div>
-                    <h4>Blackley Egyptian</h4>
-                    <div class="origin">Egypt, ~2500 BCE · revived 2019</div>
-                    <div class="starter-stats">
-                        <div class="row">
-                            <span class="label">yeast age</span
-                            ><span class="val">~4,500 yrs</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">source</span
-                            ><span class="val">Harvard Peabody</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">flour</span
-                            ><span class="val">Emmer wheat</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">flavor</span
-                            ><span class="val">sweeter, richer</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">baker</span
-                            ><span class="val">Xbox guy</span>
-                        </div>
-                    </div>
-                    <div class="stars">★ ★ ★ ★ ★</div>
-                    <div class="scribble">wildest story here</div>
-                </a>
+<section class="starters">
+  <div class="starter-grid">
 
-                <div class="starter-card coming-soon">
-                    <div class="id">№ 0411 / SPELT</div>
-                    <h4>Persephone</h4>
-                    <div class="origin">Tuscany, 1947</div>
-                    <div class="starter-stats">
-                        <div class="row">
-                            <span class="label">age</span
-                            ><span class="val">79 yrs</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">generation</span
-                            ><span class="val">2,605</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">pH at peak</span
-                            ><span class="val">3.81</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">hydration</span
-                            ><span class="val">75%</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">peak time</span
-                            ><span class="val">3h 50m</span>
-                        </div>
-                    </div>
-                    <div class="stars">★ ★ ★ ★ ★</div>
-                    <div class="scribble">moves fast. watch it.</div>
-                </div>
+    <a href="/starters/poilane-levain.html" class="starter-card" style="text-decoration:none;display:block;">
+      <div class="id">№ 0508 / WHEAT</div>
+      <h4>Poilâne Levain</h4>
+      <div class="origin">Paris, 1932</div>
+      <div class="starter-stats">
+        <div class="row"><span class="label">age</span><span class="val">94 yrs</span></div>
+        <div class="row"><span class="label">generation</span><span class="val">3,201</span></div>
+        <div class="row"><span class="label">pH at peak</span><span class="val">3.88</span></div>
+        <div class="row"><span class="label">hydration</span><span class="val">90%</span></div>
+        <div class="row"><span class="label">peak time</span><span class="val">4h 50m</span></div>
+      </div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <div class="scribble">a real darling</div>
+    </a>
 
-                <div class="starter-card coming-soon">
-                    <div class="id">№ 0089 / RYE</div>
-                    <h4>Saint Vith</h4>
-                    <div class="origin">Belgium, 1875</div>
-                    <div class="starter-stats">
-                        <div class="row">
-                            <span class="label">age</span
-                            ><span class="val">151 yrs</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">generation</span
-                            ><span class="val">4,512</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">pH at peak</span
-                            ><span class="val">3.58</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">hydration</span
-                            ><span class="val">110%</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">peak time</span
-                            ><span class="val">3h 40m</span>
-                        </div>
-                    </div>
-                    <div class="stars">★ ★ ★ ★ ★</div>
-                    <div class="scribble">a real beast.</div>
-                </div>
+    <a href="/starters/carl-griffith-1847.html" class="starter-card" style="text-decoration:none;display:block;">
+      <div class="id">№ 0142 / WHEAT</div>
+      <h4>Carl's 1847</h4>
+      <div class="origin">Oregon Trail, est. 1847</div>
+      <div class="starter-stats">
+        <div class="row"><span class="label">age</span><span class="val">~179 yrs</span></div>
+        <div class="row"><span class="label">generation</span><span class="val">~4,800+</span></div>
+        <div class="row"><span class="label">hydration</span><span class="val">100%</span></div>
+        <div class="row"><span class="label">flavor</span><span class="val">mild &amp; lactic</span></div>
+        <div class="row"><span class="label">available</span><span class="val">free via mail</span></div>
+      </div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <div class="scribble">free to anyone ✎</div>
+    </a>
 
-                <div class="starter-card coming-soon">
-                    <div class="id">№ 0726 / EINKORN</div>
-                    <h4>The Anatolian</h4>
-                    <div class="origin">Karaman, 2018</div>
-                    <div class="starter-stats">
-                        <div class="row">
-                            <span class="label">age</span
-                            ><span class="val">8 yrs</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">generation</span
-                            ><span class="val">612</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">pH at peak</span
-                            ><span class="val">3.66</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">hydration</span
-                            ><span class="val">85%</span>
-                        </div>
-                        <div class="row">
-                            <span class="label">peak time</span
-                            ><span class="val">6h 00m</span>
-                        </div>
-                    </div>
-                    <div class="stars">★ ★ ★ ★ ☆</div>
-                    <div class="scribble">young but lively</div>
-                </div>
-            </div>
-        </section>
+    <a href="/starters/blackley-ancient-egyptian.html" class="starter-card" style="text-decoration:none;display:block;">
+      <div class="id">№ 0001 / ANCIENT WHEAT</div>
+      <h4>Blackley Egyptian</h4>
+      <div class="origin">Egypt, ~2500 BCE · revived 2019</div>
+      <div class="starter-stats">
+        <div class="row"><span class="label">yeast age</span><span class="val">~4,500 yrs</span></div>
+        <div class="row"><span class="label">source</span><span class="val">Harvard Peabody</span></div>
+        <div class="row"><span class="label">flour</span><span class="val">Emmer wheat</span></div>
+        <div class="row"><span class="label">flavor</span><span class="val">sweeter, richer</span></div>
+        <div class="row"><span class="label">baker</span><span class="val">Xbox guy</span></div>
+      </div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <div class="scribble">wildest story here</div>
+    </a>
 
-        <div class="divider">
-            <span class="divider-tab">tab 02 — the math</span>
-            <h2>hydration &amp; <em>time</em></h2>
-            <p class="subtitle">
-                Sketched from 12,400 logged bakes. Real numbers. Real loaves.
-            </p>
-            <div class="divider-meta">
-                these are guidelines —<br />your kitchen knows best ✎
-            </div>
-        </div>
+    <div class="starter-card coming-soon">
+      <div class="id">№ 0411 / SPELT</div>
+      <h4>Persephone</h4>
+      <div class="origin">Tuscany, 1947</div>
+      <div class="starter-stats">
+        <div class="row"><span class="label">age</span><span class="val">79 yrs</span></div>
+        <div class="row"><span class="label">generation</span><span class="val">2,605</span></div>
+        <div class="row"><span class="label">pH at peak</span><span class="val">3.81</span></div>
+        <div class="row"><span class="label">hydration</span><span class="val">75%</span></div>
+        <div class="row"><span class="label">peak time</span><span class="val">3h 50m</span></div>
+      </div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <div class="scribble">moves fast. watch it.</div>
+    </div>
 
-        <section class="hydration-section">
-            <div class="sketched-chart">
-                <h3>where the loaves live</h3>
-                <div class="sub">hydration % across all logged bakes</div>
+    <div class="starter-card coming-soon">
+      <div class="id">№ 0089 / RYE</div>
+      <h4>Saint Vith</h4>
+      <div class="origin">Belgium, 1875</div>
+      <div class="starter-stats">
+        <div class="row"><span class="label">age</span><span class="val">151 yrs</span></div>
+        <div class="row"><span class="label">generation</span><span class="val">4,512</span></div>
+        <div class="row"><span class="label">pH at peak</span><span class="val">3.58</span></div>
+        <div class="row"><span class="label">hydration</span><span class="val">110%</span></div>
+        <div class="row"><span class="label">peak time</span><span class="val">3h 40m</span></div>
+      </div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <div class="scribble">a real beast.</div>
+    </div>
 
-                <svg viewBox="0 0 460 270" preserveAspectRatio="xMidYMid meet">
-                    <path
-                        d="M40,30 L40,235"
-                        stroke="#2a1f14"
-                        stroke-width="2"
-                        fill="none"
-                        stroke-linecap="round"
-                    />
-                    <path
-                        d="M38,235 Q220,238 452,234"
-                        stroke="#2a1f14"
-                        stroke-width="2"
-                        fill="none"
-                        stroke-linecap="round"
-                    />
+    <div class="starter-card coming-soon">
+      <div class="id">№ 0726 / EINKORN</div>
+      <h4>The Anatolian</h4>
+      <div class="origin">Karaman, 2018</div>
+      <div class="starter-stats">
+        <div class="row"><span class="label">age</span><span class="val">8 yrs</span></div>
+        <div class="row"><span class="label">generation</span><span class="val">612</span></div>
+        <div class="row"><span class="label">pH at peak</span><span class="val">3.66</span></div>
+        <div class="row"><span class="label">hydration</span><span class="val">85%</span></div>
+        <div class="row"><span class="label">peak time</span><span class="val">6h 00m</span></div>
+      </div>
+      <div class="stars">★ ★ ★ ★ ☆</div>
+      <div class="scribble">young but lively</div>
+    </div>
 
-                    <g
-                        font-family="Special Elite"
-                        font-size="10"
-                        fill="#5c4a36"
-                    >
-                        <text x="34" y="50" text-anchor="end">2400</text>
-                        <text x="34" y="100" text-anchor="end">1800</text>
-                        <text x="34" y="150" text-anchor="end">1200</text>
-                        <text x="34" y="200" text-anchor="end">600</text>
-                    </g>
-                    <g
-                        stroke="#5c4a36"
-                        stroke-dasharray="3,3"
-                        stroke-width="0.7"
-                        opacity="0.4"
-                    >
-                        <line x1="44" y1="50" x2="450" y2="50" />
-                        <line x1="44" y1="100" x2="450" y2="100" />
-                        <line x1="44" y1="150" x2="450" y2="150" />
-                        <line x1="44" y1="200" x2="450" y2="200" />
-                    </g>
-                    <g fill="#a53020" stroke="#2a1f14" stroke-width="1.2">
-                        <rect
-                            x="50"
-                            y="205"
-                            width="22"
-                            height="28"
-                            transform="rotate(-0.5 61 219)"
-                        />
-                        <rect
-                            x="78"
-                            y="185"
-                            width="22"
-                            height="48"
-                            transform="rotate(0.3 89 209)"
-                        />
-                        <rect
-                            x="106"
-                            y="158"
-                            width="22"
-                            height="75"
-                            transform="rotate(-0.4 117 195)"
-                        />
-                        <rect
-                            x="134"
-                            y="125"
-                            width="22"
-                            height="108"
-                            transform="rotate(0.2 145 179)"
-                        />
-                        <rect
-                            x="162"
-                            y="82"
-                            width="22"
-                            height="151"
-                            fill="#c44424"
-                            transform="rotate(-0.3 173 158)"
-                        />
-                        <rect
-                            x="190"
-                            y="58"
-                            width="22"
-                            height="175"
-                            fill="#c44424"
-                            transform="rotate(0.3 201 145)"
-                        />
-                        <rect
-                            x="218"
-                            y="68"
-                            width="22"
-                            height="165"
-                            fill="#c44424"
-                            transform="rotate(-0.5 229 150)"
-                        />
-                        <rect
-                            x="246"
-                            y="98"
-                            width="22"
-                            height="135"
-                            transform="rotate(0.2 257 165)"
-                        />
-                        <rect
-                            x="274"
-                            y="128"
-                            width="22"
-                            height="105"
-                            transform="rotate(-0.3 285 180)"
-                        />
-                        <rect
-                            x="302"
-                            y="162"
-                            width="22"
-                            height="71"
-                            transform="rotate(0.4 313 197)"
-                        />
-                        <rect
-                            x="330"
-                            y="184"
-                            width="22"
-                            height="49"
-                            transform="rotate(-0.2 341 208)"
-                        />
-                        <rect
-                            x="358"
-                            y="205"
-                            width="22"
-                            height="28"
-                            transform="rotate(0.3 369 219)"
-                        />
-                        <rect
-                            x="386"
-                            y="217"
-                            width="22"
-                            height="16"
-                            transform="rotate(-0.3 397 225)"
-                        />
-                        <rect
-                            x="414"
-                            y="223"
-                            width="22"
-                            height="10"
-                            transform="rotate(0.2 425 228)"
-                        />
-                    </g>
-                    <ellipse
-                        cx="201"
-                        cy="58"
-                        rx="40"
-                        ry="18"
-                        fill="none"
-                        stroke="#2a4774"
-                        stroke-width="2"
-                        stroke-dasharray="4,3"
-                        transform="rotate(-3 201 58)"
-                    />
-                    <text
-                        x="245"
-                        y="40"
-                        font-family="Caveat"
-                        font-size="22"
-                        fill="#2a4774"
-                        font-weight="600"
-                        transform="rotate(-3 245 40)"
-                    >
-                        the sweet spot ★
-                    </text>
-                    <path
-                        d="M250,46 Q230,55 215,60"
-                        stroke="#2a4774"
-                        stroke-width="1.8"
-                        fill="none"
-                    />
-                    <polygon points="218,55 211,62 220,63" fill="#2a4774" />
+  </div>
+</section>
 
-                    <g font-family="Special Elite" font-size="9" fill="#5c4a36">
-                        <text x="61" y="250" text-anchor="middle">60</text>
-                        <text x="89" y="250" text-anchor="middle">62</text>
-                        <text x="117" y="250" text-anchor="middle">64</text>
-                        <text x="145" y="250" text-anchor="middle">68</text>
-                        <text x="173" y="250" text-anchor="middle">72</text>
-                        <text x="201" y="250" text-anchor="middle">76</text>
-                        <text x="229" y="250" text-anchor="middle">80</text>
-                        <text x="257" y="250" text-anchor="middle">84</text>
-                        <text x="285" y="250" text-anchor="middle">88</text>
-                        <text x="313" y="250" text-anchor="middle">92</text>
-                        <text x="341" y="250" text-anchor="middle">96</text>
-                        <text x="369" y="250" text-anchor="middle">100</text>
-                        <text x="397" y="250" text-anchor="middle">104</text>
-                        <text x="425" y="250" text-anchor="middle">108</text>
-                    </g>
-                    <text
-                        x="245"
-                        y="265"
-                        text-anchor="middle"
-                        font-family="Caveat"
-                        font-size="16"
-                        fill="#2a1f14"
-                    >
-                        hydration % →
-                    </text>
-                </svg>
-            </div>
+<div class="divider">
+  <span class="divider-tab">tab 02 — the math</span>
+  <h2>hydration &amp; <em>time</em></h2>
+  <p class="subtitle">Drawn from community bake logs, temperature research, and sourdough science. See sources below.</p>
+  <div class="divider-meta">these are guidelines —<br>your kitchen knows best ✎</div>
+</div>
 
-            <div class="ferment-table-wrap">
-                <h3>bulk ferment cheat sheet</h3>
-                <div class="sub">ambient temp vs. how long it'll take</div>
-                <table class="ferment-table">
-                    <thead>
-                        <tr>
-                            <th>temp</th>
-                            <th>duration</th>
-                            <th>notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>18°C / 64°F</td>
-                            <td>8h 30m</td>
-                            <td>slow &amp; complex</td>
-                        </tr>
-                        <tr>
-                            <td>20°C / 68°F</td>
-                            <td>6h 15m</td>
-                            <td>balanced</td>
-                        </tr>
-                        <tr>
-                            <td>22°C / 72°F</td>
-                            <td>5h 00m</td>
-                            <td>balanced</td>
-                        </tr>
-                        <tr class="featured">
-                            <td>24°C / 75°F</td>
-                            <td>4h 15m</td>
-                            <td>just right</td>
-                        </tr>
-                        <tr>
-                            <td>26°C / 79°F</td>
-                            <td>3h 30m</td>
-                            <td>watch closely</td>
-                        </tr>
-                        <tr>
-                            <td>28°C / 82°F</td>
-                            <td>2h 50m</td>
-                            <td>fast / risky</td>
-                        </tr>
-                        <tr>
-                            <td>30°C / 86°F</td>
-                            <td>2h 15m</td>
-                            <td>too hot — slow it down</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="ferment-margin">
-                    ↑ I keep mine on top of the fridge<br />
-                    — the perfect 24°C corner!
-                </div>
-            </div>
-        </section>
+<section class="hydration-section">
 
-        <div class="divider" id="flours">
-            <span class="divider-tab">tab 03 — the flour shelf</span>
-            <h2>flour <em>compendium</em></h2>
-            <p class="subtitle">
-                Everything I've baked with, plus everything you've sent me. 312
-                mills. 87 grain varieties.
-            </p>
-            <div class="divider-meta">
-                favorites starred ★<br />new arrivals this week
-            </div>
-        </div>
+  <div class="sketched-chart">
+    <h3>where the loaves live</h3>
+    <div class="sub">hydration % across all logged bakes</div>
 
-        <section class="flour-section">
-            <div class="flour-paper">
-                <table class="flour-table">
-                    <thead>
-                        <tr>
-                            <th>variety</th>
-                            <th>mill / region</th>
-                            <th>protein</th>
-                            <th>ash</th>
-                            <th>best for</th>
-                            <th>my notes</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span class="flour-name">Type 65 (T65)</span>
-                            </td>
-                            <td>
-                                Moulin Bourgeois<br /><small
-                                    >Verdelot, FR</small
-                                >
-                            </td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 38px"
-                                ></span
-                                >11.8%
-                            </td>
-                            <td>0.65%</td>
-                            <td>country loaves</td>
-                            <td><span class="star-rating">★★★★★</span></td>
-                            <td><span class="stamp hot">favorite</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="flour-name">Tipo 00 Manitoba</span>
-                            </td>
-                            <td>
-                                Mulino Marino<br /><small>Cossano, IT</small>
-                            </td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 50px"
-                                ></span
-                                >14.5%
-                            </td>
-                            <td>0.55%</td>
-                            <td>high-hydration</td>
-                            <td><span class="star-rating">★★★★☆</span></td>
-                            <td><span class="stamp">in stock</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="flour-name"
-                                    >Bread Flour, Sifted</span
-                                >
-                            </td>
-                            <td>
-                                Cairnspring Mills<br /><small
-                                    >Burlington, WA</small
-                                >
-                            </td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 44px"
-                                ></span
-                                >13.0%
-                            </td>
-                            <td>0.58%</td>
-                            <td>open crumb</td>
-                            <td><span class="star-rating">★★★★★</span></td>
-                            <td><span class="stamp hot">mom approved</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="flour-name">Whole Spelt</span></td>
-                            <td>Roggenkampe<br /><small>Detmold, DE</small></td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 41px"
-                                ></span
-                                >12.5%
-                            </td>
-                            <td>1.85%</td>
-                            <td>blends, levain</td>
-                            <td><span class="star-rating">★★★★☆</span></td>
-                            <td><span class="stamp">in stock</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="flour-name"
-                                    >Dark Rye, Stoneground</span
-                                >
-                            </td>
-                            <td>
-                                Hayden Mills<br /><small>Queen Creek, AZ</small>
-                            </td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 32px"
-                                ></span
-                                >10.5%
-                            </td>
-                            <td>1.95%</td>
-                            <td>pumpernickel</td>
-                            <td><span class="star-rating">★★★★★</span></td>
-                            <td><span class="stamp">in stock</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="flour-name">Einkorn, Whole</span>
-                            </td>
-                            <td>Janie's Mill<br /><small>Ashkum, IL</small></td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 47px"
-                                ></span
-                                >14.0%
-                            </td>
-                            <td>1.70%</td>
-                            <td>heritage loaves</td>
-                            <td><span class="star-rating">★★★★★</span></td>
-                            <td><span class="stamp hot">limited</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="flour-name"
-                                    >High-Extraction Yecora</span
-                                >
-                            </td>
-                            <td>
-                                Central Milling<br /><small>Logan, UT</small>
-                            </td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 45px"
-                                ></span
-                                >13.5%
-                            </td>
-                            <td>0.95%</td>
-                            <td>country, baguette</td>
-                            <td><span class="star-rating">★★★★★</span></td>
-                            <td><span class="stamp">in stock</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="flour-name"
-                                    >Khorasan (Kamut®)</span
-                                >
-                            </td>
-                            <td>
-                                Big Sky Organic<br /><small>Bozeman, MT</small>
-                            </td>
-                            <td>
-                                <span
-                                    class="protein-bar"
-                                    style="width: 49px"
-                                ></span
-                                >14.2%
-                            </td>
-                            <td>1.65%</td>
-                            <td>golden crumb</td>
-                            <td><span class="star-rating">★★★★☆</span></td>
-                            <td><span class="stamp">in stock</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <svg viewBox="0 0 460 270" preserveAspectRatio="xMidYMid meet">
+      <path d="M40,30 L40,235" stroke="#2a1f14" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M38,235 Q220,238 452,234" stroke="#2a1f14" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-        <div class="divider" id="tools">
-            <span class="divider-tab">tab 04 — kitchen tools</span>
-            <h2>helpful <em>things</em></h2>
-            <p class="subtitle">
-                Calculators, planners, and little fixes — built because we
-                needed them ourselves.
-            </p>
-            <div class="divider-meta">
-                free for everyone ✎<br />no account required
-            </div>
-        </div>
+      <g font-family="Special Elite" font-size="10" fill="#5c4a36">
+        <text x="34" y="50" text-anchor="end">2400</text>
+        <text x="34" y="100" text-anchor="end">1800</text>
+        <text x="34" y="150" text-anchor="end">1200</text>
+        <text x="34" y="200" text-anchor="end">600</text>
+      </g>
+      <g stroke="#5c4a36" stroke-dasharray="3,3" stroke-width="0.7" opacity="0.4">
+        <line x1="44" y1="50" x2="450" y2="50"/>
+        <line x1="44" y1="100" x2="450" y2="100"/>
+        <line x1="44" y1="150" x2="450" y2="150"/>
+        <line x1="44" y1="200" x2="450" y2="200"/>
+      </g>
+      <g fill="#a53020" stroke="#2a1f14" stroke-width="1.2">
+        <rect x="50" y="205" width="22" height="28" transform="rotate(-0.5 61 219)"/>
+        <rect x="78" y="185" width="22" height="48" transform="rotate(0.3 89 209)"/>
+        <rect x="106" y="158" width="22" height="75" transform="rotate(-0.4 117 195)"/>
+        <rect x="134" y="125" width="22" height="108" transform="rotate(0.2 145 179)"/>
+        <rect x="162" y="82" width="22" height="151" fill="#c44424" transform="rotate(-0.3 173 158)"/>
+        <rect x="190" y="58" width="22" height="175" fill="#c44424" transform="rotate(0.3 201 145)"/>
+        <rect x="218" y="68" width="22" height="165" fill="#c44424" transform="rotate(-0.5 229 150)"/>
+        <rect x="246" y="98" width="22" height="135" transform="rotate(0.2 257 165)"/>
+        <rect x="274" y="128" width="22" height="105" transform="rotate(-0.3 285 180)"/>
+        <rect x="302" y="162" width="22" height="71" transform="rotate(0.4 313 197)"/>
+        <rect x="330" y="184" width="22" height="49" transform="rotate(-0.2 341 208)"/>
+        <rect x="358" y="205" width="22" height="28" transform="rotate(0.3 369 219)"/>
+        <rect x="386" y="217" width="22" height="16" transform="rotate(-0.3 397 225)"/>
+        <rect x="414" y="223" width="22" height="10" transform="rotate(0.2 425 228)"/>
+      </g>
+      <ellipse cx="201" cy="58" rx="40" ry="18" fill="none" stroke="#2a4774" stroke-width="2" stroke-dasharray="4,3" transform="rotate(-3 201 58)"/>
+      <text x="245" y="40" font-family="Caveat" font-size="22" fill="#2a4774" font-weight="600" transform="rotate(-3 245 40)">the sweet spot ★</text>
+      <path d="M250,46 Q230,55 215,60" stroke="#2a4774" stroke-width="1.8" fill="none"/>
+      <polygon points="218,55 211,62 220,63" fill="#2a4774"/>
 
-        <section class="tools">
-            <div class="tools-grid">
-                <a
-                    href="/tools/hydration.html"
-                    class="tool-card"
-                    style="text-decoration: none; display: block"
-                >
-                    <span class="tool-num">01</span>
-                    <div class="kicker">calculator</div>
-                    <h4>Hydration Solver</h4>
-                    <p>
-                        Type in your flour weight, get a full breakdown — water,
-                        salt, levain, multi-flour blends. The math your grandma
-                        did in her head.
-                    </p>
-                    <span class="cta">open it →</span>
-                </a>
+      <g font-family="Special Elite" font-size="9" fill="#5c4a36">
+        <text x="61" y="250" text-anchor="middle">60</text>
+        <text x="89" y="250" text-anchor="middle">62</text>
+        <text x="117" y="250" text-anchor="middle">64</text>
+        <text x="145" y="250" text-anchor="middle">68</text>
+        <text x="173" y="250" text-anchor="middle">72</text>
+        <text x="201" y="250" text-anchor="middle">76</text>
+        <text x="229" y="250" text-anchor="middle">80</text>
+        <text x="257" y="250" text-anchor="middle">84</text>
+        <text x="285" y="250" text-anchor="middle">88</text>
+        <text x="313" y="250" text-anchor="middle">92</text>
+        <text x="341" y="250" text-anchor="middle">96</text>
+        <text x="369" y="250" text-anchor="middle">100</text>
+        <text x="397" y="250" text-anchor="middle">104</text>
+        <text x="425" y="250" text-anchor="middle">108</text>
+      </g>
+      <text x="245" y="265" text-anchor="middle" font-family="Caveat" font-size="16" fill="#2a1f14">hydration % →</text>
+    </svg>
+  </div>
 
-                <a
-                    href="/tools/schedule.html"
-                    class="tool-card"
-                    style="text-decoration: none; display: block"
-                >
-                    <span class="tool-num">02</span>
-                    <div class="kicker">planner</div>
-                    <h4>Bake Schedule Builder</h4>
-                    <p>
-                        Tell us when you want bread out of the oven. We'll work
-                        backwards through retard, shape, bulk, and feed times
-                        based on your kitchen temp.
-                    </p>
-                    <span class="cta">plan a bake →</span>
-                </a>
+  <div class="ferment-table-wrap">
+    <h3>bulk ferment cheat sheet</h3>
+    <div class="sub">ambient temp vs. how long it'll take</div>
+    <table class="ferment-table">
+      <thead>
+        <tr><th>temp</th><th>duration</th><th>notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>18°C / 64°F</td><td>8h 30m</td><td>slow &amp; complex</td></tr>
+        <tr><td>20°C / 68°F</td><td>6h 15m</td><td>balanced</td></tr>
+        <tr><td>22°C / 72°F</td><td>5h 00m</td><td>balanced</td></tr>
+        <tr class="featured"><td>24°C / 75°F</td><td>4h 15m</td><td>just right</td></tr>
+        <tr><td>26°C / 79°F</td><td>3h 30m</td><td>watch closely</td></tr>
+        <tr><td>28°C / 82°F</td><td>2h 50m</td><td>fast / risky</td></tr>
+        <tr><td>30°C / 86°F</td><td>2h 15m</td><td>too hot — slow it down</td></tr>
+      </tbody>
+    </table>
+    <div class="ferment-margin">
+      ↑ I keep mine on top of the fridge<br>
+       — the perfect 24°C corner!
+    </div>
+  </div>
 
-                <a
-                    href="/tools/trouble-atlas.html"
-                    class="tool-card"
-                    style="text-decoration: none; display: block"
-                >
-                    <span class="tool-num">03</span>
-                    <div class="kicker">reference</div>
-                    <h4>Trouble Atlas</h4>
-                    <p>
-                        312 documented loaf failures with cause and cure. Search
-                        by symptom — dense crumb, no spring, sour smell,
-                        blistered crust, gummy interior.
-                    </p>
-                    <span class="cta">browse atlas →</span>
-                </a>
+  <div class="chart-sources">
+    <span class="cs-label">sources ✎</span>
+    The bulk fermentation time ranges are drawn from community temperature research by
+    <a href="https://www.thesourdoughjourney.com/temperature-and-bulk-fermentation/" target="_blank" rel="noopener" class="content-link">The Sourdough Journey</a>,
+    food science on <em>Lactobacillus</em> fermentation kinetics, and
+    <a href="https://www.thefreshloaf.com/node/56606/impact-temperature-sourdough-bulk-fermentation" target="_blank" rel="noopener" class="content-link">The Fresh Loaf community documentation</a>.
+    Hydration distribution reflects patterns widely observed across sourdough baking communities. All ranges are guidelines — your kitchen, starter, and flour will vary.
+  </div>
 
-                <div class="tool-card coming-soon">
-                    <span class="tool-num">04</span>
-                    <div class="kicker">diagnostics</div>
-                    <h4>Crumb Analyzer</h4>
-                    <p>
-                        Upload a cross-section and we'll score the alveoli, flag
-                        irregularities, and tell you what likely went sideways.
-                        Gummy strips, flying crusts, all of it.
-                    </p>
-                    <span class="cta">coming soon</span>
-                </div>
+</section>
 
-                <div class="tool-card coming-soon">
-                    <span class="tool-num">05</span>
-                    <div class="kicker">journal</div>
-                    <h4>Personal Bake Log</h4>
-                    <p>
-                        Photos, weights, temps, notes. Watch your starter's
-                        behavior change with the seasons. Export to CSV. Compare
-                        against the community.
-                    </p>
-                    <span class="cta">coming soon</span>
-                </div>
+<div class="divider" id="flours">
+  <span class="divider-tab">tab 03 — the flour shelf</span>
+  <h2>flour <em>compendium</em></h2>
+  <p class="subtitle">Everything I've baked with, plus everything you've sent me. 312 mills. 87 grain varieties.</p>
+  <div class="divider-meta">favorites starred ★<br>new arrivals this week</div>
+</div>
 
-                <div class="tool-card coming-soon">
-                    <span class="tool-num">06</span>
-                    <div class="kicker">conversion</div>
-                    <h4>Recipe Translator</h4>
-                    <p>
-                        Convert between baker's percentages and absolute
-                        weights. Scale up to commercial. Swap flours and
-                        recompute hydration automatically.
-                    </p>
-                    <span class="cta">coming soon</span>
-                </div>
-            </div>
-        </section>
+<section class="flour-section">
+  <div class="flour-paper">
+    <table class="flour-table">
+      <thead>
+        <tr>
+          <th>variety</th>
+          <th>mill / region</th>
+          <th>protein</th>
+          <th>ash</th>
+          <th>best for</th>
+          <th>my notes</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="flour-name">Type 65 (T65)</span></td>
+          <td>Moulin Bourgeois<br><small>Verdelot, FR</small></td>
+          <td><span class="protein-bar" style="width: 38px"></span>11.8%</td>
+          <td>0.65%</td>
+          <td>country loaves</td>
+          <td><span class="star-rating">★★★★★</span></td>
+          <td><span class="stamp hot">favorite</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">Tipo 00 Manitoba</span></td>
+          <td>Mulino Marino<br><small>Cossano, IT</small></td>
+          <td><span class="protein-bar" style="width: 50px"></span>14.5%</td>
+          <td>0.55%</td>
+          <td>high-hydration</td>
+          <td><span class="star-rating">★★★★☆</span></td>
+          <td><span class="stamp">in stock</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">Bread Flour, Sifted</span></td>
+          <td>Cairnspring Mills<br><small>Burlington, WA</small></td>
+          <td><span class="protein-bar" style="width: 44px"></span>13.0%</td>
+          <td>0.58%</td>
+          <td>open crumb</td>
+          <td><span class="star-rating">★★★★★</span></td>
+          <td><span class="stamp hot">mom approved</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">Whole Spelt</span></td>
+          <td>Roggenkampe<br><small>Detmold, DE</small></td>
+          <td><span class="protein-bar" style="width: 41px"></span>12.5%</td>
+          <td>1.85%</td>
+          <td>blends, levain</td>
+          <td><span class="star-rating">★★★★☆</span></td>
+          <td><span class="stamp">in stock</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">Dark Rye, Stoneground</span></td>
+          <td>Hayden Mills<br><small>Queen Creek, AZ</small></td>
+          <td><span class="protein-bar" style="width: 32px"></span>10.5%</td>
+          <td>1.95%</td>
+          <td>pumpernickel</td>
+          <td><span class="star-rating">★★★★★</span></td>
+          <td><span class="stamp">in stock</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">Einkorn, Whole</span></td>
+          <td>Janie's Mill<br><small>Ashkum, IL</small></td>
+          <td><span class="protein-bar" style="width: 47px"></span>14.0%</td>
+          <td>1.70%</td>
+          <td>heritage loaves</td>
+          <td><span class="star-rating">★★★★★</span></td>
+          <td><span class="stamp hot">limited</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">High-Extraction Yecora</span></td>
+          <td>Central Milling<br><small>Logan, UT</small></td>
+          <td><span class="protein-bar" style="width: 45px"></span>13.5%</td>
+          <td>0.95%</td>
+          <td>country, baguette</td>
+          <td><span class="star-rating">★★★★★</span></td>
+          <td><span class="stamp">in stock</span></td>
+        </tr>
+        <tr>
+          <td><span class="flour-name">Khorasan (Kamut®)</span></td>
+          <td>Big Sky Organic<br><small>Bozeman, MT</small></td>
+          <td><span class="protein-bar" style="width: 49px"></span>14.2%</td>
+          <td>1.65%</td>
+          <td>golden crumb</td>
+          <td><span class="star-rating">★★★★☆</span></td>
+          <td><span class="stamp">in stock</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-        <div class="divider" id="journal">
-            <span class="divider-tab">tab 05 — the journal</span>
-            <h2>field <em>notes</em></h2>
-            <p class="subtitle">
-                Essays, methods, profiles. Things bakers wanted to write down.
-            </p>
-            <div class="divider-meta">fresh this week ✎</div>
-        </div>
+<div class="divider" id="tools">
+  <span class="divider-tab">tab 04 — kitchen tools</span>
+  <h2>helpful <em>things</em></h2>
+  <p class="subtitle">Calculators, planners, and little fixes — built because we needed them ourselves.</p>
+  <div class="divider-meta">free for everyone ✎<br>no account required</div>
+</div>
 
-        <section class="journal-section">
-            <div class="journal-grid">
-                <article class="journal-entry featured">
-                    <div class="stamp-row">
-                        <span>essay · long-form</span><span>16 min</span>
-                    </div>
-                    <h4>The Myth of the 24-hour Cold Retard</h4>
-                    <p class="lead">
-                        After 600 logged bakes across nine starters, I'm ready
-                        to say it: the long cold ferment is overrated, and we
-                        have mistaken sourness for depth. Here is the data.
-                    </p>
-                    <div class="byline">— M. Hollander · April 22</div>
-                </article>
+<section class="tools">
+  <div class="tools-grid">
 
-                <article class="journal-entry">
-                    <div class="stamp-row">
-                        <span>method</span><span>4 min</span>
-                    </div>
-                    <h4>Stitching, not slapping</h4>
-                    <p class="lead">
-                        A gentler approach to lamination that keeps the gas
-                        pockets you fought to build during bulk.
-                    </p>
-                    <div class="byline">— A. Reyes · April 18</div>
-                </article>
+    <a href="/tools/hydration.html" class="tool-card" style="text-decoration:none;display:block;">
+      <span class="tool-num">01</span>
+      <div class="kicker">calculator</div>
+      <h4>Hydration Solver</h4>
+      <p>Type in your flour weight, get a full breakdown — water, salt, levain, multi-flour blends. The math your grandma did in her head.</p>
+      <span class="cta">open it →</span>
+    </a>
 
-                <article class="journal-entry">
-                    <div class="stamp-row">
-                        <span>flour profile</span><span>6 min</span>
-                    </div>
-                    <h4>Why Yecora Rojo behaves like nothing else</h4>
-                    <p class="lead">
-                        A heritage hard red wheat from California's Central
-                        Valley — protein high, gluten quirky, oven spring
-                        stunning.
-                    </p>
-                    <div class="byline">— J. Tamimi · April 11</div>
-                </article>
-            </div>
-        </section>
+    <a href="/tools/schedule.html" class="tool-card" style="text-decoration:none;display:block;">
+      <span class="tool-num">02</span>
+      <div class="kicker">planner</div>
+      <h4>Bake Schedule Builder</h4>
+      <p>Tell us when you want bread out of the oven. We'll work backwards through retard, shape, bulk, and feed times based on your kitchen temp.</p>
+      <span class="cta">plan a bake →</span>
+    </a>
 
-        <!-- ============ NETLIFY FORMS ============
+    <a href="/tools/trouble-atlas.html" class="tool-card" style="text-decoration:none;display:block;">
+      <span class="tool-num">03</span>
+      <div class="kicker">reference</div>
+      <h4>Trouble Atlas</h4>
+      <p>312 documented loaf failures with cause and cure. Search by symptom — dense crumb, no spring, sour smell, blistered crust, gummy interior.</p>
+      <span class="cta">browse atlas →</span>
+    </a>
+
+    <div class="tool-card coming-soon">
+      <span class="tool-num">04</span>
+      <div class="kicker">diagnostics</div>
+      <h4>Crumb Analyzer</h4>
+      <p>Upload a cross-section and we'll score the alveoli, flag irregularities, and tell you what likely went sideways. Gummy strips, flying crusts, all of it.</p>
+      <span class="cta">coming soon</span>
+    </div>
+
+    <div class="tool-card coming-soon">
+      <span class="tool-num">05</span>
+      <div class="kicker">journal</div>
+      <h4>Personal Bake Log</h4>
+      <p>Photos, weights, temps, notes. Watch your starter's behavior change with the seasons. Export to CSV. Compare against the community.</p>
+      <span class="cta">coming soon</span>
+    </div>
+
+    <div class="tool-card coming-soon">
+      <span class="tool-num">06</span>
+      <div class="kicker">conversion</div>
+      <h4>Recipe Translator</h4>
+      <p>Convert between baker's percentages and absolute weights. Scale up to commercial. Swap flours and recompute hydration automatically.</p>
+      <span class="cta">coming soon</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider" id="journal">
+  <span class="divider-tab">tab 05 — the journal</span>
+  <h2>field <em>notes</em></h2>
+  <p class="subtitle">Essays, methods, profiles. Things bakers wanted to write down.</p>
+  <div class="divider-meta">fresh this week ✎</div>
+</div>
+
+<section class="journal-section">
+  <div class="journal-grid">
+
+    <article class="journal-entry featured">
+      <div class="stamp-row"><span>essay · long-form</span><span>16 min</span></div>
+      <h4>The Myth of the 24-hour Cold Retard</h4>
+      <p class="lead">After 600 logged bakes across nine starters, I'm ready to say it: the long cold ferment is overrated, and we have mistaken sourness for depth. Here is the data.</p>
+      <div class="byline">— M. Hollander · April 22</div>
+    </article>
+
+    <article class="journal-entry">
+      <div class="stamp-row"><span>method</span><span>4 min</span></div>
+      <h4>Stitching, not slapping</h4>
+      <p class="lead">A gentler approach to lamination that keeps the gas pockets you fought to build during bulk.</p>
+      <div class="byline">— A. Reyes · April 18</div>
+    </article>
+
+    <article class="journal-entry">
+      <div class="stamp-row"><span>flour profile</span><span>6 min</span></div>
+      <h4>Why Yecora Rojo behaves like nothing else</h4>
+      <p class="lead">A heritage hard red wheat from California's Central Valley — protein high, gluten quirky, oven spring stunning.</p>
+      <div class="byline">— J. Tamimi · April 11</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ NETLIFY FORMS ============
      The data-netlify="true" attribute tells Netlify to capture
      submissions automatically. View them in your Netlify dashboard
      under Forms. No backend needed.
 ============================================ -->
-        <section class="signup">
-            <h2>add your <em>name</em> to the notebook</h2>
-            <form
-                class="form-row"
-                name="newsletter"
-                method="POST"
-                action="/thanks.html"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
-            >
-                <input type="hidden" name="form-name" value="newsletter" />
-                <p style="display: none">
-                    <label
-                        >Don't fill this out: <input name="bot-field"
-                    /></label>
-                </p>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="your.kitchen@email.com"
-                    required
-                />
-                <button type="submit">sign me up</button>
-            </form>
-            <div class="signup-note">
-                one letter a week. unsubscribe at any oven temp.
-            </div>
-        </section>
+<section class="signup">
+  <h2>add your <em>name</em> to the notebook</h2>
+  <form class="form-row" name="newsletter" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="newsletter">
+    <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <input type="email" name="email" placeholder="your.kitchen@email.com" required>
+    <button type="submit">sign me up</button>
+  </form>
+  <div class="signup-note">one letter a week. unsubscribe at any oven temp.</div>
+</section>
 
-        <footer>
-            <div class="foot-grid">
-                <div>
-                    <div class="foot-brand">The Sourdough Database</div>
-                    <p class="foot-tag">
-                        A recipe notebook for bakers who treat the loaf as both
-                        inquiry and inheritance.
-                    </p>
-                </div>
-                <div class="foot-col">
-                    <h5>The Database</h5>
-                    <ul>
-                        <li>starter index</li>
-                        <li>recipes</li>
-                        <li>flours</li>
-                        <li>bake logs</li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>Tools</h5>
-                    <ul>
-                        <li>hydration solver</li>
-                        <li>schedule builder</li>
-                        <li>crumb analyzer</li>
-                        <li>translator</li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>About</h5>
-                    <ul>
-                        <li>
-                            <a
-                                href="/about.html"
-                                style="
-                                    font-family: &quot;Caveat&quot;, cursive;
-                                    font-size: 22px;
-                                    color: var(--ink);
-                                "
-                                >the story</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/privacy.html"
-                                style="
-                                    font-family: &quot;Caveat&quot;, cursive;
-                                    font-size: 22px;
-                                    color: var(--ink);
-                                "
-                                >privacy</a
-                            >
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="colophon">
-                <span>© MMXXVI · The Sourdough Database</span>
-                <span>set in caveat, special elite &amp; crimson pro</span>
-                <span>made with flour on our hands</span>
-            </div>
-        </footer>
-    </body>
+<div id="site-footer"></div>
+
+
+<script src="/assets/js/components.js"></script>
+</body>
 </html>

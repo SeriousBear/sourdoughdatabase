@@ -1,7 +1,7 @@
-/* ===========================================================
+/* ============================================================
    THE SOURDOUGH DATABASE
    Shared stylesheet — every page inherits this
-   =========================================================== */
+   ============================================================ */
 
 :root {
   --paper: #f4ead0;
@@ -991,7 +991,7 @@ footer {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 40px;
-  padding-bottom: 32px;
+  padding: 60px 80px 32px;
   border-bottom: 1.5px dashed var(--rule-pink-strong);
 }
 .foot-brand {
@@ -1043,6 +1043,7 @@ footer {
   color: var(--pencil);
   flex-wrap: wrap;
   gap: 12px;
+  padding: 0 80px 40px;
 }
 
 /* ============ ANIMATIONS ============ */
@@ -4203,28 +4204,35 @@ footer {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 6px;
-      background: linear-gradient(to right, #7ab0d0 0%, #f4ead0 40%, #e08040 75%, #a53020 100%);
+      height: 14px;
+      background: linear-gradient(to right,
+        #7ab0d0 0%,
+        #b8cfd8 25%,
+        #e8d878 48%,
+        #e08040 72%,
+        #a53020 100%
+      );
       outline: none;
-      border: 1px solid var(--ink);
+      border: 1.5px solid var(--ink);
+      cursor: ew-resize;
     }
     .temp-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 24px;
-      height: 24px;
+      width: 8px;
+      height: 30px;
       background: var(--ink);
-      cursor: pointer;
+      cursor: ew-resize;
       border: 2px solid #fdf8e3;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 0 0 1.5px var(--ink), 2px 2px 4px rgba(0,0,0,0.3);
     }
     .temp-slider::-moz-range-thumb {
-      width: 22px;
-      height: 22px;
+      width: 6px;
+      height: 28px;
       background: var(--ink);
-      cursor: pointer;
+      cursor: ew-resize;
       border: 2px solid #fdf8e3;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 0 0 1.5px var(--ink);
       border-radius: 0;
     }
     .temp-scale {
@@ -4364,107 +4372,179 @@ footer {
       color: var(--pen-red);
       margin-bottom: 14px;
     }
-    .timeline-container {
-      overflow-x: auto;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch;
+
+    /* ── NOTEBOOK TIMELINE ───────────────────────────────────────── */
+    .timeline-notebook {
+      border: 1.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      overflow: hidden;
+      background: var(--paper);
     }
-    .timeline-track {
+
+    /* Day strip — sits above the phase cells */
+    .tl-day-strip {
       position: relative;
-      height: 72px;
-      min-width: 100%;
+      height: 22px;
+      background: var(--ink);
     }
-    /* Day marker lines */
-    .tl-day-line {
+    .tl-day-cell {
       position: absolute;
       top: 0; bottom: 0;
-      width: 1px;
-      background: var(--ink);
-      opacity: 0.35;
-    }
-    .tl-day-label {
-      position: absolute;
-      top: -20px;
-      transform: translateX(-50%);
-      font-family: 'Special Elite', monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--pencil);
-      white-space: nowrap;
-    }
-    /* Time labels on bottom axis */
-    .tl-time-label {
-      position: absolute;
-      bottom: -20px;
-      transform: translateX(-50%);
-      font-family: 'Special Elite', monospace;
-      font-size: 9px;
-      color: var(--pencil);
-      white-space: nowrap;
-    }
-    /* Timeline bars */
-    .tl-bar {
-      position: absolute;
-      top: 10px;
-      height: 36px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      padding-left: 8px;
+      font-family: 'Special Elite', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(253, 248, 227, 0.75);
+      border-right: 1px solid rgba(253, 248, 227, 0.15);
+      white-space: nowrap;
       overflow: hidden;
-      transition: opacity 0.2s;
     }
-    .tl-bar:hover { opacity: 0.85; z-index: 2; }
-    .tl-bar .tl-bar-label {
+
+    /* Phase cells row — the main event */
+    .tl-phases {
+      display: flex;
+      height: 78px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .tl-phase-cell {
+      border-right: 1.5px solid var(--ink);
+      padding: 10px 10px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      overflow: hidden;
+      cursor: default;
+      transition: filter 0.12s;
+      position: relative;
+    }
+    .tl-phase-cell:last-child { border-right: none; }
+    .tl-phase-cell:hover { filter: brightness(0.93); }
+
+    /* Cell types */
+    .tl-active {
+      background: var(--ink);
+      color: #fdf8e3;
+    }
+    .tl-passive {
+      background: var(--paper-warm);
+      color: var(--ink);
+      /* subtle ruled lines */
+      background-image: linear-gradient(
+        transparent 20px,
+        rgba(216, 163, 163, 0.3) 20px, rgba(216, 163, 163, 0.3) 21px,
+        transparent 21px
+      );
+      background-size: 100% 21px;
+    }
+    .tl-passive-cold {
+      background: var(--paper-aged);
+      color: var(--ink-soft);
+      /* diagonal hatching = cold proof */
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent, transparent 5px,
+        rgba(42, 71, 116, 0.08) 5px, rgba(42, 71, 116, 0.08) 6px
+      );
+    }
+    .tl-bake {
+      background: var(--pen-red);
+      color: #fdf8e3;
+    }
+
+    /* Cell content */
+    .tl-cell-name {
       font-family: 'Special Elite', monospace;
       font-size: 9px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: white;
+      opacity: 0.85;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding: 0 6px;
-      pointer-events: none;
     }
-    /* Window extension (lighter shade) */
-    .tl-window {
-      position: absolute;
-      top: 10px;
-      height: 36px;
-      opacity: 0.25;
+    .tl-cell-time {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      overflow: hidden;
     }
-    /* Phase colors */
-    .phase-starter { background: #2a4774; }
-    .phase-mix { background: #8b6914; }
-    .phase-bulk { background: #c47a3c; }
-    .phase-shape { background: #5a6e2a; }
-    .phase-proof { background: #3a6a8a; }
-    .phase-preheat { background: #7a3a2a; }
-    .phase-bake { background: #a53020; }
-    .phase-cool { background: #4a4a4a; }
+    .tl-cell-dur {
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      opacity: 0.65;
+      white-space: nowrap;
+    }
 
-    /* Legend */
-    .timeline-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 20px;
-      margin-top: 28px;
+    /* Time strip — sits below the phase cells */
+    .tl-time-strip {
+      position: relative;
+      height: 24px;
+      background: #fdf8e3;
+      border-top: 1px solid rgba(42,31,20,0.12);
     }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
+    .tl-tick {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Special Elite', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.08em;
+      color: var(--pencil);
+      white-space: nowrap;
+    }
+
+    /* ── CUSTOM TOOLTIP ──────────────────────────────────────────── */
+    .tl-tooltip {
+      position: fixed;
+      background: #fdf8e3;
+      border: 1.5px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 14px 18px;
+      pointer-events: none;
+      display: none;
+      z-index: 200;
+      min-width: 180px;
+      max-width: 260px;
+    }
+    .tl-tooltip.visible { display: block; }
+    .tlt-name {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .tlt-time {
+      font-family: 'Special Elite', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--pen-red);
+      margin-bottom: 4px;
+    }
+    .tlt-dur {
       font-family: 'Special Elite', monospace;
       font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--pencil);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
     }
-    .legend-swatch {
-      width: 18px;
-      height: 12px;
-      flex-shrink: 0;
+    .tlt-steps {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--pencil);
+      line-height: 1.5;
+      border-top: 1px dashed var(--rule-pink);
+      padding-top: 7px;
     }
 
     /* ── STEP CARDS ──────────────────────────────────────────────────── */
@@ -4695,4 +4775,23 @@ footer {
   /* Slight opacity variation to look inked, not printed */
   box-shadow: 1px 1px 0 rgba(165, 48, 32, 0.25),
               -1px -1px 0 rgba(165, 48, 32, 0.1);
+}
+
+/* ============ CHART SOURCES FOOTNOTE ============ */
+.chart-sources {
+  margin-top: 20px;
+  padding: 14px 20px;
+  border-top: 1px dashed var(--rule-pink-strong);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--pencil);
+  line-height: 1.8;
+}
+.chart-sources .cs-label {
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  color: var(--pen-red);
+  margin-right: 8px;
+  font-weight: 600;
 }

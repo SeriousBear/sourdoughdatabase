@@ -105,23 +105,7 @@
 </head>
 <body>
 
-<div class="binding"></div>
-<div class="holes">
-  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
-  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
-</div>
-
-<header>
-  <a href="/" class="logo">The Sourdough Database<span class="dot"></span></a>
-  <nav class="nav">
-    <a href="/">home</a>
-    <a href="/#starters">starters</a>
-    <a href="/#flours">flours</a>
-    <a href="/#tools" class="active">tools</a>
-    <a href="/#journal">journal</a>
-    <a href="/about.html">about</a>
-  </nav>
-</header>
+<div id="site-header"></div>
 
 <main class="schedule-wrap">
 
@@ -231,12 +215,12 @@
     <!-- Visual timeline -->
     <div class="timeline-section">
       <div class="timeline-section-label">Your bake — visual timeline</div>
-      <div class="timeline-container">
-        <div style="padding: 24px 0 32px; min-width: 700px;">
-          <div class="timeline-track" id="timeline-track"></div>
-        </div>
+      <div class="timeline-notebook" id="timeline-notebook">
+        <div class="tl-day-strip" id="tl-day-strip"></div>
+        <div class="tl-phases" id="tl-phases"></div>
+        <div class="tl-time-strip" id="tl-time-strip"></div>
       </div>
-      <div class="timeline-legend" id="timeline-legend"></div>
+      <div class="tl-tooltip" id="tl-tooltip"></div>
     </div>
 
     <!-- Step cards -->
@@ -255,41 +239,7 @@
 
 </main>
 
-<footer>
-  <div class="foot-grid" style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding:60px 80px 32px;border-bottom:1.5px dashed var(--rule-pink-strong);">
-    <div>
-      <div class="foot-brand">The Sourdough Database</div>
-      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
-    </div>
-    <div class="foot-col">
-      <h5>The Database</h5>
-      <ul>
-        <li><a href="/#starters">starter index</a></li>
-        <li><a href="/#flours">flours</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h5>Tools</h5>
-      <ul>
-        <li><a href="/tools/hydration.html">hydration solver</a></li>
-        <li><a href="/tools/trouble-atlas.html">trouble atlas</a></li>
-        <li><a href="/tools/schedule.html">bake schedule</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h5>About</h5>
-      <ul>
-        <li><a href="/about.html">the story</a></li>
-        <li><a href="/privacy.html">privacy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon" style="max-width:1400px;margin:24px auto 0;display:flex;justify-content:space-between;font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.1em;color:var(--pencil);padding:0 80px 40px;flex-wrap:wrap;gap:12px;">
-    <span>© MMXXVI · The Sourdough Database</span>
-    <span>set in caveat, special elite &amp; crimson pro</span>
-    <span>made with flour on our hands</span>
-  </div>
-</footer>
+<div id="site-footer"></div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
@@ -535,112 +485,154 @@ function calculateSchedule(targetMs, tempF, proofMethod) {
 }
 
 // ── RENDER TIMELINE ────────────────────────────────────────────────
-var PHASE_COLORS = {
-  starter: '#2a4774', mix: '#8b6914', bulk: '#c47a3c',
-  shape: '#5a6e2a', proof: '#3a6a8a', preheat: '#7a3a2a',
-  bake: '#a53020', cool: '#4a4a4a'
-};
-var PHASE_NAMES = {
-  starter: 'Starter', mix: 'Mix / Autolyse', bulk: 'Bulk Ferment',
-  shape: 'Shape', proof: 'Proof', preheat: 'Preheat',
-  bake: 'Bake', cool: 'Cool'
-};
+// Groups the individual steps into 5–6 readable phase cells.
+// Each cell is sized proportionally to its duration using flex.
+
+var PHASE_GROUPS = [
+  { key: 'prep',   label: 'Starter & Mix',  phases: ['starter','mix'],           type: 'active'       },
+  { key: 'bulk',   label: 'Bulk Ferment',   phases: ['bulk'],                    type: 'passive'      },
+  { key: 'shape',  label: 'Shape',          phases: ['shape'],                   type: 'active'       },
+  { key: 'proof',  label: 'Proof',          phases: ['proof'],                   type: 'passive-cold' },
+  { key: 'bake',   label: 'Bake',           phases: ['preheat','bake'],          type: 'bake'         },
+  { key: 'cool',   label: 'Cool',           phases: ['cool'],                    type: 'passive'      },
+];
+
+function groupStepsForTimeline(steps) {
+  return PHASE_GROUPS.map(function(g) {
+    var gs = steps.filter(function(s) { return g.phases.indexOf(s.phase) >= 0; });
+    if (!gs.length) return null;
+    var start = Math.min.apply(null, gs.map(function(s) { return s.start; }));
+    var end   = Math.max.apply(null, gs.map(function(s) { return s.end; }));
+    // Update proof type based on proof method
+    var type = g.type;
+    if (g.key === 'proof' && state.proofMethod === 'same') type = 'passive';
+    return { key: g.key, label: g.label, type: type,
+             start: start, end: end,
+             durationMins: Math.round((end - start) / 60000), steps: gs };
+  }).filter(Boolean);
+}
+
+// Tooltip element
+var tlTooltip = null;
 
 function renderTimeline(steps) {
-  var track = document.getElementById('timeline-track');
-  track.innerHTML = '';
+  var notebook  = document.getElementById('timeline-notebook');
+  var phasesCon = document.getElementById('tl-phases');
+  var dayStrip  = document.getElementById('tl-day-strip');
+  var timeStrip = document.getElementById('tl-time-strip');
+  tlTooltip     = document.getElementById('tl-tooltip');
+
+  phasesCon.innerHTML = '';
+  dayStrip.innerHTML  = '';
+  timeStrip.innerHTML = '';
 
   if (!steps.length) return;
 
-  var totalStart = steps[0].startEarly;
-  var totalEnd   = steps[steps.length - 1].end + 90 * 60000; // add cooling buffer for labels
+  var groups = groupStepsForTimeline(steps);
+  if (!groups.length) return;
+
+  var totalStart = groups[0].start;
+  var totalEnd   = groups[groups.length - 1].end;
   var totalSpan  = totalEnd - totalStart;
   if (totalSpan <= 0) return;
 
+  // Helper: position as percent of total span
   function pct(ms) {
-    return ((ms - totalStart) / totalSpan * 100).toFixed(3) + '%';
-  }
-  function widthPct(ms1, ms2) {
-    return (Math.max(0, ms2 - ms1) / totalSpan * 100).toFixed(3) + '%';
+    return ((ms - totalStart) / totalSpan * 100).toFixed(2) + '%';
   }
 
-  // Day boundary lines + labels
-  var dayMs = 24 * 60 * 60 * 1000;
+  // ── DAY STRIP ────────────────────────────────────────
+  var dayMs    = 24 * 3600000;
   var startDay = new Date(totalStart);
   startDay.setHours(0, 0, 0, 0);
-  for (var d = startDay.getTime(); d < totalEnd; d += dayMs) {
-    var dayDate = new Date(d);
-    if (d > totalStart && d < totalEnd) {
-      var line = document.createElement('div');
-      line.className = 'tl-day-line';
-      line.style.left = pct(d);
-      track.appendChild(line);
-    }
-    // Day label
-    var dayLabel = document.createElement('div');
-    dayLabel.className = 'tl-day-label';
-    var labelPos = Math.max(d, totalStart);
-    dayLabel.style.left = pct(labelPos + 30 * 60000);
-    var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    dayLabel.textContent = days[dayDate.getDay()];
-    track.appendChild(dayLabel);
+  var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  for (var d = startDay.getTime(); d <= totalEnd; d += dayMs) {
+    var dayDate   = new Date(d);
+    var cellStart = Math.max(d, totalStart);
+    var cellEnd   = Math.min(d + dayMs, totalEnd);
+    if (cellEnd <= cellStart) continue;
+    var dayCell = document.createElement('div');
+    dayCell.className = 'tl-day-cell';
+    dayCell.style.left  = pct(cellStart);
+    dayCell.style.width = ((cellEnd - cellStart) / totalSpan * 100).toFixed(2) + '%';
+    dayCell.textContent = DAYS[dayDate.getDay()];
+    dayStrip.appendChild(dayCell);
   }
 
-  // Time labels on bottom axis — every 2-3 hours
-  var labelInterval = totalSpan > 20 * 3600000 ? 3 * 3600000 : 2 * 3600000;
-  var firstLabel = new Date(totalStart);
-  firstLabel.setMinutes(0, 0, 0);
-  firstLabel.setHours(firstLabel.getHours() + 1);
-  for (var t = firstLabel.getTime(); t < totalEnd; t += labelInterval) {
-    var d2 = new Date(t);
-    var lbl = document.createElement('div');
-    lbl.className = 'tl-time-label';
-    lbl.style.left = pct(t);
-    var h = d2.getHours();
-    var ampm = h >= 12 ? 'pm' : 'am';
-    lbl.textContent = (h % 12 || 12) + ampm;
-    track.appendChild(lbl);
+  // ── PHASE CELLS ──────────────────────────────────────
+  groups.forEach(function(group) {
+    var cell = document.createElement('div');
+    cell.className = 'tl-phase-cell tl-' + group.type;
+
+    // Set flex proportional to duration
+    cell.style.flexGrow = group.durationMins;
+    cell.style.flexBasis = '0';
+
+    var nameEl = document.createElement('div');
+    nameEl.className = 'tl-cell-name';
+    nameEl.textContent = group.label;
+
+    var timeEl = document.createElement('div');
+    timeEl.className = 'tl-cell-time';
+    timeEl.textContent = fmtTime(new Date(group.start));
+
+    var durEl = document.createElement('div');
+    durEl.className = 'tl-cell-dur';
+    durEl.textContent = fmtDuration(group.durationMins);
+
+    cell.appendChild(nameEl);
+    cell.appendChild(timeEl);
+    cell.appendChild(durEl);
+
+    // Custom tooltip — no browser title= attribute
+    cell.addEventListener('mouseenter', function(e) { showTlTooltip(e, group); });
+    cell.addEventListener('mousemove',  function(e) { moveTlTooltip(e); });
+    cell.addEventListener('mouseleave', function()  { hideTlTooltip(); });
+
+    phasesCon.appendChild(cell);
+  });
+
+  // ── TIME STRIP (bottom axis) ──────────────────────────
+  var intervalMs = totalSpan > 18 * 3600000 ? 3 * 3600000 : 2 * 3600000;
+  var firstTick = new Date(totalStart);
+  firstTick.setMinutes(0, 0, 0);
+  if (firstTick.getTime() <= totalStart) firstTick.setHours(firstTick.getHours() + 1);
+  for (var t = firstTick.getTime(); t <= totalEnd; t += intervalMs) {
+    var d2    = new Date(t);
+    var tick  = document.createElement('div');
+    tick.className = 'tl-tick';
+    tick.style.left = pct(t);
+    var h    = d2.getHours();
+    tick.textContent = (h % 12 || 12) + (h >= 12 ? 'pm' : 'am');
+    timeStrip.appendChild(tick);
   }
+}
 
-  // Step bars
-  steps.forEach(function(step) {
-    // Window bar (lighter, behind)
-    if (step.range > 0) {
-      var win = document.createElement('div');
-      win.className = 'tl-window phase-' + step.phase;
-      win.style.left = pct(step.startEarly);
-      win.style.width = widthPct(step.startEarly, step.end + step.range * 60000);
-      track.appendChild(win);
-    }
-    // Main bar
-    var bar = document.createElement('div');
-    bar.className = 'tl-bar phase-' + step.phase;
-    var barStart = step.start;
-    var barEnd   = step.end;
-    if (barEnd <= barStart) barEnd = barStart + 15 * 60000;
-    bar.style.left  = pct(barStart);
-    bar.style.width = widthPct(barStart, barEnd);
-    var label = document.createElement('span');
-    label.className = 'tl-bar-label';
-    label.textContent = step.name;
-    bar.appendChild(label);
-    bar.title = step.name + '\n' + fmtTime(new Date(step.start));
-    track.appendChild(bar);
-  });
-
-  // Legend
-  var legend = document.getElementById('timeline-legend');
-  legend.innerHTML = '';
-  var seenPhases = {};
-  steps.forEach(function(s) { seenPhases[s.phase] = true; });
-  Object.keys(seenPhases).forEach(function(phase) {
-    var item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML =
-      '<div class="legend-swatch phase-' + phase + '"></div>' +
-      (PHASE_NAMES[phase] || phase);
-    legend.appendChild(item);
-  });
+// ── TOOLTIP ───────────────────────────────────────────────────────
+function showTlTooltip(e, group) {
+  if (!tlTooltip) return;
+  var stepNames = group.steps.map(function(s) { return s.name; }).join(', ');
+  tlTooltip.innerHTML =
+    '<div class="tlt-name">' + group.label + '</div>' +
+    '<div class="tlt-time">' + fmtTime(new Date(group.start)) + ' → ' + fmtTime(new Date(group.end)) + '</div>' +
+    '<div class="tlt-dur">' + fmtDuration(group.durationMins) + '</div>' +
+    '<div class="tlt-steps">' + stepNames + '</div>';
+  tlTooltip.classList.add('visible');
+  moveTlTooltip(e);
+}
+function moveTlTooltip(e) {
+  if (!tlTooltip) return;
+  var x = e.clientX + 16;
+  var y = e.clientY - 80;
+  var w = tlTooltip.offsetWidth || 220;
+  if (x + w > window.innerWidth - 8) x = e.clientX - w - 16;
+  if (y < 8) y = e.clientY + 16;
+  tlTooltip.style.left = x + 'px';
+  tlTooltip.style.top  = y + 'px';
+}
+function hideTlTooltip() {
+  if (!tlTooltip) return;
+  tlTooltip.classList.remove('visible');
 }
 
 // ── RENDER STEP CARDS ──────────────────────────────────────────────
@@ -655,7 +647,12 @@ function renderSteps(steps) {
     // Phase bar
     var phaseBar = document.createElement('div');
     phaseBar.className = 'step-phase-bar';
-    phaseBar.style.background = PHASE_COLORS[step.phase] || '#555';
+    var STEP_COLORS = {
+      starter:'#2a4774', mix:'#5a6028', bulk:'#c47a3c',
+      shape:'#5a6e2a', proof:'#3a6a8a', preheat:'#7a3a2a',
+      bake:'#a53020', cool:'#4a4a4a'
+    };
+    phaseBar.style.background = STEP_COLORS[step.phase] || '#555';
     card.appendChild(phaseBar);
 
     // Time column
@@ -886,5 +883,7 @@ function setFromNow() {
 })();
 </script>
 
+
+<script src="/assets/js/components.js"></script>
 </body>
 </html>

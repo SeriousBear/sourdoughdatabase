@@ -73,23 +73,7 @@
 </head>
 <body>
 
-<div class="binding"></div>
-<div class="holes">
-  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
-  <div class="hole"></div><div class="hole"></div><div class="hole"></div>
-</div>
-
-<header>
-  <a href="/" class="logo">The Sourdough Database<span class="dot"></span></a>
-  <nav class="nav">
-    <a href="/">home</a>
-    <a href="/#starters">starters</a>
-    <a href="/#flours">flours</a>
-    <a href="/#tools" class="active">tools</a>
-    <a href="/#journal">journal</a>
-    <a href="/about.html">about</a>
-  </nav>
-</header>
+<div id="site-header"></div>
 
 <main class="atlas-wrap">
 
@@ -245,40 +229,7 @@
 
 </main>
 
-<footer>
-  <div class="foot-grid" style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding:60px 80px 32px;border-bottom:1.5px dashed var(--rule-pink-strong);">
-    <div>
-      <div class="foot-brand">The Sourdough Database</div>
-      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>
-    </div>
-    <div class="foot-col">
-      <h5>The Database</h5>
-      <ul>
-        <li><a href="/#starters">starter index</a></li>
-        <li><a href="/#flours">flours</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h5>Tools</h5>
-      <ul>
-        <li><a href="/tools/hydration.html">hydration solver</a></li>
-        <li><a href="/tools/trouble-atlas.html">trouble atlas</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h5>About</h5>
-      <ul>
-        <li><a href="/about.html">the story</a></li>
-        <li><a href="/privacy.html">privacy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon" style="max-width:1400px;margin:24px auto 0;display:flex;justify-content:space-between;font-family:'Special Elite',monospace;font-size:11px;letter-spacing:0.1em;color:var(--pencil);padding:0 80px 40px;flex-wrap:wrap;gap:12px;">
-    <span>© MMXXVI · The Sourdough Database</span>
-    <span>set in caveat, special elite &amp; crimson pro</span>
-    <span>made with flour on our hands</span>
-  </div>
-</footer>
+<div id="site-footer"></div>
 
 <script>
 // ── Video facade: swap placeholder for real YouTube thumbnail when data-video-id is set ──
@@ -307,5 +258,7 @@
 })();
 </script>
 
+
+<script src="/assets/js/components.js"></script>
 </body>
 </html>
