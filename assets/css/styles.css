@@ -1029,7 +1029,7 @@ footer {
   margin-bottom: 4px;
   cursor: pointer;
   transition: color 0.2s, transform 0.2s;
-  display: inline-block;
+  display: block;
 }
 .foot-col li:hover { color: var(--pen-red); transform: translateX(3px); }
 .colophon {

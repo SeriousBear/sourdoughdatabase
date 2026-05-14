@@ -66,6 +66,7 @@
     '        <li><a href="/tools/hydration.html">hydration solver</a></li>',
     '        <li><a href="/tools/schedule.html">bake schedule</a></li>',
     '        <li><a href="/tools/trouble-atlas.html">trouble atlas</a></li>',
+    '        <li><a href="/tools/crumb-analyzer.html">crumb analyzer</a></li>',
     '      </ul>',
     '    </div>',
     '    <div class="foot-col">',
@@ -78,7 +79,7 @@
     '  </div>',
     '  <div class="colophon">',
     '    <span>\u00a9 MMXXVI \u00b7 The Sourdough Database</span>',
-    '    <span>set in caveat, special elite &amp; crimson pro</span>',
+    '    <span><a href="https://kylewebear.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">a slow-fermented kylewebear.com project</a></span>',
     '    <span>made with flour on our hands</span>',
     '  </div>',
     '</footer>'
