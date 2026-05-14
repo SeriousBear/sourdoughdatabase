@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Crumb Analyzer — The Sourdough Database</title>
+  <meta name="description" content="Match your sourdough crumb to a reference illustration. Find out what happened, why it happened, and how to fix it on the next bake.">
+  <link rel="canonical" href="https://sourdoughdatabase.com/tools/crumb-analyzer.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/tools/crumb-analyzer.html">
+  <meta property="og:title" content="Crumb Analyzer — The Sourdough Database">
+  <meta property="og:description" content="Match your sourdough crumb to a reference. Find out what went wrong and how to fix it.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7TNFRKVWVW');
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sourdough Crumb Analyzer",
+  "description": "Visual reference tool for identifying sourdough proofing levels by crumb structure.",
+  "url": "https://sourdoughdatabase.com/tools/crumb-analyzer.html",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "publisher": {"@id": "https://sourdoughdatabase.com/#organization"}
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sourdoughdatabase.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://sourdoughdatabase.com/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "Crumb Analyzer"}
+  ]
+}
+  </script>
+
+  <style>
+    /* ── CRUMB ANALYZER ─────────────────────────────────────────── */
+
+    .ca-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 80px 100px;
+    }
+
+    /* Page title */
+    .ca-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(56px, 9vw, 96px);
+      font-weight: 700;
+      line-height: 0.9;
+      color: var(--ink);
+      transform: rotate(-1deg);
+      margin-bottom: 10px;
+    }
+    .ca-title em { color: var(--pen-red); font-style: italic; display: block; }
+
+    .ca-subtitle {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 19px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 580px;
+      margin-bottom: 52px;
+    }
+
+    /* Proofing spectrum selector */
+    .ca-spectrum {
+      display: flex;
+      border: 1.5px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      background: var(--paper);
+      margin-bottom: 52px;
+      overflow: hidden;
+    }
+    .ca-sp-item {
+      flex: 1;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      border-right: 1px dashed rgba(165,155,140,0.4);
+      transition: background 0.15s;
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--pencil);
+      line-height: 1.5;
+    }
+    .ca-sp-item:last-child { border-right: none; }
+    .ca-sp-item.active {
+      background: var(--ink);
+      color: #fdf8e3;
+    }
+    .ca-sp-item:hover:not(.active) { background: var(--paper-warm); }
+    .ca-sp-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      margin: 0 auto 6px;
+    }
+
+    /* Annotation zone — polaroid + outside arrows */
+    .ca-annotation-zone {
+      position: relative;
+      min-height: 500px;
+      margin-bottom: 0;
+      background: var(--paper);
+      background-image: repeating-linear-gradient(
+        transparent, transparent 27px,
+        rgba(216,163,163,0.28) 27px, rgba(216,163,163,0.28) 28px
+      );
+      overflow: hidden;
+    }
+
+    /* SVG overlay — arrows live here */
+    .ca-svg-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Annotation text labels */
+    .ca-ann {
+      position: absolute;
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--pen-blue);
+      line-height: 1.4;
+      z-index: 4;
+      pointer-events: none;
+      width: 160px;
+    }
+    .ca-ann.right { text-align: right; }
+
+    /* Polaroid wrapper */
+    .ca-polaroid-wrap {
+      position: absolute;
+      z-index: 2;
+    }
+    .ca-polaroid {
+      background: white;
+      padding: 12px 12px 52px;
+      box-shadow: 4px 8px 28px rgba(40,25,10,0.26), 0 1px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .ca-pol-tape {
+      position: absolute;
+      left: 40px; right: 40px;
+      height: 24px;
+      top: -12px;
+      background: rgba(232,216,120,0.76);
+      transform: rotate(-0.6deg);
+      z-index: 5;
+    }
+    .ca-pol-img {
+      display: block;
+      overflow: hidden;
+    }
+    .ca-pol-img img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ca-pol-caption {
+      text-align: center;
+      padding-top: 12px;
+    }
+    .ca-pol-name {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .ca-pol-stars {
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      color: var(--pen-red);
+      margin-top: 3px;
+    }
+
+    /* Field report card */
+    .ca-field-report {
+      background: #fdf8e3;
+      border: 1.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      margin-top: 52px;
+    }
+    .ca-report-header {
+      background: var(--ink);
+      color: #fdf8e3;
+      padding: 12px 20px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ca-report-id {
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(253,248,227,0.55);
+    }
+    .ca-report-name {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fdf8e3;
+    }
+    .ca-report-stars {
+      font-family: 'Caveat', cursive;
+      font-size: 16px;
+      color: #e8d878;
+      margin-left: auto;
+    }
+
+    .ca-report-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1.5px solid var(--ink);
+    }
+    .ca-report-col {
+      padding: 22px;
+    }
+    .ca-report-col + .ca-report-col {
+      border-left: 1.5px solid var(--ink);
+    }
+
+    .ca-report-section-label {
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--pen-red);
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(165,48,32,0.25);
+      margin-bottom: 12px;
+    }
+    .ca-report-section-label + .ca-report-section-label {
+      margin-top: 18px;
+    }
+    .ca-report-prose {
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink);
+    }
+
+    .ca-steps {
+      list-style: none;
+    }
+    .ca-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 9px 0;
+      border-bottom: 1px dotted rgba(180,140,80,0.4);
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .ca-step:last-child { border-bottom: none; }
+    .ca-step-num {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--pen-blue);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 22px;
+      text-align: center;
+      margin-top: -2px;
+    }
+
+    /* See also footer */
+    .ca-see-also {
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .ca-sa-label {
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--pencil);
+      flex-shrink: 0;
+    }
+    .ca-sa-link {
+      font-family: 'Special Elite', monospace;
+      font-size: 9px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--pen-blue);
+      border: 1.5px solid var(--pen-blue);
+      padding: 5px 12px;
+      text-decoration: none;
+      background: rgba(42,71,116,0.05);
+      transition: background 0.15s;
+    }
+    .ca-sa-link:hover { background: rgba(42,71,116,0.12); }
+    .ca-sa-link.external {
+      color: #5a6e2a;
+      border-color: #5a6e2a;
+      background: rgba(90,110,42,0.05);
+    }
+    .ca-sa-link.external:hover { background: rgba(90,110,42,0.12); }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .ca-wrap { padding: 30px 24px 60px; }
+      .ca-title { font-size: 56px; }
+      .ca-annotation-zone { min-height: 400px; }
+      .ca-report-body { grid-template-columns: 1fr; }
+      .ca-report-col + .ca-report-col { border-left: none; border-top: 1.5px solid var(--ink); }
+    }
+
+    @media print {
+      header, footer, .ca-spectrum, .site-header, .site-footer { display: none; }
+      .ca-field-report { box-shadow: none; border: 1px solid #999; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="ca-wrap">
+
+  <div class="breadcrumb">
+    <a href="/">home</a><span class="sep">/</span>
+    <a href="/#tools">tools</a><span class="sep">/</span>
+    <span>crumb analyzer</span>
+  </div>
+
+  <h1 class="ca-title">
+    Crumb
+    <em>Analyzer.</em>
+  </h1>
+  <p class="ca-subtitle">
+    Cut your loaf. Find the matching reference. Read what happened and how to fix it on the next bake.
+  </p>
+
+  <!-- Spectrum selector -->
+  <div class="ca-spectrum" id="ca-spectrum">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- Annotation zone — polaroid + outside arrows -->
+  <div class="ca-annotation-zone" id="ca-annotation-zone">
+    <svg class="ca-svg-overlay" id="ca-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+    <!-- Polaroid and annotation labels injected by JS -->
+  </div>
+
+  <!-- Field report -->
+  <div class="ca-field-report" id="ca-field-report">
+    <!-- Injected by JS -->
+  </div>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="/assets/js/components.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  THE SOURDOUGH DATABASE — CRUMB ANALYZER
+//  Interactive proofing level reference tool
+// ═══════════════════════════════════════════════════════════════════
+
+// Image paths relative to site root
+var IMG_BASE = '/assets/images/crumb/';
+
+// Polaroid dimensions
+var PW = 280, PH = 225; // photo size (px)
+var PAD = 12, BOT = 52; // padding
+var PTW = PW + PAD * 2;  // polaroid total width
+var PTH = PH + PAD + BOT; // polaroid total height
+
+// These will be computed after first render since we need the container width
+var PX0 = 0, PY0 = 38;
+
+// Specimen data
+var SPECIMENS = [
+  {
+    id: 'nicely-proofed',
+    title: 'Nicely Proofed',
+    stars: '★ ★ ★ ★ ★',
+    rot: -3,
+    img: IMG_BASE + 'nicely-proofed.png',
+    anns: [
+      { t: 'lacy gluten\nnetwork',  ty: 108, side: 'L', eyOffset: 155, cpOffset: 82 },
+      { t: 'even\ndistribution',    ty: 228, side: 'L', eyOffset: 275, cpOffset: 208 },
+      { t: 'large open\nair cells', ty: 78,  side: 'R', eyOffset: 115, cpOffset: 74  },
+      { t: 'good oven\nspring',     ty: 28,  side: 'R', eyOffset: 72,  cpOffset: 34  },
+    ],
+    obs: 'Large, irregular air cells distributed evenly throughout the crumb. Thin, lacy gluten walls between holes. Strong dome with good crust structure — the loaf held its shape and sprang well in the oven.',
+    diag: 'Bulk fermentation completed at the right moment. The yeast produced sufficient gas, the gluten network stayed intact through cold proof, and the structure firmed up before baking.',
+    actionLabel: 'TO REPLICATE',
+    steps: [
+      'Bulk until 50–75% volume increase — jiggly when shaken, domed surface, bubbles visible on sides',
+      'Cold proof 10–14 hours in the fridge immediately after shaping',
+      'Bake straight from cold at 500°F → 450°F, Dutch oven covered 20 min then uncovered 22 min',
+    ],
+    links: [
+      { label: 'Bake Schedule Builder', url: '/tools/schedule.html' },
+      { label: 'Hydration Tool', url: '/tools/hydration.html' },
+      { label: 'The Sourdough Journey ↗', url: 'https://thesourdoughjourney.com', ext: true },
+    ]
+  },
+  {
+    id: 'slightly-underproofed',
+    title: 'Slightly Underproofed',
+    stars: '★ ★ ★ ☆ ☆',
+    rot: 2,
+    img: IMG_BASE + 'slightly-underproofed.png',
+    anns: [
+      { t: 'uneven large\ntunnels',  ty: 88,  side: 'L', eyOffset: 120, cpOffset: 68  },
+      { t: 'dense tight\nbase',      ty: 218, side: 'L', eyOffset: 260, cpOffset: 200 },
+      { t: 'flattened\nprofile',     ty: 30,  side: 'R', eyOffset: 68,  cpOffset: 34  },
+    ],
+    obs: 'A few large, irregular tunnels near the top — but dense, tight crumb near the base. Flattened profile suggests the loaf didn\'t have enough internal structure to hold its dome.',
+    diag: 'Bulk fermentation was cut short. The gluten hadn\'t fully relaxed and the yeast hadn\'t generated enough gas for an even rise. Often a cooler kitchen than expected, or a starter at less than full activity.',
+    actionLabel: 'NEXT BAKE FIX',
+    steps: [
+      'Extend bulk by 30–45 minutes — use the poke test, not the clock',
+      'Verify starter doubles within 4–6 hours of feeding before you mix',
+      'If kitchen is under 70°F, find a warmer spot — fermentation slows significantly below 68°F',
+    ],
+    links: [
+      { label: 'Bake Schedule', url: '/tools/schedule.html' },
+      { label: 'Dense Crumb →', url: '/atlas/dense-crumb.html' },
+      { label: 'Starter Won\'t Rise →', url: '/atlas/starter-not-rising.html' },
+    ]
+  },
+  {
+    id: 'significantly-underproofed',
+    title: 'Significantly Underproofed',
+    stars: '★ ★ ☆ ☆ ☆',
+    rot: -2,
+    img: IMG_BASE + 'significantly-underproofed.png',
+    anns: [
+      { t: 'very few\nair pockets',  ty: 118, side: 'L', eyOffset: 172, cpOffset: 96  },
+      { t: 'low, flat\nrise',        ty: 34,  side: 'R', eyOffset: 70,  cpOffset: 32  },
+    ],
+    obs: 'Very few, very small air pockets. Dense and heavy throughout. Almost no internal structure visible. Likely gummy inside despite a fully baked-looking exterior.',
+    diag: 'Significantly underfermented. The yeast hadn\'t produced sufficient gas and the gluten hadn\'t relaxed enough for the dough to expand in the oven. Common causes: weak or young starter, very cold kitchen, dramatically short bulk.',
+    actionLabel: 'NEXT BAKE FIX',
+    steps: [
+      'Check starter health: should reliably double within 5 hours at 72°F. If not, feed daily for 3+ days before baking again',
+      'Add at least 1–2 hours to bulk fermentation time — this crumb needs significantly more fermentation',
+      'A proofing box or oven with the light on can stabilise fermentation temperature and speed things up',
+    ],
+    links: [
+      { label: 'Starter Won\'t Rise →', url: '/atlas/starter-not-rising.html' },
+      { label: 'Dense Crumb →', url: '/atlas/dense-crumb.html' },
+      { label: 'Bake Schedule', url: '/tools/schedule.html' },
+    ]
+  },
+  {
+    id: 'slightly-overproofed',
+    title: 'Slightly Overproofed',
+    stars: '★ ★ ★ ☆ ☆',
+    rot: 1.5,
+    img: IMG_BASE + 'slightly-overproofed.png',
+    anns: [
+      { t: 'weakening\ngluten walls', ty: 108, side: 'L', eyOffset: 152, cpOffset: 88  },
+      { t: 'merging\ncaverns',        ty: 78,  side: 'R', eyOffset: 115, cpOffset: 74  },
+    ],
+    obs: 'Holes beginning to merge into larger, irregular caverns. Gluten walls are thinning and starting to weaken. The structure is still holding but beginning to degrade. Profile may be slightly flat at the sides.',
+    diag: 'Bulk ran a bit too long, or the kitchen was warmer than expected. The yeast began to exhaust its available food, and accumulated acid started softening the gluten network before baking.',
+    actionLabel: 'NEXT BAKE FIX',
+    steps: [
+      'Reduce bulk by 20–30 minutes — catch it before the holes start merging',
+      'Poke test: an indent should spring back slowly over 2–3 seconds. Too fast = underproofed. Doesn\'t spring = overproofed',
+      'Track kitchen temperature — every 2°F warmer = roughly 15 minutes faster fermentation',
+    ],
+    links: [
+      { label: 'Overproofed Dough →', url: '/atlas/overproofed.html' },
+      { label: 'Too Sour →', url: '/atlas/too-sour.html' },
+      { label: 'Bake Schedule', url: '/tools/schedule.html' },
+    ]
+  },
+  {
+    id: 'significantly-overproofed',
+    title: 'Significantly Overproofed',
+    stars: '★ ☆ ☆ ☆ ☆',
+    rot: -4,
+    img: IMG_BASE + 'significantly-overproofed.png',
+    anns: [
+      { t: 'extreme voids\n+ caverns',   ty: 88,  side: 'L', eyOffset: 128, cpOffset: 68  },
+      { t: 'collapsed\nstructure',       ty: 148, side: 'R', eyOffset: 178, cpOffset: 145 },
+    ],
+    obs: 'Extreme, chaotic caverns throughout. The structure has significantly collapsed — the dough likely spread before baking. A dense, gummy band near the bottom crust is common with this profile.',
+    diag: 'Well past peak fermentation. The yeast exhausted its food supply and accumulated acid degraded the gluten network. Most common with a warm kitchen, a particularly active starter, or bulk that ran 1–2 hours too long.',
+    actionLabel: 'RESCUE + FIX',
+    steps: [
+      'Rescue this loaf: bake immediately from cold. Don\'t let it come to room temperature. Accept a denser crumb',
+      'Next time: cut bulk by 45–60 minutes. Mix with cold water to slow fermentation from the start',
+      'Shape and go straight to the fridge — cold proofing is far more forgiving than room-temperature final proof',
+    ],
+    links: [
+      { label: 'Overproofed Dough →', url: '/atlas/overproofed.html' },
+      { label: 'Flat Loaf →', url: '/atlas/flat-loaf.html' },
+      { label: 'Bake Schedule', url: '/tools/schedule.html' },
+    ]
+  },
+];
+
+// ── RENDERING ──────────────────────────────────────────────────────
+
+var currentIdx = 0;
+
+function getContainerWidth() {
+  var zone = document.getElementById('ca-annotation-zone');
+  return zone ? zone.offsetWidth : 700;
+}
+
+function drawArrow(svg, lx1, ly1, cpx, cpy, ex, ey) {
+  var ddx = ex - cpx, ddy = ey - cpy;
+  var len = Math.sqrt(ddx * ddx + ddy * ddy);
+  ddx /= len; ddy /= len;
+
+  // Shorten path to leave room for arrowhead
+  var pex = ex - 6 * ddx, pey = ey - 6 * ddy;
+
+  var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M' + r(lx1) + ',' + r(ly1) + ' Q' + r(cpx) + ',' + r(cpy) + ' ' + r(pex) + ',' + r(pey));
+  path.setAttribute('stroke', '#2a4774');
+  path.setAttribute('stroke-width', '2');
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(path);
+
+  var tipX = r(ex), tipY = r(ey);
+  var w1x = r(ex - 9 * ddx - 5 * ddy), w1y = r(ey - 9 * ddy + 5 * ddx);
+  var w2x = r(ex - 9 * ddx + 5 * ddy), w2y = r(ey - 9 * ddy - 5 * ddx);
+  var poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  poly.setAttribute('points', w1x + ',' + w1y + ' ' + tipX + ',' + tipY + ' ' + w2x + ',' + w2y);
+  poly.setAttribute('fill', '#2a4774');
+  svg.appendChild(poly);
+}
+
+function r(v) { return Math.round(v * 10) / 10; }
+
+function renderSpecimen(idx) {
+  var d = SPECIMENS[idx];
+  var zone = document.getElementById('ca-annotation-zone');
+  var svg  = document.getElementById('ca-svg');
+
+  // Clear old elements
+  zone.querySelectorAll('.ca-polaroid-wrap, .ca-ann').forEach(function(el) { el.remove(); });
+  svg.innerHTML = '';
+
+  // Compute polaroid position
+  var containerW = zone.offsetWidth || 700;
+  PX0 = Math.round((containerW - PTW) / 2);
+
+  // Polaroid
+  var pw = document.createElement('div');
+  pw.className = 'ca-polaroid-wrap';
+  pw.style.cssText = 'left:' + PX0 + 'px;top:' + PY0 + 'px;transform:rotate(' + d.rot + 'deg);';
+  pw.innerHTML =
+    '<div class="ca-polaroid">' +
+    '<div class="ca-pol-tape"></div>' +
+    '<div class="ca-pol-img" style="width:' + PW + 'px;height:' + PH + 'px;">' +
+    '<img src="' + d.img + '" alt="' + d.title + ' sourdough crumb cross-section"></div>' +
+    '<div class="ca-pol-caption">' +
+    '<div class="ca-pol-name">' + d.title + '</div>' +
+    '<div class="ca-pol-stars">' + d.stars + '</div>' +
+    '</div></div>';
+  zone.appendChild(pw);
+
+  // Annotations
+  d.anns.forEach(function(ann) {
+    var lines = ann.t.split('\n');
+    var div = document.createElement('div');
+    div.className = 'ca-ann' + (ann.side === 'R' ? ' right' : '');
+    if (ann.side === 'L') {
+      div.style.cssText = 'left:8px;top:' + ann.ty + 'px;';
+    } else {
+      div.style.cssText = 'right:8px;top:' + ann.ty + 'px;';
+    }
+    div.innerHTML = lines.join('<br>');
+    zone.appendChild(div);
+
+    // Compute line geometry
+    var lh = lines.length * 23;
+    var midY = ann.ty + lh / 2;
+    var lx1 = ann.side === 'L' ? 172 : containerW - 172;
+    var ex  = ann.side === 'L' ? PX0 : PX0 + PTW;
+    var ey  = PY0 + ann.eyOffset;
+    var cpx = ann.side === 'L' ? 165 : containerW - 165;
+    var cpy = PY0 + ann.cpOffset;
+
+    drawArrow(svg, lx1, midY, cpx, cpy, ex, ey);
+  });
+
+  // Update annotation zone height to fit polaroid
+  var neededH = PY0 + PTH + 40;
+  zone.style.minHeight = Math.max(neededH, 460) + 'px';
+}
+
+function renderSpectrum(idx) {
+  var el = document.getElementById('ca-spectrum');
+  el.innerHTML = SPECIMENS.map(function(s, i) {
+    return '<div class="ca-sp-item' + (i === idx ? ' active' : '') + '" onclick="selectSpecimen(' + i + ')">' +
+      '<div class="ca-sp-dot"></div>' + s.title + '</div>';
+  }).join('');
+}
+
+function renderReport(d) {
+  var stepsHTML = d.steps.map(function(s, i) {
+    return '<li class="ca-step"><span class="ca-step-num">' + (i + 1) + '</span><span>' + s + '</span></li>';
+  }).join('');
+
+  var linksHTML = d.links.map(function(l) {
+    return '<a class="ca-sa-link' + (l.ext ? ' external' : '') + '" href="' + l.url + '"' +
+      (l.ext ? ' target="_blank" rel="noopener"' : '') + '>' + l.label + '</a>';
+  }).join('');
+
+  document.getElementById('ca-field-report').innerHTML =
+    '<div class="ca-report-header">' +
+    '<span class="ca-report-id">Field Report · ' + d.id + '</span>' +
+    '<span class="ca-report-name">' + d.title + '</span>' +
+    '<span class="ca-report-stars">' + d.stars + '</span>' +
+    '</div>' +
+    '<div class="ca-report-body">' +
+    '<div class="ca-report-col">' +
+    '<div class="ca-report-section-label">What you\'re seeing</div>' +
+    '<p class="ca-report-prose">' + d.obs + '</p>' +
+    '<div class="ca-report-section-label" style="margin-top:18px">Why it happened</div>' +
+    '<p class="ca-report-prose">' + d.diag + '</p>' +
+    '</div>' +
+    '<div class="ca-report-col">' +
+    '<div class="ca-report-section-label">' + d.actionLabel + '</div>' +
+    '<ul class="ca-steps">' + stepsHTML + '</ul>' +
+    '</div>' +
+    '</div>' +
+    '<div class="ca-see-also">' +
+    '<span class="ca-sa-label">See also →</span>' +
+    linksHTML +
+    '</div>';
+}
+
+function selectSpecimen(idx) {
+  currentIdx = idx;
+  renderSpecimen(idx);
+  renderSpectrum(idx);
+  renderReport(SPECIMENS[idx]);
+}
+
+// Init
+selectSpecimen(0);
+</script>
+
+</body>
+</html>
