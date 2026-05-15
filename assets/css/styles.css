@@ -5367,3 +5367,44 @@ footer {
   header, footer, .ca-spectrum, .site-header, .site-footer { display: none; }
   .ca-field-report { box-shadow: none; border: 1px solid #999; }
 }
+
+/* Recipe card table (mom's card · three-size layout) */
+.rc-table {
+  width: 100%;
+  margin: 10px 0 14px;
+}
+.rc-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 0 2px;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(216,163,163,0.3);
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.rc-row span:not(:first-child) { text-align: center; }
+.rc-head {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  padding-bottom: 5px;
+  border-bottom: 1.5px solid var(--rule-pink-strong);
+}
+.rc-head span:not(:first-child) { text-align: center; }
+.rc-divider {
+  display: block;
+  border-bottom: none;
+  padding: 1px 0 3px;
+}
+.rc-hydration {
+  border-bottom: none;
+  color: var(--pencil);
+  font-size: 13px;
+  padding-top: 5px;
+  border-top: 1.5px solid var(--rule-pink-strong);
+  margin-top: 2px;
+}
