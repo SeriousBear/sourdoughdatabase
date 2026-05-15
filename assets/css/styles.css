@@ -5368,43 +5368,88 @@ footer {
   .ca-field-report { box-shadow: none; border: 1px solid #999; }
 }
 
-/* Recipe card table (mom's card · three-size layout) */
-.rc-table {
+/* ── Recipe card table (mom's card · three-size layout) ──────── */
+.recipe-card-pinned .rc-table {
   width: 100%;
   margin: 10px 0 14px;
 }
-.rc-row {
+
+/* Column header row */
+.recipe-card-pinned .rc-head {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 0 2px;
-  padding: 3px 0;
-  border-bottom: 1px solid rgba(216,163,163,0.3);
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pen-blue);
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--rule-pink-strong);
+  margin-bottom: 4px;
+}
+.recipe-card-pinned .rc-head span:not(:first-child) { text-align: center; }
+
+/* Ingredient row */
+.recipe-card-pinned .rc-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 0 2px;
   font-family: 'Caveat', cursive;
   font-size: 15px;
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.45;
+  padding: 1px 0;
 }
-.rc-row span:not(:first-child) { text-align: center; }
-.rc-head {
-  font-family: 'Special Elite', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--pencil);
-  padding-bottom: 5px;
-  border-bottom: 1.5px solid var(--rule-pink-strong);
+.recipe-card-pinned .rc-row span:not(:first-child) { text-align: center; }
+
+/* Group container — rows + brace + note side by side */
+.recipe-card-pinned .rc-group {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(216,163,163,0.4);
 }
-.rc-head span:not(:first-child) { text-align: center; }
-.rc-divider {
-  display: block;
-  border-bottom: none;
-  padding: 1px 0 3px;
+.recipe-card-pinned .rc-group-rows {
+  flex: 1;
+  min-width: 0;
 }
-.rc-hydration {
-  border-bottom: none;
-  color: var(--pencil);
+
+/* SVG curly brace — scales to match group height */
+.recipe-card-pinned .rc-brace {
+  width: 12px;
+  flex-shrink: 0;
+  align-self: stretch;
+  height: 100%;
+}
+
+/* Note text to the right of the brace */
+.recipe-card-pinned .rc-group-note {
+  font-family: 'Caveat', cursive;
   font-size: 13px;
-  padding-top: 5px;
-  border-top: 1.5px solid var(--rule-pink-strong);
-  margin-top: 2px;
+  color: var(--pen-blue);
+  line-height: 1.35;
+  width: 68px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
 }
+
+/* Standalone rows (salt, DMP) */
+.recipe-card-pinned .rc-solo {
+  border-bottom: 1px dashed rgba(216,163,163,0.3);
+  padding: 1px 0;
+}
+
+/* Hydration footer */
+.recipe-card-pinned .rc-hydration {
+  border-bottom: none;
+  border-top: 1.5px solid var(--rule-pink-strong);
+  padding-top: 4px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--pencil);
+}
+.recipe-card-pinned .rc-hydration span:not(:first-child) { text-align: center; }
