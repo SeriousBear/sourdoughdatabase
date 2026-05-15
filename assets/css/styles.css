@@ -409,7 +409,7 @@ h1.hero-title .word-3 {
   font-family: 'Special Elite', monospace;
   font-size: 11px;
   color: var(--pencil);
-  margin-top: 6px;
+  margin-top: 15px;
   transform: rotate(2deg);
   letter-spacing: 0.05em;
 }
