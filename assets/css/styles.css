@@ -5453,3 +5453,65 @@ footer {
   color: var(--pencil);
 }
 .recipe-card-pinned .rc-hydration span:not(:first-child) { text-align: center; }
+
+/* ── RECIPE CARD · MOBILE FIX ──────────────────────────────────── */
+@media (max-width: 560px) {
+  .recipe-card-pinned {
+    transform: rotate(-1deg); /* less rotation on small screens */
+    padding: 18px 16px;
+  }
+  .recipe-card-pinned .rc-group {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .recipe-card-pinned .rc-brace {
+    display: none; /* hide SVG brace — note moves below */
+  }
+  .recipe-card-pinned .rc-group-note {
+    width: 100%;
+    font-size: 12px;
+    padding: 3px 0 0 4px;
+    border-top: 1px dashed rgba(42,71,116,0.25);
+    color: var(--pen-blue);
+  }
+  .recipe-card-pinned .rc-row {
+    font-size: 13px;
+  }
+  .recipe-card-pinned .rc-head {
+    font-size: 11px;
+  }
+  .recipe-card-pinned .rc-hydration {
+    font-size: 12px;
+  }
+}
+
+/* ── ARTICLE PAGES · MOBILE FIXES ──────────────────────────────── */
+@media (max-width: 720px) {
+  /* Prevent pull-quote from overflowing on narrow screens */
+  .article-pull-quote {
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  /* Share bar wraps cleanly */
+  .share-bar {
+    gap: 10px;
+    padding: 16px 0;
+  }
+  /* Footer nav stacks on very small screens */
+  .article-footer-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  /* Tool links wrap to single column */
+  .article-tools-links {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  .article-title { font-size: 30px; }
+  .article-body { font-size: 17px; }
+  .article-pull-quote { font-size: 20px; }
+}
