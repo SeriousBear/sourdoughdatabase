@@ -382,21 +382,60 @@
     <h2>Contact</h2>
     <div class="policy-rule"></div>
     <div class="policy-body">
-      <p>For any privacy-related questions, requests, or concerns, contact us:</p>
+      <p>For any privacy-related questions, requests, or concerns, use the form below. We aim to respond within 30 days. For newsletter unsubscribes, use the unsubscribe link at the bottom of any email — it's faster.</p>
     </div>
 
     <div class="contact-block">
       <h3>The Sourdough Database</h3>
       <div class="contact-line">
-        Operated by: Kyle W.<br>
-        Location: New York, NY, United States<br>
-        Email: <a href="mailto:privacy@sourdoughdatabase.com">privacy@sourdoughdatabase.com</a><br>
-        Website: <a href="https://sourdoughdatabase.com">sourdoughdatabase.com</a>
+        Operated by: Kyle W. &nbsp;·&nbsp; New York, NY &nbsp;·&nbsp;
+        <a href="https://sourdoughdatabase.com">sourdoughdatabase.com</a>
       </div>
-    </div>
 
-    <div class="policy-body" style="margin-top:24px;">
-      <p>We aim to respond to all privacy requests within 30 days. For newsletter unsubscribes specifically, use the unsubscribe link at the bottom of any email — it's faster.</p>
+      <form
+        class="privacy-form"
+        name="privacy-contact"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        action="/thanks.html"
+      >
+        <!-- Honeypot — hidden from humans, bots fill it in and get ignored -->
+        <input type="hidden" name="form-name" value="privacy-contact">
+        <p class="privacy-form-honey"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+        <div class="privacy-form-row">
+          <label class="privacy-form-label" for="pf-name">your name</label>
+          <input class="privacy-form-input" id="pf-name" type="text" name="name" required placeholder="First Last">
+        </div>
+
+        <div class="privacy-form-row">
+          <label class="privacy-form-label" for="pf-email">your email</label>
+          <input class="privacy-form-input" id="pf-email" type="email" name="email" required placeholder="you@example.com">
+        </div>
+
+        <div class="privacy-form-row">
+          <label class="privacy-form-label" for="pf-subject">subject</label>
+          <select class="privacy-form-input privacy-form-select" id="pf-subject" name="subject" required>
+            <option value="" disabled selected>— choose one</option>
+            <option>Data access request</option>
+            <option>Data deletion request</option>
+            <option>Newsletter unsubscribe</option>
+            <option>General privacy question</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="privacy-form-row">
+          <label class="privacy-form-label" for="pf-message">message</label>
+          <textarea class="privacy-form-input privacy-form-textarea" id="pf-message" name="message" required placeholder="Tell us what you need."></textarea>
+        </div>
+
+        <div class="privacy-form-footer">
+          <button class="privacy-form-btn" type="submit">send it</button>
+          <span class="privacy-form-note">no account needed · no email exposed · just the form</span>
+        </div>
+      </form>
     </div>
   </section>
 
