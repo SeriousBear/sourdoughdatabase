@@ -73,43 +73,12 @@
     /* ===========================
        SITE HEADER / NAV
     =========================== */
-    .site-header {
-      background: var(--moss-deep);
-      padding: 16px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 3px solid var(--amber);
-    }
 
-    .site-logo {
-      font-family: var(--font-hand);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--cream);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
 
-    .site-logo span { color: var(--amber); }
 
-    .site-nav {
-      display: flex;
-      gap: 24px;
-      list-style: none;
-    }
 
-    .site-nav a {
-      font-family: var(--font-type);
-      font-size: 0.78rem;
-      color: var(--sage-soft);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
 
-    .site-nav a:hover { color: var(--amber); }
+
 
     /* ===========================
        BREADCRUMB
@@ -780,66 +749,15 @@
     /* ===========================
        FOOTER
     =========================== */
-    .site-footer {
-      background: var(--moss-deep);
-      color: var(--sage-soft);
-      padding: 40px 32px 28px;
-      border-top: 3px solid var(--amber);
-    }
 
-    .footer-inner {
-      max-width: var(--max-wide);
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
 
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
 
-    .footer-logo {
-      font-family: var(--font-hand);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--cream);
-    }
 
-    .footer-logo span { color: var(--amber); }
 
-    .footer-nav {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
 
-    .footer-nav a {
-      font-family: var(--font-type);
-      font-size: 0.68rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--sage);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
 
-    .footer-nav a:hover { color: var(--cream); }
 
-    .footer-disclaimer {
-      font-family: var(--font-body);
-      font-size: 0.78rem;
-      font-style: italic;
-      color: var(--sage);
-      max-width: 640px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 16px;
-      line-height: 1.6;
-    }
+
 
     /* ===========================
        SECTION DIVIDER
@@ -909,10 +827,8 @@
       .flour-hero { padding: 36px 20px 32px; }
       .compendium-strip { padding: 10px 20px; }
       .breadcrumb { padding: 12px 20px; }
-      .site-header { padding: 14px 20px; }
-
-      .site-nav { display: none; }
-    }
+  
+      }
 
     @media (max-width: 540px) {
       .flour-title { font-size: 2.4rem; }
@@ -927,18 +843,7 @@
   <!-- ========================
        SITE HEADER
   ========================= -->
-  <header class="site-header">
-    <a href="/index.html" class="site-logo">Sourdough Database<span>.</span></a>
-    <nav>
-      <ul class="site-nav">
-        <li><a href="/recipes.html">Recipes</a></li>
-        <li><a href="/flour-compendium.html">Flour</a></li>
-        <li><a href="/articles.html">Essays</a></li>
-        <li><a href="/tools.html">Tools</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div id="site-header"></div>
 
   <!-- ========================
        BREADCRUMB
@@ -1357,24 +1262,7 @@
   <!-- ========================
        FOOTER
   ========================= -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-logo">Sourdough Database<span>.</span></div>
-        <nav class="footer-nav">
-          <a href="/index.html">Home</a>
-          <a href="/flour-compendium.html">Flour Compendium</a>
-          <a href="/recipes.html">Recipes</a>
-          <a href="/articles.html">Essays</a>
-          <a href="/tools.html">Tools</a>
-          <a href="/contact.html">Contact</a>
-        </nav>
-      </div>
-      <p class="footer-disclaimer">
-        Sourdough Database is a personal project by Kyle W. Some links on this site are Amazon affiliate links — if you buy something through them, I get a small commission at no extra cost to you. It helps keep the lights on and Oso fed. All recommendations are my own.
-      </p>
-    </div>
-  </footer>
+  <div id="site-footer"></div>
 
   <!-- ========================
        SCRIPTS
@@ -1412,5 +1300,7 @@
     barSection && barObserver.observe(barSection);
   </script>
 
+
+<script src="/assets/js/components.js"></script>
 </body>
 </html>
