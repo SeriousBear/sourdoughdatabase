@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Flour Compendium — Sourdough Database</title>
+  <meta name="description" content="A reference for every flour worth knowing in sourdough baking — from everyday bread flour to ancient grains, domestic mills to international imports." />
+  <link rel="canonical" href="https://sourdoughdatabase.com/flour-compendium.html" />
+
+  <meta property="og:title" content="The Flour Compendium — Sourdough Database" />
+  <meta property="og:description" content="Every flour worth knowing for sourdough. Protein content, handling notes, brand recommendations, and where to buy." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Special+Elite&display=swap" rel="stylesheet" />
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
+
+  <!-- NOTE: In the live site, remove this <style> block and ensure
+       all these rules live in assets/css/styles.css instead.
+       They're included here so this file is self-contained for review. -->
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+
+  <style>
+    /* ── tokens ── */
+    :root {
+      --cream: #f3ecdc; --cream-2: #ece4cf; --paper: #faf5e8;
+      --moss: #2d4a2b; --moss-deep: #1f3520;
+      --sage: #8a9a7b; --sage-soft: #c5cdb4;
+      --amber: #c8842c; --amber-deep: #9a5d1c;
+      --bark: #3d2e1f; --ink: #1d1a14;
+      --rule: rgba(29,26,20,0.18);
+      --pen-blue: #2a3f6f; --pen-red: #8b2020;
+      --font-hand: 'Caveat', cursive;
+      --font-type: 'Special Elite', cursive;
+      --font-body: 'Crimson Pro', serif;
+      --max-wide: 1000px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.7;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--amber-deep); }
+
+    /* ── site header ── */
+    .site-header {
+      background: var(--moss-deep); padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 3px solid var(--amber);
+    }
+    .site-logo { font-family: var(--font-hand); font-size: 1.6rem; font-weight: 700; color: var(--cream); text-decoration: none; }
+    .site-logo span { color: var(--amber); }
+    .site-nav { display: flex; gap: 24px; list-style: none; }
+    .site-nav a { font-family: var(--font-type); font-size: 0.78rem; color: var(--sage-soft); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .site-nav a:hover, .site-nav a.active { color: var(--amber); }
+
+    /* ── breadcrumb ── */
+    .breadcrumb { padding: 14px 32px; border-bottom: 1px solid var(--rule); background: var(--paper); }
+    .breadcrumb-inner { max-width: var(--max-wide); margin: 0 auto; font-family: var(--font-type); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--sage); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+    .breadcrumb-inner a { color: var(--sage); text-decoration: none; }
+    .breadcrumb-inner a:hover { color: var(--amber); }
+    .breadcrumb-inner .sep { color: var(--rule); }
+
+    /* ── page hero ── */
+    .page-hero {
+      background: var(--moss-deep);
+      padding: 64px 32px 56px;
+      border-bottom: 3px solid var(--amber);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: 'FLOUR';
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-hand); font-size: 14rem; font-weight: 700;
+      color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none;
+      white-space: nowrap;
+    }
+    .page-hero-inner { max-width: var(--max-wide); margin: 0 auto; position: relative; }
+    .page-hero-eyebrow { font-family: var(--font-type); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; display: block; }
+    .page-hero-title { font-family: var(--font-hand); font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; color: var(--cream); line-height: 1; margin-bottom: 16px; }
+    .page-hero-sub { font-family: var(--font-body); font-size: 1.1rem; font-style: italic; color: var(--sage-soft); max-width: 580px; line-height: 1.6; }
+
+    /* ── main wrapper ── */
+    .compendium-wrapper { max-width: var(--max-wide); margin: 0 auto; padding: 56px 32px 80px; }
+
+    /* ── intro prose ── */
+    .compendium-intro { max-width: 660px; margin-bottom: 56px; }
+    .compendium-intro p { color: var(--bark); margin-bottom: 16px; font-size: 1rem; }
+    .compendium-intro p:last-child { margin-bottom: 0; }
+
+    /* ── section heading ── */
+    .section-heading {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .section-heading h2 { font-family: var(--font-hand); font-size: 1.6rem; font-weight: 700; color: var(--moss-deep); }
+    .section-heading::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    /* ── flour grid ── */
+    .flour-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+
+    /* ── flour card ── */
+    .flour-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.2s;
+      position: relative;
+    }
+    .flour-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(29,26,20,0.12);
+      color: inherit;
+    }
+    .flour-card.active { border-color: var(--moss); border-width: 2px; }
+    .flour-card.coming-soon { opacity: 0.65; cursor: default; pointer-events: none; }
+
+    .flour-card-bar { height: 4px; background: var(--moss); }
+    .flour-card-bar.amber { background: var(--amber); }
+    .flour-card-bar.sage  { background: var(--sage); }
+    .flour-card-bar.red   { background: var(--pen-red); }
+    .flour-card-bar.blue  { background: var(--pen-blue); }
+
+    .flour-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+
+    .flour-card-number {
+      font-family: var(--font-type); font-size: 0.6rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 8px;
+    }
+    .flour-card-name {
+      font-family: var(--font-hand); font-size: 1.5rem; font-weight: 700;
+      color: var(--moss-deep); line-height: 1.1; margin-bottom: 4px;
+    }
+    .flour-card-alt {
+      font-family: var(--font-body); font-size: 0.82rem; font-style: italic;
+      color: var(--sage); margin-bottom: 12px;
+    }
+    .flour-card-desc {
+      font-family: var(--font-body); font-size: 0.9rem; color: var(--bark);
+      line-height: 1.55; flex: 1; margin-bottom: 16px;
+    }
+    .flour-card-stats {
+      display: flex; gap: 16px;
+      border-top: 1px dashed var(--rule); padding-top: 14px; margin-top: auto;
+    }
+    .fstat { display: flex; flex-direction: column; }
+    .fstat-label { font-family: var(--font-type); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage); }
+    .fstat-value { font-family: var(--font-hand); font-size: 1rem; font-weight: 700; color: var(--moss-deep); }
+
+    .flour-card-cta {
+      font-family: var(--font-type); font-size: 0.65rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--amber-deep);
+      padding: 10px 20px; border-top: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .flour-card-cta .arrow { font-size: 1rem; }
+    .coming-label {
+      font-family: var(--font-type); font-size: 0.65rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--sage);
+      padding: 10px 20px; border-top: 1px solid var(--rule);
+    }
+
+    /* active badge */
+    .live-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--moss); color: var(--cream);
+      font-family: var(--font-type); font-size: 0.58rem; letter-spacing: 0.07em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 3px;
+    }
+
+    /* ── quick reference table ── */
+    .ref-table-wrap { overflow-x: auto; margin-bottom: 64px; }
+    .ref-table {
+      width: 100%; border-collapse: collapse;
+      font-family: var(--font-body); font-size: 0.9rem;
+      min-width: 600px;
+    }
+    .ref-table th {
+      font-family: var(--font-type); font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--sage);
+      padding: 10px 14px; text-align: left;
+      background: var(--cream-2); border-bottom: 2px solid var(--rule);
+    }
+    .ref-table td { padding: 11px 14px; border-bottom: 1px solid var(--rule); color: var(--bark); vertical-align: middle; }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-table tr:hover td { background: rgba(45,74,43,0.03); }
+    .ref-table .flour-link { font-weight: 600; color: var(--moss-deep); text-decoration: none; }
+    .ref-table .flour-link:hover { color: var(--amber-deep); text-decoration: underline; }
+    .ref-table .flour-link.inactive { color: var(--bark); font-weight: 400; }
+    .diff-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+    .diff-easy   { background: var(--moss); }
+    .diff-med    { background: var(--amber); }
+    .diff-hard   { background: var(--pen-red); }
+
+    /* ── about section ── */
+    .about-strip {
+      background: var(--moss-deep); border-radius: 8px;
+      padding: 36px 40px; color: var(--sage-soft);
+      margin-bottom: 56px;
+    }
+    .about-strip h3 { font-family: var(--font-hand); font-size: 1.4rem; color: var(--cream); margin-bottom: 12px; }
+    .about-strip p { font-family: var(--font-body); font-size: 0.95rem; line-height: 1.65; margin-bottom: 10px; }
+    .about-strip p:last-child { margin-bottom: 0; }
+    .about-strip em { color: var(--amber); font-style: italic; }
+    .about-strip a { color: var(--sage-soft); }
+
+    /* ── footer ── */
+    .site-footer { background: var(--moss-deep); color: var(--sage-soft); padding: 40px 32px 28px; border-top: 3px solid var(--amber); }
+    .footer-inner { max-width: var(--max-wide); margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { font-family: var(--font-hand); font-size: 1.3rem; font-weight: 700; color: var(--cream); }
+    .footer-logo span { color: var(--amber); }
+    .footer-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-nav a { font-family: var(--font-type); font-size: 0.68rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--sage); text-decoration: none; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--cream); }
+    .footer-disclaimer { font-family: var(--font-body); font-size: 0.78rem; font-style: italic; color: var(--sage); max-width: 640px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; line-height: 1.6; }
+
+    /* ── responsive ── */
+    @media (max-width: 760px) {
+      .site-header { padding: 14px 20px; }
+      .site-nav { display: none; }
+      .breadcrumb { padding: 12px 20px; }
+      .page-hero { padding: 44px 20px 36px; }
+      .compendium-wrapper { padding: 36px 20px 60px; }
+      .about-strip { padding: 24px 24px; }
+      .flour-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "The Flour Compendium",
+    "description": "A reference for every flour worth knowing in sourdough baking.",
+    "url": "https://sourdoughdatabase.com/flour-compendium.html",
+    "isPartOf": { "@id": "https://sourdoughdatabase.com/#website" },
+    "inLanguage": "en-US"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="/index.html" class="site-logo">Sourdough Database<span>.</span></a>
+    <nav><ul class="site-nav">
+      <li><a href="/recipes.html">Recipes</a></li>
+      <li><a href="/flour-compendium.html" class="active">Flour</a></li>
+      <li><a href="/journal/" >Essays</a></li>
+      <li><a href="/tools/">Tools</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="/index.html">Home</a>
+      <span class="sep">›</span>
+      <span>Flour Compendium</span>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-eyebrow">Reference</span>
+      <h1 class="page-hero-title">The Flour Compendium</h1>
+      <p class="page-hero-sub">Everything flour in sourdough baking — protein content, handling notes, where it comes from, and where to get it.</p>
+    </div>
+  </div>
+
+  <div class="compendium-wrapper">
+
+    <!-- Intro -->
+    <div class="compendium-intro">
+      <p>Flour is the ingredient with the most variables and the least plain-language documentation. Bags are labeled in different systems, protein percentages aren't always printed, and "strong flour" means something different in the UK than it does in the US.</p>
+      <p>This compendium works through each flour one at a time: what it is, how it behaves, what to watch out for, and which brands are worth buying. Starting with the flours most home bakers actually use, then moving into the more interesting corners.</p>
+    </div>
+
+    <!-- The flours -->
+    <div class="section-heading"><h2>The Flours</h2></div>
+
+    <div class="flour-grid">
+
+      <!-- 01 White Bread Flour — LIVE -->
+      <a href="/flour/white-bread-flour.html" class="flour-card active">
+        <span class="live-badge">Live</span>
+        <div class="flour-card-bar"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 01</div>
+          <div class="flour-card-name">White Bread Flour</div>
+          <div class="flour-card-alt">also: strong white, baker's flour</div>
+          <div class="flour-card-desc">The starting point. High protein, strong gluten, forgiving to work with. The flour that most sourdough habits are built on.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">11–14%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">68–85%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Beginner</span></div>
+          </div>
+        </div>
+        <div class="flour-card-cta">Read the entry <span class="arrow">→</span></div>
+      </a>
+
+      <!-- 02 Whole Wheat — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar sage"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 02</div>
+          <div class="flour-card-name">Whole Wheat</div>
+          <div class="flour-card-alt">also: wholemeal, whole grain</div>
+          <div class="flour-card-desc">More flavor, more nutrition, more water absorption, denser crumb. Usually blended with bread flour for the best balance of taste and structure.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">13–15%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">72–82%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Intermediate</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+      <!-- 03 Rye — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar amber"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 03</div>
+          <div class="flour-card-name">Rye</div>
+          <div class="flour-card-alt">also: dark rye, light rye, pumpernickel</div>
+          <div class="flour-card-desc">The starter supercharger. Packed with wild yeasts and fermentable sugars. Sticky to work with, but the flavor payoff is enormous.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">~13%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">70–80%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Intermediate</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+      <!-- 04 Spelt — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar blue"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 04</div>
+          <div class="flour-card-name">Spelt</div>
+          <div class="flour-card-alt">also: dinkel wheat</div>
+          <div class="flour-card-desc">Nutty, slightly sweet, with fragile gluten that requires a lighter touch. Excellent blended at 20–30% with bread flour for flavor without the structural risk.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">10–12%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">68–76%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Intermediate</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+      <!-- 05 Einkorn — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar red"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 05</div>
+          <div class="flour-card-name">Einkorn</div>
+          <div class="flour-card-alt">the oldest wheat</div>
+          <div class="flour-card-desc">One of the oldest cultivated grains on earth. Golden, earthy, and technically demanding — the gluten behaves differently than anything modern. Worth the patience.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">~10%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">60–70%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Advanced</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+      <!-- 06 Khorasan — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar amber"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 06</div>
+          <div class="flour-card-name">Khorasan</div>
+          <div class="flour-card-alt">also: Kamut®</div>
+          <div class="flour-card-desc">An ancient Egyptian grain with a rich, buttery flavor and high protein, but extensible rather than elastic gluten. Blends beautifully with bread flour.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">14–15%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">68–78%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Intermediate</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+      <!-- 07 Tipo 00 — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar sage"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 07</div>
+          <div class="flour-card-name">Tipo 00</div>
+          <div class="flour-card-alt">Italian classification, not a single flour</div>
+          <div class="flour-card-desc">Finely milled Italian flour. At high protein (Manitoba, 13%+), it's a cult flour for high-hydration sourdough. At lower protein, it's strictly for pizza and pasta.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">11–13%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">72–85%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Intermediate</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+      <!-- 08 T65 French — coming soon -->
+      <div class="flour-card coming-soon">
+        <div class="flour-card-bar blue"></div>
+        <div class="flour-card-body">
+          <div class="flour-card-number">No. 08</div>
+          <div class="flour-card-name">T65 French</div>
+          <div class="flour-card-alt">farine de blé T65</div>
+          <div class="flour-card-desc">The flour of the French boulangerie. Lower protein than US bread flour, but a mineral complexity that's hard to replicate. Imported or milled domestically to spec.</div>
+          <div class="flour-card-stats">
+            <div class="fstat"><span class="fstat-label">Protein</span><span class="fstat-value">11–12%</span></div>
+            <div class="fstat"><span class="fstat-label">Hydration</span><span class="fstat-value">70–78%</span></div>
+            <div class="fstat"><span class="fstat-label">Difficulty</span><span class="fstat-value">Intermediate</span></div>
+          </div>
+        </div>
+        <div class="coming-label">Entry coming soon</div>
+      </div>
+
+    </div><!-- /flour-grid -->
+
+    <!-- Quick reference table -->
+    <div class="section-heading"><h2>Quick Reference</h2></div>
+
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Flour</th>
+            <th>Protein</th>
+            <th>Gluten</th>
+            <th>Typical Hydration</th>
+            <th>Best Used As</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="/flour/white-bread-flour.html" class="flour-link">White Bread Flour</a></td>
+            <td>11–14%</td>
+            <td>Strong / elastic</td>
+            <td>68–85%</td>
+            <td>Base flour</td>
+            <td><span class="diff-dot diff-easy"></span>Beginner</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">Whole Wheat</span></td>
+            <td>13–15%</td>
+            <td>Strong, bran disrupts</td>
+            <td>72–82%</td>
+            <td>Blend 20–50%</td>
+            <td><span class="diff-dot diff-med"></span>Intermediate</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">Rye</span></td>
+            <td>~13%*</td>
+            <td>Weak / sticky</td>
+            <td>70–80%</td>
+            <td>Blend 5–20%</td>
+            <td><span class="diff-dot diff-med"></span>Intermediate</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">Spelt</span></td>
+            <td>10–12%</td>
+            <td>Fragile / extensible</td>
+            <td>68–76%</td>
+            <td>Blend 20–30%</td>
+            <td><span class="diff-dot diff-med"></span>Intermediate</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">Einkorn</span></td>
+            <td>~10%</td>
+            <td>Weak, unique structure</td>
+            <td>60–70%</td>
+            <td>Blend 25–40%</td>
+            <td><span class="diff-dot diff-hard"></span>Advanced</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">Khorasan</span></td>
+            <td>14–15%</td>
+            <td>High but extensible</td>
+            <td>68–78%</td>
+            <td>Blend 20–30%</td>
+            <td><span class="diff-dot diff-med"></span>Intermediate</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">Tipo 00 (Manitoba)</span></td>
+            <td>11–13%</td>
+            <td>Strong / fine</td>
+            <td>72–85%</td>
+            <td>Base or blend</td>
+            <td><span class="diff-dot diff-med"></span>Intermediate</td>
+          </tr>
+          <tr>
+            <td><span class="flour-link inactive">T65 French</span></td>
+            <td>11–12%</td>
+            <td>Moderate / mineral</td>
+            <td>70–78%</td>
+            <td>Base flour</td>
+            <td><span class="diff-dot diff-med"></span>Intermediate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- About strip -->
+    <div class="about-strip">
+      <h3>How this compendium works</h3>
+      <p>Each entry covers one flour in full: what it is, how its protein and gluten behave, how it handles in a real sourdough process, which brands are worth buying (with links where possible), and how it's classified across different countries.</p>
+      <p>Where a flour is available on Amazon, you'll find an affiliate link — it's how the site sustains itself. <em>Every recommendation is based on what actually gets used here.</em> No sponsored placements. If a flour doesn't show up in these entries, it either hasn't been tested enough to write about honestly, or it's coming in a future update.</p>
+      <p>The table above is a quick lookup. The individual entries are where the real explanation lives. Start with <a href="/flour/white-bread-flour.html">White Bread Flour</a> if you're new to this.</p>
+    </div>
+
+    <!-- AdSense bottom -->
+    <div style="text-align:center; border-top: 1px dashed var(--rule); padding-top: 24px;">
+      <div style="font-family:var(--font-type);font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage-soft);margin-bottom:8px;">Advertisement</div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-8428061506404633"
+           data-ad-slot="auto"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+  </div><!-- /compendium-wrapper -->
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo">Sourdough Database<span>.</span></div>
+        <nav class="footer-nav">
+          <a href="/index.html">Home</a>
+          <a href="/flour-compendium.html">Flour Compendium</a>
+          <a href="/journal/">Essays</a>
+          <a href="/tools/">Tools</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="footer-disclaimer">Sourdough Database is a personal project by Kyle W. Some links on this site are Amazon affiliate links — if you buy through them, I get a small commission at no extra cost to you. All recommendations are my own.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>White Bread Flour — The Flour Compendium | Sourdough Database</title>
+  <meta name="description" content="Everything you need to know about white bread flour for sourdough baking — protein content, handling tips, and where to buy it." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="White Bread Flour — The Flour Compendium | Sourdough Database" />
+  <meta property="og:description" content="The workhorse of sourdough. High protein, reliable gluten development, and a forgiving temperament. Start here." />
+  <meta property="og:type" content="article" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Special+Elite&display=swap" rel="stylesheet" />
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
+
+  <style>
+    /* ===========================
+       DESIGN TOKENS
+    =========================== */
+    :root {
+      --cream:       #f3ecdc;
+      --cream-2:     #ece4cf;
+      --paper:       #faf5e8;
+      --moss:        #2d4a2b;
+      --moss-deep:   #1f3520;
+      --sage:        #8a9a7b;
+      --sage-soft:   #c5cdb4;
+      --amber:       #c8842c;
+      --amber-deep:  #9a5d1c;
+      --bark:        #3d2e1f;
+      --ink:         #1d1a14;
+      --rule:        rgba(29,26,20,0.18);
+
+      /* sourdough database specifics */
+      --pen-blue:    #2a3f6f;
+      --pen-red:     #8b2020;
+
+      --font-hand:   'Caveat', cursive;
+      --font-type:   'Special Elite', cursive;
+      --font-body:   'Crimson Pro', serif;
+
+      --max-prose:   680px;
+      --max-wide:    980px;
+    }
+
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.7;
+      /* paper grain */
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--amber-deep); }
+
+    /* ===========================
+       SITE HEADER / NAV
+    =========================== */
+    .site-header {
+      background: var(--moss-deep);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--amber);
+    }
+
+    .site-logo {
+      font-family: var(--font-hand);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .site-logo span { color: var(--amber); }
+
+    .site-nav {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .site-nav a {
+      font-family: var(--font-type);
+      font-size: 0.78rem;
+      color: var(--sage-soft);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .site-nav a:hover { color: var(--amber); }
+
+    /* ===========================
+       BREADCRUMB
+    =========================== */
+    .breadcrumb {
+      padding: 14px 32px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper);
+    }
+
+    .breadcrumb-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      font-family: var(--font-type);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--sage);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .breadcrumb-inner a { color: var(--sage); text-decoration: none; }
+    .breadcrumb-inner a:hover { color: var(--amber); }
+    .breadcrumb-inner .sep { color: var(--rule); }
+
+    /* ===========================
+       COMPENDIUM INDEX STRIP
+    =========================== */
+    .compendium-strip {
+      background: var(--moss);
+      padding: 10px 32px;
+      overflow-x: auto;
+    }
+
+    .compendium-strip-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .compendium-strip-label {
+      font-family: var(--font-hand);
+      font-size: 0.85rem;
+      color: var(--sage-soft);
+      white-space: nowrap;
+      margin-right: 6px;
+    }
+
+    .flour-pill {
+      font-family: var(--font-type);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+      white-space: nowrap;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .flour-pill.active {
+      background: var(--amber);
+      color: var(--moss-deep);
+    }
+
+    .flour-pill.inactive {
+      background: rgba(255,255,255,0.08);
+      color: var(--sage-soft);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .flour-pill.inactive:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--cream);
+    }
+
+    /* ===========================
+       HERO BLOCK
+    =========================== */
+    .flour-hero {
+      background: var(--paper);
+      border-bottom: 2px solid var(--rule);
+      padding: 56px 32px 48px;
+    }
+
+    .flour-hero-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .flour-label {
+      font-family: var(--font-type);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .flour-title {
+      font-family: var(--font-hand);
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 700;
+      color: var(--moss-deep);
+      line-height: 1.05;
+      margin-bottom: 6px;
+    }
+
+    .flour-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--bark);
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+
+    .flour-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-family: var(--font-type);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    .tag-green { background: rgba(45,74,43,0.12); color: var(--moss); border: 1px solid rgba(45,74,43,0.2); }
+    .tag-amber { background: rgba(200,132,44,0.12); color: var(--amber-deep); border: 1px solid rgba(200,132,44,0.25); }
+    .tag-blue  { background: rgba(42,63,111,0.1); color: var(--pen-blue); border: 1px solid rgba(42,63,111,0.18); }
+
+    /* STAT CARD cluster */
+    .flour-stat-card {
+      background: var(--cream-2);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 28px 24px;
+      min-width: 200px;
+      /* slight rotation */
+      transform: rotate(1.2deg);
+      box-shadow: 4px 4px 0 rgba(29,26,20,0.08);
+    }
+
+    .stat-card-header {
+      font-family: var(--font-hand);
+      font-size: 0.85rem;
+      color: var(--sage);
+      margin-bottom: 16px;
+      border-bottom: 1px dashed var(--rule);
+      padding-bottom: 8px;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 14px;
+    }
+
+    .stat-row:last-child { margin-bottom: 0; }
+
+    .stat-label {
+      font-family: var(--font-type);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+
+    .stat-value {
+      font-family: var(--font-hand);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+      line-height: 1.1;
+    }
+
+    .stat-value.highlight { color: var(--pen-red); }
+
+    /* ===========================
+       MAIN CONTENT LAYOUT
+    =========================== */
+    .content-wrapper {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ===========================
+       PROSE BODY
+    =========================== */
+    .flour-prose h2 {
+      font-family: var(--font-hand);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+      margin: 44px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .flour-prose h2:first-child { margin-top: 0; }
+
+    .flour-prose h3 {
+      font-family: var(--font-type);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pen-blue);
+      margin: 28px 0 8px;
+    }
+
+    .flour-prose p {
+      margin-bottom: 18px;
+      max-width: var(--max-prose);
+      font-size: 1rem;
+      color: var(--bark);
+    }
+
+    .flour-prose p em {
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .flour-prose strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Handwritten pull-note */
+    .hand-note {
+      font-family: var(--font-hand);
+      font-size: 1.15rem;
+      color: var(--pen-blue);
+      background: rgba(42,63,111,0.05);
+      border-left: 3px solid var(--pen-blue);
+      padding: 14px 20px;
+      margin: 28px 0;
+      border-radius: 0 4px 4px 0;
+      max-width: var(--max-prose);
+    }
+
+    /* Red pen annotation */
+    .red-note {
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      color: var(--pen-red);
+      margin: -8px 0 20px;
+      padding-left: 4px;
+      max-width: var(--max-prose);
+    }
+
+    /* Protein bar visual */
+    .protein-bar-group {
+      margin: 28px 0;
+      max-width: var(--max-prose);
+    }
+
+    .protein-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .pbar-label {
+      font-family: var(--font-type);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      width: 140px;
+      flex-shrink: 0;
+      color: var(--bark);
+    }
+
+    .pbar-track {
+      flex: 1;
+      height: 10px;
+      background: var(--cream-2);
+      border-radius: 5px;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .pbar-fill {
+      height: 100%;
+      border-radius: 5px;
+      background: var(--moss);
+      transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .pbar-fill.amber { background: var(--amber); }
+    .pbar-fill.sage  { background: var(--sage); }
+
+    .pbar-pct {
+      font-family: var(--font-hand);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--moss);
+      width: 40px;
+      text-align: right;
+    }
+
+    /* Handling tip grid */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0 28px;
+      max-width: var(--max-prose);
+    }
+
+    .tip-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 5px;
+      padding: 16px;
+    }
+
+    .tip-card-icon {
+      font-family: var(--font-hand);
+      font-size: 1.4rem;
+      color: var(--amber);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tip-card-title {
+      font-family: var(--font-type);
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 5px;
+    }
+
+    .tip-card p {
+      font-size: 0.9rem;
+      margin: 0;
+      color: var(--bark);
+    }
+
+    /* Brand table */
+    .brand-table {
+      width: 100%;
+      max-width: var(--max-prose);
+      border-collapse: collapse;
+      margin: 20px 0 32px;
+      font-size: 0.92rem;
+    }
+
+    .brand-table th {
+      font-family: var(--font-type);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .brand-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--bark);
+      vertical-align: top;
+    }
+
+    .brand-table tr:last-child td { border-bottom: none; }
+
+    .brand-table .brand-name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .brand-table .availability-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .dot-green { background: var(--moss); }
+    .dot-amber { background: var(--amber); }
+    .dot-grey  { background: var(--sage-soft); }
+
+    /* ===========================
+       AD PLACEMENT
+    =========================== */
+    .ad-break {
+      margin: 40px 0;
+      max-width: var(--max-prose);
+      text-align: center;
+      border-top: 1px dashed var(--rule);
+      border-bottom: 1px dashed var(--rule);
+      padding: 20px 0;
+    }
+
+    .ad-break-label {
+      font-family: var(--font-type);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage-soft);
+      margin-bottom: 8px;
+    }
+
+    /* ===========================
+       SIDEBAR
+    =========================== */
+    .sidebar { position: sticky; top: 32px; }
+
+    /* Buy card */
+    .buy-card {
+      background: var(--paper);
+      border: 2px solid var(--moss);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 4px 4px 0 rgba(45,74,43,0.15);
+    }
+
+    .buy-card-header {
+      background: var(--moss);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .buy-card-header-title {
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      color: var(--cream);
+    }
+
+    .buy-card-header-badge {
+      font-family: var(--font-type);
+      font-size: 0.62rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .buy-card-body { padding: 18px; }
+
+    .buy-card-brand {
+      font-family: var(--font-type);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 4px;
+    }
+
+    .buy-card-product {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .buy-card-desc {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--bark);
+      margin-bottom: 14px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .buy-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+
+    .meta-row .k { font-family: var(--font-type); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sage); }
+    .meta-row .v { font-family: var(--font-body); font-weight: 600; color: var(--ink); }
+
+    .buy-btn {
+      display: block;
+      width: 100%;
+      background: var(--amber);
+      color: var(--moss-deep);
+      font-family: var(--font-hand);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-bottom: 8px;
+    }
+
+    .buy-btn:hover {
+      background: var(--amber-deep);
+      color: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    .buy-btn-note {
+      font-family: var(--font-type);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .buy-divider {
+      border: none;
+      border-top: 1px dashed var(--rule);
+      margin: 12px 0;
+    }
+
+    .alt-buy {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--bark);
+      margin-bottom: 5px;
+    }
+
+    .alt-buy a {
+      color: var(--pen-blue);
+    }
+
+    /* On the table card */
+    .table-card {
+      background: var(--cream-2);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+
+    .table-card-title {
+      font-family: var(--font-hand);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--rule);
+    }
+
+    .table-card-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .table-card-list li {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--bark);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(29,26,20,0.07);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .table-card-list li:last-child { border-bottom: none; }
+
+    .li-dot {
+      color: var(--amber);
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    /* Compendium nav card */
+    .nav-card {
+      background: var(--moss-deep);
+      border-radius: 6px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+
+    .nav-card-title {
+      font-family: var(--font-hand);
+      font-size: 0.9rem;
+      color: var(--sage-soft);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-card-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav-card-list li {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-card-list li:last-child { border-bottom: none; }
+
+    .nav-card-list a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--sage-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-card-list a:hover { color: var(--cream); }
+
+    .nav-card-list li.current a {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .nav-badge {
+      font-family: var(--font-type);
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .nb-active  { background: rgba(200,132,44,0.25); color: var(--amber); }
+    .nb-soon    { background: rgba(255,255,255,0.06); color: var(--sage); }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    .site-footer {
+      background: var(--moss-deep);
+      color: var(--sage-soft);
+      padding: 40px 32px 28px;
+      border-top: 3px solid var(--amber);
+    }
+
+    .footer-inner {
+      max-width: var(--max-wide);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-hand);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      font-family: var(--font-type);
+      font-size: 0.68rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: var(--cream); }
+
+    .footer-disclaimer {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--sage);
+      max-width: 640px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ===========================
+       SECTION DIVIDER
+    =========================== */
+    .section-rule {
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0;
+      max-width: var(--max-prose);
+    }
+
+    .section-rule::before,
+    .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .section-rule-mark {
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    /* ===========================
+       SCROLL REVEAL
+    =========================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 860px) {
+      .flour-hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .flour-stat-card {
+        transform: none;
+        width: 100%;
+        max-width: 340px;
+      }
+
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        padding: 32px 20px 60px;
+      }
+
+      .sidebar { position: static; }
+      .buy-card { max-width: 480px; }
+
+      .tips-grid { grid-template-columns: 1fr; }
+
+      .flour-hero { padding: 36px 20px 32px; }
+      .compendium-strip { padding: 10px 20px; }
+      .breadcrumb { padding: 12px 20px; }
+      .site-header { padding: 14px 20px; }
+
+      .site-nav { display: none; }
+    }
+
+    @media (max-width: 540px) {
+      .flour-title { font-size: 2.4rem; }
+      .brand-table { font-size: 0.82rem; }
+      .brand-table th, .brand-table td { padding: 8px 8px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================
+       SITE HEADER
+  ========================= -->
+  <header class="site-header">
+    <a href="/index.html" class="site-logo">Sourdough Database<span>.</span></a>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="/recipes.html">Recipes</a></li>
+        <li><a href="/flour-compendium.html">Flour</a></li>
+        <li><a href="/articles.html">Essays</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ========================
+       BREADCRUMB
+  ========================= -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="/index.html">Home</a>
+      <span class="sep">›</span>
+      <a href="/flour-compendium.html">Flour Compendium</a>
+      <span class="sep">›</span>
+      <span>White Bread Flour</span>
+    </div>
+  </div>
+
+  <!-- ========================
+       COMPENDIUM NAVIGATION STRIP
+  ========================= -->
+  <div class="compendium-strip">
+    <div class="compendium-strip-inner">
+      <span class="compendium-strip-label">The Flours →</span>
+      <a href="/flour/white-bread-flour.html" class="flour-pill active">White Bread</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">Whole Wheat</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">Rye</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">Spelt</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">Einkorn</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">Khorasan</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">Tipo 00</a>
+      <a href="/flour-compendium.html" class="flour-pill inactive">T65 French</a>
+    </div>
+  </div>
+
+  <!-- ========================
+       FLOUR HERO
+  ========================= -->
+  <div class="flour-hero">
+    <div class="flour-hero-inner">
+      <div>
+        <span class="flour-label">The Flour Compendium — No. 01</span>
+        <h1 class="flour-title">White Bread Flour</h1>
+        <p class="flour-subtitle">The workhorse. The starting point. The flour that built a million sourdough habits.</p>
+        <div class="flour-tags">
+          <span class="tag tag-green">Beginner Friendly</span>
+          <span class="tag tag-amber">High Protein</span>
+          <span class="tag tag-blue">USA &amp; Global</span>
+          <span class="tag tag-green">Widely Available</span>
+        </div>
+        <p style="max-width:540px; font-size:0.92rem; color:var(--bark); font-style:italic;">
+          Written by Kyle W. &nbsp;·&nbsp; <a href="/flour-compendium.html" style="color:var(--sage);">Back to the Compendium</a>
+        </p>
+      </div>
+
+      <!-- Quick stats -->
+      <div class="flour-stat-card">
+        <div class="stat-card-header">at a glance</div>
+        <div class="stat-row">
+          <span class="stat-label">Protein Range</span>
+          <span class="stat-value">11 – 14%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Hydration</span>
+          <span class="stat-value">68 – 85%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Gluten Strength</span>
+          <span class="stat-value highlight">Strong</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Fermentation</span>
+          <span class="stat-value">Steady / Predictable</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Oso-Approved?</span>
+          <span class="stat-value" style="color:var(--moss);">Yes — daily driver</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================
+       MAIN CONTENT
+  ========================= -->
+  <div class="content-wrapper">
+
+    <!-- =====================
+         PROSE
+    ====================== -->
+    <article class="flour-prose">
+
+      <!-- AD BREAK: top of content -->
+      <div class="ad-break reveal">
+        <div class="ad-break-label">Advertisement</div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-8428061506404633"
+             data-ad-slot="auto"
+             data-ad-format="horizontal"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <h2 class="reveal" id="what-is-it">What Is It?</h2>
+
+      <p class="reveal">
+        White bread flour is milled from hard red or hard white wheat, with most of the bran and germ removed, leaving you with predominantly endosperm. That endosperm is rich in two proteins — glutenin and gliadin — which combine with water to form gluten. More protein means more gluten. More gluten means structure. Structure means your loaf doesn't pancake out across the Dutch oven like it's trying to escape.
+      </p>
+
+      <p class="reveal">
+        The "bread" distinction matters. <strong>All-purpose flour runs 10–12% protein</strong>; bread flour typically lands between 12–14%. That extra percentage or two might not sound like much, but in a high-hydration sourdough where you're asking the dough to hold together for 12+ hours of fermentation, it's the difference between a bold ear and a flat disappointment.
+      </p>
+
+      <div class="hand-note reveal">
+        "If you're just starting out, this is the flour. Not because it's the most interesting — it isn't — but because it gives you the clearest feedback on what your hands and your starter are actually doing."
+      </div>
+
+      <h2 class="reveal" id="protein">Protein &amp; Why It Matters</h2>
+
+      <p class="reveal">
+        Every flour's behavior in sourdough is downstream of one number: protein content. Here's how white bread flour stacks up against the other flours in this compendium.
+      </p>
+
+      <div class="protein-bar-group reveal" id="protein-bars">
+        <div class="protein-bar-row">
+          <span class="pbar-label">Bread Flour</span>
+          <div class="pbar-track"><div class="pbar-fill" style="width:0%" data-target="92%"></div></div>
+          <span class="pbar-pct">12–14%</span>
+        </div>
+        <div class="protein-bar-row">
+          <span class="pbar-label">Whole Wheat</span>
+          <div class="pbar-track"><div class="pbar-fill sage" style="width:0%" data-target="88%"></div></div>
+          <span class="pbar-pct">13–15%</span>
+        </div>
+        <div class="protein-bar-row">
+          <span class="pbar-label">All-Purpose</span>
+          <div class="pbar-track"><div class="pbar-fill amber" style="width:0%" data-target="72%"></div></div>
+          <span class="pbar-pct">10–12%</span>
+        </div>
+        <div class="protein-bar-row">
+          <span class="pbar-label">Rye</span>
+          <div class="pbar-track"><div class="pbar-fill sage" style="width:0%" data-target="75%"></div></div>
+          <span class="pbar-pct">~13%*</span>
+        </div>
+        <div class="protein-bar-row">
+          <span class="pbar-label">Spelt</span>
+          <div class="pbar-track"><div class="pbar-fill amber" style="width:0%" data-target="68%"></div></div>
+          <span class="pbar-pct">10–12%</span>
+        </div>
+        <div class="protein-bar-row">
+          <span class="pbar-label">Einkorn</span>
+          <div class="pbar-track"><div class="pbar-fill amber" style="width:0%" data-target="56%"></div></div>
+          <span class="pbar-pct">~10%*</span>
+        </div>
+      </div>
+
+      <p class="red-note reveal">*Rye's gluten is weak despite the protein. Einkorn's is weaker still. Numbers aren't everything — see those pages for the full picture.</p>
+
+      <hr class="section-rule reveal"><div class="section-rule-mark reveal">✦</div>
+
+      <h2 class="reveal" id="handling">How It Handles</h2>
+
+      <p class="reveal">
+        White bread flour is forgiving in ways that make it the best teaching flour there is. It builds strong, elastic gluten that tolerates rough treatment, holds its shape during proofing, and gives you a meaningful ear under decent scoring. It can handle hydration from a sensible 72% all the way up to 82–85% in the hands of someone who knows what they're doing.
+      </p>
+
+      <div class="tips-grid">
+        <div class="tip-card reveal">
+          <span class="tip-card-icon">⧗</span>
+          <div class="tip-card-title">Fermentation</div>
+          <p>Steady and readable. Bulk ferment typically runs 4–6 hours at 76°F with a healthy starter. It won't surprise you.</p>
+        </div>
+        <div class="tip-card reveal">
+          <span class="tip-card-icon">≋</span>
+          <div class="tip-card-title">Hydration</div>
+          <p>Start at 72–75% if you're new. Once your shaping is tight, push toward 78–80% for a more open crumb.</p>
+        </div>
+        <div class="tip-card reveal">
+          <span class="tip-card-icon">⊡</span>
+          <div class="tip-card-title">Oven Spring</div>
+          <p>Excellent. Strong gluten holds all that fermentation gas until the crust sets. This is what gives you height.</p>
+        </div>
+        <div class="tip-card reveal">
+          <span class="tip-card-icon">✦</span>
+          <div class="tip-card-title">Flavor</div>
+          <p>Clean and mild. The sourdough tang comes through clearly — no competition from the grain itself.</p>
+        </div>
+      </div>
+
+      <!-- AD BREAK: mid-content -->
+      <div class="ad-break reveal">
+        <div class="ad-break-label">Advertisement</div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-8428061506404633"
+             data-ad-slot="auto"
+             data-ad-format="horizontal"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <h2 class="reveal" id="brands">The Brands Worth Knowing</h2>
+
+      <p class="reveal">
+        In the US, the conversation usually starts and ends with King Arthur — and for good reason. Their bread flour runs a consistent 12.7% protein, it's unbleached, unbromated, and non-GMO, and you can find it at almost any grocery store in the country. It's what Oso gets fed most days.
+      </p>
+
+      <p class="reveal">
+        That said, there's a whole world of flour out there. Here's the breakdown across the US and beyond.
+      </p>
+
+      <h3 class="reveal">United States</h3>
+
+      <table class="brand-table reveal">
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Protein</th>
+            <th>Notes</th>
+            <th>Find It</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="brand-name">King Arthur Bread Flour</td>
+            <td>12.7%</td>
+            <td>The benchmark. Unbleached, non-GMO, consistent. Organic version available.</td>
+            <td><span class="availability-dot dot-green"></span>Nationwide</td>
+          </tr>
+          <tr>
+            <td class="brand-name">Central Milling Organic Bread Flour</td>
+            <td>12.5%</td>
+            <td>Tartine's flour of choice. Harder to find in stores; order direct or online.</td>
+            <td><span class="availability-dot dot-amber"></span>Online / Specialty</td>
+          </tr>
+          <tr>
+            <td class="brand-name">Bob's Red Mill Artisan Bread Flour</td>
+            <td>~12.5%</td>
+            <td>Solid, accessible, widely stocked. Good everyday option.</td>
+            <td><span class="availability-dot dot-green"></span>Nationwide</td>
+          </tr>
+          <tr>
+            <td class="brand-name">Cairnspring Expanse Bread Flour</td>
+            <td>12–13%</td>
+            <td>Pacific Northwest heritage wheat. Exceptional flavor. Small-batch mill.</td>
+            <td><span class="availability-dot dot-amber"></span>West Coast / Online</td>
+          </tr>
+          <tr>
+            <td class="brand-name">King Arthur Sir Lancelot</td>
+            <td>14.2%</td>
+            <td>High-gluten for ultra-high hydration bakes (85%+). Professional use.</td>
+            <td><span class="availability-dot dot-amber"></span>Online / Specialty</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="reveal">Europe &amp; International</h3>
+
+      <table class="brand-table reveal">
+        <thead>
+          <tr>
+            <th>Country / Type</th>
+            <th>Common Name</th>
+            <th>Approx. Protein</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="brand-name">France</td>
+            <td>Farine T65</td>
+            <td>11–12%</td>
+            <td>The standard for French country bread. Slightly more mineral flavor than US bread flour. Some specialty importers ship to the US.</td>
+          </tr>
+          <tr>
+            <td class="brand-name">Italy</td>
+            <td>Tipo 0 / Manitoba</td>
+            <td>11–14%</td>
+            <td>Manitoba Oro Tipo 00 at 13% is a cult favorite for high-hydration sourdough. Find it at Italian specialty grocers. See the <a href="/flour-compendium.html">Tipo 00 page</a> for more.</td>
+          </tr>
+          <tr>
+            <td class="brand-name">UK</td>
+            <td>Strong White Bread Flour</td>
+            <td>12–13%</td>
+            <td>Shipton Mill, Marriages, and Doves Farm are the go-to brands. Closer to US bread flour in behavior.</td>
+          </tr>
+          <tr>
+            <td class="brand-name">Germany</td>
+            <td>Type 550</td>
+            <td>~11%</td>
+            <td>The German equivalent of French T65. Common in German-style rye-wheat blends.</td>
+          </tr>
+          <tr>
+            <td class="brand-name">Australia</td>
+            <td>Baker's Flour</td>
+            <td>12–13%</td>
+            <td>Local brands like Laucke and Allied Mills are the standard. Equivalent to US bread flour.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="hand-note reveal">
+        On sourcing international flours in the US: it's a project. Caputo Manitoba Oro can be found at Italian specialty shops or ordered online. French T65 from a real French mill? You're mostly looking at places like Zingerman's or a few dedicated importers. Worth it for a special bake — not a weekend staple.
+      </div>
+
+      <hr class="section-rule reveal"><div class="section-rule-mark reveal">✦</div>
+
+      <h2 class="reveal" id="organic">The Organic Question</h2>
+
+      <p class="reveal">
+        Organic bread flour does perform slightly differently — not dramatically, but noticeably. Because organic wheat isn't treated with certain pesticides and chemicals, the bran retains more wild yeast and bacteria even after milling. Your starter tends to be more active, and the fermentation smells rounder and more complex.
+      </p>
+
+      <p class="reveal">
+        If your budget has limits (whose doesn't), an easy middle ground: use organic flour for your starter feedings, and conventional for the bulk of your bake. You get the flavor benefits where they matter most without tripling your flour costs.
+      </p>
+
+      <h2 class="reveal" id="storage">Storage</h2>
+
+      <p class="reveal">
+        Bread flour is a kitchen staple, not a pantry artifact. Store it in a cool, dry place in a sealed container — a lidded bin beats the original paper bag. Protein content and enzyme activity both degrade over time, so flour older than six months can give you a sluggish starter and weaker gluten development. Buy smaller quantities more often if you're baking less than once a week.
+      </p>
+
+      <p class="reveal">
+        In summer, if your kitchen runs hot, consider keeping a portion in the fridge. Bring it to room temperature before mixing — cold flour will throw off your bulk ferment timing.
+      </p>
+
+    </article>
+
+    <!-- =====================
+         SIDEBAR
+    ====================== -->
+    <aside class="sidebar">
+
+      <!-- Primary buy card: King Arthur via Amazon Associates -->
+      <div class="buy-card reveal">
+        <div class="buy-card-header">
+          <span class="buy-card-header-title">Recommended Buy</span>
+          <span class="buy-card-header-badge">Top Pick</span>
+        </div>
+        <div class="buy-card-body">
+          <div class="buy-card-brand">King Arthur Baking Co.</div>
+          <div class="buy-card-product">Unbleached Bread Flour, 5 lb</div>
+          <div class="buy-card-desc">The most reliable bread flour you'll find at any grocery store. 12.7% protein, unbleached, non-GMO. This is what Oso eats.</div>
+          <div class="buy-card-meta">
+            <div class="meta-row">
+              <span class="k">Protein</span>
+              <span class="v">12.7%</span>
+            </div>
+            <div class="meta-row">
+              <span class="k">Bleached?</span>
+              <span class="v">No</span>
+            </div>
+            <div class="meta-row">
+              <span class="k">Bromated?</span>
+              <span class="v">No</span>
+            </div>
+            <div class="meta-row">
+              <span class="k">Non-GMO</span>
+              <span class="v">Yes (verified)</span>
+            </div>
+          </div>
+
+          <!-- AFFILIATE LINK — replace tag= with your actual Amazon Associates tag -->
+          <a class="buy-btn"
+             href="https://www.amazon.com/dp/B00P6EQW6G?tag=sourdoughdbs-20"
+             target="_blank"
+             rel="noopener sponsored">
+            Buy on Amazon →
+          </a>
+          <div class="buy-btn-note">Affiliate link — helps keep this site going.</div>
+
+          <hr class="buy-divider" />
+          <div class="alt-buy">Also available at <a href="https://shop.kingarthurbaking.com/items/bread-flour" target="_blank" rel="noopener">King Arthur's own site</a> (no affiliate, direct pricing).</div>
+          <div class="alt-buy">Organic version: <a href="https://www.amazon.com/dp/B00P6ERTS6?tag=sourdoughdbs-20" target="_blank" rel="noopener sponsored">KA Organic Bread Flour →</a></div>
+        </div>
+      </div>
+
+      <!-- On the table -->
+      <div class="table-card reveal">
+        <div class="table-card-title">Also worth trying</div>
+        <ul class="table-card-list">
+          <li><span class="li-dot">→</span> <span><strong>Central Milling Organic Bread</strong> — Tartine uses it. Order at centralmilling.com</span></li>
+          <li><span class="li-dot">→</span> <span><strong>Bob's Red Mill Artisan Bread</strong> — solid everyday backup, widely available</span></li>
+          <li><span class="li-dot">→</span> <span><strong>Cairnspring Expanse</strong> — Pacific NW heritage wheat, beautiful flavor</span></li>
+          <li><span class="li-dot">→</span> <span><strong>KA Sir Lancelot</strong> (14.2%) — for the 80%+ hydration obsessives</span></li>
+        </ul>
+      </div>
+
+      <!-- Compendium nav -->
+      <div class="nav-card reveal">
+        <div class="nav-card-title">The Flour Compendium</div>
+        <ul class="nav-card-list">
+          <li class="current"><a href="/flour/white-bread-flour.html"><span>White Bread Flour</span><span class="nav-badge nb-active">You're here</span></a></li>
+          <li><a href="/flour-compendium.html#whole-wheat"><span>Whole Wheat</span><span class="nav-badge nb-soon">Soon</span></a></li>
+          <li><a href="/flour-compendium.html#rye"><span>Rye</span><span class="nav-badge nb-soon">Soon</span></a></li>
+          <li><a href="/flour-compendium.html#spelt"><span>Spelt</span><span class="nav-badge nb-soon">Soon</span></a></li>
+          <li><a href="/flour-compendium.html#einkorn"><span>Einkorn</span><span class="nav-badge nb-soon">Soon</span></a></li>
+          <li><a href="/flour-compendium.html#khorasan"><span>Khorasan / Kamut</span><span class="nav-badge nb-soon">Soon</span></a></li>
+          <li><a href="/flour-compendium.html#tipo-00"><span>Tipo 00 (Italian)</span><span class="nav-badge nb-soon">Soon</span></a></li>
+          <li><a href="/flour-compendium.html#t65"><span>T65 (French)</span><span class="nav-badge nb-soon">Soon</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Sidebar ad slot: 300x250 rectangle -->
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-type);font-size:0.6rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Advertisement</div>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:300px;height:250px"
+             data-ad-client="ca-pub-8428061506404633"
+             data-ad-slot="auto"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+    </aside>
+
+  </div><!-- /content-wrapper -->
+
+  <!-- ========================
+       FOOTER
+  ========================= -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo">Sourdough Database<span>.</span></div>
+        <nav class="footer-nav">
+          <a href="/index.html">Home</a>
+          <a href="/flour-compendium.html">Flour Compendium</a>
+          <a href="/recipes.html">Recipes</a>
+          <a href="/articles.html">Essays</a>
+          <a href="/tools.html">Tools</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="footer-disclaimer">
+        Sourdough Database is a personal project by Kyle W. Some links on this site are Amazon affiliate links — if you buy something through them, I get a small commission at no extra cost to you. It helps keep the lights on and Oso fed. All recommendations are my own.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ========================
+       SCRIPTS
+  ========================= -->
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = (i % 4) * 0.08 + 's';
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // Protein bar animation (triggers when section enters view)
+    const barSection = document.getElementById('protein-bars');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.pbar-fill').forEach((bar, i) => {
+            setTimeout(() => {
+              bar.style.width = bar.dataset.target;
+            }, i * 120);
+          });
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    barSection && barObserver.observe(barSection);
+  </script>
+
+</body>
+</html>
