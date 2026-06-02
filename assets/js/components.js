@@ -1,108 +1,102 @@
-/**
- * The Sourdough Database — Shared Components
- *
- * This file controls the nav and footer across every page on the site.
- * Change something here once and it updates everywhere.
- *
- * TO UPDATE THE NAV:    Edit the NAV_HTML string below.
- * TO UPDATE THE FOOTER: Edit the FOOTER_HTML string below.
- * TO ADD A NAV LINK:    Add an <a> tag to the <nav class="nav"> block.
- *
- * Active nav state is detected automatically from the page URL —
- * you never need to add class="active" to a link manually.
- */
+/* =============================================================
+   components.js — The Sourdough Database
+   Renders shared header + footer on every page.
+   Drop <div id="site-header"></div> and <div id="site-footer"></div>
+   into any page, then load this script before </body>.
+
+   Active nav rules:
+     /                          → home
+     /starters/*                → cultures
+     /atlas/* or /tools/*       → tools
+     /journal/*                 → field notes
+     /flour-compendium.html
+       or /flour/*              → flour
+     /about.html                → about
+   ============================================================= */
 
 (function () {
-  'use strict';
 
-  // ── NAV ──────────────────────────────────────────────────────────
-  // Includes the binding spine and hole-punch elements that are part
-  // of the notebook aesthetic on every page.
-
-  var NAV_HTML = [
-    '<div class="binding"></div>',
-    '<div class="holes">',
-    '  <div class="hole"></div>',
-    '  <div class="hole"></div>',
-    '  <div class="hole"></div>',
-    '  <div class="hole"></div>',
-    '  <div class="hole"></div>',
-    '  <div class="hole"></div>',
-    '</div>',
-    '<header>',
-    '  <a href="/" class="logo">The Sourdough Database<span class="dot"></span></a>',
-    '  <nav class="nav">',
-    '    <a href="/">home</a>',
-    '    <a href="/#starters">cultures</a>',
-    '    <a href="/#flours">flours</a>',
-    '    <a href="/#tools">tools</a>',
-    '    <a href="/#journal">journal</a>',
-    '    <a href="/about.html">about</a>',
-    '  </nav>',
-    '</header>'
-  ].join('\n');
-
-  // ── FOOTER ───────────────────────────────────────────────────────
-  // Update links here as new pages are added to the site.
-
-  var FOOTER_HTML = [
-    '<footer>',
-    '  <div class="foot-grid">',
-    '    <div>',
-    '      <div class="foot-brand">The Sourdough Database</div>',
-    '      <p class="foot-tag">A recipe notebook for bakers who treat the loaf as both inquiry and inheritance.</p>',
-    '    </div>',
-    '    <div class="foot-col">',
-    '      <h5>The Database</h5>',
-    '      <ul>',
-    '        <li><a href="/#starters">culture index</a></li>',
-    '        <li><a href="/#flours">flours</a></li>',
-    '        <li><a href="/#journal">journal</a></li>',
-    '      </ul>',
-    '    </div>',
-    '    <div class="foot-col">',
-    '      <h5>Tools</h5>',
-    '      <ul>',
-    '        <li><a href="/tools/hydration.html">hydration solver</a></li>',
-    '        <li><a href="/tools/schedule.html">bake schedule</a></li>',
-    '        <li><a href="/tools/trouble-atlas.html">trouble atlas</a></li>',
-    '        <li><a href="/tools/crumb-analyzer.html">crumb analyzer</a></li>',
-    '      </ul>',
-    '    </div>',
-    '    <div class="foot-col">',
-    '      <h5>About</h5>',
-    '      <ul>',
-    '        <li><a href="/about.html">the story</a></li>',
-    '        <li><a href="/privacy.html">privacy</a></li>',
-    '      </ul>',
-    '    </div>',
-    '  </div>',
-    '  <div class="colophon">',
-    '    <span>\u00a9 MMXXVI \u00b7 The Sourdough Database</span>',
-    '    <span><a href="https://kylewebear.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">a slow-fermented kylewebear.com project</a></span>',
-    '    <span>made with flour on our hands</span>',
-    '  </div>',
-    '</footer>'
-  ].join('\n');
-
-  // ── INJECT ───────────────────────────────────────────────────────
-
+  /* ── HEADER ─────────────────────────────────────────────── */
   var headerEl = document.getElementById('site-header');
+  if (headerEl) {
+    headerEl.innerHTML = [
+      '<div class="binding"></div>',
+      '<div class="holes">',
+      '  <span></span><span></span><span></span>',
+      '  <span></span><span></span><span></span>',
+      '</div>',
+      '<header>',
+      '  <a href="/" class="wordmark">',
+      '    The Sourdough<br>Database',
+      '    <span class="period">.</span>',
+      '  </a>',
+      '  <nav class="nav">',
+      '    <a href="/#starters">cultures</a>',
+      '    <a href="/flour-compendium.html">flour</a>',
+      '    <a href="/#tools">tools</a>',
+      '    <a href="/#journal">field notes</a>',
+      '    <a href="/about.html">about</a>',
+      '  </nav>',
+      '  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">',
+      '    <span></span><span></span><span></span>',
+      '  </button>',
+      '</header>',
+    ].join('\n');
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────────── */
   var footerEl = document.getElementById('site-footer');
+  if (footerEl) {
+    footerEl.innerHTML = [
+      '<footer>',
+      '  <div class="footer-inner">',
+      '    <div class="footer-brand">',
+      '      <span class="footer-wordmark">The Sourdough Database<span class="period">.</span></span>',
+      '      <p>A field guide for obsessive bakers. Built in NYC. Powered by Oso.</p>',
+      '    </div>',
+      '    <nav class="footer-nav">',
+      '      <div class="footer-nav-col">',
+      '        <span class="footer-nav-label">Reference</span>',
+      '        <a href="/#starters">Starter Cultures</a>',
+      '        <a href="/flour-compendium.html">Flour Compendium</a>',
+      '        <a href="/#tools">Tools</a>',
+      '        <a href="/tools/trouble-atlas.html">Trouble Atlas</a>',
+      '      </div>',
+      '      <div class="footer-nav-col">',
+      '        <span class="footer-nav-label">Reading</span>',
+      '        <a href="/#journal">Field Notes</a>',
+      '        <a href="/journal/the-culture-she-kept.html">The Culture She Kept</a>',
+      '        <a href="/journal/seventeen-tabs.html">Seventeen Tabs Open</a>',
+      '      </div>',
+      '      <div class="footer-nav-col">',
+      '        <span class="footer-nav-label">Site</span>',
+      '        <a href="/about.html">About</a>',
+      '        <a href="/contact.html">Contact</a>',
+      '        <a href="/privacy.html">Privacy</a>',
+      '      </div>',
+      '    </nav>',
+      '  </div>',
+      '  <div class="footer-base">',
+      '    <span>© 2026 Kyle Weber · sourdoughdatabase.com</span>',
+      '    <span class="footer-affiliate">Some links are Amazon affiliate links. All recommendations are my own.</span>',
+      '  </div>',
+      '</footer>',
+    ].join('\n');
+  }
 
-  if (headerEl) headerEl.innerHTML = NAV_HTML;
-  if (footerEl) footerEl.innerHTML = FOOTER_HTML;
+  /* ── MOBILE NAV TOGGLE ──────────────────────────────────── */
+  document.addEventListener('click', function (e) {
+    var toggle = e.target.closest('.nav-toggle');
+    if (!toggle) return;
+    var nav = document.querySelector('nav.nav');
+    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    if (nav) nav.classList.toggle('nav--open', !expanded);
+  });
 
-  // ── ACTIVE NAV STATE ─────────────────────────────────────────────
-  // Automatically highlights the correct nav link based on the current URL.
-  // No need to manually add class="active" to any page.
-  //
-  // Rules:
-  //   /                     → home
-  //   /starters/*           → cultures
-  //   /atlas/* or /tools/*  → tools
-  //   /about.html           → about
-
+  /* ── ACTIVE NAV ─────────────────────────────────────────── */
+  // Automatically highlights the correct nav item based on the
+  // current URL path. No need to manually add class="active".
   function setActiveNav() {
     var path = window.location.pathname;
     var navLinks = document.querySelectorAll('nav.nav a');
@@ -122,7 +116,8 @@
         isActive = true;
       } else if (href.indexOf('#journal') !== -1 && path.indexOf('/journal/') === 0) {
         isActive = true;
-      } else if (href.indexOf('#flours') !== -1 && path.indexOf('/flours/') === 0) {
+      } else if (href === '/flour-compendium.html' &&
+                (path === '/flour-compendium.html' || path.indexOf('/flour/') === 0)) {
         isActive = true;
       }
 
