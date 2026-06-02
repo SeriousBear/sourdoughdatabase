@@ -2898,12 +2898,14 @@ footer {
   padding-top: 4px;
   line-height: 1.1;
   position: relative;
+  background: var(--paper);
+  z-index: 1;
 }
 .timeline-year::after {
   content: "";
   position: absolute;
-  right: -14px; top: 8px;
-  width: 12px; height: 12px;
+  right: -14px; top: 12px;
+  width: 10px; height: 10px;
   background: var(--pen-red);
   border-radius: 50%;
   border: 2px solid var(--paper);
@@ -4935,7 +4937,7 @@ footer {
   font-weight: 700;
   float: left;
   line-height: 0.72;
-  margin: 0.08em 0.1em 0 0;
+  margin: 0.08em 0.25em 0 0;
   color: var(--pen-red);
 }
 
