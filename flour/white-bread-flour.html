@@ -1,803 +1,912 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>White Bread Flour — The Flour Compendium | Sourdough Database</title>
-  <meta name="description" content="Everything you need to know about white bread flour for sourdough baking — protein content, handling tips, and where to buy it." />
-
-  <link rel="canonical" href="https://sourdoughdatabase.com/flour/white-bread-flour.html" />
-
-  <meta property="og:title" content="White Bread Flour — The Flour Compendium | Sourdough Database" />
-  <meta property="og:description" content="The workhorse of sourdough. High protein, reliable gluten development, and a forgiving temperament. Start here." />
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png" />
-  <meta property="og:site_name" content="The Sourdough Database" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="White Bread Flour — The Flour Compendium | Sourdough Database" />
-  <meta name="twitter:description" content="The workhorse of sourdough. High protein, reliable gluten development, and a forgiving temperament. Start here." />
-  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png" />
-
-  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-  <link rel="alternate icon" href="/assets/images/favicon.ico">
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-  <meta name="theme-color" content="#f4ead0">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Special+Elite&display=swap" rel="stylesheet" />
-
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
-
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7TNFRKVWVW');
-  </script>
-
-  <!-- Shared stylesheet — all global styles live here -->
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-
-  <!-- Page-scoped styles only — no :root, body, *, html, or bare a overrides -->
-  <style>
-    /* ===========================
-       BREADCRUMB
-    =========================== */
-    .wb-breadcrumb {
-      padding: 14px 32px;
-      border-bottom: 1px solid var(--rule);
-      background: var(--paper);
-    }
-    .wb-breadcrumb-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      font-family: 'Special Elite', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
-      color: var(--pencil);
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .wb-breadcrumb-inner a { color: var(--pencil); text-decoration: none; }
-    .wb-breadcrumb-inner a:hover { color: var(--amber); }
-    .wb-breadcrumb-inner .wb-sep { color: var(--rule); }
-
-    /* ===========================
-       COMPENDIUM INDEX STRIP
-    =========================== */
-    .wb-strip {
-      background: var(--moss);
-      padding: 10px 32px;
-      overflow-x: auto;
-    }
-    .wb-strip-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-    .wb-strip-label {
-      font-family: 'Caveat', cursive;
-      font-size: 0.85rem;
-      color: var(--sage-soft, #c5cdb4);
-      white-space: nowrap;
-      margin-right: 6px;
-    }
-    .wb-flour-pill {
-      font-family: 'Special Elite', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.05em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      text-decoration: none;
-      white-space: nowrap;
-      text-transform: uppercase;
-      transition: background 0.2s, color 0.2s;
-    }
-    .wb-flour-pill.wb-active {
-      background: var(--amber);
-      color: var(--moss-deep, #1f3520);
-    }
-    .wb-flour-pill.wb-inactive {
-      background: rgba(255,255,255,0.08);
-      color: var(--sage-soft, #c5cdb4);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .wb-flour-pill.wb-inactive:hover {
-      background: rgba(255,255,255,0.15);
-      color: var(--paper);
-    }
-
-    /* ===========================
-       HERO BLOCK
-    =========================== */
-    .wb-flour-hero {
-      background: var(--paper);
-      border-bottom: 2px solid var(--rule);
-      padding: 56px 32px 48px;
-    }
-    .wb-flour-hero-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
-      align-items: start;
-    }
-    .wb-flour-label {
-      font-family: 'Special Elite', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 10px;
-      display: block;
-    }
-    .wb-flour-title {
-      font-family: 'Caveat', cursive;
-      font-size: clamp(2.8rem, 6vw, 4.2rem);
-      font-weight: 700;
-      color: var(--moss-deep, #1f3520);
-      line-height: 1.05;
-      margin-bottom: 6px;
-    }
-    .wb-flour-subtitle {
-      font-family: 'Crimson Pro', serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--bark);
-      margin-bottom: 24px;
-      max-width: 520px;
-    }
-    .wb-flour-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    .wb-tag {
-      font-family: 'Special Elite', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 3px;
-    }
-    .wb-tag-green { background: rgba(45,74,43,0.12); color: var(--moss); border: 1px solid rgba(45,74,43,0.2); }
-    .wb-tag-amber { background: rgba(200,132,44,0.12); color: var(--amber-deep, #9a5d1c); border: 1px solid rgba(200,132,44,0.25); }
-    .wb-tag-blue  { background: rgba(42,63,111,0.1);  color: var(--pen-blue); border: 1px solid rgba(42,63,111,0.18); }
-
-    /* STAT CARD */
-    .wb-flour-stat-card {
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      padding: 28px 24px;
-      min-width: 200px;
-      transform: rotate(1.2deg);
-      box-shadow: 4px 4px 0 rgba(29,26,20,0.08);
-    }
-    .wb-stat-card-header {
-      font-family: 'Caveat', cursive;
-      font-size: 0.85rem;
-      color: var(--sage, #8a9a7b);
-      margin-bottom: 16px;
-      border-bottom: 1px dashed var(--rule);
-      padding-bottom: 8px;
-    }
-    .wb-stat-row { display: flex; flex-direction: column; margin-bottom: 14px; }
-    .wb-stat-row:last-child { margin-bottom: 0; }
-    .wb-stat-label {
-      font-family: 'Special Elite', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--sage, #8a9a7b);
-    }
-    .wb-stat-value {
-      font-family: 'Caveat', cursive;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--moss-deep, #1f3520);
-      line-height: 1.1;
-    }
-    .wb-stat-value.wb-highlight { color: var(--pen-red); }
-
-    /* ===========================
-       MAIN CONTENT LAYOUT
-    =========================== */
-    .wb-content-wrapper {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 48px 32px 80px;
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 56px;
-      align-items: start;
-    }
-
-    /* ===========================
-       PROSE BODY
-    =========================== */
-    .wb-flour-prose h2 {
-      font-family: 'Caveat', cursive;
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--moss-deep, #1f3520);
-      margin: 44px 0 12px;
-      padding-bottom: 6px;
-      border-bottom: 2px solid var(--rule);
-    }
-    .wb-flour-prose h2:first-child { margin-top: 0; }
-    .wb-flour-prose h3 {
-      font-family: 'Special Elite', monospace;
-      font-size: 0.88rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--pen-blue);
-      margin: 28px 0 8px;
-    }
-    .wb-flour-prose p {
-      margin-bottom: 18px;
-      max-width: 680px;
-      font-size: 1rem;
-      color: var(--bark);
-    }
-    .wb-flour-prose p em { font-style: italic; color: var(--ink); }
-    .wb-flour-prose strong { font-weight: 600; color: var(--ink); }
-
-    .wb-hand-note {
-      font-family: 'Caveat', cursive;
-      font-size: 1.15rem;
-      color: var(--pen-blue);
-      background: rgba(42,63,111,0.05);
-      border-left: 3px solid var(--pen-blue);
-      padding: 14px 20px;
-      margin: 28px 0;
-      border-radius: 0 4px 4px 0;
-      max-width: 680px;
-    }
-    .wb-red-note {
-      font-family: 'Caveat', cursive;
-      font-size: 1rem;
-      color: var(--pen-red);
-      margin: -8px 0 20px;
-      padding-left: 4px;
-      max-width: 680px;
-    }
-
-    /* Protein bar visual */
-    .wb-protein-bar-group { margin: 28px 0; max-width: 680px; }
-    .wb-protein-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .wb-pbar-label {
-      font-family: 'Special Elite', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      width: 140px;
-      flex-shrink: 0;
-      color: var(--bark);
-    }
-    .wb-pbar-track {
-      flex: 1;
-      height: 10px;
-      background: var(--paper-warm);
-      border-radius: 5px;
-      border: 1px solid var(--rule);
-      overflow: hidden;
-    }
-    .wb-pbar-fill {
-      height: 100%;
-      border-radius: 5px;
-      background: var(--moss);
-      transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .wb-pbar-fill.wb-amber { background: var(--amber); }
-    .wb-pbar-fill.wb-sage  { background: var(--sage, #8a9a7b); }
-    .wb-pbar-pct {
-      font-family: 'Caveat', cursive;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--moss);
-      width: 40px;
-      text-align: right;
-    }
-
-    /* Handling tip grid */
-    .wb-tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0 28px; max-width: 680px; }
-    .wb-tip-card { background: var(--paper); border: 1px solid var(--rule); border-radius: 5px; padding: 16px; }
-    .wb-tip-card-icon { font-family: 'Caveat', cursive; font-size: 1.4rem; color: var(--amber); display: block; margin-bottom: 4px; }
-    .wb-tip-card-title { font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--moss); margin-bottom: 5px; }
-    .wb-tip-card p { font-size: 0.9rem; margin: 0; color: var(--bark); }
-
-    /* Brand table */
-    .wb-brand-table { width: 100%; max-width: 680px; border-collapse: collapse; margin: 20px 0 32px; font-size: 0.92rem; }
-    .wb-brand-table th { font-family: 'Special Elite', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage, #8a9a7b); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--rule); }
-    .wb-brand-table td { padding: 11px 12px; border-bottom: 1px solid var(--rule); color: var(--bark); vertical-align: top; }
-    .wb-brand-table tr:last-child td { border-bottom: none; }
-    .wb-brand-table .wb-brand-name { font-family: 'Crimson Pro', serif; font-weight: 600; color: var(--ink); }
-    .wb-brand-table .wb-avail-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
-    .wb-dot-green { background: var(--moss); }
-    .wb-dot-amber { background: var(--amber); }
-
-    /* Ad break */
-    .wb-ad-break { margin: 40px 0; max-width: 680px; text-align: center; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); padding: 20px 0; }
-    .wb-ad-break-label { font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil); margin-bottom: 8px; }
-
-    .wb-section-rule { border: none; display: flex; align-items: center; gap: 12px; margin: 40px 0; max-width: 680px; }
-    .wb-section-rule::before, .wb-section-rule::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-    .wb-section-rule-mark { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--amber); line-height: 1; }
-
-    /* ===========================
-       SIDEBAR
-    =========================== */
-    .wb-sidebar { position: sticky; top: 32px; }
-
-    .wb-buy-card { background: var(--paper); border: 2px solid var(--moss); border-radius: 8px; overflow: hidden; margin-bottom: 24px; box-shadow: 4px 4px 0 rgba(45,74,43,0.15); }
-    .wb-buy-card-header { background: var(--moss); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
-    .wb-buy-card-header-title { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--paper); }
-    .wb-buy-card-header-badge { font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--amber); padding: 2px 7px; border-radius: 3px; }
-    .wb-buy-card-body { padding: 18px; }
-    .wb-buy-card-brand { font-family: 'Special Elite', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage, #8a9a7b); margin-bottom: 4px; }
-    .wb-buy-card-product { font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
-    .wb-buy-card-desc { font-family: 'Crimson Pro', serif; font-size: 0.88rem; color: var(--bark); margin-bottom: 14px; font-style: italic; line-height: 1.5; }
-    .wb-buy-card-meta { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-    .wb-meta-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; }
-    .wb-meta-row .wb-k { font-family: 'Special Elite', monospace; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sage, #8a9a7b); }
-    .wb-meta-row .wb-v { font-family: 'Crimson Pro', serif; font-weight: 600; color: var(--ink); }
-    .wb-buy-btn { display: block; width: 100%; background: var(--amber); color: var(--moss-deep, #1f3520); font-family: 'Caveat', cursive; font-size: 1.05rem; font-weight: 700; text-align: center; text-decoration: none; padding: 12px 16px; border-radius: 5px; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-bottom: 8px; }
-    .wb-buy-btn:hover { background: var(--amber-deep, #9a5d1c); color: var(--paper); transform: translateY(-1px); }
-    .wb-buy-btn-note { font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--sage, #8a9a7b); text-align: center; margin-bottom: 12px; }
-    .wb-buy-divider { border: none; border-top: 1px dashed var(--rule); margin: 12px 0; }
-    .wb-alt-buy { font-family: 'Crimson Pro', serif; font-size: 0.82rem; font-style: italic; color: var(--bark); margin-bottom: 5px; }
-
-    .wb-table-card { background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 6px; padding: 18px; margin-bottom: 24px; }
-    .wb-table-card-title { font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 700; color: var(--moss-deep, #1f3520); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--rule); }
-    .wb-table-card-list { list-style: none; padding: 0; }
-    .wb-table-card-list li { font-family: 'Crimson Pro', serif; font-size: 0.88rem; color: var(--bark); padding: 6px 0; border-bottom: 1px solid rgba(29,26,20,0.07); display: flex; gap: 8px; align-items: flex-start; }
-    .wb-table-card-list li:last-child { border-bottom: none; }
-    .wb-li-dot { color: var(--amber); font-family: 'Caveat', cursive; font-size: 1.1rem; line-height: 1.2; flex-shrink: 0; }
-
-    .wb-nav-card { background: var(--moss-deep, #1f3520); border-radius: 6px; padding: 18px; margin-bottom: 24px; }
-    .wb-nav-card-title { font-family: 'Caveat', cursive; font-size: 0.9rem; color: var(--sage-soft, #c5cdb4); margin-bottom: 12px; }
-    .wb-nav-card-list { list-style: none; padding: 0; }
-    .wb-nav-card-list li { border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .wb-nav-card-list li:last-child { border-bottom: none; }
-    .wb-nav-card-list a { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-family: 'Crimson Pro', serif; font-size: 0.88rem; color: var(--sage-soft, #c5cdb4); text-decoration: none; transition: color 0.2s; }
-    .wb-nav-card-list a:hover { color: var(--paper); }
-    .wb-nav-card-list li.wb-current a { color: var(--amber); font-weight: 600; }
-    .wb-nav-badge { font-family: 'Special Elite', monospace; font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; }
-    .wb-nb-active { background: rgba(200,132,44,0.25); color: var(--amber); }
-    .wb-nb-soon   { background: rgba(255,255,255,0.06); color: var(--sage, #8a9a7b); }
-
-    /* ===========================
-       SCROLL REVEAL
-    =========================== */
-    .wb-reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1);
-    }
-    .wb-reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ===========================
-       RESPONSIVE
-    =========================== */
-    @media (max-width: 860px) {
-      .wb-flour-hero-inner { grid-template-columns: 1fr; }
-      .wb-flour-stat-card { transform: none; width: 100%; max-width: 340px; }
-      .wb-content-wrapper { grid-template-columns: 1fr; padding: 32px 20px 60px; }
-      .wb-sidebar { position: static; }
-      .wb-buy-card { max-width: 480px; }
-      .wb-tips-grid { grid-template-columns: 1fr; }
-      .wb-flour-hero { padding: 36px 20px 32px; }
-      .wb-strip { padding: 10px 20px; }
-      .wb-breadcrumb { padding: 12px 20px; }
-    }
-    @media (max-width: 540px) {
-      .wb-flour-title { font-size: 2.4rem; }
-      .wb-brand-table { font-size: 0.82rem; }
-      .wb-brand-table th, .wb-brand-table td { padding: 8px 8px; }
-    }
-  </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "White Bread Flour for Sourdough Baking",
-    "description": "Everything you need to know about white bread flour for sourdough — protein content, handling tips, and where to buy it.",
-    "url": "https://sourdoughdatabase.com/flour/white-bread-flour.html",
-    "datePublished": "2026-06-02",
-    "dateModified": "2026-06-02",
-    "author": {"@type": "Person", "name": "Kyle Weber", "url": "https://kylewebear.com"},
-    "publisher": {"@id": "https://sourdoughdatabase.com/#organization"},
-    "isPartOf": {"@id": "https://sourdoughdatabase.com/#website"},
-    "inLanguage": "en-US",
-    "keywords": "white bread flour sourdough, bread flour protein, sourdough flour, strong white flour"
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sourdoughdatabase.com/"},
-      {"@type": "ListItem", "position": 2, "name": "Flour Compendium", "item": "https://sourdoughdatabase.com/flour-compendium.html"},
-      {"@type": "ListItem", "position": 3, "name": "White Bread Flour"}
-    ]
-  }
-  </script>
-</head>
-
-<body>
-
-<div id="site-header"></div>
-
-<div class="wb-breadcrumb">
-  <div class="wb-breadcrumb-inner">
-    <a href="/">Home</a><span class="wb-sep">›</span>
-    <a href="/flour-compendium.html">Flour Compendium</a><span class="wb-sep">›</span>
-    <span>White Bread Flour</span>
-  </div>
-</div>
-
-<div class="wb-strip">
-  <div class="wb-strip-inner">
-    <span class="wb-strip-label">The Flours →</span>
-    <a href="/flour/white-bread-flour.html" class="wb-flour-pill wb-active">White Bread</a>
-    <a href="/flour/whole-wheat-flour.html" class="wb-flour-pill wb-inactive">Whole Wheat</a>
-    <a href="/flour/rye-flour.html" class="wb-flour-pill wb-inactive">Rye</a>
-    <a href="/flour/spelt-flour.html" class="wb-flour-pill wb-inactive">Spelt</a>
-    <a href="/flour/all-purpose-flour.html" class="wb-flour-pill wb-inactive">All-Purpose</a>
-    <a href="/flour-compendium.html" class="wb-flour-pill wb-inactive">Einkorn</a>
-    <a href="/flour-compendium.html" class="wb-flour-pill wb-inactive">Khorasan</a>
-    <a href="/flour-compendium.html" class="wb-flour-pill wb-inactive">Tipo 00</a>
-    <a href="/flour-compendium.html" class="wb-flour-pill wb-inactive">T65 French</a>
-  </div>
-</div>
-
-<div class="wb-flour-hero">
-  <div class="wb-flour-hero-inner">
-    <div>
-      <span class="wb-flour-label">The Flour Compendium — No. 01</span>
-      <h1 class="wb-flour-title">White Bread Flour</h1>
-      <p class="wb-flour-subtitle">The workhorse. The starting point. The flour that built a million sourdough habits.</p>
-      <div class="wb-flour-tags">
-        <span class="wb-tag wb-tag-green">Beginner Friendly</span>
-        <span class="wb-tag wb-tag-amber">High Protein</span>
-        <span class="wb-tag wb-tag-blue">USA &amp; Global</span>
-        <span class="wb-tag wb-tag-green">Widely Available</span>
-      </div>
-      <p style="max-width:540px; font-size:0.92rem; color:var(--bark); font-style:italic;">
-        Written by Kyle W. &nbsp;·&nbsp; <a href="/flour-compendium.html" style="color:var(--sage);">Back to the Compendium</a>
-      </p>
-    </div>
-    <div class="wb-flour-stat-card">
-      <div class="wb-stat-card-header">at a glance</div>
-      <div class="wb-stat-row"><span class="wb-stat-label">Protein Range</span><span class="wb-stat-value">11 – 14%</span></div>
-      <div class="wb-stat-row"><span class="wb-stat-label">Hydration</span><span class="wb-stat-value">68 – 85%</span></div>
-      <div class="wb-stat-row"><span class="wb-stat-label">Gluten Strength</span><span class="wb-stat-value wb-highlight">Strong</span></div>
-      <div class="wb-stat-row"><span class="wb-stat-label">Fermentation</span><span class="wb-stat-value">Steady / Predictable</span></div>
-      <div class="wb-stat-row"><span class="wb-stat-label">Oso-Approved?</span><span class="wb-stat-value" style="color:var(--moss);">Yes — daily driver</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="wb-content-wrapper">
-
-  <article class="wb-flour-prose">
-
-    <div class="wb-ad-break wb-reveal">
-      <div class="wb-ad-break-label">Advertisement</div>
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8428061506404633" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2 class="wb-reveal" id="what-is-it">What Is It?</h2>
-
-    <p class="wb-reveal">
-      White bread flour is milled from hard red or hard white wheat, with most of the bran and germ removed, leaving you with predominantly endosperm. That endosperm is rich in two proteins — glutenin and gliadin — which combine with water to form gluten. More protein means more gluten. More gluten means structure. Structure means your loaf doesn't pancake out across the Dutch oven like it's trying to escape.
-    </p>
-
-    <p class="wb-reveal">
-      The "bread" distinction matters. <strong>All-purpose flour runs 10–12% protein</strong>; bread flour typically lands between 12–14%. That extra percentage or two might not sound like much, but in a high-hydration sourdough where you're asking the dough to hold together for 12+ hours of fermentation, it's the difference between a bold ear and a flat disappointment.
-    </p>
-
-    <div class="wb-hand-note wb-reveal">
-      "If you're just starting out, this is the flour. Not because it's the most interesting — it isn't — but because it gives you the clearest feedback on what your hands and your starter are actually doing."
-    </div>
-
-    <h2 class="wb-reveal" id="protein">Protein &amp; Why It Matters</h2>
-
-    <p class="wb-reveal">
-      Every flour's behavior in sourdough is downstream of one number: protein content. Here's how white bread flour stacks up against the others.
-    </p>
-
-    <div class="wb-protein-bar-group wb-reveal" id="wb-protein-bars">
-      <div class="wb-protein-bar-row">
-        <span class="wb-pbar-label">Bread Flour</span>
-        <div class="wb-pbar-track"><div class="wb-pbar-fill" style="width:0%" data-target="92%"></div></div>
-        <span class="wb-pbar-pct">12–14%</span>
-      </div>
-      <div class="wb-protein-bar-row">
-        <span class="wb-pbar-label">Whole Wheat</span>
-        <div class="wb-pbar-track"><div class="wb-pbar-fill wb-sage" style="width:0%" data-target="88%"></div></div>
-        <span class="wb-pbar-pct">13–15%</span>
-      </div>
-      <div class="wb-protein-bar-row">
-        <span class="wb-pbar-label">All-Purpose</span>
-        <div class="wb-pbar-track"><div class="wb-pbar-fill wb-amber" style="width:0%" data-target="72%"></div></div>
-        <span class="wb-pbar-pct">10–12%</span>
-      </div>
-      <div class="wb-protein-bar-row">
-        <span class="wb-pbar-label">Rye</span>
-        <div class="wb-pbar-track"><div class="wb-pbar-fill wb-sage" style="width:0%" data-target="75%"></div></div>
-        <span class="wb-pbar-pct">~13%*</span>
-      </div>
-      <div class="wb-protein-bar-row">
-        <span class="wb-pbar-label">Spelt</span>
-        <div class="wb-pbar-track"><div class="wb-pbar-fill wb-amber" style="width:0%" data-target="68%"></div></div>
-        <span class="wb-pbar-pct">10–12%</span>
-      </div>
-      <div class="wb-protein-bar-row">
-        <span class="wb-pbar-label">Einkorn</span>
-        <div class="wb-pbar-track"><div class="wb-pbar-fill wb-amber" style="width:0%" data-target="56%"></div></div>
-        <span class="wb-pbar-pct">~10%*</span>
-      </div>
-    </div>
-
-    <p class="wb-red-note wb-reveal">*Rye's gluten is weak despite the protein. Einkorn's is weaker still. Numbers aren't everything — see those pages for the full picture.</p>
-
-    <div class="wb-section-rule wb-reveal"><span class="wb-section-rule-mark">✦</span></div>
-
-    <h2 class="wb-reveal" id="handling">How It Handles</h2>
-
-    <p class="wb-reveal">
-      White bread flour is forgiving in ways that make it the best teaching flour there is. It builds strong, elastic gluten that tolerates rough treatment, holds its shape during proofing, and gives you a meaningful ear under decent scoring. It can handle hydration from a sensible 72% all the way up to 82–85% in the hands of someone who knows what they're doing.
-    </p>
-
-    <div class="wb-tips-grid">
-      <div class="wb-tip-card wb-reveal">
-        <span class="wb-tip-card-icon">⧗</span>
-        <div class="wb-tip-card-title">Fermentation</div>
-        <p>Steady and readable. Bulk ferment typically runs 4–6 hours at 76°F with a healthy starter. It won't surprise you.</p>
-      </div>
-      <div class="wb-tip-card wb-reveal">
-        <span class="wb-tip-card-icon">≋</span>
-        <div class="wb-tip-card-title">Hydration</div>
-        <p>Start at 72–75% if you're new. Once your shaping is tight, push toward 78–80% for a more open crumb.</p>
-      </div>
-      <div class="wb-tip-card wb-reveal">
-        <span class="wb-tip-card-icon">⊡</span>
-        <div class="wb-tip-card-title">Oven Spring</div>
-        <p>Excellent. Strong gluten holds all that fermentation gas until the crust sets. This is what gives you height.</p>
-      </div>
-      <div class="wb-tip-card wb-reveal">
-        <span class="wb-tip-card-icon">✦</span>
-        <div class="wb-tip-card-title">Flavor</div>
-        <p>Clean and mild. The sourdough tang comes through clearly — no competition from the grain itself.</p>
-      </div>
-    </div>
-
-    <div class="wb-ad-break wb-reveal">
-      <div class="wb-ad-break-label">Advertisement</div>
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8428061506404633" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2 class="wb-reveal" id="brands">The Brands Worth Knowing</h2>
-
-    <p class="wb-reveal">
-      In the US, the conversation usually starts and ends with King Arthur — and for good reason. Their bread flour runs a consistent 12.7% protein, it's unbleached, unbromated, and non-GMO, and you can find it at almost any grocery store in the country. It's what Oso gets fed most days.
-    </p>
-
-    <h3 class="wb-reveal">United States</h3>
-
-    <table class="wb-brand-table wb-reveal">
-      <thead>
-        <tr>
-          <th>Brand</th><th>Protein</th><th>Notes</th><th>Find It</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="wb-brand-name">King Arthur Bread Flour</td>
-          <td>12.7%</td>
-          <td>The benchmark. Unbleached, non-GMO, consistent. Organic version available.</td>
-          <td><span class="wb-avail-dot wb-dot-green"></span>Nationwide</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">Central Milling Organic Bread Flour</td>
-          <td>12.5%</td>
-          <td>Tartine's flour of choice. Harder to find in stores; order direct or online.</td>
-          <td><span class="wb-avail-dot wb-dot-amber"></span>Online / Specialty</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">Bob's Red Mill Artisan Bread Flour</td>
-          <td>~12.5%</td>
-          <td>Solid, accessible, widely stocked. Good everyday option.</td>
-          <td><span class="wb-avail-dot wb-dot-green"></span>Nationwide</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">Cairnspring Expanse Bread Flour</td>
-          <td>12–13%</td>
-          <td>Pacific Northwest heritage wheat. Exceptional flavor. Small-batch mill.</td>
-          <td><span class="wb-avail-dot wb-dot-amber"></span>West Coast / Online</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">King Arthur Sir Lancelot</td>
-          <td>14.2%</td>
-          <td>High-gluten for ultra-high hydration bakes (85%+). Professional use.</td>
-          <td><span class="wb-avail-dot wb-dot-amber"></span>Online / Specialty</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 class="wb-reveal">Europe &amp; International</h3>
-
-    <table class="wb-brand-table wb-reveal">
-      <thead>
-        <tr>
-          <th>Country / Type</th><th>Common Name</th><th>Approx. Protein</th><th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="wb-brand-name">France</td>
-          <td>Farine T65</td>
-          <td>11–12%</td>
-          <td>The standard for French country bread. Slightly more mineral flavor than US bread flour.</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">Italy</td>
-          <td>Tipo 0 / Manitoba</td>
-          <td>11–14%</td>
-          <td>Manitoba Oro Tipo 00 at 13% is a cult favorite for high-hydration sourdough.</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">UK</td>
-          <td>Strong White Bread Flour</td>
-          <td>12–13%</td>
-          <td>Shipton Mill, Marriages, and Doves Farm are the go-to brands.</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">Germany</td>
-          <td>Type 550</td>
-          <td>~11%</td>
-          <td>The German equivalent of French T65. Common in rye-wheat blends.</td>
-        </tr>
-        <tr>
-          <td class="wb-brand-name">Australia</td>
-          <td>Baker's Flour</td>
-          <td>12–13%</td>
-          <td>Laucke and Allied Mills are the standard. Equivalent to US bread flour.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="wb-section-rule wb-reveal"><span class="wb-section-rule-mark">✦</span></div>
-
-    <h2 class="wb-reveal" id="organic">The Organic Question</h2>
-
-    <p class="wb-reveal">
-      Organic bread flour does perform slightly differently — not dramatically, but noticeably. Because organic wheat isn't treated with certain pesticides and chemicals, the bran retains more wild yeast and bacteria even after milling. Your starter tends to be more active, and the fermentation smells rounder and more complex.
-    </p>
-
-    <p class="wb-reveal">
-      If your budget has limits (whose doesn't), an easy middle ground: use organic flour for your starter feedings, and conventional for the bulk of your bake. You get the flavor benefits where they matter most without tripling your flour costs.
-    </p>
-
-    <h2 class="wb-reveal" id="storage">Storage</h2>
-
-    <p class="wb-reveal">
-      Bread flour is a kitchen staple, not a pantry artifact. Store it in a cool, dry place in a sealed container — a lidded bin beats the original paper bag. Protein content and enzyme activity both degrade over time, so flour older than six months can give you a sluggish starter and weaker gluten development. Buy smaller quantities more often if you're baking less than once a week.
-    </p>
-
-    <p class="wb-reveal">
-      In summer, if your kitchen runs hot, consider keeping a portion in the fridge. Bring it to room temperature before mixing — cold flour will throw off your bulk ferment timing.
-    </p>
-
-  </article>
-
-  <aside class="wb-sidebar">
-
-    <div class="wb-buy-card wb-reveal">
-      <div class="wb-buy-card-header">
-        <span class="wb-buy-card-header-title">Recommended Buy</span>
-        <span class="wb-buy-card-header-badge">Top Pick</span>
-      </div>
-      <div class="wb-buy-card-body">
-        <div class="wb-buy-card-brand">King Arthur Baking Co.</div>
-        <div class="wb-buy-card-product">Unbleached Bread Flour, 5 lb</div>
-        <div class="wb-buy-card-desc">The most reliable bread flour you'll find at any grocery store. 12.7% protein, unbleached, non-GMO. This is what Oso eats.</div>
-        <div class="wb-buy-card-meta">
-          <div class="wb-meta-row"><span class="wb-k">Protein</span><span class="wb-v">12.7%</span></div>
-          <div class="wb-meta-row"><span class="wb-k">Bleached?</span><span class="wb-v">No</span></div>
-          <div class="wb-meta-row"><span class="wb-k">Bromated?</span><span class="wb-v">No</span></div>
-          <div class="wb-meta-row"><span class="wb-k">Non-GMO</span><span class="wb-v">Yes (verified)</span></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            White Bread Flour — The Flour Compendium | Sourdough Database
+        </title>
+        <meta
+            name="description"
+            content="Everything you need to know about white bread flour for sourdough baking — protein content, handling tips, and where to buy it."
+        />
+
+        <link
+            rel="canonical"
+            href="https://sourdoughdatabase.com/flour/white-bread-flour.html"
+        />
+
+        <meta
+            property="og:title"
+            content="White Bread Flour — The Flour Compendium | Sourdough Database"
+        />
+        <meta
+            property="og:description"
+            content="The workhorse of sourdough. High protein, reliable gluten development, and a forgiving temperament. Start here."
+        />
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:image"
+            content="https://sourdoughdatabase.com/assets/images/og-image.png"
+        />
+        <meta property="og:site_name" content="The Sourdough Database" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="White Bread Flour — The Flour Compendium | Sourdough Database"
+        />
+        <meta
+            name="twitter:description"
+            content="The workhorse of sourdough. High protein, reliable gluten development, and a forgiving temperament. Start here."
+        />
+        <meta
+            name="twitter:image"
+            content="https://sourdoughdatabase.com/assets/images/og-image.png"
+        />
+
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/assets/images/favicon.svg"
+        />
+        <link rel="alternate icon" href="/assets/images/favicon.ico" />
+        <link
+            rel="apple-touch-icon"
+            href="/assets/images/apple-touch-icon.png"
+        />
+        <meta name="theme-color" content="#f4ead0" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Special+Elite&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- AdSense -->
+        <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- Google Analytics 4 -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-7TNFRKVWVW");
+        </script>
+
+        <!-- Shared stylesheet — all global styles live here -->
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+
+        <!-- Page-scoped styles only — no :root, body, *, html, or bare a overrides -->
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": "White Bread Flour for Sourdough Baking",
+                "description": "Everything you need to know about white bread flour for sourdough — protein content, handling tips, and where to buy it.",
+                "url": "https://sourdoughdatabase.com/flour/white-bread-flour.html",
+                "datePublished": "2026-06-02",
+                "dateModified": "2026-06-02",
+                "author": {
+                    "@type": "Person",
+                    "name": "Kyle Weber",
+                    "url": "https://kylewebear.com"
+                },
+                "publisher": {
+                    "@id": "https://sourdoughdatabase.com/#organization"
+                },
+                "isPartOf": { "@id": "https://sourdoughdatabase.com/#website" },
+                "inLanguage": "en-US",
+                "keywords": "white bread flour sourdough, bread flour protein, sourdough flour, strong white flour"
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://sourdoughdatabase.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Flour Compendium",
+                        "item": "https://sourdoughdatabase.com/flour-compendium.html"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "White Bread Flour"
+                    }
+                ]
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="site-header"></div>
+
+        <div class="flour-breadcrumb">
+            <div class="flour-breadcrumb-inner">
+                <a href="/">Home</a><span class="flour-sep">›</span>
+                <a href="/flour-compendium.html">Flour Compendium</a
+                ><span class="flour-sep">›</span>
+                <span>White Bread Flour</span>
+            </div>
         </div>
-        <a class="wb-buy-btn" href="https://www.amazon.com/dp/B00P6EQW6G?tag=sourdoughdbs-20" target="_blank" rel="noopener sponsored">Buy on Amazon →</a>
-        <div class="wb-buy-btn-note">Affiliate link — helps keep this site going.</div>
-        <hr class="wb-buy-divider" />
-        <div class="wb-alt-buy">Also at <a href="https://shop.kingarthurbaking.com/items/bread-flour" target="_blank" rel="noopener" style="color:var(--pen-blue);">King Arthur's own site</a></div>
-        <div class="wb-alt-buy">Organic: <a href="https://www.amazon.com/dp/B00P6ERTS6?tag=sourdoughdbs-20" target="_blank" rel="noopener sponsored" style="color:var(--pen-blue);">KA Organic Bread Flour →</a></div>
-      </div>
-    </div>
 
-    <div class="wb-table-card wb-reveal">
-      <div class="wb-table-card-title">Also worth trying</div>
-      <ul class="wb-table-card-list">
-        <li><span class="wb-li-dot">→</span><span><strong>Central Milling Organic Bread</strong> — Tartine uses it. Order at centralmilling.com</span></li>
-        <li><span class="wb-li-dot">→</span><span><strong>Bob's Red Mill Artisan Bread</strong> — solid everyday backup, widely available</span></li>
-        <li><span class="wb-li-dot">→</span><span><strong>Cairnspring Expanse</strong> — Pacific NW heritage wheat, beautiful flavor</span></li>
-        <li><span class="wb-li-dot">→</span><span><strong>KA Sir Lancelot</strong> (14.2%) — for the 80%+ hydration obsessives</span></li>
-      </ul>
-    </div>
+        <div class="flour-strip">
+            <div class="flour-strip-inner">
+                <span class="flour-strip-label">The Flours →</span>
+                <a
+                    href="/flour/white-bread-flour.html"
+                    class="flour-pill flour-active"
+                    >White Bread</a
+                >
+                <a
+                    href="/flour/whole-wheat-flour.html"
+                    class="flour-pill flour-inactive"
+                    >Whole Wheat</a
+                >
+                <a
+                    href="/flour/rye-flour.html"
+                    class="flour-pill flour-inactive"
+                    >Rye</a
+                >
+                <a
+                    href="/flour/spelt-flour.html"
+                    class="flour-pill flour-inactive"
+                    >Spelt</a
+                >
+                <a
+                    href="/flour/all-purpose-flour.html"
+                    class="flour-pill flour-inactive"
+                    >All-Purpose</a
+                >
+                <a
+                    href="/flour/einkorn-flour.html"
+                    class="flour-pill flour-inactive"
+                    >Einkorn</a
+                >
+                <a
+                    href="/flour/khorasan-flour.html"
+                    class="flour-pill flour-inactive"
+                    >Khorasan</a
+                >
+                <a
+                    href="/flour-compendium.html"
+                    class="flour-pill flour-inactive"
+                    >Tipo 00</a
+                >
+                <a
+                    href="/flour-compendium.html"
+                    class="flour-pill flour-inactive"
+                    >T65 French</a
+                >
+            </div>
+        </div>
 
-    <div class="wb-nav-card wb-reveal">
-      <div class="wb-nav-card-title">The Flour Compendium</div>
-      <ul class="wb-nav-card-list">
-        <li class="wb-current"><a href="/flour/white-bread-flour.html"><span>White Bread Flour</span><span class="wb-nav-badge wb-nb-active">You're here</span></a></li>
-        <li><a href="/flour/whole-wheat-flour.html"><span>Whole Wheat</span><span class="wb-nav-badge wb-nb-active">Live</span></a></li>
-        <li><a href="/flour/rye-flour.html"><span>Rye</span><span class="wb-nav-badge wb-nb-active">Live</span></a></li>
-        <li><a href="/flour/spelt-flour.html"><span>Spelt</span><span class="wb-nav-badge wb-nb-active">Live</span></a></li>
-        <li><a href="/flour/all-purpose-flour.html"><span>All-Purpose</span><span class="wb-nav-badge wb-nb-active">Live</span></a></li>
-        <li><a href="/flour-compendium.html"><span>Einkorn</span><span class="wb-nav-badge wb-nb-soon">Soon</span></a></li>
-        <li><a href="/flour-compendium.html"><span>Khorasan / Kamut</span><span class="wb-nav-badge wb-nb-soon">Soon</span></a></li>
-        <li><a href="/flour-compendium.html"><span>Tipo 00 (Italian)</span><span class="wb-nav-badge wb-nb-soon">Soon</span></a></li>
-        <li><a href="/flour-compendium.html"><span>T65 (French)</span><span class="wb-nav-badge wb-nb-soon">Soon</span></a></li>
-      </ul>
-    </div>
+        <div class="flour-hero">
+            <div class="flour-hero-inner">
+                <div>
+                    <span class="flour-label"
+                        >The Flour Compendium — No. 01</span
+                    >
+                    <h1 class="flour-title">White Bread Flour</h1>
+                    <p class="flour-subtitle">
+                        The workhorse. The starting point. The flour that built
+                        a million sourdough habits.
+                    </p>
+                    <div class="flour-tags">
+                        <span class="flour-tag flour-tag-green"
+                            >Beginner Friendly</span
+                        >
+                        <span class="flour-tag flour-tag-amber">High Protein</span>
+                        <span class="flour-tag flour-tag-blue">USA &amp; Global</span>
+                        <span class="flour-tag flour-tag-green"
+                            >Widely Available</span
+                        >
+                    </div>
+                    <p
+                        class="flour-hero-byline"
+                    >
+                        Written by Kyle W. &nbsp;·&nbsp;
+                        <a
+                            href="/flour-compendium.html"
+                            >Back to the Compendium</a
+                        >
+                    </p>
+                </div>
+                <div class="flour-stat-card">
+                    <div class="flour-stat-card-header">at a glance</div>
+                    <div class="flour-stat-row">
+                        <span class="flour-stat-label">Protein Range</span
+                        ><span class="flour-stat-value">11 – 14%</span>
+                    </div>
+                    <div class="flour-stat-row">
+                        <span class="flour-stat-label">Hydration</span
+                        ><span class="flour-stat-value">68 – 85%</span>
+                    </div>
+                    <div class="flour-stat-row">
+                        <span class="flour-stat-label">Gluten Strength</span
+                        ><span class="flour-stat-value flour-highlight">Strong</span>
+                    </div>
+                    <div class="flour-stat-row">
+                        <span class="flour-stat-label">Fermentation</span
+                        ><span class="flour-stat-value">Steady / Predictable</span>
+                    </div>
+                    <div class="flour-stat-row">
+                        <span class="flour-stat-label">Oso-Approved?</span
+                        ><span class="flour-stat-value flour-stat-moss"
+                            >Yes — daily driver</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div style="text-align:center;">
-      <div style="font-family:'Special Elite',monospace;font-size:0.6rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Advertisement</div>
-      <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8428061506404633" data-ad-slot="auto"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+        <div class="flour-content-wrapper">
+            <article class="flour-prose">
+                <div class="flour-ad-break flour-reveal">
+                    <div class="flour-ad-break-label">Advertisement</div>
+                    <ins
+                        class="adsbygoogle"
+                        style="display: block"
+                        data-ad-client="ca-pub-8428061506404633"
+                        data-ad-slot="auto"
+                        data-ad-format="horizontal"
+                        data-full-width-responsive="true"
+                    ></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
 
-  </aside>
+                <h2 class="flour-reveal" id="what-is-it">What Is It?</h2>
 
-</div>
+                <p class="flour-reveal">
+                    White bread flour is milled from hard red or hard white
+                    wheat, with most of the bran and germ removed, leaving you
+                    with predominantly endosperm. That endosperm is rich in two
+                    proteins — glutenin and gliadin — which combine with water
+                    to form gluten. More protein means more gluten. More gluten
+                    means structure. Structure means your loaf doesn't pancake
+                    out across the Dutch oven like it's trying to escape.
+                </p>
 
-<div id="site-footer"></div>
-<script src="/assets/js/components.js"></script>
+                <p class="flour-reveal">
+                    The "bread" distinction matters.
+                    <strong>All-purpose flour runs 10–12% protein</strong>;
+                    bread flour typically lands between 12–14%. That extra
+                    percentage or two might not sound like much, but in a
+                    high-hydration sourdough where you're asking the dough to
+                    hold together for 12+ hours of fermentation, it's the
+                    difference between a bold ear and a flat disappointment.
+                </p>
 
-<script>
-  // Scroll reveal
-  var revealEls = document.querySelectorAll('.wb-reveal');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry, i) {
-      if (entry.isIntersecting) {
-        entry.target.style.transitionDelay = (i % 4) * 0.08 + 's';
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealEls.forEach(function(el) { observer.observe(el); });
+                <div class="flour-hand-note flour-reveal">
+                    "If you're just starting out, this is the flour. Not because
+                    it's the most interesting — it isn't — but because it gives
+                    you the clearest feedback on what your hands and your
+                    starter are actually doing."
+                </div>
 
-  // Protein bar animation
-  var barSection = document.getElementById('wb-protein-bars');
-  var barObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.wb-pbar-fill').forEach(function(bar, i) {
-          setTimeout(function() { bar.style.width = bar.dataset.target; }, i * 120);
-        });
-        barObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  if (barSection) barObserver.observe(barSection);
-</script>
+                <h2 class="flour-reveal" id="protein">
+                    Protein &amp; Why It Matters
+                </h2>
 
-</body>
+                <p class="flour-reveal">
+                    Every flour's behavior in sourdough is downstream of one
+                    number: protein content. Here's how white bread flour stacks
+                    up against the others.
+                </p>
+
+                <div
+                    class="flour-protein-bar-group flour-reveal"
+                    id="flour-protein-bars"
+                >
+                    <div class="flour-protein-bar-row">
+                        <span class="flour-pbar-label">Bread Flour</span>
+                        <div class="flour-pbar-track">
+                            <div
+                                class="flour-pbar-fill"
+                                style="width: 0%"
+                                data-target="92%"
+                            ></div>
+                        </div>
+                        <span class="flour-pbar-pct">12–14%</span>
+                    </div>
+                    <div class="flour-protein-bar-row">
+                        <span class="flour-pbar-label">Whole Wheat</span>
+                        <div class="flour-pbar-track">
+                            <div
+                                class="flour-pbar-fill flour-sage"
+                                style="width: 0%"
+                                data-target="88%"
+                            ></div>
+                        </div>
+                        <span class="flour-pbar-pct">13–15%</span>
+                    </div>
+                    <div class="flour-protein-bar-row">
+                        <span class="flour-pbar-label">All-Purpose</span>
+                        <div class="flour-pbar-track">
+                            <div
+                                class="flour-pbar-fill flour-amber"
+                                style="width: 0%"
+                                data-target="72%"
+                            ></div>
+                        </div>
+                        <span class="flour-pbar-pct">10–12%</span>
+                    </div>
+                    <div class="flour-protein-bar-row">
+                        <span class="flour-pbar-label">Rye</span>
+                        <div class="flour-pbar-track">
+                            <div
+                                class="flour-pbar-fill flour-sage"
+                                style="width: 0%"
+                                data-target="75%"
+                            ></div>
+                        </div>
+                        <span class="flour-pbar-pct">~13%*</span>
+                    </div>
+                    <div class="flour-protein-bar-row">
+                        <span class="flour-pbar-label">Spelt</span>
+                        <div class="flour-pbar-track">
+                            <div
+                                class="flour-pbar-fill flour-amber"
+                                style="width: 0%"
+                                data-target="68%"
+                            ></div>
+                        </div>
+                        <span class="flour-pbar-pct">10–12%</span>
+                    </div>
+                    <div class="flour-protein-bar-row">
+                        <span class="flour-pbar-label">Einkorn</span>
+                        <div class="flour-pbar-track">
+                            <div
+                                class="flour-pbar-fill flour-amber"
+                                style="width: 0%"
+                                data-target="56%"
+                            ></div>
+                        </div>
+                        <span class="flour-pbar-pct">~10%*</span>
+                    </div>
+                </div>
+
+                <p class="flour-red-note flour-reveal">
+                    *Rye's gluten is weak despite the protein. Einkorn's is
+                    weaker still. Numbers aren't everything — see those pages
+                    for the full picture.
+                </p>
+
+                <div class="flour-section-rule flour-reveal">
+                    <span class="flour-section-rule-mark">✦</span>
+                </div>
+
+                <h2 class="flour-reveal" id="handling">How It Handles</h2>
+
+                <p class="flour-reveal">
+                    White bread flour is forgiving in ways that make it the best
+                    teaching flour there is. It builds strong, elastic gluten
+                    that tolerates rough treatment, holds its shape during
+                    proofing, and gives you a meaningful ear under decent
+                    scoring. It can handle hydration from a sensible 72% all the
+                    way up to 82–85% in the hands of someone who knows what
+                    they're doing.
+                </p>
+
+                <div class="flour-tips-grid">
+                    <div class="flour-tip-card flour-reveal">
+                        <span class="flour-tip-card-icon">⧗</span>
+                        <div class="flour-tip-card-title">Fermentation</div>
+                        <p>
+                            Steady and readable. Bulk ferment typically runs 4–6
+                            hours at 76°F with a healthy starter. It won't
+                            surprise you.
+                        </p>
+                    </div>
+                    <div class="flour-tip-card flour-reveal">
+                        <span class="flour-tip-card-icon">≋</span>
+                        <div class="flour-tip-card-title">Hydration</div>
+                        <p>
+                            Start at 72–75% if you're new. Once your shaping is
+                            tight, push toward 78–80% for a more open crumb.
+                        </p>
+                    </div>
+                    <div class="flour-tip-card flour-reveal">
+                        <span class="flour-tip-card-icon">⊡</span>
+                        <div class="flour-tip-card-title">Oven Spring</div>
+                        <p>
+                            Excellent. Strong gluten holds all that fermentation
+                            gas until the crust sets. This is what gives you
+                            height.
+                        </p>
+                    </div>
+                    <div class="flour-tip-card flour-reveal">
+                        <span class="flour-tip-card-icon">✦</span>
+                        <div class="flour-tip-card-title">Flavor</div>
+                        <p>
+                            Clean and mild. The sourdough tang comes through
+                            clearly — no competition from the grain itself.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flour-ad-break flour-reveal">
+                    <div class="flour-ad-break-label">Advertisement</div>
+                    <ins
+                        class="adsbygoogle"
+                        style="display: block"
+                        data-ad-client="ca-pub-8428061506404633"
+                        data-ad-slot="auto"
+                        data-ad-format="horizontal"
+                        data-full-width-responsive="true"
+                    ></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <h2 class="flour-reveal" id="brands">The Brands Worth Knowing</h2>
+
+                <p class="flour-reveal">
+                    In the US, the conversation usually starts and ends with
+                    King Arthur — and for good reason. Their bread flour runs a
+                    consistent 12.7% protein, it's unbleached, unbromated, and
+                    non-GMO, and you can find it at almost any grocery store in
+                    the country. It's what Oso gets fed most days.
+                </p>
+
+                <h3 class="flour-reveal">United States</h3>
+
+                <table class="flour-brand-table flour-reveal">
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Protein</th>
+                            <th>Notes</th>
+                            <th>Find It</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="flour-brand-name">
+                                King Arthur Bread Flour
+                            </td>
+                            <td>12.7%</td>
+                            <td>
+                                The benchmark. Unbleached, non-GMO, consistent.
+                                Organic version available.
+                            </td>
+                            <td>
+                                <span class="flour-avail-dot flour-dot-green"></span
+                                >Nationwide
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">
+                                Central Milling Organic Bread Flour
+                            </td>
+                            <td>12.5%</td>
+                            <td>
+                                Tartine's flour of choice. Harder to find in
+                                stores; order direct or online.
+                            </td>
+                            <td>
+                                <span class="flour-avail-dot flour-dot-amber"></span
+                                >Online / Specialty
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">
+                                Bob's Red Mill Artisan Bread Flour
+                            </td>
+                            <td>~12.5%</td>
+                            <td>
+                                Solid, accessible, widely stocked. Good everyday
+                                option.
+                            </td>
+                            <td>
+                                <span class="flour-avail-dot flour-dot-green"></span
+                                >Nationwide
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">
+                                Cairnspring Expanse Bread Flour
+                            </td>
+                            <td>12–13%</td>
+                            <td>
+                                Pacific Northwest heritage wheat. Exceptional
+                                flavor. Small-batch mill.
+                            </td>
+                            <td>
+                                <span class="flour-avail-dot flour-dot-amber"></span
+                                >West Coast / Online
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">
+                                King Arthur Sir Lancelot
+                            </td>
+                            <td>14.2%</td>
+                            <td>
+                                High-gluten for ultra-high hydration bakes
+                                (85%+). Professional use.
+                            </td>
+                            <td>
+                                <span class="flour-avail-dot flour-dot-amber"></span
+                                >Online / Specialty
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="flour-reveal">Europe &amp; International</h3>
+
+                <table class="flour-brand-table flour-reveal">
+                    <thead>
+                        <tr>
+                            <th>Country / Type</th>
+                            <th>Common Name</th>
+                            <th>Approx. Protein</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="flour-brand-name">France</td>
+                            <td>Farine T65</td>
+                            <td>11–12%</td>
+                            <td>
+                                The standard for French country bread. Slightly
+                                more mineral flavor than US bread flour.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">Italy</td>
+                            <td>Tipo 0 / Manitoba</td>
+                            <td>11–14%</td>
+                            <td>
+                                Manitoba Oro Tipo 00 at 13% is a cult favorite
+                                for high-hydration sourdough.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">UK</td>
+                            <td>Strong White Bread Flour</td>
+                            <td>12–13%</td>
+                            <td>
+                                Shipton Mill, Marriages, and Doves Farm are the
+                                go-to brands.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">Germany</td>
+                            <td>Type 550</td>
+                            <td>~11%</td>
+                            <td>
+                                The German equivalent of French T65. Common in
+                                rye-wheat blends.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flour-brand-name">Australia</td>
+                            <td>Baker's Flour</td>
+                            <td>12–13%</td>
+                            <td>
+                                Laucke and Allied Mills are the standard.
+                                Equivalent to US bread flour.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="flour-section-rule flour-reveal">
+                    <span class="flour-section-rule-mark">✦</span>
+                </div>
+
+                <h2 class="flour-reveal" id="organic">The Organic Question</h2>
+
+                <p class="flour-reveal">
+                    Organic bread flour does perform slightly differently — not
+                    dramatically, but noticeably. Because organic wheat isn't
+                    treated with certain pesticides and chemicals, the bran
+                    retains more wild yeast and bacteria even after milling.
+                    Your starter tends to be more active, and the fermentation
+                    smells rounder and more complex.
+                </p>
+
+                <p class="flour-reveal">
+                    If your budget has limits (whose doesn't), an easy middle
+                    ground: use organic flour for your starter feedings, and
+                    conventional for the bulk of your bake. You get the flavor
+                    benefits where they matter most without tripling your flour
+                    costs.
+                </p>
+
+                <h2 class="flour-reveal" id="storage">Storage</h2>
+
+                <p class="flour-reveal">
+                    Bread flour is a kitchen staple, not a pantry artifact.
+                    Store it in a cool, dry place in a sealed container — a
+                    lidded bin beats the original paper bag. Protein content and
+                    enzyme activity both degrade over time, so flour older than
+                    six months can give you a sluggish starter and weaker gluten
+                    development. Buy smaller quantities more often if you're
+                    baking less than once a week.
+                </p>
+
+                <p class="flour-reveal">
+                    In summer, if your kitchen runs hot, consider keeping a
+                    portion in the fridge. Bring it to room temperature before
+                    mixing — cold flour will throw off your bulk ferment timing.
+                </p>
+            </article>
+
+            <aside class="flour-sidebar">
+                <div class="flour-buy-card flour-reveal">
+                    <div class="flour-buy-card-header">
+                        <span class="flour-buy-card-header-title"
+                            >Recommended Buy</span
+                        >
+                        <span class="flour-buy-card-header-badge">Top Pick</span>
+                    </div>
+                    <div class="flour-buy-card-body">
+                        <div class="flour-buy-card-brand">
+                            King Arthur Baking Co.
+                        </div>
+                        <div class="flour-buy-card-product">
+                            Unbleached Bread Flour, 5 lb
+                        </div>
+                        <div class="flour-buy-card-desc">
+                            The most reliable bread flour you'll find at any
+                            grocery store. 12.7% protein, unbleached, non-GMO.
+                            This is what Oso eats.
+                        </div>
+                        <div class="flour-buy-card-meta">
+                            <div class="flour-meta-row">
+                                <span class="flour-k">Protein</span
+                                ><span class="flour-v">12.7%</span>
+                            </div>
+                            <div class="flour-meta-row">
+                                <span class="flour-k">Bleached?</span
+                                ><span class="flour-v">No</span>
+                            </div>
+                            <div class="flour-meta-row">
+                                <span class="flour-k">Bromated?</span
+                                ><span class="flour-v">No</span>
+                            </div>
+                            <div class="flour-meta-row">
+                                <span class="flour-k">Non-GMO</span
+                                ><span class="flour-v">Yes (verified)</span>
+                            </div>
+                        </div>
+                        <a
+                            class="flour-buy-btn"
+                            href="https://amzn.to/4ueyYpS"
+                            target="_blank"
+                            rel="noopener sponsored"
+                            >Buy on Amazon →</a
+                        >
+                        <div class="flour-buy-btn-note">
+                            Affiliate link — helps keep this site going.
+                        </div>
+                        <hr class="flour-buy-divider" />
+                        <div class="flour-alt-buy">
+                            Also at
+                            <a
+                                href="https://shop.kingarthurbaking.com/items/bread-flour"
+                                target="_blank"
+                                rel="noopener"
+                                >King Arthur's own site</a
+                            >
+                        </div>
+                        <div class="flour-alt-buy">
+                            Organic:
+                            <a
+                                href="https://amzn.to/4ueyYpS"
+                                target="_blank"
+                                rel="noopener sponsored"
+                                >KA Organic Bread Flour →</a
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flour-table-card flour-reveal">
+                    <div class="flour-table-card-title">Also worth trying</div>
+                    <ul class="flour-table-card-list">
+                        <li>
+                            <span class="flour-li-dot">→</span
+                            ><span
+                                ><strong>Central Milling Organic Bread</strong>
+                                — Tartine uses it. Order at
+                                centralmilling.com</span
+                            >
+                        </li>
+                        <li>
+                            <span class="flour-li-dot">→</span
+                            ><span
+                                ><strong>Bob's Red Mill Artisan Bread</strong> —
+                                solid everyday backup, widely available</span
+                            >
+                        </li>
+                        <li>
+                            <span class="flour-li-dot">→</span
+                            ><span
+                                ><strong>Cairnspring Expanse</strong> — Pacific
+                                NW heritage wheat, beautiful flavor</span
+                            >
+                        </li>
+                        <li>
+                            <span class="flour-li-dot">→</span
+                            ><span
+                                ><strong>KA Sir Lancelot</strong> (14.2%) — for
+                                the 80%+ hydration obsessives</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flour-nav-card flour-reveal">
+                    <div class="flour-nav-card-title">The Flour Compendium</div>
+                    <ul class="flour-nav-card-list">
+                        <li class="flour-current">
+                            <a href="/flour/white-bread-flour.html"
+                                ><span>White Bread Flour</span
+                                ><span class="flour-nav-badge flour-nb-active"
+                                    >You're here</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour/whole-wheat-flour.html"
+                                ><span>Whole Wheat</span
+                                ><span class="flour-nav-badge flour-nb-active"
+                                    >Live</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour/rye-flour.html"
+                                ><span>Rye</span
+                                ><span class="flour-nav-badge flour-nb-active"
+                                    >Live</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour/spelt-flour.html"
+                                ><span>Spelt</span
+                                ><span class="flour-nav-badge flour-nb-active"
+                                    >Live</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour/all-purpose-flour.html"
+                                ><span>All-Purpose</span
+                                ><span class="flour-nav-badge flour-nb-active"
+                                    >Live</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour-compendium.html"
+                                ><span>Einkorn</span
+                                ><span class="flour-nav-badge flour-nb-soon"
+                                    >Soon</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour-compendium.html"
+                                ><span>Khorasan / Kamut</span
+                                ><span class="flour-nav-badge flour-nb-soon"
+                                    >Soon</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour-compendium.html"
+                                ><span>Tipo 00 (Italian)</span
+                                ><span class="flour-nav-badge flour-nb-soon"
+                                    >Soon</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a href="/flour-compendium.html"
+                                ><span>T65 (French)</span
+                                ><span class="flour-nav-badge flour-nb-soon"
+                                    >Soon</span
+                                ></a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flour-ads-label-wrap">
+                    <div class="flour-ads-label">
+                        Advertisement
+                    </div>
+                    <ins
+                        class="adsbygoogle"
+                        style="
+                            display: inline-block;
+                            width: 300px;
+                            height: 250px;
+                        "
+                        data-ad-client="ca-pub-8428061506404633"
+                        data-ad-slot="auto"
+                    ></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </aside>
+        </div>
+
+        <div id="site-footer"></div>
+        <script src="/assets/js/components.js"></script>
+
+        <script>
+            // Scroll reveal
+            var revealEls = document.querySelectorAll(".flour-reveal");
+            var observer = new IntersectionObserver(
+                function (entries) {
+                    entries.forEach(function (entry, i) {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transitionDelay =
+                                (i % 4) * 0.08 + "s";
+                            entry.target.classList.add("visible");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.1 },
+            );
+            revealEls.forEach(function (el) {
+                observer.observe(el);
+            });
+
+            // Protein bar animation
+            var barSection = document.getElementById("flour-protein-bars");
+            var barObserver = new IntersectionObserver(
+                function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            document
+                                .querySelectorAll(".flour-pbar-fill")
+                                .forEach(function (bar, i) {
+                                    setTimeout(function () {
+                                        bar.style.width = bar.dataset.target;
+                                    }, i * 120);
+                                });
+                            barObserver.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.3 },
+            );
+            if (barSection) barObserver.observe(barSection);
+        </script>
+    </body>
 </html>

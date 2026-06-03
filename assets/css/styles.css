@@ -5607,32 +5607,1014 @@ footer {
   opacity: 0.7;
 }
 
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  align-self: center;
+/* ================================================================
+   FLOUR COMPENDIUM — ENTRY PAGES
+   Shared styles for all flour entry pages (/flour/*.html)
+   Single flour- prefix — no per-page prefixes.
+   ================================================================ */
+
+.flour-breadcrumb {
+                padding: 14px 32px;
+                border-bottom: 1px solid var(--rule);
+                background: var(--paper);
+            }
+
+.flour-breadcrumb-inner {
+                max-width: 980px;
+                margin: 0 auto;
+                font-family: "Special Elite", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.05em;
+                color: var(--pencil);
+                text-transform: uppercase;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+.flour-breadcrumb-inner a {
+                color: var(--pencil);
+                text-decoration: none;
+            }
+
+.flour-breadcrumb-inner a:hover {
+                color: var(--amber);
+            }
+
+.flour-breadcrumb-inner .flour-sep {
+                color: var(--rule);
+            }
+
+.flour-strip {
+                background: var(--moss);
+                padding: 10px 32px;
+                overflow-x: auto;
+            }
+
+.flour-strip-inner {
+                max-width: 980px;
+                margin: 0 auto;
+                display: flex;
+                gap: 6px;
+                align-items: center;
+            }
+
+.flour-strip-label {
+                font-family: "Caveat", cursive;
+                font-size: 0.85rem;
+                color: var(--sage-soft, #c5cdb4);
+                white-space: nowrap;
+                margin-right: 6px;
+            }
+
+.flour-pill {
+                font-family: "Special Elite", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 0.05em;
+                padding: 4px 12px;
+                border-radius: 20px;
+                text-decoration: none;
+                white-space: nowrap;
+                text-transform: uppercase;
+                transition:
+                    background 0.2s,
+                    color 0.2s;
+            }
+
+.flour-pill.flour-active {
+                background: var(--amber);
+                color: var(--moss-deep, #1f3520);
+            }
+
+.flour-pill.flour-inactive {
+                background: rgba(255, 255, 255, 0.08);
+                color: var(--sage-soft, #c5cdb4);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+            }
+
+.flour-pill.flour-inactive:hover {
+                background: rgba(255, 255, 255, 0.15);
+                color: var(--paper);
+            }
+
+.flour-hero {
+                background: var(--paper);
+                border-bottom: 2px solid var(--rule);
+                padding: 56px 32px 48px;
+            }
+
+.flour-hero-inner {
+                max-width: 980px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                gap: 48px;
+                align-items: start;
+            }
+
+.flour-label {
+                font-family: "Special Elite", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--amber);
+                margin-bottom: 10px;
+                display: block;
+            }
+
+.flour-title {
+                font-family: "Caveat", cursive;
+                font-size: clamp(2.8rem, 6vw, 4.2rem);
+                font-weight: 700;
+                color: var(--moss-deep, #1f3520);
+                line-height: 1.05;
+                margin-bottom: 6px;
+            }
+
+.flour-subtitle {
+                font-family: "Crimson Pro", serif;
+                font-size: 1.1rem;
+                font-style: italic;
+                color: var(--bark);
+                margin-bottom: 24px;
+                max-width: 520px;
+            }
+
+.flour-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+.flour-tag {
+                font-family: "Special Elite", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                padding: 4px 10px;
+                border-radius: 3px;
+            }
+
+.flour-tag-green {
+                background: rgba(45, 74, 43, 0.12);
+                color: var(--moss);
+                border: 1px solid rgba(45, 74, 43, 0.2);
+            }
+
+.flour-tag-amber {
+                background: rgba(200, 132, 44, 0.12);
+                color: var(--amber-deep, #9a5d1c);
+                border: 1px solid rgba(200, 132, 44, 0.25);
+            }
+
+.flour-tag-blue {
+                background: rgba(42, 63, 111, 0.1);
+                color: var(--pen-blue);
+                border: 1px solid rgba(42, 63, 111, 0.18);
+            }
+
+.flour-stat-card {
+                background: var(--paper-warm);
+                border: 1px solid var(--rule);
+                border-radius: 6px;
+                padding: 28px 24px;
+                min-width: 200px;
+                transform: rotate(1.2deg);
+                box-shadow: 4px 4px 0 rgba(29, 26, 20, 0.08);
+            }
+
+.flour-stat-card-header {
+                font-family: "Caveat", cursive;
+                font-size: 0.85rem;
+                color: var(--sage, #8a9a7b);
+                margin-bottom: 16px;
+                border-bottom: 1px dashed var(--rule);
+                padding-bottom: 8px;
+            }
+
+.flour-stat-row {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 14px;
+            }
+
+.flour-stat-row:last-child {
+                margin-bottom: 0;
+            }
+
+.flour-stat-label {
+                font-family: "Special Elite", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+            }
+
+.flour-stat-value {
+                font-family: "Caveat", cursive;
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: var(--moss-deep, #1f3520);
+                line-height: 1.1;
+            }
+
+.flour-stat-value.flour-highlight {
+                color: var(--pen-red);
+            }
+
+.flour-content-wrapper {
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 48px 32px 80px;
+                display: grid;
+                grid-template-columns: 1fr 300px;
+                gap: 56px;
+                align-items: start;
+            }
+
+.flour-prose h2 {
+                font-family: "Caveat", cursive;
+                font-size: 1.75rem;
+                font-weight: 700;
+                color: var(--moss-deep, #1f3520);
+                margin: 44px 0 12px;
+                padding-bottom: 6px;
+                border-bottom: 2px solid var(--rule);
+            }
+
+.flour-prose h2:first-child {
+                margin-top: 0;
+            }
+
+.flour-prose h3 {
+                font-family: "Special Elite", monospace;
+                font-size: 0.88rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--pen-blue);
+                margin: 28px 0 8px;
+            }
+
+.flour-prose p {
+                margin-bottom: 18px;
+                max-width: 680px;
+                font-size: 1rem;
+                color: var(--bark);
+            }
+
+.flour-prose p em {
+                font-style: italic;
+                color: var(--ink);
+            }
+
+.flour-prose strong {
+                font-weight: 600;
+                color: var(--ink);
+            }
+
+.flour-hand-note {
+                font-family: "Caveat", cursive;
+                font-size: 1.15rem;
+                color: var(--pen-blue);
+                background: rgba(42, 63, 111, 0.05);
+                border-left: 3px solid var(--pen-blue);
+                padding: 14px 20px;
+                margin: 28px 0;
+                border-radius: 0 4px 4px 0;
+                max-width: 680px;
+            }
+
+.flour-red-note {
+                font-family: "Caveat", cursive;
+                font-size: 1rem;
+                color: var(--pen-red);
+                margin: -8px 0 20px;
+                padding-left: 4px;
+                max-width: 680px;
+            }
+
+.flour-protein-bar-group {
+                margin: 28px 0;
+                max-width: 680px;
+            }
+
+.flour-protein-bar-row {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 10px;
+            }
+
+.flour-pbar-label {
+                font-family: "Special Elite", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.04em;
+                width: 140px;
+                flex-shrink: 0;
+                color: var(--bark);
+            }
+
+.flour-pbar-track {
+                flex: 1;
+                height: 10px;
+                background: var(--paper-warm);
+                border-radius: 5px;
+                border: 1px solid var(--rule);
+                overflow: hidden;
+            }
+
+.flour-pbar-fill {
+                height: 100%;
+                border-radius: 5px;
+                background: var(--moss);
+                transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+
+.flour-pbar-fill.flour-amber {
+                background: var(--amber);
+            }
+
+.flour-pbar-fill.flour-sage {
+                background: var(--sage, #8a9a7b);
+            }
+
+.flour-pbar-pct {
+                font-family: "Caveat", cursive;
+                font-size: 0.9rem;
+                font-weight: 700;
+                color: var(--moss);
+                width: 40px;
+                text-align: right;
+            }
+
+.flour-tips-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                margin: 20px 0 28px;
+                max-width: 680px;
+            }
+
+.flour-tip-card {
+                background: var(--paper);
+                border: 1px solid var(--rule);
+                border-radius: 5px;
+                padding: 16px;
+            }
+
+.flour-tip-card-icon {
+                font-family: "Caveat", cursive;
+                font-size: 1.4rem;
+                color: var(--amber);
+                display: block;
+                margin-bottom: 4px;
+            }
+
+.flour-tip-card-title {
+                font-family: "Special Elite", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--moss);
+                margin-bottom: 5px;
+            }
+
+.flour-tip-card p {
+                font-size: 0.9rem;
+                margin: 0;
+                color: var(--bark);
+            }
+
+.flour-brand-table {
+                width: 100%;
+                max-width: 680px;
+                border-collapse: collapse;
+                margin: 20px 0 32px;
+                font-size: 0.92rem;
+            }
+
+.flour-brand-table th {
+                font-family: "Special Elite", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+                padding: 8px 12px;
+                text-align: left;
+                border-bottom: 2px solid var(--rule);
+            }
+
+.flour-brand-table td {
+                padding: 11px 12px;
+                border-bottom: 1px solid var(--rule);
+                color: var(--bark);
+                vertical-align: top;
+            }
+
+.flour-brand-table tr:last-child td {
+                border-bottom: none;
+            }
+
+.flour-brand-table .flour-brand-name {
+                font-family: "Crimson Pro", serif;
+                font-weight: 600;
+                color: var(--ink);
+            }
+
+.flour-brand-table .flour-avail-dot {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
+.flour-dot-green {
+                background: var(--moss);
+            }
+
+.flour-dot-amber {
+                background: var(--amber);
+            }
+
+.flour-ad-break {
+                margin: 40px 0;
+                max-width: 680px;
+                text-align: center;
+                border-top: 1px dashed var(--rule);
+                border-bottom: 1px dashed var(--rule);
+                padding: 20px 0;
+            }
+
+.flour-ad-break-label {
+                font-family: "Special Elite", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--pencil);
+                margin-bottom: 8px;
+            }
+
+.flour-section-rule {
+                border: none;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin: 40px 0;
+                max-width: 680px;
+            }
+
+.flour-section-rule::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: var(--rule);
+            }
+
+.flour-section-rule-mark {
+                font-family: "Caveat", cursive;
+                font-size: 1.1rem;
+                color: var(--amber);
+                line-height: 1;
+            }
+
+.flour-sidebar {
+                position: sticky;
+                top: 32px;
+            }
+
+.flour-buy-card {
+                background: var(--paper);
+                border: 2px solid var(--moss);
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 24px;
+                box-shadow: 4px 4px 0 rgba(45, 74, 43, 0.15);
+            }
+
+.flour-buy-card-header {
+                background: var(--moss);
+                padding: 14px 18px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+.flour-buy-card-header-title {
+                font-family: "Caveat", cursive;
+                font-size: 1rem;
+                color: var(--paper);
+            }
+
+.flour-buy-card-header-badge {
+                font-family: "Special Elite", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--amber);
+                border: 1px solid var(--amber);
+                padding: 2px 7px;
+                border-radius: 3px;
+            }
+
+.flour-buy-card-body {
+                padding: 18px;
+            }
+
+.flour-buy-card-brand {
+                font-family: "Special Elite", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+                margin-bottom: 4px;
+            }
+
+.flour-buy-card-product {
+                font-family: "Crimson Pro", serif;
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--ink);
+                margin-bottom: 10px;
+            }
+
+.flour-buy-card-desc {
+                font-family: "Crimson Pro", serif;
+                font-size: 0.88rem;
+                color: var(--bark);
+                margin-bottom: 14px;
+                font-style: italic;
+                line-height: 1.5;
+            }
+
+.flour-buy-card-meta {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                margin-bottom: 16px;
+            }
+
+.flour-meta-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.82rem;
+            }
+
+.flour-meta-row .flour-k {
+                font-family: "Special Elite", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+            }
+
+.flour-meta-row .flour-v {
+                font-family: "Crimson Pro", serif;
+                font-weight: 600;
+                color: var(--ink);
+            }
+
+.flour-buy-btn {
+                display: block;
+                width: 100%;
+                background: var(--amber);
+                color: var(--moss-deep, #1f3520);
+                font-family: "Caveat", cursive;
+                font-size: 1.05rem;
+                font-weight: 700;
+                text-align: center;
+                text-decoration: none;
+                padding: 12px 16px;
+                border-radius: 5px;
+                border: none;
+                cursor: pointer;
+                transition:
+                    background 0.2s,
+                    transform 0.1s;
+                margin-bottom: 8px;
+            }
+
+.flour-buy-btn:hover {
+                background: var(--amber-deep, #9a5d1c);
+                color: var(--paper);
+                transform: translateY(-1px);
+            }
+
+.flour-buy-btn-note {
+                font-family: "Special Elite", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+                text-align: center;
+                margin-bottom: 12px;
+            }
+
+.flour-buy-divider {
+                border: none;
+                border-top: 1px dashed var(--rule);
+                margin: 12px 0;
+            }
+
+.flour-alt-buy {
+                font-family: "Crimson Pro", serif;
+                font-size: 0.82rem;
+                font-style: italic;
+                color: var(--bark);
+                margin-bottom: 5px;
+            }
+
+.flour-table-card {
+                background: var(--paper-warm);
+                border: 1px solid var(--rule);
+                border-radius: 6px;
+                padding: 18px;
+                margin-bottom: 24px;
+            }
+
+.flour-table-card-title {
+                font-family: "Caveat", cursive;
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--moss-deep, #1f3520);
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+                border-bottom: 1px dashed var(--rule);
+            }
+
+.flour-table-card-list {
+                list-style: none;
+                padding: 0;
+            }
+
+.flour-table-card-list li {
+                font-family: "Crimson Pro", serif;
+                font-size: 0.88rem;
+                color: var(--bark);
+                padding: 6px 0;
+                border-bottom: 1px solid rgba(29, 26, 20, 0.07);
+                display: flex;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+.flour-table-card-list li:last-child {
+                border-bottom: none;
+            }
+
+.flour-li-dot {
+                color: var(--amber);
+                font-family: "Caveat", cursive;
+                font-size: 1.1rem;
+                line-height: 1.2;
+                flex-shrink: 0;
+            }
+
+.flour-nav-card {
+                background: var(--moss-deep, #1f3520);
+                border-radius: 6px;
+                padding: 18px;
+                margin-bottom: 24px;
+            }
+
+.flour-nav-card-title {
+                font-family: "Caveat", cursive;
+                font-size: 0.9rem;
+                color: var(--sage-soft, #c5cdb4);
+                margin-bottom: 12px;
+            }
+
+.flour-nav-card-list {
+                list-style: none;
+                padding: 0;
+            }
+
+.flour-nav-card-list li {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+
+.flour-nav-card-list li:last-child {
+                border-bottom: none;
+            }
+
+.flour-nav-card-list a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                font-family: "Crimson Pro", serif;
+                font-size: 0.88rem;
+                color: var(--sage-soft, #c5cdb4);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+.flour-nav-card-list a:hover {
+                color: var(--paper);
+            }
+
+.flour-nav-card-list li.flour-current a {
+                color: var(--amber);
+                font-weight: 600;
+            }
+
+.flour-nav-badge {
+                font-family: "Special Elite", monospace;
+                font-size: 0.58rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+
+.flour-nb-active {
+                background: rgba(200, 132, 44, 0.25);
+                color: var(--amber);
+            }
+
+.flour-nb-soon {
+                background: rgba(255, 255, 255, 0.06);
+                color: var(--sage, #8a9a7b);
+            }
+
+.flour-reveal {
+                opacity: 0;
+                transform: translateY(24px);
+                transition:
+                    opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+
+.flour-reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+@media (max-width: 860px) {
+                .flour-hero-inner {
+                    grid-template-columns: 1fr;
+                }
+                .flour-stat-card {
+                    transform: none;
+                    width: 100%;
+                    max-width: 340px;
+                }
+                .flour-content-wrapper {
+                    grid-template-columns: 1fr;
+                    padding: 32px 20px 60px;
+                }
+                .flour-sidebar {
+                    position: static;
+                }
+                .flour-buy-card {
+                    max-width: 480px;
+                }
+                .flour-tips-grid {
+                    grid-template-columns: 1fr;
+                }
+                .flour-hero {
+                    padding: 36px 20px 32px;
+                }
+                .flour-strip {
+                    padding: 10px 20px;
+                }
+                .flour-breadcrumb {
+                    padding: 12px 20px;
+                }
+            }
+
+@media (max-width: 540px) {
+                .flour-title {
+                    font-size: 2.4rem;
+                }
+                .flour-brand-table {
+                    font-size: 0.82rem;
+                }
+                .flour-brand-table th,
+                .flour-brand-table td {
+                    padding: 8px 8px;
+                }
+            }
+
+/* --- Page-specific components --- */
+
+.flour-blend-table {
+                width: 100%;
+                max-width: 680px;
+                border-collapse: collapse;
+                margin: 20px 0 32px;
+                font-size: 0.92rem;
+            }
+
+.flour-blend-table th {
+                font-family: "Special Elite", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+                padding: 8px 12px;
+                text-align: left;
+                border-bottom: 2px solid var(--rule);
+            }
+
+.flour-blend-table td {
+                padding: 11px 12px;
+                border-bottom: 1px solid var(--rule);
+                color: var(--bark);
+                vertical-align: top;
+            }
+
+.flour-blend-table tr:last-child td {
+                border-bottom: none;
+            }
+
+.flour-blend-table .flour-blend-ratio {
+                font-family: "Caveat", cursive;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--ink);
+            }
+
+.flour-brand-table .flour-dot {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
+.flour-tag-red {
+                background: rgba(165, 48, 32, 0.1);
+                color: var(--pen-red);
+                border: 1px solid rgba(165, 48, 32, 0.2);
+            }
+
+.flour-stat-value.flour-amber {
+                color: var(--amber-deep, #9a5d1c);
+            }
+
+.flour-warning-note {
+                font-family: "Caveat", cursive;
+                font-size: 1.1rem;
+                color: var(--pen-red);
+                background: rgba(165, 48, 32, 0.06);
+                border-left: 3px solid var(--pen-red);
+                padding: 14px 20px;
+                margin: 28px 0;
+                border-radius: 0 4px 4px 0;
+                max-width: 680px;
+            }
+
+.flour-rye-types {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                margin: 20px 0 28px;
+                max-width: 680px;
+            }
+
+.flour-rye-type-card {
+                background: var(--paper);
+                border: 1px solid var(--rule);
+                border-radius: 5px;
+                padding: 18px;
+            }
+
+.flour-rye-type-title {
+                font-family: "Caveat", cursive;
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: var(--ink);
+                margin-bottom: 6px;
+            }
+
+.flour-rye-type-label {
+                font-family: "Special Elite", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--pen-red);
+                margin-bottom: 8px;
+                display: block;
+            }
+
+.flour-rye-type-card p {
+                font-size: 0.88rem;
+                margin: 0;
+                color: var(--bark);
+                line-height: 1.5;
+            }
+
+.flour-sep {
+                color: var(--rule);
+            }
+
+.flour-stat-value.flour-caution {
+                color: var(--amber-deep, #9a5d1c);
+            }
+
+.flour-upgrade-note {
+                font-family: "Caveat", cursive;
+                font-size: 1.1rem;
+                color: var(--moss);
+                background: rgba(45, 74, 43, 0.06);
+                border-left: 3px solid var(--moss);
+                padding: 14px 20px;
+                margin: 28px 0;
+                border-radius: 0 4px 4px 0;
+                max-width: 680px;
+            }
+
+.flour-comparison-table {
+                width: 100%;
+                max-width: 680px;
+                border-collapse: collapse;
+                margin: 20px 0 32px;
+                font-size: 0.92rem;
+            }
+
+.flour-comparison-table th {
+                font-family: "Special Elite", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--sage, #8a9a7b);
+                padding: 8px 12px;
+                text-align: left;
+                border-bottom: 2px solid var(--rule);
+            }
+
+.flour-comparison-table td {
+                padding: 11px 12px;
+                border-bottom: 1px solid var(--rule);
+                color: var(--bark);
+                vertical-align: top;
+            }
+
+.flour-comparison-table tr:last-child td {
+                border-bottom: none;
+            }
+
+.flour-comparison-table tr.flour-highlight-row td {
+                background: rgba(200, 132, 44, 0.08);
+            }
+
+.flour-comparison-table .flour-name {
+                font-family: "Crimson Pro", serif;
+                font-weight: 600;
+                color: var(--ink);
+            }
+
+.flour-comparison-table .flour-good {
+                color: var(--moss);
+                font-weight: 600;
+            }
+
+.flour-comparison-table .flour-ok {
+                color: var(--amber-deep, #9a5d1c);
+            }
+
+.flour-comparison-table .flour-limited {
+                color: var(--pen-red);
+            }
+
+.flour-dot {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
+/* --- Additional shared utility classes --- */
+
+/* Byline back-link (hero paragraph) */
+.flour-hero-byline a {
+  color: var(--pen-blue);
+  text-decoration: none;
 }
-.nav-toggle span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background: var(--ink);
-  border-radius: 1px;
-  transition: transform 0.2s, opacity 0.2s;
+.flour-hero-byline a:hover {
+  color: var(--pen-red);
 }
 
-@media (max-width: 640px) {
-  .nav-toggle { display: flex; }
-  .nav { display: none; }
-  .nav.nav--open {
-    display: flex;
-    width: 100%;
-  }
+/* Stat value with moss color (Oso-Approved) */
+.flour-stat-moss {
+  color: var(--moss);
 }
+
+/* Sidebar ads label wrapper */
+.flour-ads-label-wrap {
+  text-align: center;
+}
+
+/* Alt-buy links — pen-blue, no inline style needed */
+.flour-alt-buy a {
+  color: var(--pen-blue);
+  text-decoration: none;
+}
+.flour-alt-buy a:hover {
+  color: var(--pen-red);
+}
+

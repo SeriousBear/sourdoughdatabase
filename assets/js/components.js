@@ -22,8 +22,8 @@
     headerEl.innerHTML = [
       '<div class="binding"></div>',
       '<div class="holes">',
-      '  <span class="hole"></span><span class="hole"></span><span class="hole"></span>',
-      '  <span class="hole"></span><span class="hole"></span><span class="hole"></span>',
+      '  <span></span><span></span><span></span>',
+      '  <span></span><span></span><span></span>',
       '</div>',
       '<header>',
       '  <a href="/" class="logo">',
@@ -37,9 +37,6 @@
       '    <a href="/#journal">field notes</a>',
       '    <a href="/about.html">about</a>',
       '  </nav>',
-      '  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">',
-      '    <span></span><span></span><span></span>',
-      '  </button>',
       '</header>',
     ].join('\n');
   }
@@ -50,8 +47,8 @@
     footerEl.innerHTML = [
       '<footer>',
       '  <div class="foot-grid">',
-      '    <div>',
-      '      <span class="foot-brand">The Sourdough Database<span class="amp">.</span></span>',
+      '    <div class="foot-brand">',
+      '      The Sourdough Database<span class="amp">.</span>',
       '      <p class="foot-tag">A field guide for obsessive bakers. Built in NYC. Powered by Oso.</p>',
       '    </div>',
       '    <div class="foot-col">',
@@ -87,16 +84,6 @@
       '</footer>',
     ].join('\n');
   }
-
-  /* ── MOBILE NAV TOGGLE ──────────────────────────────────── */
-  document.addEventListener('click', function (e) {
-    var toggle = e.target.closest('.nav-toggle');
-    if (!toggle) return;
-    var nav = document.querySelector('nav.nav');
-    var expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    if (nav) nav.classList.toggle('nav--open', !expanded);
-  });
 
   /* ── ACTIVE NAV ─────────────────────────────────────────── */
   function setActiveNav() {
