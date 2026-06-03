@@ -31,6 +31,34 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://sourdoughdatabase.com/flour/whole-wheat-flour.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/flour/rye-flour.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/flour/spelt-flour.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/flour/all-purpose-flour.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- ── STARTER CULTURES ──────────────────────────────── -->
   <url>
     <loc>https://sourdoughdatabase.com/starters/poilane-levain.html</loc>
