@@ -132,11 +132,14 @@
   <div class="pinned-card">
     <span class="card-title">mom's country loaf</span>
     <div>500g bread flour</div>
-    <div>50g whole wheat</div>
-    <div><span class="strike">375g water</span></div>
-    <span class="annotation">↑ try 390g — she was right, it's better</span>
-    <div>10g salt</div>
-    <div>100g levain (100% hydration)</div>
+    <div>150g spelt</div>
+    <div>75g whole wheat</div>
+    <div>525g water</div>
+    <div>150g levain (100% hydration)</div>
+    <div>20–25g salt</div>
+    <div>2 tsp diastatic malt powder</div>
+    <span class="annotation">↑ mix in with the flours</span>
+    <div>autolyse 1 hr · then S+F 4–5×</div>
     <div><span class="strike">bulk 5 hrs</span></div>
     <span class="annotation">depends on your kitchen — watch the dough</span>
     <div>cold retard overnight</div>
@@ -169,7 +172,7 @@
     <div class="oso-name">Oso</div>
     <div class="oso-latin">var. <em>new yorkensis</em> · est. 2024</div>
     <div class="oso-stats">
-      <div class="stat-row"><span class="lbl">age</span><span class="val">1 year</span></div>
+      <div class="stat-row"><span class="lbl">age</span><span class="val" id="oso-age" data-est="2024">~2 years</span></div>
       <div class="stat-row"><span class="lbl">hydration</span><span class="val">100%</span></div>
       <div class="stat-row"><span class="lbl">flour</span><span class="val">AP + 10% whole wheat</span></div>
       <div class="stat-row"><span class="lbl">peak time (70°F)</span><span class="val">~5 hours</span></div>
@@ -241,5 +244,15 @@
 
 
 <script src="/assets/js/components.js"></script>
+<script>
+  (function () {
+    var el = document.getElementById('oso-age');
+    if (!el) return;
+    var est = parseInt(el.getAttribute('data-est'), 10);
+    if (!est) return;
+    var yrs = new Date().getFullYear() - est;
+    el.textContent = yrs <= 1 ? '~1 year' : '~' + yrs + ' years';
+  })();
+</script>
 </body>
 </html>
