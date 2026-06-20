@@ -35,6 +35,7 @@
       '    <a href="/flour-compendium.html">flour</a>',
       '    <a href="/#tools">tools</a>',
       '    <a href="/#journal">field notes</a>',
+      '    <a href="/pantry.html">the pantry</a>',
       '    <a href="/about.html">about</a>',
       '  </nav>',
       '</header>',
@@ -57,6 +58,7 @@
       '        <li><a href="/#starters">Starter Cultures</a></li>',
       '        <li><a href="/flour-compendium.html">Flour Compendium</a></li>',
       '        <li><a href="/#tools">Tools</a></li>',
+      '        <li><a href="/pantry.html">The Pantry</a></li>',
       '        <li><a href="/tools/trouble-atlas.html">Trouble Atlas</a></li>',
       '      </ul>',
       '    </div>',
@@ -97,6 +99,8 @@
       if (href === '/' && path === '/') {
         isActive = true;
       } else if (href === '/about.html' && path === '/about.html') {
+        isActive = true;
+      } else if (href === '/pantry.html' && path === '/pantry.html') {
         isActive = true;
       } else if (href.indexOf('#starters') !== -1 && path.indexOf('/starters/') === 0) {
         isActive = true;
