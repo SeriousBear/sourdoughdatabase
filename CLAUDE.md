@@ -176,6 +176,25 @@ tables must be in the served HTML.
 
 ---
 
+## Netlify Forms
+
+Four forms exist: `newsletter` (on `index.html` and `about.html`), `contact`,
+and `privacy-contact`. All POST to `/thanks.html`.
+
+- Mark the form `data-netlify="true"` and `netlify-honeypot="bot-field"` —
+  **not** `data-netlify-honeypot`. Only the un-prefixed spelling is in
+  Netlify's docs; the `data-` variant is a widely-copied guess that silently
+  does nothing, which means no spam protection.
+- Include a hidden `<input type="hidden" name="form-name" value="...">` whose
+  value exactly matches the form's `name`.
+- Wrap the honeypot input in a hidden `<p>` (`class="privacy-form-honey"` or
+  `style="display:none"`).
+- **Netlify detects forms by parsing HTML at deploy time.** A new or renamed
+  form does not exist in the dashboard until the next successful deploy — and
+  a form removed from the HTML stops accepting submissions after one.
+- Two forms sharing a `name` share one submission inbox. That's intentional for
+  `newsletter`; give any genuinely separate form its own name.
+
 ## Verify before claiming done
 
 There's no test suite yet, so verification is manual and non-negotiable:
