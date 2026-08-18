@@ -131,10 +131,10 @@ hand-rolling a head. Every published page needs all of:
 - [ ] Internal links **in the body prose** to 2–3 related pages — hub → entry
       and entry → hub, both directions
 
-**Don't hide content behind JS.** Header and footer are injected by
-`components.js`, so those links are invisible to any crawler that doesn't
-render JS. Never do that with body content — article text, FAQ answers, and
-tables must be in the served HTML.
+**Don't hide content behind JS.** Header and footer are now real HTML in every
+page (they used to be injected by `components.js` — that was fixed so crawlers
+which don't run JS can see the navigation). Keep it that way: article text, FAQ
+answers, tables, and links must all be in the served HTML.
 
 ---
 
@@ -179,10 +179,13 @@ tables must be in the served HTML.
 1. Copy `_template.html` (or the journal template for essays).
 2. Fill in the full SEO block above — title, description, canonical, OG,
    JSON-LD, breadcrumb.
-3. Drop in `<div id="site-header"></div>` and `<div id="site-footer"></div>`
-   and load `components.js` before `</body>`.
-4. If it needs a nav entry or an active-nav rule, update **both** the header
-   markup and `setActiveNav()` in `assets/js/components.js`.
+3. Copy the `<div id="site-header">…</div>` and `<div id="site-footer">…</div>`
+   blocks verbatim from any existing page — they are real markup now, not
+   placeholders — and load `components.js` with `defer` before `</body>`.
+4. If it needs a nav entry: the nav is **duplicated in all 36 pages** by
+   design (no build step). Change it with a scripted find-and-replace across
+   every page, never by hand in one file, and update the matching rule in
+   `assets/js/components.js` (which now only sets the active class).
 5. Add page-specific CSS to the right stylesheet, using existing tokens.
 6. Add the URL to `sitemap.xml`.
 7. Link to it from at least one hub page's body prose, and link back.

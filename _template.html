@@ -113,7 +113,27 @@
 <body>
 
 <!-- DO NOT EDIT: Nav is injected here by components.js -->
-<div id="site-header"></div>
+<div id="site-header">
+  <div class="binding"></div>
+  <div class="holes">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <header>
+    <a href="/" class="logo">
+      The Sourdough<br>Database
+      <span class="dot"></span>
+    </a>
+    <nav class="nav">
+      <a href="/#starters">cultures</a>
+      <a href="/flour-compendium.html">flour</a>
+      <a href="/#tools">tools</a>
+      <a href="/#journal">field notes</a>
+      <a href="/pantry.html">the pantry</a>
+      <a href="/about.html">about</a>
+    </nav>
+  </header>
+</div>
 
 <main>
   <!--
@@ -157,10 +177,49 @@
 </main>
 
 <!-- DO NOT EDIT: Footer is injected here by components.js -->
-<div id="site-footer"></div>
+<div id="site-footer">
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        The Sourdough Database<span class="amp">.</span>
+        <p class="foot-tag">A field guide for obsessive bakers. Built in NYC. Powered by Oso.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Reference</h5>
+        <ul>
+          <li><a href="/#starters">Starter Cultures</a></li>
+          <li><a href="/flour-compendium.html">Flour Compendium</a></li>
+          <li><a href="/#tools">Tools</a></li>
+          <li><a href="/pantry.html">The Pantry</a></li>
+          <li><a href="/tools/trouble-atlas.html">Trouble Atlas</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Reading</h5>
+        <ul>
+          <li><a href="/#journal">Field Notes</a></li>
+          <li><a href="/journal/the-culture-she-kept.html">The Culture She Kept</a></li>
+          <li><a href="/journal/seventeen-tabs.html">Seventeen Tabs Open</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Site</h5>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Kyle Weber · sourdoughdatabase.com</span>
+      <span>Some links are Amazon affiliate links. All recommendations are my own.</span>
+    </div>
+  </footer>
+</div>
 
 <!-- DO NOT EDIT: Shared nav and footer -->
-<script src="/assets/js/components.js"></script>
+<script src="/assets/js/components.js" defer></script>
 
 </body>
 </html>

@@ -7,7 +7,7 @@ Classic `<script>` tags sharing one global scope. No bundler, no modules, no
 
 | File | Loads on | Contains |
 |---|---|---|
-| `components.js` | every page | shared header + footer markup, active-nav logic |
+| `components.js` | every page (`defer`) | active-nav highlighting only |
 
 ## Conventions
 
@@ -34,9 +34,17 @@ These pages still carry large inline scripts and should move here:
 | `tools/hydration.html` | ~12 KB | `hydration.js` |
 | `tools/trouble-atlas.html` | ~6 KB | `trouble-atlas.js` |
 
-## Gotcha: header/footer are JS-injected
+## Header and footer are real HTML now
 
-`components.js` writes the nav and footer with `innerHTML`, so those links are
-absent from the served HTML. Crawlers that don't execute JS see a page with no
-navigation. Never put body content — article text, FAQ answers, tables — behind
-the same pattern. Moving the header/footer into the HTML is on the roadmap.
+They used to be written by `components.js` with `innerHTML`, which meant the
+site's navigation didn't exist for any crawler that doesn't execute JavaScript.
+They're now static markup inside `<div id="site-header">` / `<div
+id="site-footer">` on all 36 pages, and `components.js` only adds the `active`
+class to the current nav link.
+
+The tradeoff: the nav and footer are duplicated 36 times. **Change them with a
+scripted find-and-replace across every page**, never by editing one file and
+hoping. A verification pass should assert that all 36 pages hash to a single
+distinct header and a single distinct footer.
+
+Don't reintroduce the old pattern for anything crawlable.
