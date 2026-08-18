@@ -17,6 +17,7 @@
      /flour-compendium.html
        or /flour/*              → flour
      /pantry.html               → the pantry
+     /recipes/*                 → recipes
      /about.html                → about
    ============================================================= */
 
@@ -35,6 +36,8 @@
     } else if (href === '/about.html' && path === '/about.html') {
       isActive = true;
     } else if (href === '/pantry.html' && path === '/pantry.html') {
+      isActive = true;
+    } else if (href === '/recipes/' && path.indexOf('/recipes') === 0) {
       isActive = true;
     } else if (href.indexOf('#starters') !== -1 && path.indexOf('/starters/') === 0) {
       isActive = true;

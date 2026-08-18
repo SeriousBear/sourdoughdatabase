@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sourdough Recipes — The Sourdough Database</title>
+  <meta name="description" content="Sourdough recipes written to be understood, not just followed. Filter by skill level, flour, time and form — every one cross-referenced to the tools and the Trouble Atlas.">
+  <meta name="keywords" content="sourdough recipes, beginner sourdough recipe, sourdough bread recipes, sourdough discard recipes, whole wheat sourdough, sourdough focaccia">
+  <link rel="canonical" href="https://sourdoughdatabase.com/recipes/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sourdoughdatabase.com/recipes/">
+  <meta property="og:title" content="Sourdough Recipes — The Sourdough Database">
+  <meta property="og:description" content="Recipes written to be understood, not just followed. Filter by level, flour, time and form.">
+  <meta property="og:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+  <meta property="og:site_name" content="The Sourdough Database">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://sourdoughdatabase.com/recipes/">
+  <meta name="twitter:title" content="Sourdough Recipes — The Sourdough Database">
+  <meta name="twitter:description" content="Recipes written to be understood, not just followed.">
+  <meta name="twitter:image" content="https://sourdoughdatabase.com/assets/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="alternate icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4ead0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "url": "https://sourdoughdatabase.com/recipes/",
+  "name": "Sourdough Recipes — The Sourdough Database",
+  "description": "A growing library of sourdough recipes, filterable by skill level, flour, time and form.",
+  "isPartOf": {"@id": "https://sourdoughdatabase.com/#website"},
+  "inLanguage": "en-US"
+}
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sourdoughdatabase.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Recipes"}
+  ]
+}
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7TNFRKVWVW');</script>
+
+  <style>
+    /* ── recipe hub (rh-) — page-specific, mirrors the flour compendium pattern ── */
+    .rh-hero {
+      background: var(--ink); padding: 64px 32px 56px;
+      border-bottom: 3px solid var(--pen-red); position: relative; overflow: hidden;
+    }
+    .rh-hero::before {
+      content: 'RECIPES'; position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%); font-family: 'Caveat', cursive; font-size: 14rem;
+      font-weight: 700; color: rgba(244,234,208,0.035); line-height: 1;
+      pointer-events: none; white-space: nowrap;
+    }
+    .rh-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+    .rh-eyebrow {
+      font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--rule-pink-strong); margin-bottom: 12px; display: block;
+    }
+    .rh-title {
+      font-family: 'Caveat', cursive; font-size: clamp(3rem, 7vw, 5rem); font-weight: 700;
+      color: var(--paper); line-height: 1; margin-bottom: 16px;
+    }
+    .rh-title em { color: var(--rule-pink); font-style: italic; }
+    .rh-sub {
+      font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-style: italic;
+      color: var(--paper-aged); max-width: 600px; line-height: 1.6;
+    }
+    .rh-wrap { max-width: 1000px; margin: 0 auto; padding: 48px 32px 80px; }
+    .rh-intro {
+      font-family: 'Crimson Pro', serif; font-size: 1.08rem; line-height: 1.75;
+      color: var(--ink-soft); max-width: 700px; margin-bottom: 40px;
+    }
+    .rh-intro a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── filters: hidden until JS confirms it can drive them ── */
+    .rh-filters { display: none; margin-bottom: 32px; }
+    .rh-ready .rh-filters { display: block; }
+    .rh-filter-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+    .rh-filter-legend {
+      font-family: 'Special Elite', monospace; font-size: 0.64rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--pencil); min-width: 86px;
+    }
+    .rh-chip {
+      font-family: 'Special Elite', monospace; font-size: 0.68rem; letter-spacing: 0.06em;
+      background: var(--paper); border: 1px solid var(--rule); color: var(--ink-soft);
+      padding: 5px 12px; border-radius: 2px; cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .rh-chip:hover { border-color: var(--rule-pink-strong); }
+    .rh-chip[aria-pressed="true"] { background: var(--pen-red); border-color: var(--pen-red); color: var(--paper); }
+    .rh-count {
+      font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.98rem;
+      color: var(--pencil); margin-bottom: 22px;
+    }
+    .rh-reset {
+      background: none; border: none; cursor: pointer; padding: 0 0 0 8px;
+      font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
+      color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px;
+    }
+
+    /* ── cards ── */
+    .rh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .rh-card {
+      display: block; position: relative; background: var(--paper);
+      border: 1px solid var(--rule); text-decoration: none; overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.2,0.8,0.2,1), border-color 0.2s;
+    }
+    .rh-card[hidden] { display: none; }
+    a.rh-card:hover { transform: translateY(-4px); border-color: var(--rule-pink-strong); }
+    .rh-card-bar { height: 5px; background: var(--pen-red); }
+    .rh-card-bar.rh-blue { background: var(--pen-blue); }
+    .rh-card-bar.rh-pink { background: var(--rule-pink-strong); }
+    .rh-card-body { padding: 20px 22px 22px; }
+    .rh-card-number {
+      font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--pencil); margin-bottom: 8px;
+    }
+    .rh-card-name {
+      font-family: 'Caveat', cursive; font-size: 1.9rem; font-weight: 700;
+      color: var(--ink); line-height: 1.1; margin-bottom: 6px;
+    }
+    .rh-card-desc {
+      font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.6;
+      color: var(--ink-soft); margin-bottom: 14px;
+    }
+    .rh-card-stats { display: flex; flex-wrap: wrap; gap: 14px; border-top: 1px solid var(--rule); padding-top: 12px; }
+    .rh-stat { display: flex; flex-direction: column; }
+    .rh-stat-label {
+      font-family: 'Special Elite', monospace; font-size: 0.56rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--pencil);
+    }
+    .rh-stat-value { font-family: 'Caveat', cursive; font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+    .rh-tag {
+      position: absolute; top: 12px; right: 12px; font-family: 'Special Elite', monospace;
+      font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 2px;
+    }
+    .rh-tag-ours { background: var(--pen-red); color: var(--paper); }
+    .rh-tag-adapted { background: var(--pen-blue); color: var(--paper); }
+    .rh-card-soon { opacity: 0.62; }
+    .rh-soon-label {
+      font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--pencil); border-top: 1px solid var(--rule);
+      padding-top: 12px; display: block;
+    }
+    .rh-empty {
+      display: none; font-family: 'Crimson Pro', serif; font-style: italic;
+      font-size: 1.05rem; color: var(--pencil); padding: 40px 0; text-align: center;
+    }
+    .rh-empty.rh-show { display: block; }
+    @media (max-width: 640px) {
+      .rh-hero { padding: 44px 22px 40px; }
+      .rh-wrap { padding: 34px 22px 60px; }
+      .rh-filter-legend { min-width: 100%; margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header">
+  <div class="binding"></div>
+  <div class="holes">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <header>
+    <a href="/" class="logo">
+      The Sourdough<br>Database
+      <span class="dot"></span>
+    </a>
+    <nav class="nav">
+      <a href="/#starters">cultures</a>
+      <a href="/recipes/">recipes</a>
+      <a href="/flour-compendium.html">flour</a>
+      <a href="/#tools">tools</a>
+      <a href="/#journal">field notes</a>
+      <a href="/pantry.html">the pantry</a>
+      <a href="/about.html">about</a>
+    </nav>
+  </header>
+</div>
+
+<section class="rh-hero">
+  <div class="rh-hero-inner">
+    <span class="rh-eyebrow">The Library</span>
+    <h1 class="rh-title">Recipes, <em>explained.</em></h1>
+    <p class="rh-sub">Every recipe here tells you why, not just what. Weights, timings, and the reasoning behind both — cross-referenced to the calculators and the Trouble Atlas, so when something goes sideways you know exactly where to look.</p>
+  </div>
+</section>
+
+<main class="rh-wrap" id="rh-root">
+
+  <div class="breadcrumb">
+    <a href="/">home</a><span class="sep">/</span>
+    <span>recipes</span>
+  </div>
+
+  <p class="rh-intro">Two kinds of recipe live here. <strong>Ours</strong> are written from scratch in this kitchen, with the reasoning and the arguments left in. <strong>Adapted</strong> ones take a formula that's already proven itself — the ingredient weights, which are facts and belong to everyone — and rebuild the method in our own words, with full credit and a link back to the baker who got there first. We never reprint anyone's writing. If you want their version, and you should, the link is right there at the top of the page.</p>
+
+  <div class="rh-filters" role="group" aria-label="Filter recipes">
+    <div class="rh-filter-row">
+      <span class="rh-filter-legend" id="lbl-level">Level</span>
+      <button class="rh-chip" data-group="level" data-value="beginner" aria-pressed="false">beginner</button>
+      <button class="rh-chip" data-group="level" data-value="intermediate" aria-pressed="false">intermediate</button>
+      <button class="rh-chip" data-group="level" data-value="advanced" aria-pressed="false">advanced</button>
+    </div>
+    <div class="rh-filter-row">
+      <span class="rh-filter-legend" id="lbl-flour">Flour</span>
+      <button class="rh-chip" data-group="flour" data-value="white" aria-pressed="false">white</button>
+      <button class="rh-chip" data-group="flour" data-value="wholewheat" aria-pressed="false">whole wheat</button>
+      <button class="rh-chip" data-group="flour" data-value="rye" aria-pressed="false">rye</button>
+      <button class="rh-chip" data-group="flour" data-value="blend" aria-pressed="false">blend</button>
+    </div>
+    <div class="rh-filter-row">
+      <span class="rh-filter-legend" id="lbl-form">Form</span>
+      <button class="rh-chip" data-group="form" data-value="loaf" aria-pressed="false">loaf</button>
+      <button class="rh-chip" data-group="form" data-value="flatbread" aria-pressed="false">flatbread</button>
+      <button class="rh-chip" data-group="form" data-value="enriched" aria-pressed="false">enriched</button>
+      <button class="rh-chip" data-group="form" data-value="discard" aria-pressed="false">discard</button>
+    </div>
+    <div class="rh-filter-row">
+      <span class="rh-filter-legend" id="lbl-time">Time</span>
+      <button class="rh-chip" data-group="time" data-value="short" aria-pressed="false">under 12 hr</button>
+      <button class="rh-chip" data-group="time" data-value="medium" aria-pressed="false">12–24 hr</button>
+      <button class="rh-chip" data-group="time" data-value="long" aria-pressed="false">over 24 hr</button>
+    </div>
+    <div class="rh-filter-row">
+      <span class="rh-filter-legend" id="lbl-origin">Origin</span>
+      <button class="rh-chip" data-group="origin" data-value="original" aria-pressed="false">ours</button>
+      <button class="rh-chip" data-group="origin" data-value="adapted" aria-pressed="false">adapted</button>
+    </div>
+  </div>
+
+  <p class="rh-count" id="rh-count" aria-live="polite"></p>
+
+  <div class="rh-grid" id="rh-grid">
+
+    <a class="rh-card" href="/recipes/calibration-loaf.html"
+       data-level="beginner" data-flour="white" data-form="loaf" data-time="medium" data-origin="original" data-status="live">
+      <span class="rh-tag rh-tag-ours">Ours</span>
+      <div class="rh-card-bar"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 01</div>
+        <div class="rh-card-name">The Calibration Loaf</div>
+        <div class="rh-card-desc">One flour, 70% hydration, nothing to hide behind. The loaf to learn on, and the control bake to come back to when things drift.</div>
+        <div class="rh-card-stats">
+          <div class="rh-stat"><span class="rh-stat-label">Level</span><span class="rh-stat-value">Beginner</span></div>
+          <div class="rh-stat"><span class="rh-stat-label">Hydration</span><span class="rh-stat-value">70%</span></div>
+          <div class="rh-stat"><span class="rh-stat-label">Time</span><span class="rh-stat-value">~24 hr</span></div>
+        </div>
+      </div>
+    </a>
+
+    <div class="rh-card rh-card-soon"
+         data-level="beginner" data-flour="wholewheat" data-form="loaf" data-time="medium" data-origin="original" data-status="soon">
+      <span class="rh-tag rh-tag-ours">Ours</span>
+      <div class="rh-card-bar rh-pink"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 02</div>
+        <div class="rh-card-name">The Weekday Wheat</div>
+        <div class="rh-card-desc">The Calibration Loaf with 30% whole wheat, and a full accounting of everything that shifts when you add it.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+    <div class="rh-card rh-card-soon"
+         data-level="intermediate" data-flour="blend" data-form="loaf" data-time="long" data-origin="adapted" data-status="soon">
+      <span class="rh-tag rh-tag-adapted">Adapted</span>
+      <div class="rh-card-bar rh-blue"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 03</div>
+        <div class="rh-card-name">The Country Loaf</div>
+        <div class="rh-card-desc">The high-hydration blended country boule that defined modern home sourdough. Formula credited, method rewritten, original linked.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+    <div class="rh-card rh-card-soon"
+         data-level="beginner" data-flour="white" data-form="flatbread" data-time="medium" data-origin="original" data-status="soon">
+      <span class="rh-tag rh-tag-ours">Ours</span>
+      <div class="rh-card-bar rh-pink"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 04</div>
+        <div class="rh-card-name">Pan Focaccia</div>
+        <div class="rh-card-desc">The most forgiving thing you can do with sourdough. No shaping, no scoring, no Dutch oven — and almost impossible to ruin.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+    <div class="rh-card rh-card-soon"
+         data-level="beginner" data-flour="white" data-form="discard" data-time="short" data-origin="original" data-status="soon">
+      <span class="rh-tag rh-tag-ours">Ours</span>
+      <div class="rh-card-bar rh-pink"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 05</div>
+        <div class="rh-card-name">Discard Pancakes</div>
+        <div class="rh-card-desc">Thirty minutes, one bowl, and a use for the jar of discard currently making your fridge smell like a brewery.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+    <div class="rh-card rh-card-soon"
+         data-level="beginner" data-flour="white" data-form="enriched" data-time="medium" data-origin="original" data-status="soon">
+      <span class="rh-tag rh-tag-ours">Ours</span>
+      <div class="rh-card-bar rh-pink"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 06</div>
+        <div class="rh-card-name">Sandwich Loaf</div>
+        <div class="rh-card-desc">Soft, square, and sliceable. Milk and butter change the fermentation more than people expect, and this explains how.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+    <div class="rh-card rh-card-soon"
+         data-level="intermediate" data-flour="white" data-form="enriched" data-time="long" data-origin="adapted" data-status="soon">
+      <span class="rh-tag rh-tag-adapted">Adapted</span>
+      <div class="rh-card-bar rh-blue"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 07</div>
+        <div class="rh-card-name">Sourdough Bagels</div>
+        <div class="rh-card-desc">Stiff dough, cold overnight, boiled then baked. The one recipe where under-fermenting slightly is the correct move.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+    <div class="rh-card rh-card-soon"
+         data-level="advanced" data-flour="rye" data-form="loaf" data-time="long" data-origin="adapted" data-status="soon">
+      <span class="rh-tag rh-tag-adapted">Adapted</span>
+      <div class="rh-card-bar rh-blue"></div>
+      <div class="rh-card-body">
+        <div class="rh-card-number">No. 08</div>
+        <div class="rh-card-name">Seeded Rye</div>
+        <div class="rh-card-desc">High-percentage rye behaves nothing like wheat. Sticky, fast, and unforgiving of the habits every other recipe taught you.</div>
+        <span class="rh-soon-label">In the oven</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="rh-empty" id="rh-empty">Nothing matches that combination yet — the library is still young. Try loosening a filter.</p>
+
+</main>
+
+<div id="site-footer">
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        The Sourdough Database<span class="amp">.</span>
+        <p class="foot-tag">A field guide for obsessive bakers. Built in NYC. Powered by Oso.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Reference</h5>
+        <ul>
+          <li><a href="/#starters">Starter Cultures</a></li>
+          <li><a href="/recipes/">Recipes</a></li>
+          <li><a href="/flour-compendium.html">Flour Compendium</a></li>
+          <li><a href="/#tools">Tools</a></li>
+          <li><a href="/pantry.html">The Pantry</a></li>
+          <li><a href="/tools/trouble-atlas.html">Trouble Atlas</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Reading</h5>
+        <ul>
+          <li><a href="/#journal">Field Notes</a></li>
+          <li><a href="/journal/the-culture-she-kept.html">The Culture She Kept</a></li>
+          <li><a href="/journal/seventeen-tabs.html">Seventeen Tabs Open</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Site</h5>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Kyle Weber · sourdoughdatabase.com</span>
+      <span>Some links are Amazon affiliate links. All recommendations are my own.</span>
+    </div>
+  </footer>
+</div>
+
+<script src="/assets/js/components.js" defer></script>
+<script src="/assets/js/recipes.js" defer></script>
+</body>
+</html>

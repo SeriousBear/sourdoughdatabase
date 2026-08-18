@@ -192,6 +192,55 @@ answers, tables, and links must all be in the served HTML.
 
 ---
 
+## Recipes
+
+`/recipes/` is the hub; entries are `/recipes/<slug>.html`. Start from
+`_template-recipe.html`, which covers both types.
+
+### The copyright rule — not optional
+
+- **A formula is a fact.** Ingredients, weights, percentages, times, and
+  temperatures carry no copyright. Restating them is fine.
+- **The writing is not.** Method prose, headnotes, and narrative are protected
+  expression. Never reuse anyone's sentences, paraphrase closely, or "reword"
+  their method. Write it from our own bake or don't publish it.
+- **Credit is courtesy, not a licence.** Attribution prevents plagiarism; it
+  does not make copying lawful. Adapted recipes get a visible `.rc-credit`
+  block, an `isBasedOn` in the schema, and a real link to the original.
+
+### Two types, one URL space
+
+| | Original ("ours") | Adapted |
+|---|---|---|
+| Badge | `.rc-badge-original` | `.rc-badge-adapted` |
+| Credit block | delete it | required, with real name + URL |
+| `.rc-notes` | required — the long-form/opinion space | optional, keep short |
+| Schema | `author` = Kyle Weber | plus `isBasedOn` |
+| Hub card tag | `.rh-tag-ours` | `.rh-tag-adapted` |
+
+Both live under `/recipes/` so the SEO consolidates. Don't split them into
+separate directories.
+
+### Every recipe must
+
+- Carry full `Recipe` JSON-LD. **`image` must be a real photo of the finished
+  bake, 1200px+** — Google shows no recipe rich result without one.
+  `og-image.png` is a placeholder and will not earn a rich result.
+- Give each step a unique `id="step-N"` matching the `url` on its `HowToStep`.
+- Link out to at least one **Atlas** page at the point of failure, one
+  **calculator**, and one **flour** entry. Cross-linking is the point of the
+  library, not decoration — put the links where a baker would actually stumble.
+- Be added to `sitemap.xml` and get a card on `/recipes/index.html` with the
+  full `data-level`, `data-flour`, `data-form`, `data-time`, `data-origin`
+  attribute set, or the filter will silently drop it.
+
+### The hub filter
+
+Cards are **real HTML**; `recipes.js` only shows and hides them. Never render
+cards from JSON — that would repeat the header/footer mistake and hide the
+library from crawlers. The filter bar is CSS-hidden until JS adds `.rh-ready`,
+so a no-JS visitor sees every recipe and no dead controls.
+
 ## Netlify Forms
 
 Four forms exist: `newsletter` (on `index.html` and `about.html`), `contact`,
