@@ -235,6 +235,7 @@ h1.hero-title .word-3 {
   transform: rotate(28deg);
   background: var(--tape-pink);
 }
+.polaroid picture { display: block; }
 .polaroid svg,
 .polaroid img {
   width: 100%;

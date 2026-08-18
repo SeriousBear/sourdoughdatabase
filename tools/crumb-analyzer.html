@@ -126,7 +126,7 @@ var SPECIMENS = [
     title: 'Nicely Proofed',
     stars: '★ ★ ★ ★ ★',
     rot: -3,
-    img: IMG_BASE + 'nicely-proofed.png',
+    img: IMG_BASE + 'nicely-proofed.webp',
     anns: [
       { t: 'lacy gluten\nnetwork',  ty: 108, side: 'L', eyOffset: 155, cpOffset: 82 },
       { t: 'even\ndistribution',    ty: 228, side: 'L', eyOffset: 275, cpOffset: 208 },
@@ -152,7 +152,7 @@ var SPECIMENS = [
     title: 'Slightly Underproofed',
     stars: '★ ★ ★ ☆ ☆',
     rot: 2,
-    img: IMG_BASE + 'slightly-underproofed.png',
+    img: IMG_BASE + 'slightly-underproofed.webp',
     anns: [
       { t: 'uneven large\ntunnels',  ty: 88,  side: 'L', eyOffset: 120, cpOffset: 68  },
       { t: 'dense tight\nbase',      ty: 218, side: 'L', eyOffset: 260, cpOffset: 200 },
@@ -177,7 +177,7 @@ var SPECIMENS = [
     title: 'Significantly Underproofed',
     stars: '★ ★ ☆ ☆ ☆',
     rot: -2,
-    img: IMG_BASE + 'significantly-underproofed.png',
+    img: IMG_BASE + 'significantly-underproofed.webp',
     anns: [
       { t: 'very few\nair pockets',  ty: 118, side: 'L', eyOffset: 172, cpOffset: 96  },
       { t: 'low, flat\nrise',        ty: 34,  side: 'R', eyOffset: 70,  cpOffset: 32  },
@@ -201,7 +201,7 @@ var SPECIMENS = [
     title: 'Slightly Overproofed',
     stars: '★ ★ ★ ☆ ☆',
     rot: 1.5,
-    img: IMG_BASE + 'slightly-overproofed.png',
+    img: IMG_BASE + 'slightly-overproofed.webp',
     anns: [
       { t: 'weakening\ngluten walls', ty: 108, side: 'L', eyOffset: 152, cpOffset: 88  },
       { t: 'merging\ncaverns',        ty: 78,  side: 'R', eyOffset: 115, cpOffset: 74  },
@@ -225,7 +225,7 @@ var SPECIMENS = [
     title: 'Significantly Overproofed',
     stars: '★ ☆ ☆ ☆ ☆',
     rot: -4,
-    img: IMG_BASE + 'significantly-overproofed.png',
+    img: IMG_BASE + 'significantly-overproofed.webp',
     anns: [
       { t: 'extreme voids\n+ caverns',   ty: 88,  side: 'L', eyOffset: 128, cpOffset: 68  },
       { t: 'collapsed\nstructure',       ty: 148, side: 'R', eyOffset: 178, cpOffset: 145 },
@@ -303,7 +303,8 @@ function renderSpecimen(idx) {
     '<div class="ca-polaroid">' +
     '<div class="ca-pol-tape"></div>' +
     '<div class="ca-pol-img" style="width:' + PW + 'px;height:' + PH + 'px;">' +
-    '<img src="' + d.img + '" alt="' + d.title + ' sourdough crumb cross-section"></div>' +
+    '<img src="' + d.img + '" alt="' + d.title + ' sourdough crumb cross-section" loading="lazy" ' +
+    'onerror="this.onerror=null;this.src=this.src.replace(&quot;.webp&quot;,&quot;.png&quot;)"></div>' +
     '<div class="ca-pol-caption">' +
     '<div class="ca-pol-name">' + d.title + '</div>' +
     '<div class="ca-pol-stars">' + d.stars + '</div>' +

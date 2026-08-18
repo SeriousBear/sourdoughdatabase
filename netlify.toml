@@ -26,14 +26,32 @@
 
 # =================================================================
 # CACHING
-# Tells the browser/CDN how long to cache static files.
-# Long cache for assets (they have hashed names if/when we build),
-# short cache for HTML so updates show up fast.
+# Asset filenames are NOT content-hashed (there's no build step), so
+# nothing here may be marked "immutable" — a browser that caches
+# styles.css as immutable would keep a stale copy for a year after a
+# deploy, and there'd be no way to force it out.
+#
+# Instead: CSS/JS revalidate on every visit. With an ETag that's a
+# ~200-byte 304 when nothing changed, and a correct file when it did.
+# Images change rarely and can be cached for a week.
+#
+# If a build step with hashed filenames ever lands, THEN switch
+# /assets/* back to "max-age=31536000, immutable".
 # =================================================================
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 [[headers]]
   for = "/*.html"

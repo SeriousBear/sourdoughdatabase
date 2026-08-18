@@ -2,7 +2,8 @@
 
 A recipe notebook for bakers — built to be obsessive, beautiful, and free to use.
 
-🌐 **Live site:** https://sourdoughdatabase.com (after deploy)
+🌐 **Live site:** https://sourdoughdatabase.com
+🤖 **Working conventions:** see `CLAUDE.md` — read it before editing anything
 📁 **Hosting:** Netlify (free tier)
 🗄️ **Database (when needed):** Supabase (free tier)
 🔧 **Stack:** Static HTML/CSS/JS — no build step yet
@@ -14,22 +15,36 @@ A recipe notebook for bakers — built to be obsessive, beautiful, and free to u
 ```
 sourdoughdatabase/
 ├── index.html              # Homepage
+├── about.html              # The mom story
+├── pantry.html             # Affiliate gear picks
+├── flour-compendium.html   # Flour hub
+├── privacy.html            # Privacy policy
+├── thanks.html             # Form success page
 ├── 404.html                # Custom 404 page
+├── _template.html          # Starting point for a new page
+├── flour/                  # Flour entries (7 pages)
+├── atlas/                  # Trouble Atlas problem pages (10 pages)
+├── tools/                  # Calculators + Trouble Atlas hub
+├── starters/               # Named culture histories (3 pages)
+├── journal/                # Long-form essays + article template
 ├── netlify.toml            # Netlify config (security headers, caching)
 ├── robots.txt              # Search engine instructions
 ├── sitemap.xml             # Helps Google find your pages
-├── .gitignore              # Files Git should ignore
+├── CLAUDE.md               # Conventions for AI sessions in this repo
 ├── README.md               # This file
 └── assets/
     ├── css/
     │   └── styles.css      # Shared stylesheet — every page uses this
-    ├── js/                 # JavaScript (when we add interactivity)
-    ├── images/
-    │   ├── favicon.svg     # Browser tab icon (modern browsers)
-    │   ├── favicon.ico     # Browser tab icon (older browsers)
-    │   ├── apple-touch-icon.png  # iOS home-screen icon
-    │   └── og-image.png    # Social-share preview (1200×630)
-    └── fonts/              # Self-hosted fonts (when we add them)
+    ├── js/
+    │   ├── components.js   # Shared header + footer + active nav
+    │   └── README.md       # JS module map and conventions
+    └── images/
+        ├── favicon.svg     # Browser tab icon (modern browsers)
+        ├── favicon.ico     # Browser tab icon (older browsers)
+        ├── apple-touch-icon.png  # iOS home-screen icon
+        ├── og-image.png    # Social-share preview (1200×630)
+        ├── mom-sourdough.jpg
+        └── crumb/          # Crumb analyzer reference photos
 ```
 
 ---
@@ -57,11 +72,14 @@ That spins up a local server at `http://localhost:3000`.
 
 ### Adding a new page
 
-1. Copy `index.html` and rename it (e.g. `about.html`)
-2. Update the `<title>` and `<meta description>`
-3. Replace the `<body>` content with your new page content
+1. Copy `_template.html` and rename it
+2. Fill in the full SEO block — title, description, canonical, OG, JSON-LD
+3. Write the `<body>` content
 4. Add the new URL to `sitemap.xml`
-5. Commit and push — it goes live automatically
+5. Link to it from a hub page, and link back
+6. Commit and push — it goes live automatically
+
+The full checklist lives in `CLAUDE.md`.
 
 ---
 
@@ -69,15 +87,12 @@ That spins up a local server at `http://localhost:3000`.
 
 The project is connected to Netlify via Git. Every time you push to GitHub, Netlify automatically rebuilds and deploys the site within ~30 seconds.
 
-**To deploy a change:**
+**To deploy a change:** commit and push in GitHub Desktop. That's it — watch
+the deploy in your Netlify dashboard.
 
-```bash
-git add .
-git commit -m "what you changed"
-git push
-```
-
-That's it. Watch the deploy in your Netlify dashboard.
+Commit messages use the imperative mood: "Add einkorn flour entry," not
+"Added einkorn flour entry." Short and specific enough that future-you
+understands the change six months from now.
 
 ---
 
@@ -133,13 +148,19 @@ Defined as CSS variables at the top of `assets/css/styles.css`:
 
 - [x] Homepage
 - [x] Deployment via Netlify + Git
-- [ ] About page (mom story, longer-form)
-- [ ] Hydration calculator (interactive tool)
-- [ ] Individual starter detail pages
-- [ ] Bake schedule builder
+- [x] About page (mom story, longer-form)
+- [x] Hydration calculator
+- [x] Individual starter detail pages
+- [x] Bake schedule builder
+- [x] Crumb analyzer
+- [x] Trouble Atlas (hub + 10 problem pages)
+- [x] Flour Compendium (hub + 7 entries)
+- [x] The Pantry (affiliate picks)
+- [x] Field Notes (journal)
+- [ ] Split `styles.css` and extract inline tool JS
+- [ ] Recipe library with `Recipe` structured data
+- [ ] Ask-anything sourdough chatbot
 - [ ] User accounts + bake logs (this is when Supabase comes in)
-- [ ] Crumb analyzer
-- [ ] Trouble Atlas
 
 ---
 

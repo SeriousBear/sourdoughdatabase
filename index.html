@@ -197,13 +197,20 @@
                 </div>
 
                 <aside class="polaroid fade-up d4">
-                    <img
-                        src="/assets/images/mom-sourdough.jpg"
-                        alt="Sunday's sourdough loaf, sliced on a wooden cutting board with butter and flour dusted around"
-                        loading="lazy"
-                        width="900"
-                        height="491"
-                    />
+                    <picture>
+                        <source
+                            srcset="/assets/images/mom-sourdough.webp"
+                            type="image/webp"
+                        />
+                        <img
+                            src="/assets/images/mom-sourdough.jpg"
+                            alt="Sunday's sourdough loaf, sliced on a wooden cutting board with butter and flour dusted around"
+                            loading="lazy"
+                            decoding="async"
+                            width="900"
+                            height="491"
+                        />
+                    </picture>
                     <div class="polaroid-caption">
                         Sunday's bake — finally!
                         <small>78% hydration · spring at last</small>
