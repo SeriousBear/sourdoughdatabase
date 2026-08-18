@@ -148,9 +148,22 @@ tables must be in the served HTML.
   reference it through `<picture>` (or an `onerror` fallback where the tag is
   built in JS) — and **resize to the display box first**; re-encoding a
   1100px image that renders at 280px saves far less than resizing it does.
-- **Fonts:** four Google families is the current budget and it is already the
-  largest blocking cost on first paint. Don't add a fifth. Prefer self-hosted
-  `woff2` subsets with `font-display: swap`.
+- **Fonts:** three Google families (Caveat, Crimson Pro, Special Elite),
+  ~229 KB total, `display=swap`. Don't add a fourth.
+  - **All 36 pages must request the identical URL.** It's the one in every
+    `<head>` — copy it exactly. Three different variants had drifted in, which
+    made the request impossible to change in one place.
+  - **Don't pin discrete weights to "save bytes."** Measured August 2026:
+    `Crimson+Pro:ital,wght@0,300..900;1,300..900` and the pinned
+    `0,300;0,400;0,600;...` form download *the same files* — Google serves the
+    variable font either way. Pinning buys nothing.
+  - A font is only downloaded when a glyph on the page needs it, so an unused
+    family costs nothing on pages that don't use it — and 14 KB on the ones
+    that do. Kalam was removed for exactly this: two rules containing only
+    `★` and spaces.
+  - The real remaining win is self-hosted subsetted `woff2` (~229 KB → 70–90 KB).
+    Not done; it trades a third-party dependency for a manual step on font
+    changes.
 - **Caching:** filenames aren't content-hashed, so nothing may be served
   `immutable`. `netlify.toml` gives CSS/JS `max-age=0, must-revalidate` (a
   ~200-byte 304 when unchanged) and images a week. Don't "optimize" that back
