@@ -310,6 +310,21 @@ pages — not the top nav. Adding a ninth needs an IA change (grouping under a
 `recipes/index.html` until Starter School needed the same cards; moved rather
 than duplicated. Any future hub uses `rh-` too.
 
+## scripts/sync-chrome.py — the only way to change the nav
+
+    python3 scripts/sync-chrome.py            # apply
+    python3 scripts/sync-chrome.py --check    # report drift, change nothing
+
+`index.html` holds the one true copy of the header and footer. Edit the nav
+**there**, run this, and all pages match. Indentation is preserved per file.
+
+It also fills `<!--HEADER-->` and `<!--FOOTER-->` markers, so **write new pages
+with those markers** and run sync-chrome instead of pasting chrome in by hand.
+
+Three separate bugs in this repo came from pasting a cached copy of the header
+into a new page and not noticing it was a nav item behind. There is now no
+reason to ever paste it manually.
+
 ## scripts/verify.py — run it before every commit
 
     python3 scripts/verify.py
