@@ -322,6 +322,48 @@ Rules for the dropdowns:
 An anchor can't rank, can't be a canonical destination, and can't receive
 internal links properly. If a section is worth a nav slot, it's worth a page.
 
+## Trouble Atlas
+
+`/atlas/<slug>.html`, hub at `/tools/trouble-atlas.html`. Fixed structure —
+copy an existing entry rather than inventing a layout:
+
+`problem-id` → `problem-title` → `problem-tagline` → `quick-stats` (4 items)
+→ §01 symptom → `visual-block` (YouTube facade + hidden `own-photo` figure)
+→ §02 `cause-list` **ranked by likelihood** → §03 `fix-steps` **ordered by
+least effort first** → `quick-checklist` → `related-grid`.
+
+**Adding an entry means three edits, not one.** Miss any and it's orphaned:
+
+1. The page itself
+2. A `problem-card` in the right `atlas-category` section on the hub — and bump
+   that section's `cat-count`
+3. An entry in the `PROBLEMS` array in the hub's inline JS, or it won't appear
+   in search
+
+Ranking causes by likelihood is the point of the format. "Most common" first,
+exotic last. Where a symptom is commonly confused with a harmless one, lead
+with what it *isn't* — `contamination.html` spends its first two causes on
+hooch and dried crust because far more starters are thrown away by mistake
+than are ever actually contaminated.
+
+**Namespace caution:** atlas related-cards use `.rc-cat` and `.rc-name`, which
+predate the recipe `rc-` namespace. They don't currently collide, but check
+before adding any new `rc-` rule with a short suffix.
+
+## Flour Compendium entries
+
+`/flour/<slug>-flour.html`, ~730 lines, hub at `flour-compendium.html`.
+
+Adding one touches **three** places: the page, a `fc-flour-card` on the hub
+(plus the quick-reference table row), and the `flour-pill` strip that appears
+on every sibling flour page — use a scripted replace for that last one.
+
+**These pages carry a "Recommended Buy" card with a named brand and a Top Pick
+badge.** That's a personal product endorsement tied to affiliate revenue.
+**Never invent one.** If Kyle hasn't said what he recommends, leave the card as
+a clearly-marked placeholder comment and tell him it needs filling — the same
+rule as recipes he hasn't baked.
+
 ## Hub chrome is shared
 
 `rh-` styles live in `styles.css`, not inline. They were inline in

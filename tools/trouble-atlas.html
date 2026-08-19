@@ -155,7 +155,7 @@
     </div>
     <div class="problem-cards">
 
-      <a href="/atlas/gummy-crumb.html" class="problem-card" data-keywords="gummy wet dense raw inside crumb moist sticky">
+      <a href="/atlas/gummy-crumb.html" class="problem-card" data-keywords="gummy wet dense raw inside crumb moist sticky undercooked inside bread doughy raw center">
         <div class="pc-num">AT-01</div>
         <div class="pc-name">Gummy Crumb</div>
         <div class="pc-symptom">The inside is dense, wet, almost translucent. It collapses when pressed. Tastes fine, but wrong.</div>
@@ -171,13 +171,6 @@
         <div class="pc-cta">→</div>
       </a>
 
-      <a href="/atlas/gummy-crumb.html" class="problem-card" data-keywords="undercooked inside bread doughy raw center">
-        <div class="pc-num">AT-01b</div>
-        <div class="pc-name">Undercooked / Doughy Inside</div>
-        <div class="pc-symptom">The exterior looks baked but the center is raw or doughy. Related to gummy crumb — usually the same fix.</div>
-        <div class="pc-badge">Common</div>
-        <div class="pc-cta">→</div>
-      </a>
 
     </div>
   </section>
@@ -259,7 +252,7 @@
     <div class="atlas-category-heading">
       <span class="cat-icon">⬤</span>
       <h2>Starter <em>Problems</em></h2>
-      <span class="cat-count">2 entries</span>
+      <span class="cat-count">3 entries</span>
     </div>
     <div class="problem-cards">
 
@@ -279,8 +272,45 @@
         <div class="pc-cta">→</div>
       </a>
 
+      <a href="/atlas/contamination.html" class="problem-card" data-keywords="mold mould pink orange red streaks fuzzy contamination throw out discard unsafe serratia">
+        <div class="pc-num">AT-11</div>
+        <div class="pc-name">Mold and Pink Streaks</div>
+        <div class="pc-symptom">Fuzzy growth, or streaks of pink or orange. The one problem here that isn't fixable.</div>
+        <div class="pc-badge">Uncommon</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+
     </div>
   </section>
+
+  <section class="atlas-category" id="bake-problems" data-category="bake">
+    <div class="atlas-category-heading">
+      <span class="cat-icon">⬤</span>
+      <h2>Bake &amp; <em>Handling</em></h2>
+      <span class="cat-count">2 entries</span>
+    </div>
+    <div class="problem-cards">
+
+      <a href="/atlas/burnt-bottom.html" class="problem-card" data-keywords="burnt bottom black base bitter dutch oven scorched burned underneath rack position">
+        <div class="pc-num">AT-12</div>
+        <div class="pc-name">Burnt Bottom</div>
+        <div class="pc-symptom">Top is perfect, base is black and bitter. Conducted heat from the pot, not the oven.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+      <a href="/atlas/sticky-dough.html" class="problem-card" data-keywords="sticky dough wet hands glued counter unmanageable slack too wet handling shaping">
+        <div class="pc-num">AT-13</div>
+        <div class="pc-name">Dough Too Sticky</div>
+        <div class="pc-symptom">Glued to your hands and the counter. Usually not too much water — usually dry hands.</div>
+        <div class="pc-badge common">Very common</div>
+        <div class="pc-cta">→</div>
+      </a>
+
+    </div>
+  </section>
+
 
   <!-- ── NOT LISTED ──────────────────────────────────────────────────── -->
 
@@ -361,6 +391,9 @@
     { name: 'Hooch / Liquid on Top', cat: 'Starter', url: '/atlas/hooch.html', snippet: 'gray liquid on starter surface', keys: 'hooch liquid on top starter gray grey dark liquid smells alcohol acetone hungry' },
     { name: 'Overproofed Dough', cat: 'Rise', url: '/atlas/overproofed.html', snippet: 'slack, sticky, deflated, won\'t spring back', keys: 'overproofed too long slack sticky deflated collapsed poke test stays' },
     { name: 'Underproofed Dough', cat: 'Rise', url: '/atlas/underproofed.html', snippet: 'dense, burst sides, needed more time', keys: 'underproofed not enough time dense tight burst sides crust tears' },
+    { name: 'Mold and Pink Streaks', cat: 'Starter', url: '/atlas/contamination.html', snippet: 'fuzzy growth or pink streaks — discard', keys: 'mold mould pink orange red streaks fuzzy contamination throw out discard unsafe serratia safe to eat' },
+    { name: 'Burnt Bottom', cat: 'Bake', url: '/atlas/burnt-bottom.html', snippet: 'black bitter base, perfect top', keys: 'burnt bottom black base bitter scorched burned underneath dutch oven rack position' },
+    { name: 'Dough Too Sticky', cat: 'Handling', url: '/atlas/sticky-dough.html', snippet: 'glued to hands and counter', keys: 'sticky dough wet hands glued counter unmanageable slack too wet handling shaping add flour' },
   ];
 
   var input = document.getElementById('atlas-search');
