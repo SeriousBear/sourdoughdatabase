@@ -53,18 +53,44 @@ not polish.** Treat a page that ranks badly or loads slowly as broken.
 The whole point is that an edit should be cheap: a targeted read of one file,
 not a 7,000-line scroll.
 
-### CSS
+### CSS — edit `src/`, never `styles.css`
 
-`assets/css/styles.css` is currently ~7,000 lines and loads on **every** page.
-It is over budget.
+The source is **eight files** in `assets/css/src/`, concatenated in filename
+order into the single `assets/css/styles.css` the site serves:
 
-- **Target: no single stylesheet over ~1,500 lines.**
-- Split by concern, loaded per-page:
-  - `core.css` — `:root` tokens, reset, body/paper texture, typography,
-    binding, header, footer, links, animations. Loads on every page.
-  - Then one file per surface: `tools.css`, `flour.css`, `atlas.css`,
-    `article.css`, `pantry.css`, `home.css`.
-- A page loads `core.css` plus **only** the surfaces it uses.
+    00-base.css            tokens, reset, body, binding, header
+    01-home.css            homepage sections, animations, 404
+    02-page-furniture.css  prose, section labels/headings, shared page chrome
+    03-article.css         about, starter detail, journal, privacy
+    04-atlas.css           Trouble Atlas hub + problem pages
+    05-calculators.css     the three tools, crumb analyzer, schedule builder
+    06-flour-pantry.css    Flour Compendium entries, The Pantry
+    07-recipes-hubs.css    rc- recipe pages, rh- hubs, nav dropdowns
+
+    python3 scripts/build-css.py            # after any CSS edit
+    python3 scripts/build-css.py --check    # is styles.css stale?
+
+`styles.css` is generated and committed. **Never edit it directly** —
+`scripts/verify.py` fails if it drifts from `src/`.
+
+**Do not "optimise" this into per-page stylesheets.** It was attempted and
+rejected on evidence, August 2026. This stylesheet's section boundaries do not
+match page boundaries:
+
+- The sitewide **mobile nav and footer rules** —
+  `@media (max-width:640px){ .binding,.holes{display:none} .nav{...}
+  .foot-grid{...} }` — sit inside the *TOOLS / CALCULATORS* section. Ship that
+  only to tool pages and every other page loses its mobile layout.
+- `.prose`, `.section-label`, `.section-heading`, `.opener` are defined in the
+  *ABOUT PAGE* section and used by all 13 Atlas pages.
+- 35 more classes live in one surface and are used by three.
+
+The prize was ~15 KB gzipped on a first visit. Every one of those breakages
+renders clean in a static checker — `verify.py` would have said all-green.
+Revisit only after the shared furniture is extracted into its own layer.
+
+- **Target: no source file over ~1,500 lines.** Split at a section boundary and
+  add the new file to `src/` with the right number prefix.
 - Keep the `/* ============ SECTION ============ */` headers. Clear seams let an
   edit target a span by grep instead of reading the whole file — that matters
   as much as raw size.
@@ -72,10 +98,11 @@ It is over budget.
 ### JavaScript
 
 - **No inline `<script>` blocks over ~50 lines.** Anything bigger moves to
-  `assets/js/<page-name>.js` and loads with `defer`.
+  `assets/js/<page-name>.js` and loads with `defer`, after `components.js`.
   Inline JS ships inside the HTML document, which is served
   `max-age=0, must-revalidate` — so it is re-downloaded on every visit and
-  never cached. External JS is cached.
+  never cached. External JS is cached. All four tool pages were extracted in
+  August 2026; the GA4 snippet in `<head>` is the one deliberate exception.
 - **Target 200–600 lines per JS file; hard ceiling ~800 → split** at the next
   natural concern boundary, never mid-function.
 - **Don't split below ~100 lines** without a reason — tiny files add load-order

@@ -147,6 +147,17 @@ def check_sitemap(files):
     check(not absent, "every indexable page is in the sitemap", absent)
 
 # ── assets ───────────────────────────────────────────────────────────
+def check_css_build():
+    """styles.css is generated from assets/css/src/ — fail if it has drifted."""
+    parts = sorted(glob.glob('assets/css/src/*.css'))
+    check(len(parts) > 0, "css sources present in assets/css/src/", len(parts))
+    if not parts: return
+    built = "".join(open(x, encoding='utf-8').read() for x in parts)
+    current = open('assets/css/styles.css', encoding='utf-8').read()
+    check(built == current,
+          "styles.css matches its sources (run scripts/build-css.py)",
+          "" if built == current else "%d built vs %d on disk" % (len(built), len(current)))
+
 def check_assets():
     tom = open('netlify.toml').read()
     active = re.findall(r'^\s*Cache-Control = "([^"]+)"', tom, re.M)
@@ -160,7 +171,7 @@ if __name__ == '__main__':
     files = pages()
     print("Verifying %d pages\n" % len(files))
     check_parse(files); check_chrome(files); check_schema(files)
-    check_links(files); check_sitemap(files); check_assets()
+    check_links(files); check_sitemap(files); check_assets(); check_css_build()
     print()
     if fails:
         print("%d FAILED: %s" % (len(fails), fails)); sys.exit(1)

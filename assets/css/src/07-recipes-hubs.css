@@ -1,0 +1,426 @@
+/* ============================================================
+   RECIPES — entry pages (/recipes/*.html)
+   Shared by both recipe types. Hub-specific styles live inline
+   in /recipes/index.html, matching the flour-compendium pattern.
+   Single rc- prefix — no per-page prefixes.
+   ============================================================ */
+
+.rc-hero {
+  background: var(--ink);
+  padding: 60px 32px 52px;
+  border-bottom: 3px solid var(--pen-red);
+  position: relative;
+  overflow: hidden;
+}
+.rc-hero::before {
+  content: 'RECIPES';
+  position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+  font-family: 'Caveat', cursive; font-size: 13rem; font-weight: 700;
+  color: rgba(244, 234, 208, 0.035); line-height: 1; pointer-events: none;
+  white-space: nowrap;
+}
+.rc-hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+.rc-eyebrow {
+  font-family: 'Special Elite', monospace; font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--rule-pink-strong); margin-bottom: 12px; display: block;
+}
+.rc-title {
+  font-family: 'Caveat', cursive; font-size: clamp(2.8rem, 6.5vw, 4.4rem);
+  font-weight: 700; color: var(--paper); line-height: 1.02; margin-bottom: 14px;
+}
+.rc-title em { color: var(--rule-pink); font-style: italic; }
+.rc-sub {
+  font-family: 'Crimson Pro', serif; font-size: 1.08rem; font-style: italic;
+  color: var(--paper-aged); max-width: 560px; line-height: 1.6;
+}
+
+/* ── origin badge ── */
+.rc-badge {
+  display: inline-block; font-family: 'Special Elite', monospace;
+  font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; margin-bottom: 16px;
+}
+.rc-badge-original { background: var(--pen-red); color: var(--paper); }
+.rc-badge-adapted  { background: var(--pen-blue); color: var(--paper); }
+
+.rc-wrap { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+
+/* ── at a glance ── */
+.rc-glance {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  margin: 0 0 44px;
+}
+.rc-glance-item { background: var(--paper); padding: 14px 16px; }
+.rc-glance-label {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil);
+  margin-bottom: 5px;
+}
+.rc-glance-value {
+  display: block; font-family: 'Caveat', cursive; font-size: 1.5rem;
+  font-weight: 600; color: var(--ink); line-height: 1.1;
+}
+
+/* ── credit block (adapted recipes only) ── */
+.rc-credit {
+  border-left: 3px solid var(--pen-blue); background: var(--paper-warm);
+  padding: 18px 22px; margin: 0 0 40px;
+}
+.rc-credit h4 {
+  font-family: 'Special Elite', monospace; font-size: 0.7rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--pen-blue);
+  margin-bottom: 8px;
+}
+.rc-credit p { font-family: 'Crimson Pro', serif; font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
+.rc-credit a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── sections ── */
+.rc-section { margin: 0 0 52px; }
+.rc-section-label {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.68rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--pencil);
+  margin-bottom: 6px;
+}
+.rc-section-heading {
+  display: block; font-family: 'Caveat', cursive; font-size: 2.4rem;
+  font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 20px;
+}
+.rc-section-heading em { color: var(--pen-red); font-style: italic; }
+
+/* ── formula table ── */
+.rc-formula { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+.rc-formula th {
+  font-family: 'Special Elite', monospace; font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil);
+  text-align: left; padding: 8px 10px; border-bottom: 2px solid var(--rule);
+}
+.rc-formula td {
+  font-family: 'Crimson Pro', serif; font-size: 1.02rem; color: var(--ink);
+  padding: 10px; border-bottom: 1px solid var(--rule);
+}
+.rc-formula td:nth-child(2), .rc-formula td:nth-child(3),
+.rc-formula th:nth-child(2), .rc-formula th:nth-child(3) { text-align: right; white-space: nowrap; }
+.rc-formula tr.rc-total td { font-weight: 700; border-bottom: none; border-top: 2px solid var(--rule); }
+.rc-formula-note {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
+  color: var(--pencil); line-height: 1.6;
+}
+
+/* ── numbered steps ── */
+.rc-steps { list-style: none; counter-reset: rcstep; }
+.rc-step {
+  counter-increment: rcstep; position: relative;
+  padding: 0 0 30px 62px; margin-bottom: 4px;
+  border-left: 1px solid var(--rule); margin-left: 20px;
+}
+.rc-step:last-child { border-left: 1px solid transparent; padding-bottom: 0; }
+.rc-step::before {
+  content: counter(rcstep, decimal-leading-zero);
+  position: absolute; left: -20px; top: -2px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--rule);
+  font-family: 'Special Elite', monospace; font-size: 0.82rem;
+  color: var(--pen-red); display: flex; align-items: center; justify-content: center;
+}
+.rc-step-title {
+  font-family: 'Caveat', cursive; font-size: 1.7rem; font-weight: 700;
+  color: var(--ink); line-height: 1.15; margin-bottom: 2px;
+}
+.rc-step-time {
+  font-family: 'Special Elite', monospace; font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil);
+  margin-bottom: 10px;
+}
+.rc-step-body p {
+  font-family: 'Crimson Pro', serif; font-size: 1.05rem; line-height: 1.7;
+  color: var(--ink-soft); margin-bottom: 12px;
+}
+.rc-step-body p:last-child { margin-bottom: 0; }
+
+/* ── inline callouts to tools / atlas ── */
+.rc-callout {
+  display: block; border-left: 3px solid var(--rule-pink-strong);
+  background: var(--paper-warm); padding: 12px 16px; margin: 14px 0;
+  font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.6;
+  color: var(--ink-soft);
+}
+.rc-callout strong {
+  font-family: 'Special Elite', monospace; font-size: 0.64rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pen-red);
+  display: block; margin-bottom: 5px; font-weight: 400;
+}
+.rc-callout a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+.rc-callout-tool { border-left-color: var(--pen-blue); }
+
+/* ── troubleshooting table ── */
+.rc-trouble { width: 100%; border-collapse: collapse; }
+.rc-trouble th {
+  font-family: 'Special Elite', monospace; font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil);
+  text-align: left; padding: 8px 10px; border-bottom: 2px solid var(--rule);
+}
+.rc-trouble td {
+  font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--ink-soft);
+  padding: 11px 10px; border-bottom: 1px solid var(--rule); vertical-align: top;
+}
+.rc-trouble a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── the notes / process section (original recipes) ── */
+.rc-notes {
+  background: var(--paper-warm); border: 1px solid var(--rule);
+  padding: 32px 30px; margin: 0 0 52px; position: relative;
+}
+.rc-notes::before {
+  content: ''; position: absolute; top: -10px; left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 90px; height: 22px; background: var(--tape);
+}
+.rc-notes h3 {
+  font-family: 'Caveat', cursive; font-size: 2rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 14px; line-height: 1.1;
+}
+.rc-notes p {
+  font-family: 'Crimson Pro', serif; font-size: 1.05rem; line-height: 1.75;
+  color: var(--ink-soft); margin-bottom: 14px;
+}
+.rc-notes p:last-child { margin-bottom: 0; }
+.rc-notes a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── next steps ── */
+.rc-next-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.rc-next-card {
+  display: block; border: 1px solid var(--rule); background: var(--paper);
+  padding: 18px 20px; text-decoration: none;
+  transition: transform 0.18s cubic-bezier(0.2,0.8,0.2,1), border-color 0.18s;
+}
+.rc-next-card:hover { transform: translateY(-3px); border-color: var(--rule-pink-strong); }
+.rc-next-label {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil); margin-bottom: 6px;
+}
+.rc-next-name {
+  display: block; font-family: 'Caveat', cursive; font-size: 1.5rem;
+  font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 6px;
+}
+.rc-next-desc { font-family: 'Crimson Pro', serif; font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; }
+
+@media (max-width: 640px) {
+  .rc-hero { padding: 44px 22px 40px; }
+  .rc-wrap { padding: 36px 22px 60px; }
+  .rc-step { padding-left: 52px; }
+  .rc-notes { padding: 26px 20px; }
+}
+
+/* ============================================================
+   HUB PAGES — shared card/filter chrome (rh-)
+   Used by /recipes/ and /starter-school/. Was inline in
+   recipes/index.html until Starter School needed the same
+   chrome; moved here rather than duplicated.
+   Single rh- prefix — no per-hub prefixes.
+   ============================================================ */
+    .rh-hero {
+      background: var(--ink); padding: 64px 32px 56px;
+      border-bottom: 3px solid var(--pen-red); position: relative; overflow: hidden;
+    }
+    .rh-hero::before {
+      content: 'RECIPES'; position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%); font-family: 'Caveat', cursive; font-size: 14rem;
+      font-weight: 700; color: rgba(244,234,208,0.035); line-height: 1;
+      pointer-events: none; white-space: nowrap;
+    }
+    .rh-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+    .rh-eyebrow {
+      font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--rule-pink-strong); margin-bottom: 12px; display: block;
+    }
+    .rh-title {
+      font-family: 'Caveat', cursive; font-size: clamp(3rem, 7vw, 5rem); font-weight: 700;
+      color: var(--paper); line-height: 1; margin-bottom: 16px;
+    }
+    .rh-title em { color: var(--rule-pink); font-style: italic; }
+    .rh-sub {
+      font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-style: italic;
+      color: var(--paper-aged); max-width: 600px; line-height: 1.6;
+    }
+    .rh-wrap { max-width: 1000px; margin: 0 auto; padding: 48px 32px 80px; }
+    .rh-intro {
+      font-family: 'Crimson Pro', serif; font-size: 1.08rem; line-height: 1.75;
+      color: var(--ink-soft); max-width: 700px; margin-bottom: 40px;
+    }
+    .rh-intro a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── filters: hidden until JS confirms it can drive them ── */
+    .rh-filters { display: none; margin-bottom: 32px; }
+    .rh-ready .rh-filters { display: block; }
+    .rh-filter-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+    .rh-filter-legend {
+      font-family: 'Special Elite', monospace; font-size: 0.64rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--pencil); min-width: 86px;
+    }
+    .rh-chip {
+      font-family: 'Special Elite', monospace; font-size: 0.68rem; letter-spacing: 0.06em;
+      background: var(--paper); border: 1px solid var(--rule); color: var(--ink-soft);
+      padding: 5px 12px; border-radius: 2px; cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .rh-chip:hover { border-color: var(--rule-pink-strong); }
+    .rh-chip[aria-pressed="true"] { background: var(--pen-red); border-color: var(--pen-red); color: var(--paper); }
+    .rh-count {
+      font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.98rem;
+      color: var(--pencil); margin-bottom: 22px;
+    }
+    .rh-reset {
+      background: none; border: none; cursor: pointer; padding: 0 0 0 8px;
+      font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
+      color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px;
+    }
+
+    /* ── cards ── */
+    .rh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .rh-card {
+      display: block; position: relative; background: var(--paper);
+      border: 1px solid var(--rule); text-decoration: none; overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.2,0.8,0.2,1), border-color 0.2s;
+    }
+    .rh-card[hidden] { display: none; }
+    a.rh-card:hover { transform: translateY(-4px); border-color: var(--rule-pink-strong); }
+    .rh-card-bar { height: 5px; background: var(--pen-red); }
+    .rh-card-bar.rh-blue { background: var(--pen-blue); }
+    .rh-card-bar.rh-pink { background: var(--rule-pink-strong); }
+    .rh-card-body { padding: 20px 22px 22px; }
+    .rh-card-number {
+      font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--pencil); margin-bottom: 8px;
+    }
+    .rh-card-name {
+      font-family: 'Caveat', cursive; font-size: 1.9rem; font-weight: 700;
+      color: var(--ink); line-height: 1.1; margin-bottom: 6px;
+    }
+    .rh-card-desc {
+      font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.6;
+      color: var(--ink-soft); margin-bottom: 14px;
+    }
+    .rh-card-stats { display: flex; flex-wrap: wrap; gap: 14px; border-top: 1px solid var(--rule); padding-top: 12px; }
+    .rh-stat { display: flex; flex-direction: column; }
+    .rh-stat-label {
+      font-family: 'Special Elite', monospace; font-size: 0.56rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--pencil);
+    }
+    .rh-stat-value { font-family: 'Caveat', cursive; font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+    .rh-tag {
+      position: absolute; top: 12px; right: 12px; font-family: 'Special Elite', monospace;
+      font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 2px;
+    }
+    .rh-tag-ours { background: var(--pen-red); color: var(--paper); }
+    .rh-tag-adapted { background: var(--pen-blue); color: var(--paper); }
+    .rh-card-soon { opacity: 0.62; }
+    .rh-soon-label {
+      font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--pencil); border-top: 1px solid var(--rule);
+      padding-top: 12px; display: block;
+    }
+    .rh-empty {
+      display: none; font-family: 'Crimson Pro', serif; font-style: italic;
+      font-size: 1.05rem; color: var(--pencil); padding: 40px 0; text-align: center;
+    }
+    .rh-empty.rh-show { display: block; }
+    @media (max-width: 640px) {
+      .rh-hero { padding: 44px 22px 40px; }
+      .rh-wrap { padding: 34px 22px 60px; }
+      .rh-filter-legend { min-width: 100%; margin-bottom: 2px; }
+    }
+/* ============================================================
+   TECHNIQUE DIAGRAMS + PHOTO SLOTS
+   Used on /techniques/*.html. Diagrams carry the page until
+   Kyle shoots the real photos; the slots below use the naming
+   convention from the local photo guide, so dropping a file in
+   replaces the placeholder with no markup change.
+   ============================================================ */
+
+.rc-diagram-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px; margin: 18px 0;
+}
+.rc-diagram {
+  background: var(--paper-warm); border: 1px solid var(--rule); padding: 10px;
+}
+.rc-diagram svg { display: block; width: 100%; height: auto; }
+.rc-diagram figcaption {
+  font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.05em;
+  color: var(--pencil); margin-top: 8px; line-height: 1.45; text-align: center;
+}
+.rc-diagram figcaption b { color: var(--pen-red); font-weight: 400; display: block; margin-bottom: 2px; }
+
+/* photo slot — shows a dashed placeholder until the file exists */
+.rc-photo { margin: 18px 0; }
+.rc-photo img {
+  display: block; width: 100%; border: 1px solid var(--rule); background: var(--paper-warm);
+}
+.rc-photo figcaption {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.92rem;
+  color: var(--pencil); margin-top: 7px;
+}
+.rc-photo-missing img { display: none; }
+.rc-photo-missing {
+  border: 1px dashed var(--rule-pink-strong); background: var(--paper-warm);
+  padding: 22px; text-align: center;
+}
+.rc-photo-missing figcaption { margin: 0; font-style: normal; font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.06em; }
+
+/* ============================================================
+   NAV DROPDOWNS
+   Six top-level items; Learn and Tools open a panel.
+   The panel links are always in the DOM so crawlers see them —
+   they're hidden with CSS, never absent. Without JS the panel
+   still opens on hover and on keyboard focus (:focus-within),
+   so the menu is never a dead end.
+   ============================================================ */
+
+.nav-group { position: relative; display: inline-flex; }
+.nav-top {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0;
+  cursor: pointer; position: relative; transition: color 0.2s;
+}
+.nav-top:hover { color: var(--pen-red); }
+.nav-top::after { content: " \25BE"; font-size: 0.68em; opacity: 0.7; }
+.nav-top.active::after,
+.nav-top.active { color: var(--pen-red); }
+.nav-top.active::before {
+  content: ""; position: absolute; bottom: -4px; left: -4px; right: -4px;
+  height: 8px; background: var(--tape); z-index: -1; transform: rotate(-1deg);
+}
+
+.nav-menu {
+  position: absolute; top: calc(100% + 12px); left: -16px; z-index: 60;
+  min-width: 214px; display: none;
+  background: var(--paper); border: 1px solid var(--rule);
+  box-shadow: 0 8px 22px rgba(40, 25, 10, 0.16);
+  padding: 7px 0;
+}
+.nav-group.open > .nav-menu,
+.nav-group:hover > .nav-menu,
+.nav-group:focus-within > .nav-menu { display: block; }
+
+.nav-menu a {
+  display: block; padding: 7px 18px; white-space: nowrap;
+  font-family: 'Crimson Pro', serif; font-size: 16px; font-weight: 400;
+  color: var(--ink-soft); transition: background 0.15s, color 0.15s;
+}
+.nav-menu a:hover { background: var(--paper-warm); color: var(--pen-red); }
+.nav-menu a.active { color: var(--pen-red); font-weight: 600; }
+.nav-menu a.active::after { display: none; }
+
+@media (max-width: 640px) {
+  /* absolute panels overflow a wrapped nav — inline them instead */
+  .nav-group { display: block; width: 100%; }
+  .nav-menu {
+    position: static; display: block; min-width: 0;
+    border: 0; border-left: 2px solid var(--rule-pink); border-radius: 0;
+    box-shadow: none; background: none; padding: 2px 0 6px 12px; margin-top: 4px;
+  }
+  .nav-menu a { padding: 4px 0; font-size: 15px; }
+  .nav-top::after { display: none; }
+}

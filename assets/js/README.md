@@ -7,7 +7,15 @@ Classic `<script>` tags sharing one global scope. No bundler, no modules, no
 
 | File | Loads on | Contains |
 |---|---|---|
-| `components.js` | every page (`defer`) | active-nav highlighting only |
+| `components.js` | every page (`defer`) | active-nav highlighting + the Learn/Tools dropdowns |
+| `recipes.js` | `/recipes/` (`defer`) | faceted filtering of the recipe cards |
+| `schedule.js` | `tools/schedule.html` (`defer`) | bake schedule builder |
+| `crumb-analyzer.js` | `tools/crumb-analyzer.html` (`defer`) | crumb reference tool |
+| `hydration.js` | `tools/hydration.html` (`defer`) | hydration + baker's percentage calculators |
+| `trouble-atlas.js` | `tools/trouble-atlas.html` (`defer`) | Atlas search and autocomplete |
+
+`components.js` loads first on every page; page scripts follow. Deferred
+scripts run in document order, so that ordering is guaranteed.
 
 ## Conventions
 
@@ -23,16 +31,15 @@ Classic `<script>` tags sharing one global scope. No bundler, no modules, no
 - Shared behavior goes in a shared file, not copy-pasted into two pages.
 - **Update this table** whenever a file is added, split, or renamed.
 
-## Pending extractions
+## Inline JS is extracted
 
-These pages still carry large inline scripts and should move here:
+All four tool pages had large inline `<script>` blocks. They're now external
+and deferred. The reason isn't page weight — it's caching: HTML is served
+`max-age=0, must-revalidate`, so inline JS was re-downloaded on **every** visit
+and could never be cached. As external files they cache like any other asset.
 
-| Page | Inline JS | Target file |
-|---|---|---|
-| `tools/schedule.html` | ~26 KB | `schedule.js` |
-| `tools/crumb-analyzer.html` | ~13 KB | `crumb-analyzer.js` |
-| `tools/hydration.html` | ~12 KB | `hydration.js` |
-| `tools/trouble-atlas.html` | ~6 KB | `trouble-atlas.js` |
+Keep it that way. The rule in `CLAUDE.md` is no inline `<script>` over ~50
+lines; the GA4 snippet in `<head>` is the deliberate exception.
 
 ## Header and footer are real HTML now
 
