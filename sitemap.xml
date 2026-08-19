@@ -30,6 +30,27 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://sourdoughdatabase.com/starter-school/feeding-and-ratios.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/starter-school/fridge-rhythm.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/starter-school/reviving.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- ── TECHNIQUES ────────────────────────────────────────── -->
   <url>
     <loc>https://sourdoughdatabase.com/techniques/</loc>
