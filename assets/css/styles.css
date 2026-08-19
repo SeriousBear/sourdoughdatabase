@@ -2567,7 +2567,7 @@ footer {
   margin: 24px 0;
 }
 
-.gary-block {
+.oso-block {
   background: #fdf8e3;
   border: 1.5px solid var(--ink);
   box-shadow: 5px 5px 0 var(--ink);
@@ -2576,7 +2576,7 @@ footer {
   position: relative;
   margin: 48px 0;
 }
-.gary-block::before {
+.oso-block::before {
   content: "SPECIMEN № 0001";
   position: absolute;
   top: -11px;
@@ -2588,7 +2588,7 @@ footer {
   letter-spacing: 0.16em;
   color: var(--pen-red);
 }
-.gary-block .gary-name {
+.oso-block .oso-name {
   font-family: 'Caveat', cursive;
   font-size: 48px;
   font-weight: 700;
@@ -2596,27 +2596,27 @@ footer {
   line-height: 1;
   margin-bottom: 4px;
 }
-.gary-block .gary-latin {
+.oso-block .oso-latin {
   font-family: 'Crimson Pro', serif;
   font-style: italic;
   font-size: 13px;
   color: var(--pencil);
   margin-bottom: 18px;
 }
-.gary-stats { font-family: 'Special Elite', monospace; font-size: 12.5px; line-height: 1.9; }
-.gary-stats .stat-row {
+.oso-stats { font-family: 'Special Elite', monospace; font-size: 12.5px; line-height: 1.9; }
+.oso-stats .stat-row {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px dotted rgba(180, 130, 70, 0.4);
 }
-.gary-stats .stat-row .lbl {
+.oso-stats .stat-row .lbl {
   color: var(--pencil);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-size: 10.5px;
 }
-.gary-stats .stat-row .val { color: var(--ink); font-weight: 700; }
-.gary-note {
+.oso-stats .stat-row .val { color: var(--ink); font-weight: 700; }
+.oso-note {
   margin-top: 16px;
   font-family: 'Caveat', cursive;
   font-size: 22px;
@@ -7324,3 +7324,58 @@ footer {
   padding: 22px; text-align: center;
 }
 .rc-photo-missing figcaption { margin: 0; font-style: normal; font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.06em; }
+
+/* ============================================================
+   NAV DROPDOWNS
+   Six top-level items; Learn and Tools open a panel.
+   The panel links are always in the DOM so crawlers see them —
+   they're hidden with CSS, never absent. Without JS the panel
+   still opens on hover and on keyboard focus (:focus-within),
+   so the menu is never a dead end.
+   ============================================================ */
+
+.nav-group { position: relative; display: inline-flex; }
+.nav-top {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0;
+  cursor: pointer; position: relative; transition: color 0.2s;
+}
+.nav-top:hover { color: var(--pen-red); }
+.nav-top::after { content: " \25BE"; font-size: 0.68em; opacity: 0.7; }
+.nav-top.active::after,
+.nav-top.active { color: var(--pen-red); }
+.nav-top.active::before {
+  content: ""; position: absolute; bottom: -4px; left: -4px; right: -4px;
+  height: 8px; background: var(--tape); z-index: -1; transform: rotate(-1deg);
+}
+
+.nav-menu {
+  position: absolute; top: calc(100% + 12px); left: -16px; z-index: 60;
+  min-width: 214px; display: none;
+  background: var(--paper); border: 1px solid var(--rule);
+  box-shadow: 0 8px 22px rgba(40, 25, 10, 0.16);
+  padding: 7px 0;
+}
+.nav-group.open > .nav-menu,
+.nav-group:hover > .nav-menu,
+.nav-group:focus-within > .nav-menu { display: block; }
+
+.nav-menu a {
+  display: block; padding: 7px 18px; white-space: nowrap;
+  font-family: 'Crimson Pro', serif; font-size: 16px; font-weight: 400;
+  color: var(--ink-soft); transition: background 0.15s, color 0.15s;
+}
+.nav-menu a:hover { background: var(--paper-warm); color: var(--pen-red); }
+.nav-menu a.active { color: var(--pen-red); font-weight: 600; }
+.nav-menu a.active::after { display: none; }
+
+@media (max-width: 640px) {
+  /* absolute panels overflow a wrapped nav — inline them instead */
+  .nav-group { display: block; width: 100%; }
+  .nav-menu {
+    position: static; display: block; min-width: 0;
+    border: 0; border-left: 2px solid var(--rule-pink); border-radius: 0;
+    box-shadow: none; background: none; padding: 2px 0 6px 12px; margin-top: 4px;
+  }
+  .nav-menu a { padding: 4px 0; font-size: 15px; }
+  .nav-top::after { display: none; }
+}

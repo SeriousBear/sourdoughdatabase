@@ -9,6 +9,27 @@
     <priority>1.0</priority>
   </url>
 
+  <url>
+    <loc>https://sourdoughdatabase.com/tools/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/starters/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sourdoughdatabase.com/journal/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- ── TECHNIQUES ────────────────────────────────────────── -->
   <url>
     <loc>https://sourdoughdatabase.com/techniques/</loc>

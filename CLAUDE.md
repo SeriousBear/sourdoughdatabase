@@ -297,18 +297,50 @@ first time it ran against this page.
 Shot specs and file naming live in the local photo guide outside the repo at
 `~/Desktop/Projects/sourdough-photo-guide/`.
 
-### Nav is full
+### Nav — six top-level, two dropdowns
 
-Eight items is the ceiling for the current header. Techniques is reached from
-the footer, the recipe hub, and contextual links inside recipes and Atlas
-pages — not the top nav. Adding a ninth needs an IA change (grouping under a
-"Learn" menu, or a hub-of-hubs landing page), not another `<a>`.
+    start · recipes · learn ▾ · tools ▾ · the pantry · about
+
+Every top-level destination is a **real page**, never a homepage anchor. Three
+nav items used to point at `/#starters`, `/#tools` and `/#journal`, which meant
+the Trouble Atlas and the calculators had no page to accumulate authority on.
+`/tools/`, `/starters/` and `/journal/` are now real hubs.
+
+Rules for the dropdowns:
+
+- **Panel links are always in the DOM.** They're hidden with CSS, never absent.
+  Crawlers read and follow them normally.
+- **They work without JavaScript** — `:hover` and `:focus-within` open the
+  panel, so keyboard and mouse users are fine with JS off. `components.js` adds
+  click/tap toggling, which hover cannot do on touch screens.
+- Panels are `position: static` under 640px, because an absolute panel
+  overflows a wrapped nav.
+- Adding a seventh top-level item means removing one. Six is the budget.
+
+### Don't point navigation at homepage anchors
+
+An anchor can't rank, can't be a canonical destination, and can't receive
+internal links properly. If a section is worth a nav slot, it's worth a page.
 
 ## Hub chrome is shared
 
 `rh-` styles live in `styles.css`, not inline. They were inline in
 `recipes/index.html` until Starter School needed the same cards; moved rather
 than duplicated. Any future hub uses `rh-` too.
+
+## Hubs
+
+Every library has a real hub at a directory index: `/recipes/`, `/techniques/`,
+`/starter-school/`, `/tools/`, `/starters/`, `/journal/`, plus
+`/flour-compendium.html` (older, at the root).
+
+Hubs use `rh-` classes from `styles.css`. A new hub is a head, a `.rh-hero`, an
+intro paragraph that links sideways to the other libraries, and a `.rh-grid` of
+`.rh-card`s. Cards are real HTML — never rendered from JSON.
+
+Each hub's intro should point at its neighbours ("if you'd rather diagnose than
+learn, that's the Atlas"). That cross-linking is what keeps the libraries from
+reading as separate silos.
 
 ## scripts/sync-chrome.py — the only way to change the nav
 
@@ -383,4 +415,4 @@ Warm, wry, observational, never corporate. Field-guide-meets-recipe-card, on
 paper stock, in pencil and pen. Brevity beats thoroughness. Full voice rules
 live in `webear-system.md` — match it, don't reinvent it.
 
-The starter is named Gary.
+The starter is named Oso.

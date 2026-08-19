@@ -1,60 +1,95 @@
 /* =============================================================
    components.js — The Sourdough Database
 
-   The header and footer are now REAL HTML in every page, not
-   injected here — crawlers that don't run JS need to see the
-   navigation. This file only marks the current section in the nav.
+   Two jobs, both progressive enhancements:
+     1. mark the current section in the nav
+     2. click-toggle the Learn / Tools dropdowns
 
-   If you change the nav or footer, you must change it in all
-   pages (they're duplicated on purpose) AND update the rules
-   below. See CLAUDE.md.
+   The header and footer are real HTML in every page — never
+   injected here. Change them in index.html and run
+   scripts/sync-chrome.py. See CLAUDE.md.
 
-   Active nav rules:
-     /                          → home
-     /starters/*                → cultures
-     /atlas/* or /tools/*       → tools
-     /journal/*                 → field notes
-     /flour-compendium.html
-       or /flour/*              → flour
-     /pantry.html               → the pantry
-     /recipes/*                 → recipes
-     /starter-school/*          → starter
-     /about.html                → about
+   The dropdown panels are always in the DOM (crawlable) and are
+   revealed by CSS on :hover and :focus-within, so they work with
+   JavaScript disabled. This file adds click/tap toggling, which
+   hover can't provide on touch screens.
    ============================================================= */
 
 (function () {
 
   var path = window.location.pathname;
-  var navLinks = document.querySelectorAll('nav.nav a');
-  if (!navLinks.length) return;
 
-  navLinks.forEach(function (link) {
-    var href = link.getAttribute('href') || '';
-    var isActive = false;
+  /* ── ACTIVE SECTION ─────────────────────────────────────── */
+  // Longest matching prefix wins, so /tools/hydration.html marks the
+  // hydration item rather than every link starting with /tools/.
+  function activate() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.nav a'));
+    if (!links.length) return;
 
-    if (href === '/' && path === '/') {
-      isActive = true;
-    } else if (href === '/about.html' && path === '/about.html') {
-      isActive = true;
-    } else if (href === '/pantry.html' && path === '/pantry.html') {
-      isActive = true;
-    } else if (href === '/recipes/' && path.indexOf('/recipes') === 0) {
-      isActive = true;
-    } else if (href === '/starter-school/' && path.indexOf('/starter-school') === 0) {
-      isActive = true;
-    } else if (href.indexOf('#starters') !== -1 && path.indexOf('/starters/') === 0) {
-      isActive = true;
-    } else if (href.indexOf('#tools') !== -1 &&
-              (path.indexOf('/tools/') === 0 || path.indexOf('/atlas/') === 0)) {
-      isActive = true;
-    } else if (href.indexOf('#journal') !== -1 && path.indexOf('/journal/') === 0) {
-      isActive = true;
-    } else if (href === '/flour-compendium.html' &&
-              (path === '/flour-compendium.html' || path.indexOf('/flour/') === 0)) {
-      isActive = true;
+    var best = null, bestLen = -1;
+    links.forEach(function (link) {
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '/') return;
+      var match =
+        href === '/'      ? path === '/' :
+        /\/$/.test(href)  ? path.indexOf(href) === 0 :
+                            path === href;
+      if (match && href.length > bestLen) { best = link; bestLen = href.length; }
+    });
+    if (!best) return;
+
+    best.classList.add('active');
+
+    // if the match lives inside a dropdown, light up its parent too
+    var group = best.closest ? best.closest('.nav-group') : null;
+    if (group) {
+      var top = group.querySelector('.nav-top');
+      if (top) top.classList.add('active');
+    }
+  }
+
+  /* ── DROPDOWNS ──────────────────────────────────────────── */
+  function dropdowns() {
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));
+    if (!groups.length) return;
+
+    function closeAll(except) {
+      groups.forEach(function (g) {
+        if (g === except) return;
+        g.classList.remove('open');
+        var b = g.querySelector('.nav-top');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
     }
 
-    link.classList.toggle('active', isActive);
-  });
+    groups.forEach(function (g) {
+      var btn = g.querySelector('.nav-top');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = g.classList.contains('open');
+        closeAll(g);
+        g.classList.toggle('open', !open);
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      var inside = groups.some(function (g) { return g.contains(e.target); });
+      if (!inside) closeAll(null);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' && e.keyCode !== 27) return;
+      var open = groups.filter(function (g) { return g.classList.contains('open'); });
+      if (!open.length) return;
+      closeAll(null);
+      var btn = open[0].querySelector('.nav-top');
+      if (btn) btn.focus();
+    });
+  }
+
+  activate();
+  dropdowns();
 
 })();
