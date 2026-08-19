@@ -18,6 +18,7 @@
        or /flour/*              → flour
      /pantry.html               → the pantry
      /recipes/*                 → recipes
+     /starter-school/*          → starter
      /about.html                → about
    ============================================================= */
 
@@ -38,6 +39,8 @@
     } else if (href === '/pantry.html' && path === '/pantry.html') {
       isActive = true;
     } else if (href === '/recipes/' && path.indexOf('/recipes') === 0) {
+      isActive = true;
+    } else if (href === '/starter-school/' && path.indexOf('/starter-school') === 0) {
       isActive = true;
     } else if (href.indexOf('#starters') !== -1 && path.indexOf('/starters/') === 0) {
       isActive = true;

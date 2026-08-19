@@ -121,9 +121,17 @@ hand-rolling a head. Every published page needs all of:
       `og:image` (absolute URL, 1200×630)
 - [ ] Twitter card: `summary_large_image`
 - [ ] JSON-LD structured data — pick the right type:
-      `Article` for journal, `HowTo` for procedures, `FAQPage` where there's a
-      real Q&A block, `BreadcrumbList` on any page below the root,
-      `SoftwareApplication` for the calculators
+      `Article` for journal entries, guides and procedures; `Recipe` for
+      recipes; `CollectionPage` for hubs; `BreadcrumbList` on any page below
+      the root; `WebApplication` for the calculators
+      - **Don't use `HowTo` or `FAQPage` on new pages.** Google retired HowTo
+        rich results in 2023 and removed FAQPage rich results in May 2026.
+        Both are still valid markup that validators accept, but they earn zero
+        search treatment — which makes them a trap, since everything looks
+        fine. Use `Article` for step-by-step guides instead.
+      - `tools/hydration.html` and `tools/schedule.html` still carry
+        `FAQPage`. Leave them: removing it gains nothing and risks breaking
+        working pages. Just don't add more.
 - [ ] Exactly one `<h1>`, then a sane `h2`/`h3` outline — never skip levels
 - [ ] Breadcrumb markup **and** a visible breadcrumb on sub-pages
 - [ ] Descriptive `alt` on every image (what it shows, not "image of bread")
@@ -240,6 +248,84 @@ Cards are **real HTML**; `recipes.js` only shows and hides them. Never render
 cards from JSON — that would repeat the header/footer mistake and hide the
 library from crawlers. The filter bar is CSS-hidden until JS adds `.rh-ready`,
 so a no-JS visitor sees every recipe and no dead controls.
+
+## Starter School
+
+`/starter-school/` is the hub; guides are `/starter-school/<slug>.html`. It
+covers the *life of a starter* — creating, feeding, reviving, storing.
+
+**Keep it separate from `/starters/`.** That directory is the Culture Index:
+field reports on documented cultures (Carl Griffith 1847, Poilâne), explicitly
+"not formulas". Two different jobs, two different intents. Don't merge them and
+don't cross-post — link between them instead.
+
+Guides reuse the `rc-` classes from the recipe pages (hero, glance, steps,
+callouts, trouble table, notes, next-cards) rather than defining a parallel
+namespace. The hub reuses `rh-`. If a guide needs something genuinely new, add
+it to the `rc-` section rather than starting an `ss-` prefix.
+
+## Techniques
+
+`/techniques/` is the hub; entries are `/techniques/<slug>.html`. These cover
+the *physical mechanics* — folds, shaping, scoring, autolyse, retard, steam.
+
+**Recipes link here instead of re-explaining.** A recipe should describe what to
+do at that step and link out for the full technique. That keeps recipes lean
+and means a technique is explained once, well, in one place.
+
+Three libraries, three intents — don't blur them:
+
+| | Answers |
+|---|---|
+| `/techniques/` | "how do I do this move, and what is it for" |
+| `/atlas/` | "it already went wrong, what caused it" |
+| `/recipes/` | "make this specific thing" |
+
+Entries reuse `rc-` classes; the hub reuses `rh-`.
+
+### Photo slots
+
+Technique pages carry placeholders where a photo should go. They are a
+`<div class="rc-photo rc-photo-missing">` plus an HTML **comment** holding the
+exact `<figure>` to paste in once the shot exists.
+
+**Never leave a live `<img>` pointing at a photo that isn't there.** It fires a
+404 on every page load, fills the console with errors, and costs a round trip.
+`scripts/verify.py` will fail the build for it — that check earned its keep the
+first time it ran against this page.
+
+Shot specs and file naming live in the local photo guide outside the repo at
+`~/Desktop/Projects/sourdough-photo-guide/`.
+
+### Nav is full
+
+Eight items is the ceiling for the current header. Techniques is reached from
+the footer, the recipe hub, and contextual links inside recipes and Atlas
+pages — not the top nav. Adding a ninth needs an IA change (grouping under a
+"Learn" menu, or a hub-of-hubs landing page), not another `<a>`.
+
+## Hub chrome is shared
+
+`rh-` styles live in `styles.css`, not inline. They were inline in
+`recipes/index.html` until Starter School needed the same cards; moved rather
+than duplicated. Any future hub uses `rh-` too.
+
+## scripts/verify.py — run it before every commit
+
+    python3 scripts/verify.py
+
+Checks tag balance, JSON-LD validity, Recipe schema completeness, step-id/URL
+agreement, unfilled `[placeholders]`, internal link resolution, sitemap
+coverage both ways, cache headers, single font URL, and — the one that matters
+most here — that all pages share **one** header and **one** footer with the
+same nav item count.
+
+That last check exists because two hand-rolled versions of it silently passed
+while two pages carried a stale nav. One matched a nested `</div>` and compared
+only the first few lines; the other looked for a nav link with a substring that
+also appears in a breadcrumb. **A check that can pass vacuously is worse than
+no check** — it converts an unknown into a false certainty. If you add
+assertions here, make sure each one fails when it finds nothing to inspect.
 
 ## Netlify Forms
 

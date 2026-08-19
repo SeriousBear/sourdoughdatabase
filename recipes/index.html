@@ -60,121 +60,6 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7TNFRKVWVW"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7TNFRKVWVW');</script>
 
-  <style>
-    /* ── recipe hub (rh-) — page-specific, mirrors the flour compendium pattern ── */
-    .rh-hero {
-      background: var(--ink); padding: 64px 32px 56px;
-      border-bottom: 3px solid var(--pen-red); position: relative; overflow: hidden;
-    }
-    .rh-hero::before {
-      content: 'RECIPES'; position: absolute; right: -20px; top: 50%;
-      transform: translateY(-50%); font-family: 'Caveat', cursive; font-size: 14rem;
-      font-weight: 700; color: rgba(244,234,208,0.035); line-height: 1;
-      pointer-events: none; white-space: nowrap;
-    }
-    .rh-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
-    .rh-eyebrow {
-      font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--rule-pink-strong); margin-bottom: 12px; display: block;
-    }
-    .rh-title {
-      font-family: 'Caveat', cursive; font-size: clamp(3rem, 7vw, 5rem); font-weight: 700;
-      color: var(--paper); line-height: 1; margin-bottom: 16px;
-    }
-    .rh-title em { color: var(--rule-pink); font-style: italic; }
-    .rh-sub {
-      font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-style: italic;
-      color: var(--paper-aged); max-width: 600px; line-height: 1.6;
-    }
-    .rh-wrap { max-width: 1000px; margin: 0 auto; padding: 48px 32px 80px; }
-    .rh-intro {
-      font-family: 'Crimson Pro', serif; font-size: 1.08rem; line-height: 1.75;
-      color: var(--ink-soft); max-width: 700px; margin-bottom: 40px;
-    }
-    .rh-intro a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
-
-    /* ── filters: hidden until JS confirms it can drive them ── */
-    .rh-filters { display: none; margin-bottom: 32px; }
-    .rh-ready .rh-filters { display: block; }
-    .rh-filter-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 12px; }
-    .rh-filter-legend {
-      font-family: 'Special Elite', monospace; font-size: 0.64rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--pencil); min-width: 86px;
-    }
-    .rh-chip {
-      font-family: 'Special Elite', monospace; font-size: 0.68rem; letter-spacing: 0.06em;
-      background: var(--paper); border: 1px solid var(--rule); color: var(--ink-soft);
-      padding: 5px 12px; border-radius: 2px; cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
-    }
-    .rh-chip:hover { border-color: var(--rule-pink-strong); }
-    .rh-chip[aria-pressed="true"] { background: var(--pen-red); border-color: var(--pen-red); color: var(--paper); }
-    .rh-count {
-      font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.98rem;
-      color: var(--pencil); margin-bottom: 22px;
-    }
-    .rh-reset {
-      background: none; border: none; cursor: pointer; padding: 0 0 0 8px;
-      font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
-      color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px;
-    }
-
-    /* ── cards ── */
-    .rh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .rh-card {
-      display: block; position: relative; background: var(--paper);
-      border: 1px solid var(--rule); text-decoration: none; overflow: hidden;
-      transition: transform 0.2s cubic-bezier(0.2,0.8,0.2,1), border-color 0.2s;
-    }
-    .rh-card[hidden] { display: none; }
-    a.rh-card:hover { transform: translateY(-4px); border-color: var(--rule-pink-strong); }
-    .rh-card-bar { height: 5px; background: var(--pen-red); }
-    .rh-card-bar.rh-blue { background: var(--pen-blue); }
-    .rh-card-bar.rh-pink { background: var(--rule-pink-strong); }
-    .rh-card-body { padding: 20px 22px 22px; }
-    .rh-card-number {
-      font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--pencil); margin-bottom: 8px;
-    }
-    .rh-card-name {
-      font-family: 'Caveat', cursive; font-size: 1.9rem; font-weight: 700;
-      color: var(--ink); line-height: 1.1; margin-bottom: 6px;
-    }
-    .rh-card-desc {
-      font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.6;
-      color: var(--ink-soft); margin-bottom: 14px;
-    }
-    .rh-card-stats { display: flex; flex-wrap: wrap; gap: 14px; border-top: 1px solid var(--rule); padding-top: 12px; }
-    .rh-stat { display: flex; flex-direction: column; }
-    .rh-stat-label {
-      font-family: 'Special Elite', monospace; font-size: 0.56rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--pencil);
-    }
-    .rh-stat-value { font-family: 'Caveat', cursive; font-size: 1.2rem; font-weight: 600; color: var(--ink); }
-    .rh-tag {
-      position: absolute; top: 12px; right: 12px; font-family: 'Special Elite', monospace;
-      font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 3px 8px; border-radius: 2px;
-    }
-    .rh-tag-ours { background: var(--pen-red); color: var(--paper); }
-    .rh-tag-adapted { background: var(--pen-blue); color: var(--paper); }
-    .rh-card-soon { opacity: 0.62; }
-    .rh-soon-label {
-      font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--pencil); border-top: 1px solid var(--rule);
-      padding-top: 12px; display: block;
-    }
-    .rh-empty {
-      display: none; font-family: 'Crimson Pro', serif; font-style: italic;
-      font-size: 1.05rem; color: var(--pencil); padding: 40px 0; text-align: center;
-    }
-    .rh-empty.rh-show { display: block; }
-    @media (max-width: 640px) {
-      .rh-hero { padding: 44px 22px 40px; }
-      .rh-wrap { padding: 34px 22px 60px; }
-      .rh-filter-legend { min-width: 100%; margin-bottom: 2px; }
-    }
-  </style>
 </head>
 <body>
 
@@ -190,6 +75,7 @@
       <span class="dot"></span>
     </a>
     <nav class="nav">
+      <a href="/starter-school/">starter</a>
       <a href="/#starters">cultures</a>
       <a href="/recipes/">recipes</a>
       <a href="/flour-compendium.html">flour</a>
@@ -217,6 +103,8 @@
   </div>
 
   <p class="rh-intro">Two kinds of recipe live here. <strong>Ours</strong> are written from scratch in this kitchen, with the reasoning and the arguments left in. <strong>Adapted</strong> ones take a formula that's already proven itself — the ingredient weights, which are facts and belong to everyone — and rebuild the method in our own words, with full credit and a link back to the baker who got there first. We never reprint anyone's writing. If you want their version, and you should, the link is right there at the top of the page.</p>
+
+  <p class="rh-intro">Recipes here link out to <a href="/techniques/">Techniques</a> rather than re-explaining folds and shaping every time, and to <a href="/starter-school/">Starter School</a> if you don't have a culture yet.</p>
 
   <div class="rh-filters" role="group" aria-label="Filter recipes">
     <div class="rh-filter-row">
@@ -372,9 +260,11 @@
       <div class="foot-col">
         <h5>Reference</h5>
         <ul>
+          <li><a href="/starter-school/">Starter School</a></li>
           <li><a href="/#starters">Starter Cultures</a></li>
           <li><a href="/recipes/">Recipes</a></li>
           <li><a href="/flour-compendium.html">Flour Compendium</a></li>
+          <li><a href="/techniques/">Techniques</a></li>
           <li><a href="/#tools">Tools</a></li>
           <li><a href="/pantry.html">The Pantry</a></li>
           <li><a href="/tools/trouble-atlas.html">Trouble Atlas</a></li>
