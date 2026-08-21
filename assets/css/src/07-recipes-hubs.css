@@ -146,11 +146,15 @@
   font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.6;
   color: var(--ink-soft);
 }
-.rc-callout strong {
+/* Label only — must stay scoped to the FIRST child. Unscoped, this rule turned
+   every inline <strong> inside a callout into a block heading, which broke a
+   paragraph on create-a-starter. Inline emphasis inherits normally below. */
+.rc-callout > strong:first-child {
   font-family: 'Special Elite', monospace; font-size: 0.64rem;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--pen-red);
   display: block; margin-bottom: 5px; font-weight: 400;
 }
+.rc-callout strong { font-weight: 700; color: var(--ink); }
 .rc-callout a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
 .rc-callout-tool { border-left-color: var(--pen-blue); }
 
@@ -423,4 +427,49 @@
   }
   .nav-menu a { padding: 4px 0; font-size: 15px; }
   .nav-top::after { display: none; }
+}
+
+/* ── the featured recipe: one slot, above the filter bar ──────────────
+   Lives outside #rh-grid on purpose. recipes.js filters the grid, and a
+   build-your-own tool is relevant to every filter — inside the grid,
+   picking "rye" made it disappear.
+   -------------------------------------------------------------------- */
+.rh-feature {
+  display: grid; grid-template-columns: 1fr 200px; gap: 26px;
+  background: var(--paper-warm); border: 2px solid var(--pen-blue);
+  padding: 26px 28px; margin: 0 0 34px; position: relative;
+  text-decoration: none; transition: background 0.15s;
+}
+.rh-feature::before {
+  content: ''; position: absolute; top: -11px; left: 40px;
+  width: 92px; height: 22px; background: var(--tape);
+  transform: rotate(-1.5deg);
+}
+.rh-feature:hover { background: var(--paper); }
+.rh-feature-eyebrow {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pen-blue);
+  margin-bottom: 8px;
+}
+.rh-feature-name {
+  display: block; font-family: 'Caveat', cursive; font-size: 2.4rem;
+  font-weight: 700; color: var(--ink); line-height: 1; margin-bottom: 10px;
+}
+.rh-feature-desc {
+  font-family: 'Crimson Pro', serif; font-size: 1.02rem; line-height: 1.65;
+  color: var(--ink-soft); margin: 0 0 14px;
+}
+.rh-feature-cta {
+  font-family: 'Special Elite', monospace; font-size: 0.68rem;
+  letter-spacing: 0.08em; color: var(--pen-red);
+}
+.rh-feature-stats {
+  display: flex; flex-direction: column; gap: 12px;
+  border-left: 1px dashed var(--rule); padding-left: 22px;
+}
+
+@media (max-width: 640px) {
+  .rh-feature { grid-template-columns: 1fr; gap: 18px; padding: 22px 18px; }
+  .rh-feature-stats { border-left: none; border-top: 1px dashed var(--rule); padding: 14px 0 0; }
+  .rh-feature-name { font-size: 2rem; }
 }

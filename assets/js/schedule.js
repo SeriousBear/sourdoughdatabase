@@ -23,6 +23,10 @@ var state = {
 // ── TEMPERATURE LOOKUP TABLES ──────────────────────────────────────
 // All values in minutes. Format: [temp_F, center_minutes, half_range_minutes]
 // Based on 20% levain at 100% hydration, standard white flour blend.
+// This assumption is now stated to the reader in tools/schedule.html — if you
+// change these tables, change that callout too. Whole grain and rye ferment
+// faster and are NOT modelled here; that lands when the Dough Lab's shared
+// fermentation module does.
 
 var BULK_DATA = [
   [64, 540, 60], [66, 465, 45], [68, 405, 45], [70, 352, 37],

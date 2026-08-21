@@ -9,6 +9,9 @@ Classic `<script>` tags sharing one global scope. No bundler, no modules, no
 |---|---|---|
 | `components.js` | every page (`defer`) | active-nav highlighting + the Learn/Tools dropdowns |
 | `recipes.js` | `/recipes/` (`defer`) | faceted filtering of the recipe cards |
+| `dough-lab-data.js` | `/recipes/build-your-own.html` (`defer`, **before** `dough-lab.js`) | the ingredient catalogue: every flour, liquid and add-in with its water/absorb figures, dose-aware guidance, and `ruinPct` ceiling. Adding an ingredient means editing this file only — every entry needs `blurb`, `band`, `low` and `high` |
+| `dough-lab-tips.js` | `/recipes/build-your-own.html` (`defer`, **after** data, **before** the engine) | pure presentation: turns a catalogue entry plus numbers into tip HTML. Reads no page state, touches no DOM — safe to unit-test in node |
+| `dough-lab.js` | `/recipes/build-your-own.html` (`defer`) | grams-native formula engine: state, arithmetic and DOM wiring. Copy lives in `-data`, tip rendering in `-tips`. **No timeline** — that lands in a shared `fermentation.js` |
 | `schedule.js` | `tools/schedule.html` (`defer`) | bake schedule builder |
 | `crumb-analyzer.js` | `tools/crumb-analyzer.html` (`defer`) | crumb reference tool |
 | `hydration.js` | `tools/hydration.html` (`defer`) | hydration + baker's percentage calculators |

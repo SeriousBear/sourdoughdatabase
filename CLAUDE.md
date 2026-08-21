@@ -391,6 +391,15 @@ badge.** That's a personal product endorsement tied to affiliate revenue.
 a clearly-marked placeholder comment and tell him it needs filling — the same
 rule as recipes he hasn't baked.
 
+### The featured slot
+
+`/recipes/` has one `.rh-feature` block above the filter bar, currently
+**Choose Your Own Crumb**. It sits **outside `#rh-grid` deliberately** —
+`recipes.js` filters everything inside the grid, and the builder is relevant to
+every filter. It was inside once; picking "rye" made it vanish. Anything that
+should always be visible goes outside the grid, and the `rh-count` totals stay
+correct because `recipes.js` counts `grid.querySelectorAll('.rh-card')`.
+
 ## Hub chrome is shared
 
 `rh-` styles live in `styles.css`, not inline. They were inline in
@@ -445,8 +454,15 @@ assertions here, make sure each one fails when it finds nothing to inspect.
 
 ## Netlify Forms
 
-Four forms exist: `newsletter` (on `index.html` and `about.html`), `contact`,
-and `privacy-contact`. All POST to `/thanks.html`.
+Five forms exist: `newsletter` (on `index.html` and `about.html`), `contact`,
+`privacy-contact`, and `crumb-report` (the bake report-back at the foot of
+`/recipes/build-your-own.html`). All POST to `/thanks.html`.
+
+`crumb-report` carries a hidden `formula` field that `dough-lab.js` fills
+with the reader's current bench state, so a submission arrives with the
+actual recipe attached. With JS off it submits empty, which is fine.
+Photo upload is not wired up yet — it needs `enctype="multipart/form-data"`
+and a `file` input, and Netlify counts uploads against a separate quota.
 
 - Mark the form `data-netlify="true"` and `netlify-honeypot="bot-field"` —
   **not** `data-netlify-honeypot`. Only the un-prefixed spelling is in
@@ -484,4 +500,19 @@ Warm, wry, observational, never corporate. Field-guide-meets-recipe-card, on
 paper stock, in pencil and pen. Brevity beats thoroughness. Full voice rules
 live in `webear-system.md` — match it, don't reinvent it.
 
-The starter is named Oso.
+### Every page is a landing page
+
+Assume the reader arrived from a search result and has never seen another page
+on this site. Most traffic here will be exactly that. So:
+
+- **No insider references in instructional copy.** Kyle's starter is named Oso,
+  and that name belongs on `about.html`, in Field Notes, and in the footer —
+  places where it's introduced or is clearly Kyle talking about himself. In a
+  recipe or a technique guide, write **"your starter"** or **"mine"**. A reader
+  who hits `create-a-starter.html` from Google has no idea who Oso is, and a
+  proper noun they can't resolve reads as a mistake.
+- Same rule for any running joke, nickname, or callback that depends on having
+  read something else. If it needs setup the page doesn't provide, cut it.
+- **The voice is not the in-jokes.** Warm, wry and observational survives fine
+  without them — it's carried by sentence rhythm and by being willing to say
+  what's actually true. Keep the register; drop the references.

@@ -1,0 +1,305 @@
+
+/* ============================================================
+   CHOOSE YOUR OWN CRUMB — the build-your-own recipe
+   /recipes/build-your-own.html
+
+   Uses the rc- recipe shell (hero, glance, sections, callouts)
+   so it reads as a recipe rather than a calculator. Everything
+   below is the interactive layer only. Single dl- prefix.
+   ============================================================ */
+
+/* ── live glance: same furniture as a recipe, but it moves ── */
+.dl-live .rc-glance-value { transition: color 0.18s; }
+.dl-flash { color: var(--pen-red) !important; }
+
+/* ── the bench: where you build the dough ── */
+.dl-bench {
+  background: var(--paper-warm); border: 1px solid var(--rule);
+  padding: 26px 26px 22px; margin: 0 0 34px; position: relative;
+}
+.dl-bench::before {
+  content: ''; position: absolute; top: -10px; left: 42px;
+  width: 84px; height: 21px; background: var(--tape);
+  transform: rotate(-1.5deg);
+}
+.dl-bench-title {
+  font-family: 'Caveat', cursive; font-size: 1.75rem; font-weight: 700;
+  color: var(--ink); line-height: 1.1; margin-bottom: 3px;
+}
+.dl-bench-note {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
+  color: var(--pencil); margin-bottom: 18px;
+}
+/* ── the preset notice: these numbers are a loan, not an instruction ── */
+.dl-preset-note {
+  font-family: 'Crimson Pro', serif; font-size: 0.95rem; line-height: 1.6;
+  color: var(--ink-soft); background: var(--paper);
+  border: 1px dashed var(--rule-pink-strong);
+  padding: 12px 16px; margin: 0 0 22px;
+}
+.dl-preset-note strong { color: var(--ink); }
+
+/* ── groups inside the bench ── */
+.dl-group { margin-bottom: 26px; }
+.dl-group-title {
+  font-family: 'Caveat', cursive; font-size: 1.5rem; font-weight: 700;
+  color: var(--ink); line-height: 1.1; margin-bottom: 2px;
+}
+.dl-group-note {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.92rem;
+  color: var(--pencil); margin-bottom: 14px;
+}
+.dl-empty {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
+  color: var(--pencil); margin: 0 0 10px;
+}
+.dl-bench-foot { margin-top: 4px; padding-top: 16px; border-top: 1px dashed var(--rule); }
+.dl-reset {
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-family: 'Special Elite', monospace; font-size: 0.64rem; letter-spacing: 0.08em;
+  color: var(--pencil); text-decoration: underline; text-underline-offset: 3px;
+}
+.dl-reset:hover { color: var(--pen-red); }
+
+/* ── flour rows ── */
+.dl-row {
+  display: grid; grid-template-columns: 1fr 88px 52px 34px;
+  gap: 10px; align-items: center; margin-bottom: 9px;
+}
+.dl-row-label {
+  font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--ink);
+  padding: 8px 0;
+}
+.dl-pct {
+  font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.05em;
+  color: var(--pencil); text-align: right;
+}
+.dl-x-spacer { display: block; }
+
+/* Preset values are the Calibration Loaf on loan — faded until the reader
+   makes the recipe theirs, at which point JS strips this class. */
+.dl-preset { color: var(--pencil); opacity: 0.72; }
+.dl-preset:focus { color: var(--ink); opacity: 1; }
+.dl-select, .dl-num {
+  font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--rule);
+  padding: 8px 10px; border-radius: 2px; width: 100%;
+}
+.dl-select:focus, .dl-num:focus { outline: 2px solid var(--rule-pink-strong); outline-offset: -1px; }
+.dl-num { text-align: right; font-family: 'Special Elite', monospace; font-size: 0.88rem; }
+.dl-x {
+  background: none; border: 1px solid var(--rule); color: var(--pencil);
+  font-family: 'Special Elite', monospace; cursor: pointer;
+  border-radius: 2px; padding: 7px 0; line-height: 1; transition: all 0.15s;
+}
+.dl-x:hover { border-color: var(--pen-red); color: var(--pen-red); }
+.dl-add {
+  background: none; border: 1px dashed var(--rule-pink-strong); color: var(--pen-blue);
+  font-family: 'Special Elite', monospace; font-size: 0.7rem; letter-spacing: 0.08em;
+  padding: 8px 14px; border-radius: 2px; cursor: pointer; margin-top: 4px;
+  transition: background 0.15s;
+}
+.dl-add:hover { background: var(--paper); }
+.dl-add[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+.dl-total {
+  font-family: 'Special Elite', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+  color: var(--pencil); margin-top: 12px; padding-top: 10px;
+  border-top: 1px dashed var(--rule);
+}
+.dl-total.dl-off { color: var(--pen-red); }
+
+/* ── the dials ── */
+.dl-dials { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-top: 22px; }
+.dl-dial { display: flex; flex-direction: column; }
+.dl-dial-label {
+  font-family: 'Special Elite', monospace; font-size: 0.62rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--pencil); margin-bottom: 5px;
+}
+.dl-dial-hint { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.85rem; color: var(--pencil); margin-top: 4px; }
+.dl-range { width: 100%; accent-color: var(--pen-red); margin-top: 2px; }
+
+/* ── the water recommendation: the centrepiece ── */
+.dl-water {
+  border: 2px solid var(--pen-blue); background: var(--paper);
+  padding: 20px 22px; margin: 26px 0 0;
+}
+.dl-water-head {
+  font-family: 'Special Elite', monospace; font-size: 0.64rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--pen-blue); margin-bottom: 8px;
+}
+.dl-water-why .dl-add { margin-left: 6px; }
+.dl-water-num {
+  font-family: 'Caveat', cursive; font-size: 3rem; font-weight: 700;
+  color: var(--ink); line-height: 1; margin-bottom: 2px;
+}
+.dl-water-num small { font-size: 1.4rem; color: var(--pencil); }
+.dl-water-why {
+  font-family: 'Crimson Pro', serif; font-size: 1rem; line-height: 1.65;
+  color: var(--ink-soft); margin-top: 10px;
+}
+.dl-water-why a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+.dl-override { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
+
+/* ── per-row tips: what this ingredient is, and what your dose of it does ──
+   Sits directly under the row it belongs to, so the guidance is attached to
+   the thing rather than filed somewhere else on the page. */
+.dl-tip {
+  border-left: 2px solid var(--rule-pink-strong);
+  margin: -3px 0 14px; padding: 8px 0 8px 14px;
+}
+#dl-hyd-tip .dl-tip, #dl-size-tip .dl-tip { margin: 16px 0 0; }
+.dl-tip-high { border-left-color: var(--pen-red); }
+.dl-tip-blurb {
+  font-family: 'Crimson Pro', serif; font-size: 0.95rem; line-height: 1.6;
+  color: var(--ink-soft);
+}
+.dl-tip-dose {
+  font-family: 'Crimson Pro', serif; font-size: 0.95rem; line-height: 1.6;
+  color: var(--ink-soft); margin-top: 6px;
+}
+.dl-tip-dose-label {
+  font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--pencil); display: block; margin-bottom: 3px;
+}
+.dl-tip-high .dl-tip-dose-label { color: var(--pen-red); }
+.dl-tip a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+/* the ceiling: where this ingredient stops being a choice and starts being
+   a problem. Quiet until you cross it, then red. */
+.dl-tip-ruin {
+  font-family: 'Crimson Pro', serif; font-size: 0.92rem; line-height: 1.6;
+  color: var(--pencil); margin-top: 6px; padding-top: 6px;
+  border-top: 1px dotted var(--rule);
+}
+.dl-tip-ruin-hit { color: var(--ink-soft); }
+.dl-tip-ruin-hit .dl-tip-dose-label { color: var(--pen-red); }
+.dl-tip-ruin a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+/* the "handles more like X%" line under the headline hydration */
+.dl-effect:not(:empty) {
+  margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule);
+}
+
+/* ── consequences: what your blend will actually do ── */
+.dl-notes { margin: 0 0 34px; }
+.dl-note {
+  border-left: 3px solid var(--rule-pink-strong); background: var(--paper-warm);
+  padding: 13px 17px; margin-bottom: 10px;
+}
+.dl-note-head {
+  font-family: 'Special Elite', monospace; font-size: 0.63rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--pen-red); margin-bottom: 4px;
+}
+.dl-note-body { font-family: 'Crimson Pro', serif; font-size: 1rem; line-height: 1.65; color: var(--ink-soft); }
+.dl-note-body a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+/* the absurd notes: the numbers have stopped describing bread */
+.dl-note-absurd {
+  border-left-color: var(--pen-red); border-left-width: 5px;
+  background: var(--paper);
+}
+.dl-note-absurd .dl-note-head { color: var(--pen-red); }
+
+.dl-note-blue { border-left-color: var(--pen-blue); }
+.dl-note-blue .dl-note-head { color: var(--pen-blue); }
+.dl-note-empty { font-family: 'Crimson Pro', serif; font-style: italic; color: var(--pencil); padding: 8px 0; }
+
+/* ── the formula it spits out ── */
+.dl-out-total td { font-weight: 700; border-top: 2px solid var(--rule); border-bottom: none; }
+.dl-hint {
+  font-family: 'Special Elite', monospace; font-size: 0.6rem; letter-spacing: 0.06em;
+  color: var(--pencil); text-transform: uppercase;
+}
+
+/* ── the method: written from the bench ──────────────────────
+   The one control that gates the walkthrough. Two states: in sync
+   (blue, quiet) and stale (.is-stale, red, asking to be pressed).
+   ------------------------------------------------------------ */
+.dl-regen {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
+  border: 1px solid var(--pen-blue); border-left-width: 3px;
+  background: var(--paper); padding: 14px 18px; margin: 0 0 26px;
+}
+.dl-regen.is-stale { border-color: var(--pen-red); background: var(--paper-warm); }
+.dl-regen-text { flex: 1 1 300px; }
+.dl-regen-label {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pen-blue);
+  margin-bottom: 4px;
+}
+.dl-regen.is-stale .dl-regen-label { color: var(--pen-red); }
+.dl-regen-body {
+  font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.6;
+  color: var(--ink-soft);
+}
+.dl-regen-btn {
+  font-family: 'Special Elite', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+  background: var(--ink); color: var(--paper); border: none; white-space: nowrap;
+  padding: 11px 18px; border-radius: 2px; cursor: pointer; transition: background 0.15s;
+}
+.dl-regen-btn:hover { background: var(--pen-red); }
+
+/* Values the method fills in from the bench. Underlined faintly so it's
+   visible which parts of the prose moved, without shouting. */
+.dl-v { border-bottom: 1px dotted var(--rule-pink-strong); }
+
+/* ── conditional notes: fire only for this blend ── */
+.dl-cond {
+  border-left: 3px solid var(--pen-red); background: var(--paper-warm);
+  padding: 12px 16px; margin: 14px 0 0;
+}
+.dl-cond-tag {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.6rem;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--pen-red);
+  margin-bottom: 4px;
+}
+.dl-cond-body {
+  font-family: 'Crimson Pro', serif; font-size: 0.98rem; line-height: 1.65;
+  color: var(--ink-soft);
+}
+.dl-cond-body a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+.dl-actions { margin-top: 18px; }
+
+/* ── did you make it: the report-back form ── */
+.dl-share {
+  border: 1px solid var(--rule); background: var(--paper-warm);
+  padding: 26px 26px 22px; margin: 0 0 34px; position: relative;
+}
+.dl-share::before {
+  content: ''; position: absolute; top: -10px; right: 46px;
+  width: 84px; height: 21px; background: var(--tape);
+  transform: rotate(1.5deg);
+}
+.dl-share .privacy-form { margin-top: 18px; }
+.dl-share-soon {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.92rem;
+  color: var(--pencil); margin-top: 14px; padding-top: 12px;
+  border-top: 1px dashed var(--rule);
+}
+
+/* ── print: just the card ── */
+@media print {
+  .dl-bench, .rc-hero, .breadcrumb, #site-header, #site-footer,
+  .dl-print-btn, .dl-regen, .dl-share, .dl-tip, .rc-next-grid, .rc-section-label,
+  ins, .adsbygoogle { display: none !important; }
+  .dl-v { border-bottom: none !important; }
+  body { background: #fff !important; }
+  .rc-wrap { padding: 0 !important; max-width: none !important; }
+  .dl-water { border: 1px solid #999 !important; }
+  a { text-decoration: none !important; color: #000 !important; }
+}
+.dl-print-btn {
+  font-family: 'Special Elite', monospace; font-size: 0.7rem; letter-spacing: 0.08em;
+  background: var(--ink); color: var(--paper); border: none;
+  padding: 11px 20px; border-radius: 2px; cursor: pointer; transition: background 0.15s;
+}
+.dl-print-btn:hover { background: var(--pen-red); }
+
+@media (max-width: 640px) {
+  .dl-bench { padding: 20px 18px 18px; }
+  .dl-row { grid-template-columns: 1fr 70px 50px 30px; gap: 7px; }
+  .dl-water-num { font-size: 2.4rem; }
+  .dl-regen-btn { width: 100%; }
+}
