@@ -10,6 +10,8 @@ Classic `<script>` tags sharing one global scope. No bundler, no modules, no
 | `components.js` | every page (`defer`) | active-nav highlighting + the Learn/Tools dropdowns |
 | `recipes.js` | `/recipes/` (`defer`) | faceted filtering of the recipe cards |
 | `dough-lab-data.js` | `/recipes/build-your-own.html` (`defer`, **before** `dough-lab.js`) | the ingredient catalogue: every flour, liquid and add-in with its water/absorb figures, dose-aware guidance, and `ruinPct` ceiling. Adding an ingredient means editing this file only — every entry needs `blurb`, `band`, `low` and `high` |
+| `fermentation.js` | `/recipes/build-your-own.html` (`defer`) | **shared** timing engine: the bulk / starter-peak / proof tables plus a speed factor for blend, starter %, hydration, acid, sugar and salt. `tools/schedule.html` should adopt this — it still carries its own copy of the tables |
+| `dough-lab-method.js` | `/recipes/build-your-own.html` (`defer`, after fermentation) | writes the ten steps of § 05 from a bench snapshot: weights, timings, and the conditional warnings that fired |
 | `dough-lab-tips.js` | `/recipes/build-your-own.html` (`defer`, **after** data, **before** the engine) | pure presentation: turns a catalogue entry plus numbers into tip HTML. Reads no page state, touches no DOM — safe to unit-test in node |
 | `dough-lab.js` | `/recipes/build-your-own.html` (`defer`) | grams-native formula engine: state, arithmetic and DOM wiring. Copy lives in `-data`, tip rendering in `-tips`. **No timeline** — that lands in a shared `fermentation.js` |
 | `schedule.js` | `tools/schedule.html` (`defer`) | bake schedule builder |

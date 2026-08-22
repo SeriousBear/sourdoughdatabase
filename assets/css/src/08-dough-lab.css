@@ -222,6 +222,13 @@
   background: var(--paper); padding: 14px 18px; margin: 0 0 26px;
 }
 .dl-regen.is-stale { border-color: var(--pen-red); background: var(--paper-warm); }
+/* Untouched: neither "yours" nor "wrong", so neither blue nor red. Dashed and
+   pencil-coloured, the same treatment the preset numbers get on the bench. */
+.dl-regen.is-default {
+  border: 1px dashed var(--rule-pink-strong); border-left-width: 3px;
+  background: var(--paper-warm);
+}
+.dl-regen.is-default .dl-regen-label { color: var(--pencil); }
 .dl-regen-text { flex: 1 1 300px; }
 .dl-regen-label {
   display: block; font-family: 'Special Elite', monospace; font-size: 0.62rem;
@@ -245,10 +252,13 @@
 .dl-v { border-bottom: 1px dotted var(--rule-pink-strong); }
 
 /* ── conditional notes: fire only for this blend ── */
+.dl-temp-dial { max-width: 340px; margin: 0 0 26px; }
+
 .dl-cond {
   border-left: 3px solid var(--pen-red); background: var(--paper-warm);
   padding: 12px 16px; margin: 14px 0 0;
 }
+.dl-cond-warn { border-left-color: var(--pen-red); background: var(--paper); }
 .dl-cond-tag {
   display: block; font-family: 'Special Elite', monospace; font-size: 0.6rem;
   letter-spacing: 0.09em; text-transform: uppercase; color: var(--pen-red);

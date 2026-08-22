@@ -33,6 +33,7 @@
   var LIQUIDS = DATA.LIQUIDS;
   var EXTRAS  = DATA.EXTRAS;
   var TIPS    = window.DOUGH_LAB_TIPS || {};
+  var METHOD  = window.DOUGH_LAB_METHOD || null;
   var WHOLEGRAIN = ['wholewheat', 'rye', 'einkorn'];
 
   /* The Calibration Loaf, which is what a first-time visitor should see. */
@@ -44,6 +45,7 @@
     levain: 100,        // starter at 100% hydration: half flour, half water
     salt: 10,
     extras: [],
+    tempF: 74,          // kitchen temperature, drives every timing in § 05
     touched: false      // has the reader changed anything yet?
   };
 
@@ -480,6 +482,7 @@
     setDisabled('dl-liquid-add', state.liquids.length >= 4);
     setDisabled('dl-extra-add', state.extras.length >= 6);
     refreshLive();
+    refreshRegen();
   }
 
   /* Pull a row out and pour its grams into the biggest one left. Removing
@@ -501,6 +504,136 @@
     for (var i = 0; i < els.length; i++) els[i].classList.remove('dl-preset');
     var note = $('dl-preset-note'); if (note) note.style.display = 'none';
   }
+
+
+  /* ── § 05: the method ────────────────────────────────────────────────
+     The bench updates live. The method does not — a ten-step walkthrough
+     rewriting itself under you while you drag a slider is disorienting, and
+     the click is the moment you commit to a dough. So the method holds its
+     last-written state and the bar above it goes red when the bench drifts.
+     -------------------------------------------------------------------- */
+  var methodSig = null;    // what the printed method was written for
+
+  function methodContext() {
+    var d = derive();
+    var liquidTotal = state.liquids.reduce(function (a, l) { return a + (+l.g || 0); }, 0);
+
+    var acid = 0, hasDairy = false, hasEnzymeRisk = false;
+    state.liquids.forEach(function (l) {
+      var x = LIQUIDS[l.id]; if (!x || !(+l.g > 0)) return;
+      if (x.note === 'acid') acid += (+l.g || 0);
+      if (x.note === 'dairy' || x.note === 'culturedairy') hasDairy = true;
+      if (l.id === 'juice') hasEnzymeRisk = true;
+    });
+
+    var sugar = 0, fat = 0, fatNames = [], inclusions = [], hasCheese = false;
+    state.extras.forEach(function (e) {
+      var x = EXTRAS[e.id]; if (!x || !(+e.g > 0)) return;
+      if (x.note === 'sugar') sugar += (+e.g || 0);
+      if (x.note === 'fat') { fat += (+e.g || 0); fatNames.push(x.name.toLowerCase()); }
+      if (x.group === 'Inclusion') inclusions.push(x.name.toLowerCase());
+      if (x.note === 'cheese') hasCheese = true;
+    });
+
+    // the liquid phrase reads naturally whether it is water or a blend
+    // The clause has to carry its own weights, because a blend lists them per
+    // liquid. Prefixing a total in front of that reads as "300 g of 150 g
+    // water plus 150 g red wine", which is how the first version shipped.
+    var pours = state.liquids.filter(function (l) { return +l.g > 0 && LIQUIDS[l.id]; });
+    var liquidClause = pours.length === 1
+      ? g0(pours[0].g) + ' g of ' + (pours[0].id === 'water' ? 'warm water' : LIQUIDS[pours[0].id].name.toLowerCase())
+      : pours.map(function (l) { return g0(l.g) + ' g of ' + LIQUIDS[l.id].name.toLowerCase(); }).join(' plus ');
+    var liquidPhrase = pours.map(function (l) { return LIQUIDS[l.id].name.toLowerCase(); }).join(' + ');
+
+    var blendParts = state.flours.filter(function (r) { return +r.g > 0 && FLOURS[r.id]; });
+    var ft = blendParts.reduce(function (a, r) { return a + (+r.g || 0); }, 0) || 1;
+    var blendLabel = blendParts.map(function (r) {
+      return Math.round(r.g / ft * 100) + '% ' + FLOURS[r.id].name.toLowerCase();
+    }).join(' / ');
+
+    var sizeWarn = '';
+    if (d.dough >= 1500) sizeWarn = 'It will not fit a 9-inch banneton or a 4-quart pot. Use a 10-inch basket and at least a 6-quart oven, or divide it in two here.';
+    else if (d.dough < 350) sizeWarn = 'This is roll-sized. A banneton will barely register it — proof it on a tray under a bowl and start checking the bake twenty minutes early.';
+
+    return {
+      totalFlour: d.totalFlour, flourG: d.flourG, levain: state.levain,
+      liquidWeight: d.liquidWeight, liquidPhrase: liquidPhrase, liquidClause: liquidClause,
+      salt: state.salt, saltLabel: g1(state.salt) + ' g', saltPct: d.saltPct,
+      dough: d.dough, hydration: d.hydration, starterPct: d.starterPct,
+      ryePct: flourPct(['rye']), wholeGrainPct: flourPct(WHOLEGRAIN),
+      einkornPct: flourPct(['einkorn']), speltPct: flourPct(['spelt']),
+      acidSharePct: liquidTotal ? acid / liquidTotal * 100 : 0,
+      sugarPct: d.totalFlour ? sugar / d.totalFlour * 100 : 0,
+      fatPct: d.totalFlour ? fat / d.totalFlour * 100 : 0,
+      fatNames: fatNames.join(' and '),
+      inclusionNames: inclusions.length ? inclusions.join(' and ') : '',
+      hasDairy: hasDairy, hasCheese: hasCheese, hasEnzymeRisk: hasEnzymeRisk,
+      doughSizeWarn: sizeWarn,
+      blendLabel: blendLabel || 'no flour',
+      tempF: state.tempF
+    };
+  }
+
+  /* Only the things the method actually reads. Nudging the salt by a tenth of
+     a gram should not turn the bar red. */
+  function signature(c) {
+    return [c.blendLabel, Math.round(c.hydration), Math.round(c.starterPct),
+            Math.round(c.saltPct * 10), g0(c.dough), Math.round(c.ryePct),
+            Math.round(c.wholeGrainPct), Math.round(c.acidSharePct),
+            Math.round(c.sugarPct), Math.round(c.fatPct),
+            c.inclusionNames, c.liquidPhrase, c.tempF].join('|');
+  }
+
+  function writeMethod() {
+    if (!METHOD) return;
+    var c = methodContext();
+    var built = METHOD.build(c);
+    if (!built) return;
+    var host = $('dl-steps'), sum = $('dl-method-summary');
+    if (host) host.innerHTML = built.steps;
+    if (sum) sum.innerHTML = built.summary;
+    methodSig = signature(c);
+    refreshRegen();
+  }
+
+  /* Three states, because the button does two different jobs and the reader
+     needs to know which one they are looking at:
+
+       default  — untouched, still showing the Calibration Loaf. Say so out
+                  loud; otherwise someone reads a recipe they never asked for
+                  and assumes the tool generated it for them.
+       stale    — they changed the bench after generating. Red, asks to be
+                  pressed.
+       in sync  — the steps match the bench. Quiet.
+
+     The button label follows the state rather than staying fixed, so it always
+     names the thing it is about to do. */
+  function refreshRegen() {
+    var bar = $('dl-regen'); if (!bar || !METHOD) return;
+    var c = methodContext();
+    var untouched = !state.touched;
+    var stale = !untouched && methodSig !== null && signature(c) !== methodSig;
+
+    bar.className = 'dl-regen' + (untouched ? ' is-default' : stale ? ' is-stale' : '');
+
+    var label = $('dl-regen-label'), body = $('dl-regen-body'), btn = $('dl-regen-btn');
+    if (label) {
+      label.textContent = untouched ? 'Still the default recipe'
+                        : stale     ? 'Your dough changed'
+                                    : 'Written for your dough';
+    }
+    if (body) {
+      body.innerHTML = untouched
+        ? 'These steps are <a href="/recipes/calibration-loaf.html">the Calibration Loaf</a>, sitting here as a worked example. Change anything on the bench above and this becomes your recipe instead.'
+        : stale
+        ? 'The steps below were written for a different dough. You are now on <strong>' +
+          c.blendLabel + ' at ' + Math.round(c.hydration) + '%</strong>.'
+        : 'These steps match what is on the bench — <strong>' + c.blendLabel +
+          ' at ' + Math.round(c.hydration) + '%</strong>. Change something above and this turns red.';
+    }
+    if (btn) btn.textContent = untouched ? 'Write my recipe' : 'Update my recipe';
+  }
+
 
   /* ── wiring ── */
   function init() {
@@ -577,6 +710,9 @@
       $('dl-levain').value = state.levain;
       $('dl-salt').value = state.salt;
       render();
+      // Put the method back too. Without this the bar says "still the default
+      // recipe" while § 05 is still showing whatever was last generated.
+      writeMethod();
     });
 
     document.addEventListener('click', function (e) {
@@ -590,6 +726,25 @@
         touch(); render();
       }
     });
+
+    var rb = $('dl-regen-btn');
+    if (rb) rb.addEventListener('click', function () {
+      writeMethod();
+      var h = $('dl-method'); if (h && h.scrollIntoView) h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    var tp = $('dl-temp');
+    if (tp) tp.addEventListener('input', function () {
+      state.tempF = +tp.value || 74;
+      setText('dl-temp-out', state.tempF + '°F');
+      touch(); render(false);
+    });
+
+    // The default method is already in the served HTML (see § 05 in the
+    // page) so crawlers and no-JS readers get a complete recipe. Don't
+    // rewrite it on load — just record what it was written for, so the bar
+    // starts in sync and goes red the moment the bench drifts.
+    if (METHOD) { methodSig = signature(methodContext()); refreshRegen(); }
 
     var pb = $('dl-print');
     if (pb) pb.addEventListener('click', function () { window.print(); });

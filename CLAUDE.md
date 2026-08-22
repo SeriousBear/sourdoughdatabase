@@ -391,6 +391,35 @@ badge.** That's a personal product endorsement tied to affiliate revenue.
 a clearly-marked placeholder comment and tell him it needs filling — the same
 rule as recipes he hasn't baked.
 
+### The generated method on /recipes/build-your-own.html
+
+§ 05 is written by `dough-lab-method.js` from whatever is on the bench, using
+`fermentation.js` for the timings. Two rules:
+
+- **The default method is pre-rendered into the served HTML.** A crawler and a
+  no-JS reader must both get a complete, readable recipe — the section was
+  briefly JS-only, which silently dropped ten steps of indexable content. If
+  you change `DEFAULTS` in `dough-lab.js`, regenerate that static block by
+  running `dough-lab-method.js` against the new defaults in node and pasting
+  the result back into `#dl-steps`.
+- **The method does not follow the bench live, on purpose.** A ten-step
+  walkthrough rewriting itself mid-slider-drag is disorienting, and pressing
+  the button is the moment the reader commits to a dough. `signature()`
+  deliberately ignores changes too small to alter the method.
+- **The bar has three states, and the button label follows them.** Untouched
+  is `.is-default` — dashed and pencil-coloured, saying out loud that these
+  steps are the Calibration Loaf and not something the reader asked for, with
+  the button reading *Write my recipe*. After an edit it is `.is-stale` (red,
+  *Update my recipe*), and after pressing it, plain blue. The static copy in
+  the page must match the default branch of `refreshRegen()`, and **"start
+  over" has to call `writeMethod()` as well as `render()`** — otherwise the bar
+  claims the default while § 05 still shows the last dough.
+
+`fermentation.js` is the one place fermentation timing may live. `schedule.js`
+still has its own copy of the same three tables and is hardcoded to white flour
+at 20% starter — that is the drift this file exists to end. Move it over before
+adding any new timing feature anywhere.
+
 ### The featured slot
 
 `/recipes/` has one `.rh-feature` block above the filter bar, currently

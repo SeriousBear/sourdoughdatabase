@@ -231,137 +231,59 @@
     <p class="rc-formula-note">These change as you build. They're about what the dough will <em>feel and do</em> — a number can't tell you that a 30% rye dough is going to stick to everything you own.<br><br><strong>They are tips, not physics.</strong> The flour absorption figures are measured. What happens when you pour a bottle of Dr Pepper into a levain is not — that one is "here's what usually goes wrong", and the only way to know for certain is to bake it.</p>
   </section>
 
-  <section class="rc-section">
+  <section class="rc-section" id="dl-method">
     <span class="rc-section-label">§ 05 — the method</span>
     <span class="rc-section-heading">Ten steps, <em>written for your dough.</em></span>
 
-    <!-- The one control that gates the method. Two states: in sync (blue) and
-         stale (red, .is-stale). Static in the mock; JS drives it later. -->
-    <div class="dl-regen" id="dl-regen">
+    <!-- Ships in the DEFAULT state, because the served HTML carries the
+         Calibration Loaf method. dough-lab.js moves it to stale / in-sync as
+         the reader edits. Keep this copy in step with refreshRegen(). -->
+    <div class="dl-regen is-default" id="dl-regen">
       <div class="dl-regen-text">
-        <span class="dl-regen-label">Written for what's on the bench</span>
-        <span class="dl-regen-body">This method matches your current ingredients — <span class="dl-v">450 g white bread flour at 70% hydration</span>. Change something above and this turns red until you rewrite it.</span>
+        <span class="dl-regen-label" id="dl-regen-label">Still the default recipe</span>
+        <span class="dl-regen-body" id="dl-regen-body">These steps are <a href="/recipes/calibration-loaf.html">the Calibration Loaf</a>, sitting here as a worked example. Change anything on the bench above and this becomes your recipe instead.</span>
       </div>
-      <button type="button" class="dl-regen-btn" id="dl-regen-btn">Rewrite the method</button>
+      <button type="button" class="dl-regen-btn" id="dl-regen-btn">Write my recipe</button>
     </div>
 
-    <div class="rc-step-body">
-      <p>Written for <strong><span class="dl-v">450 g of flour at 70% hydration</span></strong>, finishing at about <span class="dl-v">860 g</span> of dough. Times assume a kitchen around <span class="dl-v">74°F / 23°C</span> — <a href="/tools/schedule.html" class="content-link">build the clock for your actual room</a> if yours runs cold.</p>
+    <div class="dl-dial dl-temp-dial">
+      <label class="dl-dial-label" for="dl-temp">Your kitchen temperature</label>
+      <input class="dl-range" type="range" id="dl-temp" min="62" max="86" step="1" value="74">
+      <span class="dl-dial-hint"><output id="dl-temp-out">74°F</output> — every timing below moves with this</span>
     </div>
 
-    <ol class="rc-steps">
+    <div class="rc-step-body"><p id="dl-method-summary">Written for <strong>500 g of flour at 70% hydration</strong>, finishing at about <strong>860 g</strong> of dough. Times are counted from the moment you mix, at <strong>74°F / 23°C</strong> — this dough runs at about the pace of a plain white loaf. <a href="/tools/schedule.html" class="content-link">Turn it into a wall clock</a> if you need it out of the oven at a particular time.</p></div>
 
-      <li class="rc-step" id="step-1">
-        <div class="rc-step-title">Feed the starter</div>
-        <div class="rc-step-time"><span class="dl-v">Morning · 4–6 hours before you mix</span></div>
-        <div class="rc-step-body">
-          <p>You need <span class="dl-v">100 g</span> of starter at peak, so feed at least <span class="dl-v">120 g</span> to leave yourself a margin and something to keep. A 1:1:1 by weight — equal starter, flour and water — left at room temperature will get you there.</p>
-          <p>Peak means roughly doubled, domed on top, smelling yeasty and faintly sweet rather than sharp. Past peak it has already spent its rise and your bulk will crawl. Mark the jar with a rubber band; watch the level, not the clock.</p>
-          <div class="rc-callout rc-callout-tool">
-            <strong>Don't have a starter yet?</strong>
-            Nothing else here works without one. <a href="/starter-school/create-a-starter.html">Make one from scratch</a> — flour, water, and about two weeks.
-          </div>
-          <div class="dl-cond">
-            <span class="dl-cond-tag">Because you're at 20% starter</span>
-            <div class="dl-cond-body">That's a standard dose and the timings below assume it. Drop to 10% and everything stretches by roughly half again; push past 25% and the bulk will be over before you've finished the folds — <a href="/starter-school/feeding-and-ratios.html">feeding and ratios</a> covers the trade.</div>
-          </div>
-        </div>
-      </li>
+    <!-- The default (Calibration Loaf) method is pre-rendered here so the
+         served HTML carries a complete, readable recipe for anyone without JS
+         and for crawlers. dough-lab-method.js replaces it when the reader
+         presses "Rewrite the method". Regenerate with:
+           node -e "...require fermentation + dough-lab-method, build(defaults)"
+         and keep it in step with DEFAULTS in dough-lab.js. -->
+    <div id="dl-steps">
+      <ol class="rc-steps">
+      <li class="rc-step" id="step-1"><div class="rc-step-title">Feed the starter</div><div class="rc-step-time">Before you mix · 4–6 hrs ahead</div><div class="rc-step-body"><p>You need <strong>100 g</strong> of starter at peak, so feed at least <strong>120 g</strong> to leave yourself a margin and something to keep. A 1:1:1 by weight at room temperature gets you there in roughly 4–6 hrs at 74°F.</p><p>Peak means roughly doubled, domed, smelling yeasty rather than sharp. Past peak it has spent its rise and your bulk will crawl.</p><div class="rc-callout rc-callout-tool"><strong>Don't have a starter yet?</strong> Nothing else here works without one. <a href="/starter-school/create-a-starter.html">Make one from scratch</a> — flour, water, and about two weeks.</div></div></li>
 
-      <li class="rc-step" id="step-2">
-        <div class="rc-step-title">Mix the flour and water</div>
-        <div class="rc-step-time"><span class="dl-v">2:00 pm · 5 minutes, then 1 hour rest</span></div>
-        <div class="rc-step-body">
-          <p>Whisk <span class="dl-v">450 g of flour</span> and <span class="dl-v">300 g of warm water</span> together until there is no dry flour left anywhere. It will look shaggy and unpromising. That's correct.</p>
-          <p>Cover it and leave it. This is the autolyse, and it does real work — the flour hydrates fully and the gluten starts organising itself without you kneading anything.</p>
-        </div>
-      </li>
+      <li class="rc-step" id="step-2"><div class="rc-step-title">Mix the flour and the liquid</div><div class="rc-step-time">+0:00 · 5 minutes, then 1 hr rest</div><div class="rc-step-body"><p>Whisk <strong>450 g of flour</strong> and <strong>300 g of warm water</strong> together until no dry flour is left anywhere. It will look shaggy and unpromising. That is correct.</p><p>Cover it and leave it 1 hr. The flour hydrates fully and the gluten starts organising itself without you kneading anything.</p><div class="rc-callout rc-callout-tool"><strong>Why an hour, and when to skip it</strong> Autolyse is optional and behaves differently with whole grain — <a href="/techniques/autolyse.html">the full case, both ways</a>.</div></div></li>
 
-      <li class="rc-step" id="step-3">
-        <div class="rc-step-title">Add the starter and the salt</div>
-        <div class="rc-step-time"><span class="dl-v">3:00 pm · 3 minutes</span></div>
-        <div class="rc-step-body">
-          <p>Add <span class="dl-v">100 g</span> of peaked starter and <span class="dl-v">10 g</span> of salt straight on top. Wet one hand and squeeze the dough repeatedly between your fingers, folding it over itself, until you can't see any streaks. About three minutes.</p>
-          <p>It will feel slack and sticky and slightly wrong. It is supposed to. Don't add flour.</p>
-        </div>
-      </li>
+      <li class="rc-step" id="step-3"><div class="rc-step-title">Add the starter and the salt</div><div class="rc-step-time">+1:00 · 3 minutes</div><div class="rc-step-body"><p>Add <strong>100 g</strong> of peaked starter and <strong>10 g</strong> of salt straight on top. Wet one hand and squeeze the dough repeatedly, folding it over itself, until there are no streaks. About three minutes.</p><p>It will feel slack and slightly wrong. It is supposed to. Do not add flour.</p></div></li>
 
-      <li class="rc-step" id="step-4">
-        <div class="rc-step-title">Bulk ferment, with folds</div>
-        <div class="rc-step-time"><span class="dl-v">3:00–7:00 pm · 4 sets in the first 2 hours</span></div>
-        <div class="rc-step-body">
-          <p>Cover and leave it at room temperature. At <span class="dl-v">30, 60, 90 and 120 minutes</span>, do one set of stretch and folds, then leave it completely alone. You'll watch it get smoother, puffier, and start holding a dome instead of slumping flat.</p>
-        </div>
-      </li>
+      <li class="rc-step" id="step-4"><div class="rc-step-title">Bulk ferment, with folds</div><div class="rc-step-time">+1:05 · 4–5 hrs · 4 sets</div><div class="rc-step-body"><p>Cover and leave it at <strong>74°F</strong>. Do one set of folds at 45 min, 1.5 hr, 2.3 hr and 3 hr, then leave it completely alone.</p><p>This blend runs <strong>at about the pace of a plain white loaf</strong>. The bracket above is where to start looking, not a timer.</p><div class="rc-callout rc-callout-tool"><strong>New to folding?</strong> How hard to pull, when to stop, and why more sets are not better — <a href="/techniques/stretch-and-fold.html">stretch and fold</a>.</div></div></li>
 
-      <li class="rc-step" id="step-5">
-        <div class="rc-step-title">Judge the bulk — the one that matters</div>
-        <div class="rc-step-time"><span class="dl-v">Around 7:00 pm · volume, not the clock</span></div>
-        <div class="rc-step-body">
-          <p>This is the skill. Everything else here is mechanical; this is the part you're actually learning.</p>
-          <p>Stop when three things are true: the dough has risen about <span class="dl-v">50%</span>, the edges where it meets the bowl are domed rather than sunken, and the whole mass jiggles as one soft body when you shake it.</p>
-          <p>If it's <span class="dl-v">7:00</span> and it hasn't done that, wait. If it got there early, move on. The clock is a suggestion; the dough is the instruction.</p>
-          <div class="rc-callout rc-callout-tool">
-            <strong>This is the skill</strong>
-            Volume, dome, jiggle, and the aliquot-jar trick that turns "50%" from a guess into a measurement — <a href="/techniques/reading-the-bulk.html">reading the bulk</a>.
-          </div>
-        </div>
-      </li>
+      <li class="rc-step" id="step-5"><div class="rc-step-title">Judge the bulk — the one that matters</div><div class="rc-step-time">+5:35 · volume, not the clock</div><div class="rc-step-body"><p>This is the skill. Everything else here is mechanical; this is the part you are actually learning.</p><p>Stop when three things are true: the dough has risen about <strong>50%</strong>, the edges where it meets the bowl are domed rather than sunken, and the whole mass jiggles as one soft body when you shake it.</p><p>If the bracket has run out and it has not done that, wait. If it got there early, move on.</p><div class="rc-callout rc-callout-tool"><strong>This is the skill</strong> Volume, dome, jiggle, and the aliquot-jar trick that turns "50%" from a guess into a measurement — <a href="/techniques/reading-the-bulk.html">reading the bulk</a>.</div></div></li>
 
-      <li class="rc-step" id="step-6">
-        <div class="rc-step-title">Preshape and rest</div>
-        <div class="rc-step-time"><span class="dl-v">7:00 pm · 20 minutes</span></div>
-        <div class="rc-step-body">
-          <p>Tip the dough onto an unfloured counter. Use a bench knife to drag it toward you in quarter turns until it pulls itself into a taut round. Cover it with the bowl and leave it alone for twenty minutes so the gluten relaxes enough to shape.</p>
-        </div>
-      </li>
+      <li class="rc-step" id="step-6"><div class="rc-step-title">Pre-shape and rest</div><div class="rc-step-time">+5:35 · 5 minutes, then 20 rest</div><div class="rc-step-body"><p>Tip the dough onto an unfloured counter — you need the friction. Fold the edges in, flip it seam-side down, and drag it toward you a few times to tighten the surface. Leave it uncovered for twenty minutes.</p></div></li>
 
-      <li class="rc-step" id="step-7">
-        <div class="rc-step-title">Shape</div>
-        <div class="rc-step-time"><span class="dl-v">7:20 pm · 5 minutes</span></div>
-        <div class="rc-step-body">
-          <p>Flour the top, flip it, and shape into a boule or a bâtard. What you're building is surface tension — a skin tight enough to hold the loaf up while it springs. Seam side up into a floured banneton, cover, and into the fridge.</p>
-          <div class="rc-callout rc-callout-tool">
-            <strong>Tension, not decoration</strong>
-            The three shapes and how to know you've got enough tension — <a href="/techniques/shaping.html">shaping</a>.
-          </div>
-        </div>
-      </li>
+      <li class="rc-step" id="step-7"><div class="rc-step-title">Shape</div><div class="rc-step-time">+6:00 · 5 minutes</div><div class="rc-step-body"><p>Flour the top, flip it, and shape into a boule or a bâtard. What you are building is surface tension — a skin tight enough to hold the loaf up while it springs. Seam side up into a floured banneton.</p><div class="rc-callout rc-callout-tool"><strong>Tension, not decoration</strong> The three shapes and how to know you have enough tension — <a href="/techniques/shaping.html">shaping</a>.</div></div></li>
 
-      <li class="rc-step" id="step-8">
-        <div class="rc-step-title">Cold retard</div>
-        <div class="rc-step-time"><span class="dl-v">7:30 pm – next morning · 12–16 hours</span></div>
-        <div class="rc-step-body">
-          <p>Straight into the fridge, uncovered or loosely bagged. This buys flavour, makes the loaf far easier to score, and puts the bake on your schedule instead of the dough's.</p>
-          <div class="rc-callout rc-callout-tool">
-            <strong>How long is too long?</strong>
-            What the cold actually changes, and the ceiling — <a href="/techniques/cold-retard.html">cold retard</a>.
-          </div>
-        </div>
-      </li>
+      <li class="rc-step" id="step-8"><div class="rc-step-title">Cold retard</div><div class="rc-step-time">+6:05 · 12–16 hours</div><div class="rc-step-body"><p>Straight into the fridge. This buys flavour, makes the loaf far easier to score, and puts the bake on your schedule instead of the dough's.</p><div class="rc-callout rc-callout-tool"><strong>What the cold is doing</strong> Cold slows yeast far more than bacteria, which is why you get flavour without extra rise — <a href="/techniques/cold-retard.html">the cold retard</a>.</div></div></li>
 
-      <li class="rc-step" id="step-9">
-        <div class="rc-step-title">Score and bake</div>
-        <div class="rc-step-time"><span class="dl-v">Next morning · 20 min covered, 25 min uncovered</span></div>
-        <div class="rc-step-body">
-          <p>Preheat the Dutch oven to 500°F / 260°C for a full hour. Turn the cold loaf straight out onto parchment, score it decisively in one motion, and get the lid on. Twenty minutes covered, then drop to 450°F / 230°C, lid off, for another twenty-five.</p>
-          <p>Take it darker than feels comfortable. Pale crust is the most common self-inflicted wound in sourdough.</p>
-          <div class="rc-callout rc-callout-tool">
-            <strong>Steam is the whole trick</strong>
-            Why covered-then-uncovered works, and the alternatives if you have no Dutch oven — <a href="/techniques/steam.html">steam and the bake</a>.
-          </div>
-        </div>
-      </li>
+      <li class="rc-step" id="step-9"><div class="rc-step-title">Score and bake</div><div class="rc-step-time">Next morning · 20 min covered, 23 min uncovered</div><div class="rc-step-body"><p>Preheat the Dutch oven to 500°F / 260°C for a full hour. Turn the cold loaf out onto parchment, score it decisively in one motion, and get the lid on. <strong>20 minutes covered</strong>, then drop to 450°F / 230°C, lid off, for another <strong>23</strong>. Internal temperature should read 205–210°F / 96–99°C.</p><p>Take it darker than feels comfortable. Pale crust is the most common self-inflicted wound in sourdough.</p><div class="rc-callout rc-callout-tool"><strong>Steam is the whole trick</strong> Why covered-then-uncovered works, and what to do with no Dutch oven — <a href="/techniques/steam.html">steam and the bake</a>.</div></div></li>
 
-      <li class="rc-step" id="step-10">
-        <div class="rc-step-title">Cool — properly</div>
-        <div class="rc-step-time"><span class="dl-v">At least 2 hours</span></div>
-        <div class="rc-step-body">
-          <p>On a rack, not a board. The loaf is still cooking as it cools and the crumb is still setting. Cutting hot bread gums it, and you will blame the recipe.</p>
-        </div>
-      </li>
+      <li class="rc-step" id="step-10"><div class="rc-step-title">Cool — properly</div><div class="rc-step-time">At least 2 hours</div><div class="rc-step-body"><p>On a rack, not a board. The loaf is still cooking as it cools and the crumb is still setting. Cutting it hot gums it, and you will blame the recipe.</p></div></li>
 
     </ol>
+    </div>
   </section>
 
   <div class="rc-notes">
@@ -489,6 +411,8 @@
 <script src="/assets/js/components.js" defer></script>
 <script src="/assets/js/dough-lab-data.js" defer></script>
 <script src="/assets/js/dough-lab-tips.js" defer></script>
+<script src="/assets/js/fermentation.js" defer></script>
+<script src="/assets/js/dough-lab-method.js" defer></script>
 <script src="/assets/js/dough-lab.js" defer></script>
 </body>
 </html>
