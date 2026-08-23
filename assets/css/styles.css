@@ -4998,6 +4998,20 @@ footer {
 .article-body p { margin-bottom: 1.4em; }
 .article-body p:last-child { margin-bottom: 0; }
 
+/* Section headings inside an essay. The first two Field Notes pieces run
+   straight through on ✎ breaks alone; anything long enough to need a
+   scannable outline (and an h2 outline for search) uses these instead. */
+.article-body h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--pen-blue);
+  margin: 40px 0 14px;
+}
+.article-body h2:first-child { margin-top: 0; }
+.article-body .article-break + h2 { margin-top: 0; }
+
 .article-opener::first-letter {
   font-family: 'Caveat', cursive;
   font-size: 5.2em;
