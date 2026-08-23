@@ -66,7 +66,7 @@
             rel="stylesheet"
         />
 
-        <link rel="stylesheet" href="/assets/css/styles.css?v=f50525ee" />
+        <link rel="stylesheet" href="/assets/css/styles.css?v=e3f5474e" />
 
         <script type="application/ld+json">
             {
@@ -137,6 +137,18 @@
               The Sourdough<br>Database
               <span class="dot"></span>
             </a>
+
+            <!-- Mobile menu toggle. A real checkbox, so the menu opens with
+                 JavaScript off; components.js upgrades it to a proper
+                 aria-expanded button and closes it on link tap. Hidden
+                 entirely above 640px. -->
+            <input type="checkbox" id="nav-toggle" class="nav-check">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menu">
+              <span class="nav-burger-bar"></span>
+              <span class="nav-burger-bar"></span>
+              <span class="nav-burger-bar"></span>
+            </label>
+
             <nav class="nav">
               <a href="/starter-school/">start</a>
               <a href="/recipes/">recipes</a>
@@ -1376,6 +1388,6 @@
           </footer>
         </div>
 
-        <script src="/assets/js/components.js?v=bb7bce2e" defer></script>
+        <script src="/assets/js/components.js?v=d4ceaf3e" defer></script>
     </body>
 </html>

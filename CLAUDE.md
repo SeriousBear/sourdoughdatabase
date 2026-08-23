@@ -345,9 +345,37 @@ Rules for the dropdowns:
 - **They work without JavaScript** — `:hover` and `:focus-within` open the
   panel, so keyboard and mouse users are fine with JS off. `components.js` adds
   click/tap toggling, which hover cannot do on touch screens.
-- Panels are `position: static` under 640px, because an absolute panel
-  overflows a wrapped nav.
 - Adding a seventh top-level item means removing one. Six is the budget.
+
+### Under 640px the whole nav is behind a burger
+
+Six top-level items with two dropdowns does not fit a phone. The panels were
+inlined (`position: static`, always open) so they wouldn't overflow a wrapped
+nav — which produced a **~1,300px navigation column pushing the page off screen
+on every load**. Replaced August 2026 with a proper menu: the header collapses
+to logo + burger (90px), and the nav opens as a full-width block below it.
+
+- **The toggle is a real `<input type="checkbox">` plus a `<label>`**, not a
+  button, so **the menu opens and closes with JavaScript off** — the same
+  standard the dropdowns are held to. The checkbox is clipped rather than
+  `display:none` so it stays focusable and keyboard-operable.
+- `components.js` `mobileMenu()` adds only what CSS can't: `aria-expanded` on
+  the label, closing on link tap (which matters for same-page anchors, where
+  no navigation closes it), and Escape. **Don't convert this to a JS-only
+  button** — that trades the no-JS guarantee for nothing.
+- **Open, it shows all thirteen links at once.** No second tap into a submenu.
+  Thirteen is few enough to read in one go, and nested taps on a phone are
+  worse than a slightly longer list. The panel is capped at
+  `calc(100vh - 130px)` with `overflow-y: auto`, so it can never exceed the
+  screen if the nav grows.
+- Inside the open menu the `.nav-top` buttons are **headings, not controls** —
+  their panel is already open. They're `cursor: default` and their dropdown
+  caret is hidden.
+- The mobile `.nav` is `align-items: flex-start` so items hug their text. Full
+  width would stretch the active `tape` marker across the whole row.
+- All of it lives in the `@media (max-width: 640px)` block in
+  `07-recipes-hubs.css`, next to the dropdown rules. It has to load after the
+  `header` rule in `02-page-furniture.css`, which it overrides.
 
 ### Don't point navigation at homepage anchors
 

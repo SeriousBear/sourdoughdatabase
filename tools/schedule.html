@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&family=Special+Elite&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/styles.css?v=f50525ee">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=e3f5474e">
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8428061506404633" crossorigin="anonymous"></script>
@@ -116,6 +116,18 @@
       The Sourdough<br>Database
       <span class="dot"></span>
     </a>
+
+    <!-- Mobile menu toggle. A real checkbox, so the menu opens with
+         JavaScript off; components.js upgrades it to a proper
+         aria-expanded button and closes it on link tap. Hidden
+         entirely above 640px. -->
+    <input type="checkbox" id="nav-toggle" class="nav-check">
+    <label for="nav-toggle" class="nav-burger" aria-label="Menu">
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+    </label>
+
     <nav class="nav">
       <a href="/starter-school/">start</a>
       <a href="/recipes/">recipes</a>
@@ -378,7 +390,7 @@
 
 
 
-<script src="/assets/js/components.js?v=bb7bce2e" defer></script>
+<script src="/assets/js/components.js?v=d4ceaf3e" defer></script>
 <script src="/assets/js/fermentation.js?v=74f03354" defer></script>
 <script src="/assets/js/schedule.js?v=bcaaadd0" defer></script>
 </body>

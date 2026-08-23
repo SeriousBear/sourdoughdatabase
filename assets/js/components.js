@@ -4,6 +4,7 @@
    Progressive enhancements shared by every page:
      1. mark the current section in the nav
      2. click-toggle the Learn / Tools dropdowns
+     2b. upgrade the mobile burger to a real aria button
      3. YouTube facades   — any [data-video-id]
      4. scroll reveal     — any .flour-reveal
      5. reading progress  — #read-progress + #article-body
@@ -178,8 +179,56 @@
     if (btn && !btn.getAttribute('onclick')) btn.addEventListener('click', copyLink);
   }
 
+  /* ── MOBILE MENU ────────────────────────────────────────────────
+     The burger works without this: it's a <label> for a real checkbox, so
+     CSS alone opens and closes it. What JS adds is the part CSS can't —
+     announcing state to a screen reader, and closing the menu when the
+     reader taps a link or presses Escape.
+
+     Deliberately no click-outside handler: the menu is a block in the
+     document flow, not an overlay, so there is nothing behind it to
+     dismiss. */
+  function mobileMenu() {
+    var box = document.getElementById('nav-toggle');
+    var nav = document.querySelector('nav.nav');
+    if (!box || !nav) return;
+    var label = document.querySelector('label[for="nav-toggle"]');
+
+    if (!nav.id) nav.id = 'site-nav';
+    if (label) {
+      label.setAttribute('role', 'button');
+      label.setAttribute('aria-controls', nav.id);
+      label.setAttribute('tabindex', '-1');   // the checkbox itself takes focus
+    }
+
+    function sync() {
+      if (label) label.setAttribute('aria-expanded', box.checked ? 'true' : 'false');
+      box.setAttribute('aria-label', box.checked ? 'Close menu' : 'Open menu');
+    }
+    sync();
+    box.addEventListener('change', sync);
+
+    // Tapping a link should close the menu — it matters for same-page
+    // anchors, where no navigation happens to close it for us.
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a') && box.checked) {
+        box.checked = false;
+        sync();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && box.checked) {
+        box.checked = false;
+        sync();
+        box.focus();
+      }
+    });
+  }
+
   activate();
   dropdowns();
+  mobileMenu();
   videoFacades();
   scrollReveal();
   readProgress();
