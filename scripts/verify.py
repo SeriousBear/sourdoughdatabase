@@ -125,7 +125,12 @@ def check_links(files):
     for f in files:
         if '_template' in f: continue          # templates hold deliberate placeholders
         s = COMMENT.sub('', HIDDEN.sub('', open(f, encoding='utf-8').read()))
-        for u in re.findall(r'href="(/[^"#?\s]*)"', s) + re.findall(r'src="(/[^"#?\s]*)"', s):
+        # Strip the ?v=<hash> cache-busting stamp before resolving. Without
+        # this the regex simply wouldn't match a stamped reference, so every
+        # stamped asset would silently drop out of the check — the vacuous-pass
+        # failure mode this file exists to prevent.
+        refs = re.findall(r'href="(/[^"#\s]*)"', s) + re.findall(r'src="(/[^"#\s]*)"', s)
+        for u in (r.split('?')[0] for r in refs):
             if u.startswith('/assets'):
                 if not os.path.exists(u[1:]): miss[u].add(f)
             elif u not in known: miss[u].add(f)
@@ -158,6 +163,30 @@ def check_css_build():
           "styles.css matches its sources (run scripts/build-css.py)",
           "" if built == current else "%d built vs %d on disk" % (len(built), len(current)))
 
+def check_stamps():
+    """Every CSS/JS reference must carry its file's current content hash.
+
+    Filenames are not content-hashed, so `?v=<md5>` is the only thing that can
+    reach a browser holding an asset cached under the old `immutable` header —
+    it will not revalidate, but it has never seen the new URL. A stale stamp
+    means a returning visitor keeps running old code against new HTML.
+    """
+    ref = re.compile(r'(href|src)="(/assets/(?:css|js)/[^"?]+\.(?:css|js))(?:\?v=([0-9a-f]+))?"')
+    seen, bad = 0, []
+    for f in pages():   # includes the templates; they ship too
+        for _, path, stamp in ref.findall(open(f, encoding='utf-8').read()):
+            disk = path[1:]
+            if not os.path.exists(disk):
+                bad.append('%s -> %s (missing)' % (f, path)); continue
+            seen += 1
+            want = hashlib.md5(open(disk, 'rb').read()).hexdigest()[:8]
+            if stamp != want:
+                bad.append('%s -> %s (%s)' % (f, path, stamp or 'unstamped'))
+    # Must fail when it finds nothing to inspect, or it passes vacuously.
+    check(seen > 0, "found CSS/JS references to stamp-check", seen)
+    check(not bad, "every CSS/JS reference carries the current content hash "
+                   "(run scripts/stamp-assets.py)", bad[:6])
+
 def check_assets():
     tom = open('netlify.toml').read()
     active = re.findall(r'^\s*Cache-Control = "([^"]+)"', tom, re.M)
@@ -172,6 +201,7 @@ if __name__ == '__main__':
     print("Verifying %d pages\n" % len(files))
     check_parse(files); check_chrome(files); check_schema(files)
     check_links(files); check_sitemap(files); check_assets(); check_css_build()
+    check_stamps()
     print()
     if fails:
         print("%d FAILED: %s" % (len(fails), fails)); sys.exit(1)

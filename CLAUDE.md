@@ -202,8 +202,13 @@ answers, tables, and links must all be in the served HTML.
 - **Caching:** filenames aren't content-hashed, so nothing may be served
   `immutable`. `netlify.toml` gives CSS/JS `max-age=0, must-revalidate` (a
   ~200-byte 304 when unchanged) and images a week. Don't "optimize" that back
-  to a long immutable cache unless a build step with hashed filenames lands
-  first — that bug shipped once already.
+  to a long immutable cache — that bug shipped once already, and it is not
+  self-healing (see `scripts/stamp-assets.py`).
+- **Every CSS and JS reference carries `?v=<content-hash>`**, applied by
+  `scripts/stamp-assets.py` and enforced by `verify.py`. Don't hand-write an
+  asset reference without one, and don't strip them "for tidiness" — the stamp
+  is the only thing that can reach a browser still holding an `immutable`
+  copy from before that header was fixed.
 - Budget for a new page: **under 100 KB** of HTML+CSS+JS transferred, LCP under
   2.5s on a mid-range phone.
 
@@ -490,15 +495,51 @@ Three separate bugs in this repo came from pasting a cached copy of the header
 into a new page and not noticing it was a nav item behind. There is now no
 reason to ever paste it manually.
 
+## scripts/stamp-assets.py — cache busting
+
+    python3 scripts/stamp-assets.py            # apply
+    python3 scripts/stamp-assets.py --check    # report drift, change nothing
+
+Appends `?v=<first 8 of the file's md5>` to every `/assets/css/*.css` and
+`/assets/js/*.js` reference in every page. Per file, so a CSS edit doesn't bust
+the JS, and a byte-identical rebuild produces no diff.
+
+**Why it exists.** `netlify.toml` served `/assets/*` as
+`max-age=31536000, immutable` until August 2026. A browser that visited during
+that window keeps those files for a *year* and never sends a revalidation
+request — so fixing the header could not reach it. Found in the wild: a phone
+rendering current HTML with a `components.js` cached from before the
+header/footer moved into real markup. The old script injected the **old nav**
+over the correct one, and an equally stale `styles.css` had no `.rh-*` rules,
+so hub cards rendered as bare stacked text. Nothing was wrong with the site.
+
+A changed URL is the only thing such a browser will fetch. That's all the stamp
+is for.
+
+**Run it last** of the three generators, after the bytes on disk have settled:
+
+    python3 scripts/build-css.py
+    python3 scripts/sync-chrome.py
+    python3 scripts/stamp-assets.py
+    python3 scripts/verify.py
+
+Images are deliberately not stamped — they're served for a week and a stale
+photo is cosmetic, not broken. Stamping them would mean rewriting URLs inside
+stylesheets too.
+
 ## scripts/verify.py — run it before every commit
 
     python3 scripts/verify.py
 
 Checks tag balance, JSON-LD validity, Recipe schema completeness, step-id/URL
 agreement, unfilled `[placeholders]`, internal link resolution, sitemap
-coverage both ways, cache headers, single font URL, and — the one that matters
-most here — that all pages share **one** header and **one** footer with the
-same nav item count.
+coverage both ways, cache headers, single font URL, asset cache stamps, and —
+the one that matters most here — that all pages share **one** header and
+**one** footer with the same nav item count.
+
+The link check strips `?v=…` before resolving. Without that it would stop
+matching stamped references entirely and every CSS and JS file would silently
+drop out of the check — exactly the vacuous pass this file exists to prevent.
 
 That last check exists because two hand-rolled versions of it silently passed
 while two pages carried a stale nav. One matched a nested `</div>` and compared

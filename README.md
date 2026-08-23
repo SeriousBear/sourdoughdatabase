@@ -65,10 +65,22 @@ That spins up a local server at `http://localhost:3000`.
 
 ## How to make changes
 
-1. Edit a file (HTML in the root, CSS in `assets/css/styles.css`)
-2. Save
-3. Refresh your browser
-4. When happy, commit and push (see "Deploying" below)
+1. Edit a file — HTML in the root, **CSS in `assets/css/src/`** (never
+   `styles.css`; that file is generated)
+2. Run the three generators, in this order:
+
+       python3 scripts/build-css.py       # rebuild styles.css from src/
+       python3 scripts/sync-chrome.py     # push header/footer to every page
+       python3 scripts/stamp-assets.py    # cache-bust changed CSS/JS
+
+3. Check it: `python3 scripts/verify.py` — it fails if any of the above was
+   skipped
+4. Refresh your browser
+5. When happy, commit and push (see "Deploying" below)
+
+**Don't skip step 2.** `stamp-assets.py` puts a content hash on every CSS and
+JS URL. Without it, a returning visitor can keep running old code against new
+HTML — the site looks broken to them and fine to you.
 
 ### Adding a new page
 
