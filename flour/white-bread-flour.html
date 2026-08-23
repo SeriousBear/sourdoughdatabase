@@ -951,25 +951,10 @@
         <script src="/assets/js/components.js" defer></script>
 
         <script>
-            // Scroll reveal
-            var revealEls = document.querySelectorAll(".flour-reveal");
-            var observer = new IntersectionObserver(
-                function (entries) {
-                    entries.forEach(function (entry, i) {
-                        if (entry.isIntersecting) {
-                            entry.target.style.transitionDelay =
-                                (i % 4) * 0.08 + "s";
-                            entry.target.classList.add("visible");
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                { threshold: 0.1 },
-            );
-            revealEls.forEach(function (el) {
-                observer.observe(el);
-            });
-
+        (function () {
+            // Scroll reveal moved to components.js in August 2026 — it was
+            // copy-pasted into three flour pages. The protein bars stay here:
+            // only this page has them.
             // Protein bar animation
             var barSection = document.getElementById("flour-protein-bars");
             var barObserver = new IntersectionObserver(
@@ -990,6 +975,7 @@
                 { threshold: 0.3 },
             );
             if (barSection) barObserver.observe(barSection);
+        })();
         </script>
     </body>
 </html>

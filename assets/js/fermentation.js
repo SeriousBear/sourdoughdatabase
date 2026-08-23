@@ -1,10 +1,12 @@
 /* =============================================================
    fermentation.js — the shared timing engine
 
-   Used by /recipes/build-your-own.html today. tools/schedule.html
-   should adopt it next: that page currently carries its own copy
-   of the tables below and is silently hardcoded to white flour at
-   20% starter, which is exactly the drift this file exists to stop.
+   The one place fermentation timing lives. Used by
+   /recipes/build-your-own.html and tools/schedule.html. Both pages
+   held their own copy of these tables once; the schedule builder's
+   copy was silently hardcoded to white flour at 20% starter, so the
+   two tools disagreed by about 90 minutes on a rye dough. Merged
+   August 2026. Do not copy these tables anywhere — import this.
 
    ── Where the numbers come from ──────────────────────────────
 

@@ -1,9 +1,23 @@
 /* =============================================================
    components.js — The Sourdough Database
 
-   Two jobs, both progressive enhancements:
+   Progressive enhancements shared by every page:
      1. mark the current section in the nav
      2. click-toggle the Learn / Tools dropdowns
+     3. YouTube facades   — any [data-video-id]
+     4. scroll reveal     — any .flour-reveal
+     5. reading progress  — #read-progress + #article-body
+     6. copy-link button  — #copy-btn
+
+   Items 3–6 were copy-pasted inline into 16 pages before August
+   2026: the video facade into 10 Atlas entries, the reveal into 3
+   flour pages, and the progress bar and copy button into 3 journal
+   files. Three Atlas pages carried the data attribute but had
+   never received the script, so adding a real video ID to them
+   would have silently done nothing.
+
+   Each one is keyed off markup and no-ops when that markup is
+   absent, which is what makes it safe to run everywhere.
 
    The header and footer are real HTML in every page — never
    injected here. Change them in index.html and run
@@ -89,7 +103,86 @@
     });
   }
 
+  /* ── YouTube facade ──────────────────────────────────────────────
+     Swap the placeholder for a real thumbnail when a video ID is set. No
+     iframe until the reader clicks, so nothing is loaded from YouTube — and
+     nothing at all happens while the attribute is empty.
+
+     TO ADD A VIDEO: put data-video-id="THE_ID" on the .video-reference div.
+     Nothing else to change, on any page. */
+  function videoFacades() {
+    var refs = document.querySelectorAll('[data-video-id]');
+    for (var i = 0; i < refs.length; i++) {
+      var ref = refs[i];
+      var id = ref.getAttribute('data-video-id');
+      if (!id) continue;
+      var a = ref.querySelector('a');
+      if (!a) continue;
+      a.href = 'https://www.youtube.com/watch?v=' + id;
+      a.className = 'video-card';
+      a.innerHTML =
+        '<img src="https://img.youtube.com/vi/' + id + '/hqdefault.jpg" ' +
+        'alt="Video thumbnail" loading="lazy" width="480" height="360">' +
+        '<span class="video-play" aria-hidden="true">▶</span>';
+    }
+  }
+
+  /* ── scroll reveal ── */
+  function scrollReveal() {
+    var els = document.querySelectorAll('.flour-reveal');
+    if (!els.length || !window.IntersectionObserver) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (!entry.isIntersecting) return;
+        entry.target.style.transitionDelay = (i % 4) * 0.08 + 's';
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+    for (var i = 0; i < els.length; i++) obs.observe(els[i]);
+  }
+
+  /* ── reading progress ── */
+  function readProgress() {
+    var bar = document.getElementById('read-progress');
+    var body = document.getElementById('article-body');
+    if (!bar || !body) return;
+    window.addEventListener('scroll', function () {
+      var rect = body.getBoundingClientRect();
+      var pct = Math.min(100, Math.max(0,
+        (-rect.top + window.innerHeight) / body.offsetHeight * 100));
+      bar.style.width = pct + '%';
+    }, { passive: true });
+  }
+
+  /* ── copy link ──────────────────────────────────────────────────
+     Still exposed as a global because the journal articles call it from an
+     inline onclick. A delegated listener is also wired, so new markup can
+     just use id="copy-btn" and drop the attribute. */
+  function copyLink() {
+    var btn = document.getElementById('copy-btn');
+    if (!btn || !navigator.clipboard) return;
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      btn.textContent = 'copied \u2713';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'copy link';
+        btn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+  window.copyLink = copyLink;
+
+  function copyButton() {
+    var btn = document.getElementById('copy-btn');
+    if (btn && !btn.getAttribute('onclick')) btn.addEventListener('click', copyLink);
+  }
+
   activate();
   dropdowns();
+  videoFacades();
+  scrollReveal();
+  readProgress();
+  copyButton();
 
 })();

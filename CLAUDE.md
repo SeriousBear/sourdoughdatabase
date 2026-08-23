@@ -415,10 +415,36 @@ rule as recipes he hasn't baked.
   over" has to call `writeMethod()` as well as `render()`** — otherwise the bar
   claims the default while § 05 still shows the last dough.
 
-`fermentation.js` is the one place fermentation timing may live. `schedule.js`
-still has its own copy of the same three tables and is hardcoded to white flour
-at 20% starter — that is the drift this file exists to end. Move it over before
-adding any new timing feature anywhere.
+`fermentation.js` is the one place fermentation timing may live. Both this page
+and `tools/schedule.html` use it. The schedule builder held its own copy of the
+same three tables until August 2026 and was silently hardcoded to white flour
+at 20% starter, so the two tools disagreed by about 90 minutes on a rye dough.
+**Never copy those tables into a page.** If a timing needs a new input, add it
+to `speedFactor()` and both tools get it.
+
+## One source of truth
+
+The site has no build step, so nothing stops the same fact being written twice.
+That is the failure mode to watch for — not file count. Splitting a file into
+four is fine and often right; having two files that both claim to know how fast
+rye ferments is not.
+
+Two rounds of this have already been cleaned up:
+
+- **Fermentation tables** — were in `schedule.js` and `fermentation.js`. Merged.
+- **Four inline behaviours** — the YouTube facade was pasted into 10 Atlas
+  entries, the scroll reveal into 3 flour pages, and the reading-progress bar
+  and copy-link into 3 journal files. All four now live in `components.js`,
+  each guarded so it no-ops when its markup is absent. Three Atlas pages
+  carried `data-video-id` but had never been given the script — adding a real
+  video ID to them would have silently done nothing.
+
+Genuine one-offs stay inline and that is correct: the protein-bar animation on
+`flour/white-bread-flour.html` and the starter-age line on `about.html` each
+appear on exactly one page.
+
+**Before pasting a `<script>` into a page, check whether a second page will
+ever want it.** If yes, it belongs in `components.js` behind a markup guard.
 
 ### The featured slot
 

@@ -260,27 +260,6 @@
 </div>
 <script src="/assets/js/components.js" defer></script>
 
-<script>
-(function(){
-  var bar=document.getElementById('read-progress');
-  var body=document.getElementById('article-body');
-  if(!bar||!body)return;
-  window.addEventListener('scroll',function(){
-    var rect=body.getBoundingClientRect();
-    var pct=Math.min(100,Math.max(0,(-rect.top+window.innerHeight)/body.offsetHeight*100));
-    bar.style.width=pct+'%';
-  },{passive:true});
-})();
-
-function copyLink(){
-  var btn=document.getElementById('copy-btn');
-  navigator.clipboard.writeText(window.location.href).then(function(){
-    btn.textContent='copied ✓';
-    btn.classList.add('copied');
-    setTimeout(function(){btn.textContent='copy link';btn.classList.remove('copied');},2200);
-  });
-}
-</script>
 
 </body>
 </html>

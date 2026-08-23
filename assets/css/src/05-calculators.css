@@ -1800,3 +1800,14 @@
   opacity: 0.7;
 }
 
+/* ── schedule builder: the blend picker ──────────────────────────────
+   Reuses .proof-toggle, but four across instead of two — and it wraps to
+   two-up rather than stacking four tall on a phone. */
+.sched-blend { flex-wrap: wrap; }
+.sched-blend button { flex: 1 1 46%; }
+.sched-hint {
+  font-family: 'Crimson Pro', serif; font-size: 0.9rem; line-height: 1.6;
+  color: var(--pencil); margin-top: 10px;
+}
+.sched-hint a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+@media (min-width: 720px) { .sched-blend button { flex: 1 1 0; } }

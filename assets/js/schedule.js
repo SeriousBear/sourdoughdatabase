@@ -18,50 +18,31 @@ var state = {
   unit: 'F',
   proofMethod: 'cold',
   tempF: 72,
+  // Reference dough by default, so the page opens on the same schedule it has
+  // always given. blend presets move these; see setBlend().
+  starterPct: 20,
+  wholeGrainPct: 0,
+  ryePct: 0,
 };
 
-// ── TEMPERATURE LOOKUP TABLES ──────────────────────────────────────
-// All values in minutes. Format: [temp_F, center_minutes, half_range_minutes]
-// Based on 20% levain at 100% hydration, standard white flour blend.
-// This assumption is now stated to the reader in tools/schedule.html — if you
-// change these tables, change that callout too. Whole grain and rye ferment
-// faster and are NOT modelled here; that lands when the Dough Lab's shared
-// fermentation module does.
+// ── FERMENTATION ───────────────────────────────────────────────────
+// The three lookup tables and `interpolate` used to live here. They now live
+// in assets/js/fermentation.js, which this page loads first, because the Dough
+// Lab needs exactly the same numbers and two copies of a fact is one copy too
+// many. Same tables, same values — plus a correction for blend and starter %,
+// which this page could not do before and silently assumed away.
+var F = window.FERMENTATION;
 
-var BULK_DATA = [
-  [64, 540, 60], [66, 465, 45], [68, 405, 45], [70, 352, 37],
-  [72, 307, 37], [74, 270, 30], [76, 240, 30], [78, 210, 28],
-  [80, 187, 22], [82, 165, 15], [84, 150, 15], [86, 132, 12]
-];
-
-var STARTER_PEAK_DATA = [
-  [64, 600, 120], [66, 510, 90], [68, 450, 90], [70, 390, 75],
-  [72, 330, 60], [74, 300, 60], [76, 255, 45], [78, 210, 45],
-  [80, 180, 30], [82, 150, 30], [84, 120, 25], [86, 90, 20]
-];
-
-var SAME_DAY_PROOF_DATA = [
-  [64, 180, 30], [66, 165, 27], [68, 150, 25], [70, 135, 22],
-  [72, 120, 20], [74, 105, 18], [76, 90, 15], [78, 78, 12],
-  [80, 68, 10], [82, 58, 8], [84, 50, 8], [86, 42, 7]
-];
-
-function interpolate(data, tempF) {
-  if (tempF <= data[0][0]) return { center: data[0][1], range: data[0][2] };
-  if (tempF >= data[data.length-1][0]) {
-    var last = data[data.length-1];
-    return { center: last[1], range: last[2] };
-  }
-  for (var i = 0; i < data.length - 1; i++) {
-    if (tempF >= data[i][0] && tempF <= data[i+1][0]) {
-      var t = (tempF - data[i][0]) / (data[i+1][0] - data[i][0]);
-      return {
-        center: Math.round(data[i][1] + t * (data[i+1][1] - data[i][1])),
-        range: Math.round(data[i][2] + t * (data[i+1][2] - data[i][2]))
-      };
-    }
-  }
-  return { center: 300, range: 30 };
+// Everything the shared engine needs to know about this dough. The defaults
+// are the reference — white flour, 20% starter — so an unchanged page produces
+// exactly the schedule it produced before this file stopped owning the tables.
+function fermOpts() {
+  return {
+    starterPct: state.starterPct,
+    wholeGrainPct: state.wholeGrainPct,
+    ryePct: state.ryePct,
+    hydration: F.REFERENCE.hydration   // this page does not ask for a formula
+  };
 }
 
 // ── UNIT CONVERSION ────────────────────────────────────────────────
@@ -100,9 +81,9 @@ function fmtDuration(mins) {
   return m > 0 ? h + 'h ' + m + 'm' : h + 'h';
 }
 function fmtBulkRange(tempF) {
-  var b = interpolate(BULK_DATA, tempF);
-  var lo = b.center - b.range;
-  var hi = b.center + b.range;
+  var b = F.bulk(tempF, fermOpts());
+  var lo = b.lo;
+  var hi = b.hi;
   var loH = (lo/60).toFixed(1).replace('.0','');
   var hiH = (hi/60).toFixed(1).replace('.0','');
   return loH + '–' + hiH + ' hrs';
@@ -193,7 +174,7 @@ function calculateSchedule(targetMs, tempF, proofMethod) {
       lookFor: 'Minimum 8 hours, maximum 16 hours. This is your most flexible step — adjust to your schedule. Longer cold proof = more complex sourness. No attention needed during this time.',
     });
   } else {
-    var proof = interpolate(SAME_DAY_PROOF_DATA, tempF);
+    var proof = F.sameDayProof(tempF, fermOpts());
     addStep({
       name: 'Final proof at room temp', phase: 'proof', icon: '○',
       duration: proof.center, range: proof.range,
@@ -211,7 +192,7 @@ function calculateSchedule(targetMs, tempF, proofMethod) {
   });
 
   // 8. BULK FERMENTATION
-  var bulk = interpolate(BULK_DATA, tempF);
+  var bulk = F.bulk(tempF, fermOpts());
   var tempLabel = state.unit === 'F' ? tempF + '°F' : toDisplay(tempF, 'C') + '°C';
   addStep({
     name: 'Bulk fermentation', phase: 'bulk', icon: '⟳',
@@ -231,7 +212,7 @@ function calculateSchedule(targetMs, tempF, proofMethod) {
   // 10. STARTER at peak (the autolyse start = when starter should be ready)
   // Starter feed time is calculated separately
   var starterPeakMs = cursor; // cursor is now at autolyse start
-  var peak = interpolate(STARTER_PEAK_DATA, tempF);
+  var peak = F.starterPeak(tempF, fermOpts());
   var starterFeedMs = starterPeakMs - peak.center * 60000;
   var starterFeedEarlyMs = starterPeakMs - (peak.center + peak.range) * 60000;
   var starterFeedLateMs  = starterPeakMs - (peak.center - peak.range) * 60000;
@@ -593,6 +574,37 @@ function updateBulkPreview() {
   document.getElementById('bulk-preview-time').textContent = fmtBulkRange(state.tempF);
 }
 
+/* Blend presets. This page plans a bake; it does not know your formula, so it
+   offers four honest brackets rather than pretending to a precision it cannot
+   have. Anyone who wants exact numbers gets sent to Choose Your Own Crumb. */
+var BLENDS = {
+  white:  { wholeGrainPct: 0,  ryePct: 0,  label: 'white flour' },
+  some:   { wholeGrainPct: 25, ryePct: 0,  label: 'about a quarter whole grain' },
+  heavy:  { wholeGrainPct: 50, ryePct: 0,  label: 'about half whole grain' },
+  rye:    { wholeGrainPct: 30, ryePct: 30, label: 'rye-forward' }
+};
+
+function setBlend(key) {
+  var b = BLENDS[key]; if (!b) return;
+  state.blend = key;
+  state.wholeGrainPct = b.wholeGrainPct;
+  state.ryePct = b.ryePct;
+  ['white', 'some', 'heavy', 'rye'].forEach(function (k) {
+    var el = document.getElementById('btn-blend-' + k);
+    if (el) el.className = (k === key ? 'active' : '');
+  });
+  updateBulkPreview();
+  render();
+}
+
+function onStarterChange(val) {
+  state.starterPct = +val || 20;
+  var out = document.getElementById('starter-out');
+  if (out) out.textContent = state.starterPct + '%';
+  updateBulkPreview();
+  render();
+}
+
 function setProof(method) {
   state.proofMethod = method;
   document.getElementById('btn-cold').classList.toggle('active', method === 'cold');
@@ -607,8 +619,8 @@ function setFromNow() {
   var tempF = state.tempF;
   var proofMethod = state.proofMethod;
 
-  var peak   = interpolate(STARTER_PEAK_DATA, tempF);
-  var bulk   = interpolate(BULK_DATA, tempF);
+  var peak   = F.starterPeak(tempF, fermOpts());
+  var bulk   = F.bulk(tempF, fermOpts());
 
   // Starter peaks in peak.center minutes from now
   // Autolyse (30 min) runs in parallel with starter peak, so mix starts at peak
@@ -621,7 +633,7 @@ function setFromNow() {
     var coldProofEnd = shapeEnd + 720 * 60000; // 12hr cold proof
     bakeStart = coldProofEnd + 60 * 60000;     // 60min preheat
   } else {
-    var proof = interpolate(SAME_DAY_PROOF_DATA, tempF);
+    var proof = F.sameDayProof(tempF, fermOpts());
     bakeStart = shapeEnd + proof.center * 60000 + 60 * 60000; // proof + preheat overlap
   }
 

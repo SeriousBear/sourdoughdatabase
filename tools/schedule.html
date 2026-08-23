@@ -165,11 +165,11 @@
 
   <div class="rc-callout">
     <strong>What these timings assume</strong>
-    Every number here is calculated for a <strong>white-flour dough at 20% starter</strong>, adjusted for your kitchen temperature. That's the common case, and temperature is by far the biggest lever — but it isn't the only one.
+    Temperature is the biggest lever, and it always was. Your flour blend and how much starter you use are the next two, and this page now asks for both — set them below and every timing moves with them. The same engine runs <a href="/recipes/build-your-own.html">Choose Your Own Crumb</a>, so the two tools agree on the same dough.
     <br><br>
-    Whole grain and rye ferment noticeably <em>faster</em>: at 25–30% whole wheat expect bulk to finish maybe 15–20% sooner than shown, and high rye sooner still. More starter speeds things up; less slows them down. Enriched doughs with fat, sugar or dairy run slower.
+    What it still cannot know is your exact formula. Hydration is assumed around 70%, and fat, sugar, dairy and acid all slow a dough down without appearing here — if you're baking something enriched or sour, <a href="/recipes/build-your-own.html">build it properly</a> and read the timings off that instead.
     <br><br>
-    So treat these as a <strong>starting estimate, not a stopwatch</strong>. The dough decides — <a href="/techniques/reading-the-bulk.html">reading the bulk</a> covers the four signals that actually tell you when it's done.
+    Either way, treat these as a <strong>starting estimate, not a stopwatch</strong>. The dough decides — <a href="/techniques/reading-the-bulk.html">reading the bulk</a> covers the four signals that actually tell you when it's done.
   </div>
 
   <!-- ── INPUT PANEL ──────────────────────────────────────────────── -->
@@ -221,6 +221,49 @@
         <span>64°F · cold</span>
         <span>72°F · typical</span>
         <span>86°F · hot</span>
+      </div>
+    </div>
+
+    <div class="input-divider"></div>
+
+    <!-- ── YOUR DOUGH ────────────────────────────────────────
+         These two are why this page used to be wrong for anything that
+         wasn't a white loaf at 20% starter. Both default to that reference,
+         so the schedule is unchanged unless you say otherwise. -->
+    <div class="sched-section">
+      <span class="sched-label">Your flour blend</span>
+      <div class="proof-toggle sched-blend" id="blend-toggle">
+        <button class="active" onclick="setBlend('white')" id="btn-blend-white">
+          White
+          <span class="pt-sub">bread or all-purpose</span>
+        </button>
+        <button onclick="setBlend('some')" id="btn-blend-some">
+          ~25% whole grain
+          <span class="pt-sub">the usual blend</span>
+        </button>
+        <button onclick="setBlend('heavy')" id="btn-blend-heavy">
+          ~50% whole grain
+          <span class="pt-sub">noticeably faster</span>
+        </button>
+        <button onclick="setBlend('rye')" id="btn-blend-rye">
+          Rye-forward
+          <span class="pt-sub">fastest of the four</span>
+        </button>
+      </div>
+      <p class="sched-hint">Whole grain and rye ferment faster than white. Picking the right one here moves every timing below. For an exact formula rather than a bracket, build it in <a href="/recipes/build-your-own.html">Choose Your Own Crumb</a>.</p>
+    </div>
+
+    <div class="input-divider"></div>
+
+    <div class="sched-section">
+      <span class="sched-label">How much starter</span>
+      <input type="range" class="temp-slider" id="starter-slider"
+             min="5" max="35" value="20" step="1"
+             oninput="onStarterChange(this.value)">
+      <div class="temp-scale">
+        <span>5% · very slow</span>
+        <span><output id="starter-out">20%</output> of flour weight</span>
+        <span>35% · fast</span>
       </div>
     </div>
 
@@ -335,6 +378,7 @@
 
 
 <script src="/assets/js/components.js" defer></script>
+<script src="/assets/js/fermentation.js" defer></script>
 <script src="/assets/js/schedule.js" defer></script>
 </body>
 </html>
