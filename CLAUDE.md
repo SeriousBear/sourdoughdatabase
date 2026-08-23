@@ -526,6 +526,48 @@ Each hub's intro should point at its neighbours ("if you'd rather diagnose than
 learn, that's the Atlas"). That cross-linking is what keeps the libraries from
 reading as separate silos.
 
+### `.rh-hero` belongs on all seven hubs and nowhere else
+
+It's the marker for *this is the front page of a library*. Entry pages
+(`/atlas/*`, `/flour/*`, `/techniques/*`, recipes, journal articles) use their
+own `rc-`/article chrome and must not have one — two hero treatments in a row
+is what it looks like when someone puts a hub hero on a leaf page.
+
+**`data-hub` on the `.rh-hero` drives everything that differs between hubs** —
+the ghosted watermark word and the accent colour, both defined together in one
+block in `07-recipes-hubs.css`. Adding a hub means one attribute in the page
+and two lines in that block. A hero with no `data-hub` still renders: default
+accent, no watermark, so it can't ship looking broken.
+
+The watermark was a hardcoded `content: 'RECIPES'` until August 2026, so
+Starter School, the Journal and every other hub had RECIPES ghosted behind
+them.
+
+**Accents must clear 4.5:1 against `--ink`.** The eyebrow is small uppercase
+type on a dark hero — the hardest thing on the site to read. `--pen-red`
+(2.33), `--pen-blue` (1.73) and `--pencil` (1.91) all fail on ink and are not
+candidates, whatever they look like in a swatch. The seven `--hub-*` tokens in
+`00-base.css` were each measured, not eyeballed. Check any new one before
+adding it.
+
+The accent drives three things and they must stay in sync: the 3px bottom rule,
+the eyebrow, and the `<em>` in the title. That last one is what makes the
+coding actually readable at a glance — the eyebrow alone is too small to
+register.
+
+**Flour Compendium was the odd one out** and was brought onto this in August
+2026. It had its own `fc-page-hero` with a moss-green background and an
+inline-styled breadcrumb using `›` and capitalised "Home" — a second breadcrumb
+implementation with ten inline styles sitting next to the `.breadcrumb` class
+that already existed. Both are gone. The page keeps its green card and table
+styling; only the hero and breadcrumb are shared now.
+
+Its `--moss`, `--moss-deep`, `--amber` and `--amber-deep` were referenced ~20
+times as `var(--moss, #2d4a2b)` and only ever resolved through the fallback —
+the properties themselves were never declared. They're real tokens in
+`00-base.css` now, same values. `var(--moss)` without a fallback used to
+silently produce nothing.
+
 ## scripts/sync-chrome.py — the only way to change the nav
 
     python3 scripts/sync-chrome.py            # apply
@@ -540,6 +582,38 @@ with those markers** and run sync-chrome instead of pasting chrome in by hand.
 Three separate bugs in this repo came from pasting a cached copy of the header
 into a new page and not noticing it was a nav item behind. There is now no
 reason to ever paste it manually.
+
+### Why the chrome is duplicated instead of included — asked and settled
+
+A nav change touching 66 files looks wrong. It isn't, and this was measured in
+August 2026 rather than assumed:
+
+- **Static HTML has no include tag**, and Netlify does not support SSI, PHP, or
+  anything similar. Their own guidance is "use JavaScript or a function."
+- **JS injection is the one option that is actively harmful here.** The header
+  and footer *are* the site's internal link graph. When `components.js` wrote
+  them with `innerHTML`, a crawler that doesn't execute JS saw pages with no
+  navigation. That is the single worst thing to hide behind JS on a site whose
+  traffic model is organic search. It also caused a live bug: a browser holding
+  a cached old copy of the script overwrote correct served HTML with a
+  two-versions-stale nav.
+- **The cost is negligible.** Chrome is 3,770 bytes per page raw, ~1.1 KB
+  gzipped, 17.5% of an average page, 243 KB across the whole 4.7 MB repo.
+  Shipping it in the HTML is *faster* than any include — no second request, no
+  JS execution, and it compresses into the page rather than on top of it.
+- **The real cost is git diff noise**, not anything user-facing.
+
+The genuine upgrade is a static site generator (Eleventy, Astro): one layout,
+identical rendered output, generated pages no longer committed. It would also
+retire `stamp-assets.py`, since an SSG gives content-hashed filenames — the
+proper fix, which would let `/assets/*` go back to `immutable` and be faster
+than today.
+
+**Deliberately deferred, August 2026.** It buys authoring ergonomics, not
+speed or SEO, and it costs a build step, a lockfile, a dependency to maintain,
+and builds that can fail. Revisit when the page count passes ~100, or when
+hashed filenames and long-lived asset caching become worth a build. Don't
+re-propose it as an SEO or performance win — it is neither.
 
 ## scripts/stamp-assets.py — cache busting
 

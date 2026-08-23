@@ -17,6 +17,30 @@
   --pen-red: #a53020;
   --tape: rgba(238, 218, 122, 0.55);
   --tape-pink: rgba(232, 182, 184, 0.6);
+
+  /* Hub accents — one per library, used for the hero's eyebrow text and its
+     bottom rule. Every one is >= 4.5:1 against --ink, checked rather than
+     eyeballed: the eyebrow is small uppercase type on a dark hero, which is
+     the hardest thing on the site to read. --pen-red (2.33), --pen-blue
+     (1.73) and --pencil (1.91) all fail that bar on ink and are NOT
+     candidates here, whatever they look like in a swatch. */
+  --hub-recipes:  #c47878;   /* rose   4.83 */
+  --hub-start:    #9db08c;   /* sage   6.92 */
+  --hub-technique:#7c9dc4;   /* blue   5.73 */
+  --hub-tools:    #a8b4bb;   /* steel  7.60 */
+  --hub-cultures: #c9a2c4;   /* plum   7.24 */
+  --hub-journal:  #e2cf9f;   /* cream 10.47 */
+  --hub-flour:    var(--amber);
+
+  /* The Flour Compendium's own green/amber system. These were referenced
+     ~20 times across that page as var(--moss, #2d4a2b) and only ever
+     resolved through the fallback — the custom properties did not exist.
+     Same hex values, now declared once. Anyone writing var(--moss) without
+     a fallback used to get nothing. */
+  --moss:       #2d4a2b;
+  --moss-deep:  #1f3520;
+  --amber:      #c8842c;
+  --amber-deep: #9a5d1c;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -7268,26 +7292,50 @@ footer {
    chrome; moved here rather than duplicated.
    Single rh- prefix — no per-hub prefixes.
    ============================================================ */
+    /* One hero, seven libraries. `data-hub` on the .rh-hero picks both the
+       ghosted watermark word and the accent — everything that differs
+       between hubs is in the block below and nowhere else. A hero with no
+       data-hub still renders correctly, just with the default rose accent
+       and no watermark, so a new hub can't ship looking broken.
+
+       The watermark used to be a hardcoded content:'RECIPES', which meant
+       Starter School and the Journal both had RECIPES ghosted behind them. */
     .rh-hero {
+      --rh-accent: var(--hub-recipes);
       background: var(--ink); padding: 64px 32px 56px;
-      border-bottom: 3px solid var(--pen-red); position: relative; overflow: hidden;
+      border-bottom: 3px solid var(--rh-accent); position: relative; overflow: hidden;
     }
     .rh-hero::before {
-      content: 'RECIPES'; position: absolute; right: -20px; top: 50%;
+      content: ''; position: absolute; right: -20px; top: 50%;
       transform: translateY(-50%); font-family: 'Caveat', cursive; font-size: 14rem;
       font-weight: 700; color: rgba(244,234,208,0.035); line-height: 1;
       pointer-events: none; white-space: nowrap;
     }
+
+    .rh-hero[data-hub="recipes"]        { --rh-accent: var(--hub-recipes); }
+    .rh-hero[data-hub="recipes"]::before        { content: 'RECIPES'; }
+    .rh-hero[data-hub="starter-school"] { --rh-accent: var(--hub-start); }
+    .rh-hero[data-hub="starter-school"]::before { content: 'STARTER'; }
+    .rh-hero[data-hub="techniques"]     { --rh-accent: var(--hub-technique); }
+    .rh-hero[data-hub="techniques"]::before     { content: 'TECHNIQUES'; }
+    .rh-hero[data-hub="tools"]          { --rh-accent: var(--hub-tools); }
+    .rh-hero[data-hub="tools"]::before          { content: 'TOOLS'; }
+    .rh-hero[data-hub="starters"]       { --rh-accent: var(--hub-cultures); }
+    .rh-hero[data-hub="starters"]::before       { content: 'CULTURES'; }
+    .rh-hero[data-hub="journal"]        { --rh-accent: var(--hub-journal); }
+    .rh-hero[data-hub="journal"]::before        { content: 'FIELD NOTES'; }
+    .rh-hero[data-hub="flour"]          { --rh-accent: var(--hub-flour); }
+    .rh-hero[data-hub="flour"]::before          { content: 'FLOUR'; }
     .rh-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
     .rh-eyebrow {
       font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--rule-pink-strong); margin-bottom: 12px; display: block;
+      text-transform: uppercase; color: var(--rh-accent); margin-bottom: 12px; display: block;
     }
     .rh-title {
       font-family: 'Caveat', cursive; font-size: clamp(3rem, 7vw, 5rem); font-weight: 700;
       color: var(--paper); line-height: 1; margin-bottom: 16px;
     }
-    .rh-title em { color: var(--rule-pink); font-style: italic; }
+    .rh-title em { color: var(--rh-accent); font-style: italic; }
     .rh-sub {
       font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-style: italic;
       color: var(--paper-aged); max-width: 600px; line-height: 1.6;

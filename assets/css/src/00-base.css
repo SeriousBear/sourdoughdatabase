@@ -17,6 +17,30 @@
   --pen-red: #a53020;
   --tape: rgba(238, 218, 122, 0.55);
   --tape-pink: rgba(232, 182, 184, 0.6);
+
+  /* Hub accents — one per library, used for the hero's eyebrow text and its
+     bottom rule. Every one is >= 4.5:1 against --ink, checked rather than
+     eyeballed: the eyebrow is small uppercase type on a dark hero, which is
+     the hardest thing on the site to read. --pen-red (2.33), --pen-blue
+     (1.73) and --pencil (1.91) all fail that bar on ink and are NOT
+     candidates here, whatever they look like in a swatch. */
+  --hub-recipes:  #c47878;   /* rose   4.83 */
+  --hub-start:    #9db08c;   /* sage   6.92 */
+  --hub-technique:#7c9dc4;   /* blue   5.73 */
+  --hub-tools:    #a8b4bb;   /* steel  7.60 */
+  --hub-cultures: #c9a2c4;   /* plum   7.24 */
+  --hub-journal:  #e2cf9f;   /* cream 10.47 */
+  --hub-flour:    var(--amber);
+
+  /* The Flour Compendium's own green/amber system. These were referenced
+     ~20 times across that page as var(--moss, #2d4a2b) and only ever
+     resolved through the fallback — the custom properties did not exist.
+     Same hex values, now declared once. Anyone writing var(--moss) without
+     a fallback used to get nothing. */
+  --moss:       #2d4a2b;
+  --moss-deep:  #1f3520;
+  --amber:      #c8842c;
+  --amber-deep: #9a5d1c;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

@@ -39,30 +39,10 @@
     gtag('config', 'G-7TNFRKVWVW');
   </script>
 
-  <link rel="stylesheet" href="/assets/css/styles.css?v=1330312e" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=844665b1" />
 
   <!-- Page-scoped styles only — no :root, body, *, html, or bare a rules -->
   <style>
-    /* ── page hero ── */
-    .fc-page-hero {
-      background: var(--moss-deep, #1f3520);
-      padding: 64px 32px 56px;
-      border-bottom: 3px solid var(--amber, #c8842c);
-      position: relative;
-      overflow: hidden;
-    }
-    .fc-page-hero::before {
-      content: 'FLOUR';
-      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
-      font-family: 'Caveat', cursive; font-size: 14rem; font-weight: 700;
-      color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none;
-      white-space: nowrap;
-    }
-    .fc-page-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
-    .fc-page-hero-eyebrow { font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber, #c8842c); margin-bottom: 12px; display: block; }
-    .fc-page-hero-title { font-family: 'Caveat', cursive; font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; color: #f3ecdc; line-height: 1; margin-bottom: 16px; }
-    .fc-page-hero-sub { font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-style: italic; color: #c5cdb4; max-width: 580px; line-height: 1.6; }
-
     /* ── main wrapper ── */
     .fc-compendium-wrapper { max-width: 1000px; margin: 0 auto; padding: 56px 32px 80px; }
 
@@ -199,7 +179,6 @@
 
     /* ── responsive ── */
     @media (max-width: 760px) {
-      .fc-page-hero { padding: 44px 20px 36px; }
       .fc-compendium-wrapper { padding: 36px 20px 60px; }
       .fc-about-strip { padding: 24px; }
       .fc-flour-grid { grid-template-columns: 1fr; }
@@ -274,23 +253,20 @@
     </header>
   </div>
 
-  <div class="breadcrumb">
-    <div style="max-width:1000px;margin:0 auto;padding:14px 32px;font-family:'Special Elite',monospace;font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--pencil);display:flex;align-items:center;gap:8px;">
-      <a href="/" style="color:var(--pencil);text-decoration:none;">Home</a>
-      <span style="color:var(--rule);">›</span>
-      <span>Flour Compendium</span>
+  <section class="rh-hero" data-hub="flour">
+    <div class="rh-hero-inner">
+      <span class="rh-eyebrow">Reference</span>
+      <h1 class="rh-title">The Flour <em>Compendium</em></h1>
+      <p class="rh-sub">Everything flour in sourdough baking — protein content, handling notes, where it comes from, and where to get it.</p>
     </div>
-  </div>
-
-  <div class="fc-page-hero">
-    <div class="fc-page-hero-inner">
-      <span class="fc-page-hero-eyebrow">Reference</span>
-      <h1 class="fc-page-hero-title">The Flour Compendium</h1>
-      <p class="fc-page-hero-sub">Everything flour in sourdough baking — protein content, handling notes, where it comes from, and where to get it.</p>
-    </div>
-  </div>
+  </section>
 
   <div class="fc-compendium-wrapper">
+
+    <div class="breadcrumb">
+      <a href="/">home</a><span class="sep">/</span>
+      <span>flour compendium</span>
+    </div>
 
     <!-- Intro -->
     <div class="fc-compendium-intro">

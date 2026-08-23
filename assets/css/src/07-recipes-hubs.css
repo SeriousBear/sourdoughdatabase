@@ -224,26 +224,50 @@
    chrome; moved here rather than duplicated.
    Single rh- prefix — no per-hub prefixes.
    ============================================================ */
+    /* One hero, seven libraries. `data-hub` on the .rh-hero picks both the
+       ghosted watermark word and the accent — everything that differs
+       between hubs is in the block below and nowhere else. A hero with no
+       data-hub still renders correctly, just with the default rose accent
+       and no watermark, so a new hub can't ship looking broken.
+
+       The watermark used to be a hardcoded content:'RECIPES', which meant
+       Starter School and the Journal both had RECIPES ghosted behind them. */
     .rh-hero {
+      --rh-accent: var(--hub-recipes);
       background: var(--ink); padding: 64px 32px 56px;
-      border-bottom: 3px solid var(--pen-red); position: relative; overflow: hidden;
+      border-bottom: 3px solid var(--rh-accent); position: relative; overflow: hidden;
     }
     .rh-hero::before {
-      content: 'RECIPES'; position: absolute; right: -20px; top: 50%;
+      content: ''; position: absolute; right: -20px; top: 50%;
       transform: translateY(-50%); font-family: 'Caveat', cursive; font-size: 14rem;
       font-weight: 700; color: rgba(244,234,208,0.035); line-height: 1;
       pointer-events: none; white-space: nowrap;
     }
+
+    .rh-hero[data-hub="recipes"]        { --rh-accent: var(--hub-recipes); }
+    .rh-hero[data-hub="recipes"]::before        { content: 'RECIPES'; }
+    .rh-hero[data-hub="starter-school"] { --rh-accent: var(--hub-start); }
+    .rh-hero[data-hub="starter-school"]::before { content: 'STARTER'; }
+    .rh-hero[data-hub="techniques"]     { --rh-accent: var(--hub-technique); }
+    .rh-hero[data-hub="techniques"]::before     { content: 'TECHNIQUES'; }
+    .rh-hero[data-hub="tools"]          { --rh-accent: var(--hub-tools); }
+    .rh-hero[data-hub="tools"]::before          { content: 'TOOLS'; }
+    .rh-hero[data-hub="starters"]       { --rh-accent: var(--hub-cultures); }
+    .rh-hero[data-hub="starters"]::before       { content: 'CULTURES'; }
+    .rh-hero[data-hub="journal"]        { --rh-accent: var(--hub-journal); }
+    .rh-hero[data-hub="journal"]::before        { content: 'FIELD NOTES'; }
+    .rh-hero[data-hub="flour"]          { --rh-accent: var(--hub-flour); }
+    .rh-hero[data-hub="flour"]::before          { content: 'FLOUR'; }
     .rh-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
     .rh-eyebrow {
       font-family: 'Special Elite', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--rule-pink-strong); margin-bottom: 12px; display: block;
+      text-transform: uppercase; color: var(--rh-accent); margin-bottom: 12px; display: block;
     }
     .rh-title {
       font-family: 'Caveat', cursive; font-size: clamp(3rem, 7vw, 5rem); font-weight: 700;
       color: var(--paper); line-height: 1; margin-bottom: 16px;
     }
-    .rh-title em { color: var(--rule-pink); font-style: italic; }
+    .rh-title em { color: var(--rh-accent); font-style: italic; }
     .rh-sub {
       font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-style: italic;
       color: var(--paper-aged); max-width: 600px; line-height: 1.6;
