@@ -1103,6 +1103,70 @@ footer {
   padding-bottom: 2px;
 }
 
+/* ── THE PROGRESSION (homepage tab 01) ────────────────────────────────
+   A ladder, not a grid: the order is the content. Rungs that point off
+   this site are marked, because a reader deserves to know before they
+   click that they are leaving.
+   -------------------------------------------------------------------- */
+.journey { max-width: 860px; margin: 0 auto; padding: 0 24px 40px; }
+.jr-ladder { list-style: none; margin: 0; padding: 0; position: relative; }
+.jr-ladder::before {
+  content: ''; position: absolute; left: 19px; top: 12px; bottom: 12px;
+  width: 1px; background: var(--rule);
+}
+.jr-rung { display: grid; grid-template-columns: 40px 1fr; gap: 22px; margin-bottom: 34px; position: relative; }
+.jr-num {
+  font-family: 'Special Elite', monospace; font-size: 0.72rem;
+  color: var(--pen-red); background: var(--paper);
+  width: 40px; height: 40px; border: 1px solid var(--rule); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; z-index: 1;
+}
+.jr-kicker {
+  display: block; font-family: 'Special Elite', monospace; font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--pencil);
+  margin-bottom: 5px;
+}
+.jr-title {
+  font-family: 'Caveat', cursive; font-size: 1.9rem; font-weight: 700;
+  color: var(--ink); line-height: 1.05; margin: 0 0 8px;
+}
+.jr-what {
+  font-family: 'Crimson Pro', serif; font-size: 1.02rem; line-height: 1.65;
+  color: var(--ink-soft); margin: 0 0 12px;
+}
+.jr-go {
+  display: inline-block; font-family: 'Special Elite', monospace;
+  font-size: 0.68rem; letter-spacing: 0.06em; color: var(--pen-blue);
+  text-decoration: none; border-bottom: 1px solid var(--rule-pink-strong);
+  padding-bottom: 2px;
+}
+.jr-go:hover { color: var(--pen-red); border-bottom-color: var(--pen-red); }
+.jr-out { color: var(--ink); }
+.jr-who { color: var(--pencil); text-transform: none; letter-spacing: 0; }
+.jr-prep {
+  font-family: 'Crimson Pro', serif; font-size: 0.92rem; line-height: 1.6;
+  color: var(--pencil); margin: 10px 0 0;
+}
+.jr-prep-label {
+  font-family: 'Special Elite', monospace; font-size: 0.58rem;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--pencil);
+  margin-right: 6px;
+}
+.jr-prep a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+.jr-foot {
+  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.95rem;
+  line-height: 1.7; color: var(--pencil);
+  border-top: 1px dashed var(--rule); padding-top: 20px; margin-top: 8px;
+}
+.jr-foot a { color: var(--pen-blue); text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .journey { padding: 0 18px 30px; }
+  .jr-rung { grid-template-columns: 32px 1fr; gap: 14px; }
+  .jr-num { width: 32px; height: 32px; font-size: 0.65rem; }
+  .jr-ladder::before { left: 15px; }
+  .jr-title { font-size: 1.6rem; }
+}
 /* ============================================================
    TOOLS PAGES (shared)
    ============================================================ */
