@@ -352,30 +352,48 @@ Rules for the dropdowns:
 Six top-level items with two dropdowns does not fit a phone. The panels were
 inlined (`position: static`, always open) so they wouldn't overflow a wrapped
 nav — which produced a **~1,300px navigation column pushing the page off screen
-on every load**. Replaced August 2026 with a proper menu: the header collapses
-to logo + burger (90px), and the nav opens as a full-width block below it.
+on every load**. Replaced August 2026.
 
+- **`#site-header` is `position: sticky`** at mobile, so the burger is reachable
+  from anywhere in a long guide and the close X stays where the reader left it.
+  `html { scroll-padding-top: 92px }` keeps in-page anchors clear of it.
+- **The open menu is a fixed full-screen panel** (`position: fixed; inset: 0`),
+  not a block in the flow. The in-flow version shipped first and was wrong twice
+  over: clipped by its own `max-height` so the reader never reached `tools`,
+  `the pantry` or `about`, and an inner scroller fighting the page scroll
+  underneath it. The page is frozen behind the panel via
+  `html:has(.nav-check:checked) { overflow: hidden }`, with `components.js`
+  setting `.nav-open` as the fallback for browsers without `:has()` — neither
+  is load-bearing alone.
 - **The toggle is a real `<input type="checkbox">` plus a `<label>`**, not a
   button, so **the menu opens and closes with JavaScript off** — the same
   standard the dropdowns are held to. The checkbox is clipped rather than
-  `display:none` so it stays focusable and keyboard-operable.
-- `components.js` `mobileMenu()` adds only what CSS can't: `aria-expanded` on
-  the label, closing on link tap (which matters for same-page anchors, where
-  no navigation closes it), and Escape. **Don't convert this to a JS-only
-  button** — that trades the no-JS guarantee for nothing.
+  `display:none` so it stays focusable and keyboard-operable. `mobileMenu()` in
+  `components.js` adds only what CSS can't: `aria-expanded`, closing on link tap
+  (which matters for same-page anchors, where no navigation closes it), Escape,
+  and the scroll-lock fallback. **Don't convert this to a JS-only button** — it
+  trades the no-JS guarantee for nothing.
 - **Open, it shows all thirteen links at once.** No second tap into a submenu.
-  Thirteen is few enough to read in one go, and nested taps on a phone are
-  worse than a slightly longer list. The panel is capped at
-  `calc(100vh - 130px)` with `overflow-y: auto`, so it can never exceed the
-  screen if the nav grows.
+  Thirteen is few enough to read in one go, and nested taps on a phone are worse
+  than a slightly longer list. It fits without scrolling down to a 402×874
+  viewport; below that the panel scrolls itself, with `overscroll-behavior:
+  contain` so nothing chains to the page.
 - Inside the open menu the `.nav-top` buttons are **headings, not controls** —
-  their panel is already open. They're `cursor: default` and their dropdown
-  caret is hidden.
-- The mobile `.nav` is `align-items: flex-start` so items hug their text. Full
-  width would stretch the active `tape` marker across the whole row.
-- All of it lives in the `@media (max-width: 640px)` block in
-  `07-recipes-hubs.css`, next to the dropdown rules. It has to load after the
-  `header` rule in `02-page-furniture.css`, which it overrides.
+  their panel is already open. `cursor: default`, caret hidden.
+
+**Two traps, both of which shipped once and looked fine in a static check:**
+
+1. **`.nav` inherits `flex-wrap: wrap`** from the old inline nav rule in
+   `02-page-furniture.css`. In a fixed-height *column* flex container that wraps
+   into **columns** — `about` rendered half off the right edge. The mobile rule
+   must set `flex-wrap: nowrap` explicitly.
+2. **The panel is a child of `<header>`, not a sibling.** Raising `<header>`
+   above it does nothing, because the panel is inside that stacking context.
+   `.logo` and `.nav-burger` have to be raised themselves
+   (`position: relative; z-index: 2`) against the panel's `z-index: 1`.
+
+Both render clean in `verify.py`. Check a mobile viewport in a real browser
+after touching any of this, and check it **scrolled down**, not just at the top.
 
 ### Don't point navigation at homepage anchors
 

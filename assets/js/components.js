@@ -204,6 +204,10 @@
     function sync() {
       if (label) label.setAttribute('aria-expanded', box.checked ? 'true' : 'false');
       box.setAttribute('aria-label', box.checked ? 'Close menu' : 'Open menu');
+      // Freezes the page behind the open panel. The CSS does this with
+      // :has() too — this is the fallback for browsers without it, and
+      // costs nothing where :has() already works.
+      document.documentElement.classList.toggle('nav-open', box.checked);
     }
     sync();
     box.addEventListener('change', sync);
