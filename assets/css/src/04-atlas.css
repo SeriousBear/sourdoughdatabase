@@ -17,7 +17,7 @@
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 10px;
 }
 .atlas-search-input-row {
@@ -42,7 +42,7 @@
   padding: 0 20px;
   display: flex;
   align-items: center;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   font-family: 'Caveat', cursive;
   font-size: 28px;
 }
@@ -82,7 +82,7 @@
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
 }
 .autocomplete-item .ac-snippet {
   font-family: 'Crimson Pro', serif;
@@ -108,7 +108,7 @@
 .atlas-category-heading .cat-icon {
   font-family: 'Caveat', cursive;
   font-size: 36px;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   line-height: 1;
   transform: rotate(-3deg);
 }
@@ -120,7 +120,15 @@
   line-height: 1;
   transform: rotate(-0.5deg);
 }
-.atlas-category-heading h2 em { color: var(--pen-red); font-style: italic; }
+.atlas-category-heading h2 em { color: var(--hub-atlas); font-style: italic; }
+
+/* The hub and the entry pages both use the shared .section-heading, whose em
+   is --pen-red in 03-article.css and is used on pages all over the site.
+   Scope the Atlas accent to these two wrappers rather than changing that rule
+   for everyone. Without the second selector an entry page reads with a teal
+   title and red sub-headings, which looks like a mistake. */
+.atlas-hub-wrap .section-heading em,
+.atlas-wrap .section-heading em { color: var(--hub-atlas); }
 .atlas-category-heading .cat-count {
   font-family: 'Special Elite', monospace;
   font-size: 11px;
@@ -159,7 +167,7 @@
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 6px;
 }
 .problem-card .pc-name {
@@ -243,7 +251,7 @@
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 8px;
 }
 .problem-title {
@@ -255,7 +263,7 @@
   transform: rotate(-1deg);
   margin-bottom: 10px;
 }
-.problem-title em { color: var(--pen-red); font-style: italic; display: block; }
+.problem-title em { color: var(--hub-atlas); font-style: italic; display: block; }
 .problem-tagline {
   font-family: 'Crimson Pro', serif;
   font-style: italic;
@@ -264,7 +272,7 @@
   color: var(--ink-soft);
   max-width: 620px;
   padding-left: 20px;
-  border-left: 3px solid var(--pen-red);
+  border-left: 3px solid var(--hub-atlas);
   margin-bottom: 32px;
 }
 
@@ -344,7 +352,7 @@
 .vc-play {
   width: 52px;
   height: 52px;
-  background: var(--pen-red);
+  background: var(--hub-atlas);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -383,7 +391,7 @@
   border: 1.5px solid var(--ink);
   transition: background 0.2s;
 }
-.video-facade-placeholder:hover { background: var(--pen-red); }
+.video-facade-placeholder:hover { background: var(--hub-atlas); }
 .video-facade-placeholder .vfp-icon {
   width: 48px; height: 48px;
   background: rgba(253, 248, 227, 0.15);
@@ -452,7 +460,7 @@
   font-family: 'Caveat', cursive;
   font-size: 30px;
   font-weight: 700;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   line-height: 1;
   text-align: center;
 }
@@ -475,7 +483,7 @@
   font-size: 9.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 6px;
 }
 
@@ -545,7 +553,7 @@
   font-family: 'Special Elite', monospace;
   font-size: 10px;
   letter-spacing: 0.2em;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
 }
 .quick-checklist h3 {
   font-family: 'Caveat', cursive;
@@ -571,7 +579,7 @@
   content: "☐";
   position: absolute;
   left: 0;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   font-size: 16px;
   top: 8px;
 }
@@ -610,7 +618,7 @@
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 4px;
 }
 .related-card .rc-name {
@@ -636,7 +644,7 @@
   font-weight: 600;
   color: var(--pen-blue);
 }
-.atlas-nav a:hover { color: var(--pen-red); }
+.atlas-nav a:hover { color: var(--hub-atlas); }
 .atlas-nav .an-center {
   font-family: 'Special Elite', monospace;
   font-size: 10px;

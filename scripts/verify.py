@@ -163,6 +163,22 @@ def check_css_build():
           "styles.css matches its sources (run scripts/build-css.py)",
           "" if built == current else "%d built vs %d on disk" % (len(built), len(current)))
 
+def check_index():
+    """The homepage Index panel must match what build-index.py produces.
+
+    Counts and the 'last filed' dateline are generated, not typed. Without
+    this check the panel would quietly go stale the first time a page is
+    added — and a reference site advertising numbers that are wrong is worse
+    than one advertising none.
+    """
+    import subprocess
+    r = subprocess.run([sys.executable, 'scripts/build-index.py', '--check'],
+                       capture_output=True, text=True)
+    detail = (r.stdout + r.stderr).strip().splitlines()
+    check(r.returncode == 0,
+          "homepage Index matches the repo (run scripts/build-index.py)",
+          detail[0] if detail else '')
+
 def check_stamps():
     """Every CSS/JS reference must carry its file's current content hash.
 
@@ -201,7 +217,7 @@ if __name__ == '__main__':
     print("Verifying %d pages\n" % len(files))
     check_parse(files); check_chrome(files); check_schema(files)
     check_links(files); check_sitemap(files); check_assets(); check_css_build()
-    check_stamps()
+    check_stamps(); check_index()
     print()
     if fails:
         print("%d FAILED: %s" % (len(fails), fails)); sys.exit(1)

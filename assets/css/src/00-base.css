@@ -32,6 +32,19 @@
   --hub-journal:  #e2cf9f;   /* cream 10.47 */
   --hub-flour:    var(--amber);
 
+  /* The Trouble Atlas is the one library that does NOT sit on a dark hero —
+     its hub and all 13 entries are on paper. So this accent is measured
+     against --paper (6.40:1), not --ink, and the pale hub accents above
+     would be invisible here. It is the only cool colour on the site, which
+     is the point: the Atlas is the section about diagnosis rather than
+     making, and it should not look like the rest.
+
+     Red was rejected after measuring: every candidate landed within ~70 of
+     --pen-red and read as "pen-red, slightly off" rather than a section of
+     its own. Green was rejected too — it collides with the Flour
+     Compendium's --moss (46 apart). */
+  --hub-atlas:  #1f5c5a;
+
   /* The Flour Compendium's own green/amber system. These were referenced
      ~20 times across that page as var(--moss, #2d4a2b) and only ever
      resolved through the fallback — the custom properties did not exist.

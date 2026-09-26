@@ -32,6 +32,19 @@
   --hub-journal:  #e2cf9f;   /* cream 10.47 */
   --hub-flour:    var(--amber);
 
+  /* The Trouble Atlas is the one library that does NOT sit on a dark hero —
+     its hub and all 13 entries are on paper. So this accent is measured
+     against --paper (6.40:1), not --ink, and the pale hub accents above
+     would be invisible here. It is the only cool colour on the site, which
+     is the point: the Atlas is the section about diagnosis rather than
+     making, and it should not look like the rest.
+
+     Red was rejected after measuring: every candidate landed within ~70 of
+     --pen-red and read as "pen-red, slightly off" rather than a section of
+     its own. Green was rejected too — it collides with the Flour
+     Compendium's --moss (46 apart). */
+  --hub-atlas:  #1f5c5a;
+
   /* The Flour Compendium's own green/amber system. These were referenced
      ~20 times across that page as var(--moss, #2d4a2b) and only ever
      resolved through the fallback — the custom properties did not exist.
@@ -183,13 +196,16 @@ h1.hero-title {
 h1.hero-title .word-1 { display: block; }
 h1.hero-title .word-2 {
   display: block;
-  color: var(--pen-red);
-  font-style: italic;
   transform: rotate(0.5deg) translateX(40px);
   margin-top: -10px;
 }
+/* The accent word. It sits on the last line rather than the middle one
+   because the line that matters here is "sourdough." — the word the whole
+   site is named after, and the one the old headline never contained. */
 h1.hero-title .word-3 {
   display: block;
+  color: var(--pen-red);
+  font-style: italic;
   transform: rotate(-0.3deg);
   margin-top: -10px;
 }
@@ -216,10 +232,16 @@ h1.hero-title .word-3 {
   background: var(--pen-red);
   opacity: 0.6;
 }
+/* Sits beside the deck, not beside the headline. It used to hang at
+   top:240px, which was clear of "for bread." and is not clear of
+   "sourdough." — a much longer last line. Anchored to the bottom of the
+   hero column instead, so it can't be knocked over again by a headline
+   edit. Hidden under 1024px. */
 .hero-margin-note {
   position: absolute;
-  top: 240px;
-  right: -10px;
+  top: auto;
+  bottom: 18px;
+  right: -20px;
   font-family: 'Caveat', cursive;
   font-size: 22px;
   color: var(--pen-red);
@@ -234,54 +256,99 @@ h1.hero-title .word-3 {
 }
 
 /* ============ POLAROID ============ */
-.polaroid {
-  background: #fdf8e8;
-  padding: 14px 14px 50px 14px;
-  box-shadow: 0 6px 14px rgba(40, 25, 10, 0.18), 0 1px 0 rgba(255,255,255,0.6) inset;
-  transform: rotate(2.5deg);
+/* ── the Index panel ──────────────────────────────────────────────
+   Replaced the taped polaroid in September 2026. The photo said
+   "someone bakes bread"; this says "here is everything, and here is
+   how much of it there is" — which is the question a first-time
+   visitor to a reference site actually has.
+
+   Nothing inside is typed by hand. scripts/build-index.py writes the
+   rows and the dateline from the filesystem, and verify.py fails if
+   they drift. Edit the registry in that script, never the markup. */
+.idx {
   position: relative;
-  margin-top: 40px;
+  background: #fdf8e8;
+  padding: 22px 26px 28px;
+  margin-top: 28px;
+  transform: rotate(0.9deg);
+  box-shadow: 0 6px 14px rgba(40, 25, 10, 0.18),
+              0 1px 0 rgba(255, 255, 255, 0.6) inset;
 }
-.polaroid::before, .polaroid::after {
+.idx::before {                       /* the same strip of tape the polaroid wore */
   content: "";
   position: absolute;
+  top: -10px; left: 50%;
   width: 70px; height: 22px;
   background: var(--tape);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-.polaroid::before {
-  top: -10px; left: 50%;
   transform: translateX(-50%) rotate(-2deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
-.polaroid::after {
-  bottom: -8px; right: -14px;
-  width: 48px; height: 18px;
-  transform: rotate(28deg);
-  background: var(--tape-pink);
-}
-.polaroid picture { display: block; }
-.polaroid svg,
-.polaroid img {
-  width: 100%;
-  height: 220px;
-  background: #1a1108;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-.polaroid-caption {
-  font-family: 'Caveat', cursive;
-  font-size: 22px;
-  text-align: center;
-  margin-top: 14px;
-  color: var(--ink);
-  line-height: 1.1;
-}
-.polaroid-caption small {
-  display: block;
-  font-size: 14px;
+.idx-head {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--pencil);
-  margin-top: 2px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.idx-list { list-style: none; counter-reset: idx; }
+.idx-list li { counter-increment: idx; border-bottom: 1px dotted var(--rule-pink); }
+.idx-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 16px;
+  color: var(--ink);
+  transition: color 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+              padding-left 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.idx-list a::before {
+  content: counter(idx, decimal-leading-zero);
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  color: var(--rule-pink-strong);
+  min-width: 18px;
+}
+.idx-list a:hover { color: var(--pen-red); padding-left: 5px; }
+.idx-list a:hover .n { color: var(--pen-red); }
+.idx-list .leader {
+  flex: 1;
+  min-width: 14px;
+  border-bottom: 1px dotted var(--rule);
+  transform: translateY(-5px);
+}
+.idx-list .n {
+  font-family: 'Caveat', cursive;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--pen-blue);
+  line-height: 1;
+  transition: color 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Right padding keeps the dateline clear of the rotated stamp. Without it
+   the line runs under 'Index' once the panel goes full-width on a phone. */
+.idx-foot { margin-top: 14px; padding-right: 72px; }
+.idx-last {
+  font-family: 'Special Elite', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--pencil);
+}
+.idx-last a { color: var(--pen-blue); border-bottom: 1px solid var(--rule-pink-strong); }
+.idx-last a:hover { color: var(--pen-red); }
+.idx-stamp {
+  position: absolute;
+  right: 14px; bottom: 12px;
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--pen-red);
+  border: 2px solid var(--pen-red);
+  padding: 4px 9px;
+  transform: rotate(-8deg);
+  opacity: 0.45;
 }
 
 /* ============ MOM SECTION ============ */
@@ -3258,7 +3325,7 @@ footer {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 10px;
 }
 .atlas-search-input-row {
@@ -3283,7 +3350,7 @@ footer {
   padding: 0 20px;
   display: flex;
   align-items: center;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   font-family: 'Caveat', cursive;
   font-size: 28px;
 }
@@ -3323,7 +3390,7 @@ footer {
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
 }
 .autocomplete-item .ac-snippet {
   font-family: 'Crimson Pro', serif;
@@ -3349,7 +3416,7 @@ footer {
 .atlas-category-heading .cat-icon {
   font-family: 'Caveat', cursive;
   font-size: 36px;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   line-height: 1;
   transform: rotate(-3deg);
 }
@@ -3361,7 +3428,15 @@ footer {
   line-height: 1;
   transform: rotate(-0.5deg);
 }
-.atlas-category-heading h2 em { color: var(--pen-red); font-style: italic; }
+.atlas-category-heading h2 em { color: var(--hub-atlas); font-style: italic; }
+
+/* The hub and the entry pages both use the shared .section-heading, whose em
+   is --pen-red in 03-article.css and is used on pages all over the site.
+   Scope the Atlas accent to these two wrappers rather than changing that rule
+   for everyone. Without the second selector an entry page reads with a teal
+   title and red sub-headings, which looks like a mistake. */
+.atlas-hub-wrap .section-heading em,
+.atlas-wrap .section-heading em { color: var(--hub-atlas); }
 .atlas-category-heading .cat-count {
   font-family: 'Special Elite', monospace;
   font-size: 11px;
@@ -3400,7 +3475,7 @@ footer {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 6px;
 }
 .problem-card .pc-name {
@@ -3484,7 +3559,7 @@ footer {
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 8px;
 }
 .problem-title {
@@ -3496,7 +3571,7 @@ footer {
   transform: rotate(-1deg);
   margin-bottom: 10px;
 }
-.problem-title em { color: var(--pen-red); font-style: italic; display: block; }
+.problem-title em { color: var(--hub-atlas); font-style: italic; display: block; }
 .problem-tagline {
   font-family: 'Crimson Pro', serif;
   font-style: italic;
@@ -3505,7 +3580,7 @@ footer {
   color: var(--ink-soft);
   max-width: 620px;
   padding-left: 20px;
-  border-left: 3px solid var(--pen-red);
+  border-left: 3px solid var(--hub-atlas);
   margin-bottom: 32px;
 }
 
@@ -3585,7 +3660,7 @@ footer {
 .vc-play {
   width: 52px;
   height: 52px;
-  background: var(--pen-red);
+  background: var(--hub-atlas);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -3624,7 +3699,7 @@ footer {
   border: 1.5px solid var(--ink);
   transition: background 0.2s;
 }
-.video-facade-placeholder:hover { background: var(--pen-red); }
+.video-facade-placeholder:hover { background: var(--hub-atlas); }
 .video-facade-placeholder .vfp-icon {
   width: 48px; height: 48px;
   background: rgba(253, 248, 227, 0.15);
@@ -3693,7 +3768,7 @@ footer {
   font-family: 'Caveat', cursive;
   font-size: 30px;
   font-weight: 700;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   line-height: 1;
   text-align: center;
 }
@@ -3716,7 +3791,7 @@ footer {
   font-size: 9.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 6px;
 }
 
@@ -3786,7 +3861,7 @@ footer {
   font-family: 'Special Elite', monospace;
   font-size: 10px;
   letter-spacing: 0.2em;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
 }
 .quick-checklist h3 {
   font-family: 'Caveat', cursive;
@@ -3812,7 +3887,7 @@ footer {
   content: "☐";
   position: absolute;
   left: 0;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   font-size: 16px;
   top: 8px;
 }
@@ -3851,7 +3926,7 @@ footer {
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pen-red);
+  color: var(--hub-atlas);
   margin-bottom: 4px;
 }
 .related-card .rc-name {
@@ -3877,7 +3952,7 @@ footer {
   font-weight: 600;
   color: var(--pen-blue);
 }
-.atlas-nav a:hover { color: var(--pen-red); }
+.atlas-nav a:hover { color: var(--hub-atlas); }
 .atlas-nav .an-center {
   font-family: 'Special Elite', monospace;
   font-size: 10px;

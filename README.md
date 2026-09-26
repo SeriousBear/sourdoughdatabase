@@ -71,6 +71,7 @@ That spins up a local server at `http://localhost:3000`.
 
        python3 scripts/build-css.py       # rebuild styles.css from src/
        python3 scripts/sync-chrome.py     # push header/footer to every page
+       python3 scripts/build-index.py     # refresh the homepage Index counts
        python3 scripts/stamp-assets.py    # cache-bust changed CSS/JS
 
 3. Check it: `python3 scripts/verify.py` — it fails if any of the above was

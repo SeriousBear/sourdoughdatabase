@@ -543,6 +543,28 @@ The watermark was a hardcoded `content: 'RECIPES'` until August 2026, so
 Starter School, the Journal and every other hub had RECIPES ghosted behind
 them.
 
+**The Trouble Atlas is the exception, and deliberately so.** It's the one
+library with no dark hero — its hub and all 13 entries sit on paper — so
+`--hub-atlas` is measured against `--paper` (6.40:1), not `--ink`. The seven
+pale accents above would be invisible there, and this one would be invisible
+on a dark hero. Don't "fix" the inconsistency by moving it into the same range.
+
+It is also **the only cool colour on the site**, which is the point: the Atlas
+is the section about diagnosis rather than making. Two alternatives were
+measured and rejected — every red candidate landed within ~70 of `--pen-red`
+and read as "pen-red, slightly off" rather than a section of its own, and green
+collides with the Flour Compendium's `--moss` (46 apart).
+
+Inside the Atlas, `--pen-red` survives in exactly two places and they are
+semantic, not decorative: the `.pc-badge.common` frequency badge and
+`.qs-value.red`. Red against teal now means *this is the usual suspect* — a
+second signal the section did not have when everything on it was one red.
+
+Two shared rules had to be scoped rather than changed: `.section-heading em` is
+`--pen-red` in `03-article.css` and is used across the site, so the Atlas
+override is keyed to `.atlas-hub-wrap` and `.atlas-wrap`. Miss the second
+selector and an entry page reads with a teal title and red sub-headings.
+
 **Accents must clear 4.5:1 against `--ink`.** The eyebrow is small uppercase
 type on a dark hero — the hardest thing on the site to read. `--pen-red`
 (2.33), `--pen-blue` (1.73) and `--pencil` (1.91) all fail on ink and are not
@@ -615,6 +637,40 @@ and builds that can fail. Revisit when the page count passes ~100, or when
 hashed filenames and long-lived asset caching become worth a build. Don't
 re-propose it as an SEO or performance win — it is neither.
 
+## scripts/build-index.py — the homepage Index panel
+
+    python3 scripts/build-index.py            # apply
+    python3 scripts/build-index.py --check    # report drift, change nothing
+
+The hero's right-hand panel is a contents page: each library, how many entries
+it holds, and the most recent thing published. **None of it is typed.** Counts
+come from the filesystem; the dateline comes from the newest `datePublished` in
+any page's JSON-LD (not sitemap `lastmod`, which moves on a mere edit, and not
+file mtime, which a fresh checkout resets). `verify.py` fails if the rendered
+block has drifted.
+
+The rows live between `<!--INDEX:ROWS-->` and `<!--INDEX:LAST-->` markers in
+`index.html`. **Never hand-edit inside them** — edit `LIBRARIES` in the script.
+
+**Two constants carry the design rule:**
+
+- `MIN_ENTRIES = 3` — a library stays off the front page until it has something
+  to say. Recipes sits at 2 and is correctly absent; it appears on its own the
+  day a third is baked, with no edit anywhere.
+- `MAX_ROWS = 7` — the panel cannot grow past this and wreck the hero, however
+  much gets written. Rows sort largest first; registry order breaks ties.
+
+**Adding a library is one entry in `LIBRARIES`.** Watch the double-count trap:
+`tools/trouble-atlas.html` is dropped from the tools count because it's the
+Atlas *hub* and its 13 entries already have their own row. That shipped wrong
+once and read as five tools when there are four.
+
+The panel replaced a taped polaroid of a finished loaf. The photo said "someone
+bakes bread"; the index says "here is everything, and here is how much of it
+there is" — the question a first-time visitor to a reference site actually has.
+It also removed the hero's only image request, which was very likely the LCP
+element. `mom-sourdough.jpg` / `.webp` are now unreferenced by any page.
+
 ## scripts/stamp-assets.py — cache busting
 
     python3 scripts/stamp-assets.py            # apply
@@ -636,10 +692,11 @@ so hub cards rendered as bare stacked text. Nothing was wrong with the site.
 A changed URL is the only thing such a browser will fetch. That's all the stamp
 is for.
 
-**Run it last** of the three generators, after the bytes on disk have settled:
+**Run it last** of the generators, after the bytes on disk have settled. `build-index.py` rewrites `index.html`, so stamping before it leaves that page's own hash stale:
 
     python3 scripts/build-css.py
     python3 scripts/sync-chrome.py
+    python3 scripts/build-index.py
     python3 scripts/stamp-assets.py
     python3 scripts/verify.py
 
