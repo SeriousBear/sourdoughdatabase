@@ -5,6 +5,7 @@
      1. mark the current section in the nav
      2. click-toggle the Learn / Tools dropdowns
      2b. upgrade the mobile burger to a real aria button
+     2c. graceful fallback for blocked product images — img.product-img
      3. YouTube facades   — any [data-video-id]
      4. scroll reveal     — any .flour-reveal
      5. reading progress  — #read-progress + #article-body
@@ -230,9 +231,56 @@
     });
   }
 
+  /* ── PRODUCT IMAGES ─────────────────────────────────────────────
+     The Pantry's product shots are hotlinked from m.media-amazon.com,
+     which is what the Amazon Associates agreement requires — their images
+     may be used through SiteStripe or the API, not copied onto our own
+     server. The cost of that is real: ad blockers and privacy shields
+     routinely block amazon image hosts as third-party trackers, so a
+     large share of readers never see them.
+
+     Each image used to carry onerror="this.style.display='none'", which
+     turned a blocked image into a silent hole and made the whole page
+     look broken. This swaps in a placeholder that keeps the card's shape
+     and shows the product's own icon, so a blocked image reads as a
+     design choice rather than a failure.
+
+     Handles the already-failed case too: this script is deferred, so by
+     the time it runs an image may have given up long ago and will never
+     fire another error event. */
+  function productImages() {
+    var imgs = document.querySelectorAll('img.product-img');
+    if (!imgs.length) return;
+
+    function fallback(img) {
+      if (!img.parentNode || img.getAttribute('data-fellback')) return;
+      img.setAttribute('data-fellback', '1');
+      var card = img.closest ? img.closest('.product-card') : null;
+      var icon = card ? card.querySelector('.product-icon') : null;
+      var ph = document.createElement('div');
+      ph.className = 'product-img-missing';
+      ph.setAttribute('role', 'img');
+      ph.setAttribute('aria-label', img.alt || 'Product photo unavailable');
+      var mark = document.createElement('span');
+      mark.className = 'pim-mark';
+      mark.setAttribute('aria-hidden', 'true');
+      mark.textContent = icon ? icon.textContent.trim() : '\u270E';
+      ph.appendChild(mark);
+      img.parentNode.replaceChild(ph, img);
+    }
+
+    for (var i = 0; i < imgs.length; i++) {
+      (function (img) {
+        if (img.complete && img.naturalWidth === 0) { fallback(img); return; }
+        img.addEventListener('error', function () { fallback(img); });
+      })(imgs[i]);
+    }
+  }
+
   activate();
   dropdowns();
   mobileMenu();
+  productImages();
   videoFacades();
   scrollReveal();
   readProgress();

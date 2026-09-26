@@ -7,7 +7,7 @@ Classic `<script>` tags sharing one global scope. No bundler, no modules, no
 
 | File | Loads on | Contains |
 |---|---|---|
-| `components.js` | every page (`defer`) | active-nav highlighting, Learn/Tools dropdowns, **and the four behaviours that used to be copy-pasted inline**: YouTube facades (`[data-video-id]`), scroll reveal (`.flour-reveal`), reading progress, copy-link. Each no-ops when its markup is absent |
+| `components.js` | every page (`defer`) | active-nav highlighting, Learn/Tools dropdowns, **and the four behaviours that used to be copy-pasted inline**: YouTube facades (`[data-video-id]`), scroll reveal (`.flour-reveal`), reading progress, copy-link. Plus the mobile menu (`#nav-toggle`) and the Pantry's blocked-image fallback (`img.product-img`). Each no-ops when its markup is absent |
 | `recipes.js` | `/recipes/` (`defer`) | faceted filtering of the recipe cards |
 | `dough-lab-data.js` | `/recipes/build-your-own.html` (`defer`, **before** `dough-lab.js`) | the ingredient catalogue: every flour, liquid and add-in with its water/absorb figures, dose-aware guidance, and `ruinPct` ceiling. Adding an ingredient means editing this file only — every entry needs `blurb`, `band`, `low` and `high` |
 | `fermentation.js` | `/recipes/build-your-own.html` and `tools/schedule.html` (`defer`) | **the only** place fermentation timing lives: the bulk / starter-peak / proof tables plus a speed factor for blend, starter %, hydration, acid, sugar and salt. Never copy these tables into a page |

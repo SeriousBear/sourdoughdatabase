@@ -637,6 +637,37 @@ and builds that can fail. Revisit when the page count passes ~100, or when
 hashed filenames and long-lived asset caching become worth a build. Don't
 re-propose it as an SEO or performance win — it is neither.
 
+## The Pantry's product images
+
+They are **hotlinked from `m.media-amazon.com`, and that is not a mistake to
+fix.** The Amazon Associates operating agreement allows their product images to
+be used through SiteStripe or the Product Advertising API — copying them onto
+our own server is a breach. So don't "optimise" these by downloading them, even
+though self-hosting would be faster and would dodge the blockers.
+
+The cost of that is real and worth stating: **ad blockers and privacy shields
+routinely block Amazon image hosts as third-party trackers**, so a meaningful
+share of readers will never load them. Brave Shields and uBlock both do.
+
+Every image used to carry `onerror="this.style.display='none'"`, which turned a
+blocked image into a silent hole — twenty-seven of them, and a page that looked
+broken rather than blocked. `productImages()` in `components.js` now swaps in a
+`.product-img-missing` placeholder that keeps the card's 150px block and shows
+the product's own icon, so a blocked image reads as a design choice.
+
+Two things that make it work and are easy to break:
+
+- It handles the **already-failed** case, not just the `error` event.
+  `components.js` is deferred, so by the time it runs an image may have given
+  up long ago and will never fire another event.
+- The images are `loading="lazy"`, so most only attempt to load when scrolled
+  to. Placeholders appear progressively, which is correct — don't force them
+  eager to "fix" it.
+
+If a product photo is genuinely gone rather than blocked, get a fresh URL from
+that listing's SiteStripe. Kyle's own photos of gear he actually owns are the
+only way out of this trade-off entirely.
+
 ## scripts/build-index.py — the homepage Index panel
 
     python3 scripts/build-index.py            # apply

@@ -1150,6 +1150,27 @@
 
 /* ── Product image (Amazon SiteStripe photo) ── */
 /* Hidden via inline onerror until a real image URL is pasted into src. */
+/* Stands in when a product shot is blocked or 404s — see productImages()
+   in components.js. Same 150px block as the real image so the card keeps
+   its shape, dashed rather than solid so it reads as a deliberate gap. */
+.product-img-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 150px;
+  background: var(--paper-warm);
+  border: 1px dashed var(--rule-pink-strong);
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+.product-img-missing .pim-mark {
+  font-size: 42px;
+  line-height: 1;
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
 .product-img {
   display: block;
   width: 100%;
