@@ -180,28 +180,54 @@ def check_index():
           detail[0] if detail else '')
 
 def check_stamps():
-    """Every CSS/JS reference must carry its file's current content hash.
+    """Asset stamps must be ALL absent or ALL current — never mixed, never stale.
 
-    Filenames are not content-hashed, so `?v=<md5>` is the only thing that can
-    reach a browser holding an asset cached under the old `immutable` header —
-    it will not revalidate, but it has never seen the new URL. A stale stamp
-    means a returning visitor keeps running old code against new HTML.
+    Stamping moved to deploy time (netlify.toml) in September 2026, because
+    doing it locally meant every CSS edit rewrote all 66 pages and a one-line
+    change produced a 68-file commit. So the committed HTML is normally
+    unstamped and that is fine. What is NOT fine is a stale stamp or a half
+    stamped tree — either means a returning visitor can run old code against
+    new HTML, which is the exact bug this machinery exists to prevent.
     """
     ref = re.compile(r'(href|src)="(/assets/(?:css|js)/[^"?]+\.(?:css|js))(?:\?v=([0-9a-f]+))?"')
-    seen, bad = 0, []
-    for f in pages():   # includes the templates; they ship too
+    seen = stamped = 0
+    bad, missing = [], []
+    for f in pages():
         for _, path, stamp in ref.findall(open(f, encoding='utf-8').read()):
             disk = path[1:]
             if not os.path.exists(disk):
-                bad.append('%s -> %s (missing)' % (f, path)); continue
+                missing.append('%s -> %s' % (f, path)); continue
             seen += 1
+            if not stamp:
+                continue
+            stamped += 1
             want = hashlib.md5(open(disk, 'rb').read()).hexdigest()[:8]
             if stamp != want:
-                bad.append('%s -> %s (%s)' % (f, path, stamp or 'unstamped'))
+                bad.append('%s -> %s (%s, want %s)' % (f, path, stamp, want))
+
     # Must fail when it finds nothing to inspect, or it passes vacuously.
     check(seen > 0, "found CSS/JS references to stamp-check", seen)
-    check(not bad, "every CSS/JS reference carries the current content hash "
-                   "(run scripts/stamp-assets.py)", bad[:6])
+    check(not missing, "every stamped asset exists on disk", missing[:6])
+    check(not bad, "no stale asset stamps (run scripts/stamp-assets.py)", bad[:6])
+    check(stamped in (0, seen),
+          "asset stamps are all-or-nothing, not a mix",
+          '' if stamped in (0, seen) else '%d of %d stamped' % (stamped, seen))
+
+def check_deploy_stamping():
+    """netlify.toml must still invoke the stamper.
+
+    This is the one failure that would be completely silent. Delete that line
+    and every deploy ships unstamped forever; nothing looks broken, and any
+    browser holding an asset cached under the old `immutable` header stays
+    broken until 2027. The check exists because the mechanism now lives in a
+    file nobody edits.
+    """
+    tom = open('netlify.toml').read()
+    m = re.search(r'^\s*command\s*=\s*"([^"]*)"', tom, re.M)
+    cmd = m.group(1) if m else ''
+    check('stamp-assets.py' in cmd,
+          "netlify.toml build command runs stamp-assets.py",
+          cmd or 'no build command at all')
 
 def check_assets():
     tom = open('netlify.toml').read()
@@ -217,7 +243,7 @@ if __name__ == '__main__':
     print("Verifying %d pages\n" % len(files))
     check_parse(files); check_chrome(files); check_schema(files)
     check_links(files); check_sitemap(files); check_assets(); check_css_build()
-    check_stamps(); check_index()
+    check_stamps(); check_deploy_stamping(); check_index()
     print()
     if fails:
         print("%d FAILED: %s" % (len(fails), fails)); sys.exit(1)

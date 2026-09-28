@@ -256,6 +256,113 @@ h1.hero-title .word-3 {
 }
 
 /* ============ POLAROID ============ */
+/* ── the trail ────────────────────────────────────────────────────
+   Sits under the Index panel and fills the gap that made the right
+   column stop ~160px higher than the left.
+
+   The waypoint circle is rendered as part of its own link, not as a
+   <circle> in the SVG. That is the whole trick: a dot drawn separately
+   from its label WILL drift the moment either is edited, and a dot
+   sitting beside the wrong text is the one error here nobody could
+   miss. The SVG carries only the route, which is decorative — a pixel
+   out and no one can tell.
+
+   The route's control points push along the PERPENDICULAR of each
+   segment rather than straight down, which is what makes it bow out
+   and back rather than march. The tail is deliberately weaker than the
+   route — thinner, paler, wider dashes, an open chevron instead of a
+   solid head — because it is a departure, not an instruction. */
+.hero-side { position: relative; }
+
+.trail {
+  position: relative;
+  height: 244px;
+  margin-top: 22px;
+  padding-left: 4px;
+}
+.tr-path {
+  position: absolute;
+  top: 0; left: 4px;
+  overflow: visible;
+  pointer-events: none;
+}
+.tr-line {
+  fill: none;
+  stroke: var(--pen-blue);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 2.5 5.5;
+}
+.tr-tail {
+  fill: none;
+  stroke: var(--pen-blue);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 2 7;
+  opacity: 0.42;
+}
+.tr-tip {
+  fill: none;
+  stroke: var(--pen-red);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+}
+
+.tr-stop {
+  position: absolute;
+  left: calc(var(--x) - 11px);
+  top: var(--y);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: var(--ink);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tr-dot {
+  flex: none;
+  width: 22px; height: 22px;
+  border: 2px solid var(--pen-blue);
+  border-radius: 50%;
+  background: var(--paper);
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--pen-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tr-stop span {
+  font-family: 'Caveat', cursive;
+  font-size: 23px;
+  line-height: 1;
+}
+.tr-stop:hover { color: var(--pen-red); transform: translateY(-50%) translateX(4px); }
+.tr-stop:hover .tr-dot { border-color: var(--pen-red); color: var(--pen-red); }
+
+.tr-end {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translateY(-50%);
+  font-family: 'Caveat', cursive;
+  font-size: 19px;
+  color: var(--pen-red);
+  opacity: 0.85;
+  white-space: nowrap;
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tr-end:hover { opacity: 1; transform: translateY(-50%) translateX(4px); }
+
 /* ── the Index panel ──────────────────────────────────────────────
    Replaced the taped polaroid in September 2026. The photo said
    "someone bakes bread"; this says "here is everything, and here is
@@ -1825,6 +1932,22 @@ footer {
 .mode-panel { display: none; }
 .mode-panel.active { display: block; }
 
+/* The trail is drawn at fixed pixel coordinates and needs about 420px of
+   column to sit in. The hero grid does not collapse until 1024px, but the
+   right column drops below 420px at roughly 1300px — so the trail gets its
+   own, earlier breakpoint. Matching it to the grid's caused the drawn path
+   to push the page sideways on any laptop between the two.
+   Below this it is an ordinary stacked list; the path is dropped, not
+   stretched, because stretching fixed coordinates just breaks the alignment
+   the whole thing was built to guarantee. */
+@media (max-width: 1300px) {
+  .tr-path { display: none; }
+  .trail { height: auto; display: flex; flex-direction: column; gap: 12px;
+           padding-left: 0; margin-top: 26px; }
+  .tr-stop, .tr-end { position: static; transform: none; }
+  .tr-stop:hover, .tr-end:hover { transform: translateX(4px); }
+}
+
 @media (max-width: 1024px) {
   .calc-grid, .explainer-grid { grid-template-columns: 1fr; gap: 30px; }
   .results-card { transform: none; }
@@ -2494,6 +2617,7 @@ footer {
   .starter-grid, .tools-grid { grid-template-columns: repeat(2, 1fr); }
   .journal-grid, .foot-grid { grid-template-columns: 1fr 1fr; }
   .hero-margin-note { display: none; }
+
 }
 @media (max-width: 640px) {
   .binding, .holes { display: none; }

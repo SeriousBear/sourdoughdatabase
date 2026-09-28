@@ -565,6 +565,22 @@
 .mode-panel { display: none; }
 .mode-panel.active { display: block; }
 
+/* The trail is drawn at fixed pixel coordinates and needs about 420px of
+   column to sit in. The hero grid does not collapse until 1024px, but the
+   right column drops below 420px at roughly 1300px — so the trail gets its
+   own, earlier breakpoint. Matching it to the grid's caused the drawn path
+   to push the page sideways on any laptop between the two.
+   Below this it is an ordinary stacked list; the path is dropped, not
+   stretched, because stretching fixed coordinates just breaks the alignment
+   the whole thing was built to guarantee. */
+@media (max-width: 1300px) {
+  .tr-path { display: none; }
+  .trail { height: auto; display: flex; flex-direction: column; gap: 12px;
+           padding-left: 0; margin-top: 26px; }
+  .tr-stop, .tr-end { position: static; transform: none; }
+  .tr-stop:hover, .tr-end:hover { transform: translateX(4px); }
+}
+
 @media (max-width: 1024px) {
   .calc-grid, .explainer-grid { grid-template-columns: 1fr; gap: 30px; }
   .results-card { transform: none; }
@@ -1234,6 +1250,7 @@
   .starter-grid, .tools-grid { grid-template-columns: repeat(2, 1fr); }
   .journal-grid, .foot-grid { grid-template-columns: 1fr 1fr; }
   .hero-margin-note { display: none; }
+
 }
 @media (max-width: 640px) {
   .binding, .holes { display: none; }

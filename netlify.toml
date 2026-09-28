@@ -5,8 +5,19 @@
 # =================================================================
 
 [build]
-  # We're not using a build tool yet (pure HTML/CSS), so just publish the root
   publish = "."
+  # Cache-busting runs HERE, at deploy, not on Kyle's machine.
+  #
+  # stamp-assets.py rewrites every CSS/JS href to carry its file's content
+  # hash. Done locally that meant a one-line CSS edit produced a 68-file
+  # commit -- 66 of them a single hash bump -- and real changes hid among
+  # them. Netlify's build image ships Python 3 by default, so it does the
+  # rewriting on a fresh checkout instead and the stamps never get committed.
+  #
+  # If this command fails the deploy fails and the previous one stays live,
+  # which is the right way round: it is loud rather than silently shipping
+  # pages that can't reach a stale cache.
+  command = "python3 scripts/stamp-assets.py"
 
 # =================================================================
 # SECURITY HEADERS

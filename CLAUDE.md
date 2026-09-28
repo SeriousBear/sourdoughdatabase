@@ -668,6 +668,33 @@ If a product photo is genuinely gone rather than blocked, get a fresh URL from
 that listing's SiteStripe. Kyle's own photos of gear he actually owns are the
 only way out of this trade-off entirely.
 
+## The hero trail
+
+Three stops under the Index panel — make a starter, bake the Calibration Loaf,
+read the bulk — then a tail out to Choose Your Own Crumb. It exists because the
+Index raises a question it does not answer (*sixty pages, where do I start?*)
+and because the right column stopped ~160px higher than the left, which is what
+read as unfinished.
+
+**The waypoint circle is part of its own `<a>`, not a `<circle>` in the SVG.**
+That is the whole design. A dot drawn separately from its label drifts the
+moment either is edited, and a dot sitting beside the wrong step is the one
+error here nobody could miss. The SVG carries only the route, which is
+decorative — a pixel out and no one can tell. Each stop's position lives in
+`--x`/`--y` on the link; the path is drawn to pass near those numbers.
+
+**It has its own breakpoint at 1300px, deliberately not the grid's 1024px.**
+The route is drawn at fixed pixel coordinates and needs about 420px of column.
+The hero grid does not collapse until 1024, but the right column drops under
+420px at roughly 1300 — so matching the two **pushed the whole page sideways on
+any laptop between them**. Below 1300 the trail is an ordinary stacked list and
+the path is dropped rather than stretched; stretching fixed coordinates would
+break the alignment the thing was built to guarantee.
+
+The tail is intentionally weaker than the route — thinner, paler, wider dashes,
+an open chevron rather than a solid arrowhead. It is a departure, not an
+instruction. Do not "fix" it to match the route's weight.
+
 ## scripts/build-index.py — the homepage Index panel
 
     python3 scripts/build-index.py            # apply
@@ -723,12 +750,28 @@ so hub cards rendered as bare stacked text. Nothing was wrong with the site.
 A changed URL is the only thing such a browser will fetch. That's all the stamp
 is for.
 
-**Run it last** of the generators, after the bytes on disk have settled. `build-index.py` rewrites `index.html`, so stamping before it leaves that page's own hash stale:
+**It runs at deploy, not on your machine.** `netlify.toml` calls it, on a fresh
+checkout, after the repo is cloned and before the site is published. The
+committed HTML is unstamped; the served HTML is stamped.
+
+It used to be the last step of the local chain, and that was wrong: the stamp is
+a function of file *content*, so any CSS edit changed one hash and therefore all
+66 pages. A one-line change produced a **68-file commit** and buried the real
+diff among 66 identical hash bumps. Moved out September 2026.
+
+`verify.py` now accepts an unstamped tree or a fully stamped one, and rejects a
+**mix** or a **stale** stamp. It separately asserts the build command still
+exists in `netlify.toml` — delete that line and every deploy ships unstamped
+forever with nothing looking wrong, which is the only way this can really fail.
+A failing build command fails the whole deploy and leaves the previous one live,
+which is the right way round: loud, not silent.
+
+`python3 scripts/stamp-assets.py --strip` removes every stamp, if a tree ever
+ends up committed with them.
 
     python3 scripts/build-css.py
     python3 scripts/sync-chrome.py
     python3 scripts/build-index.py
-    python3 scripts/stamp-assets.py
     python3 scripts/verify.py
 
 Images are deliberately not stamped — they're served for a week and a stale

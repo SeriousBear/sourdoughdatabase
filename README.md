@@ -72,16 +72,17 @@ That spins up a local server at `http://localhost:3000`.
        python3 scripts/build-css.py       # rebuild styles.css from src/
        python3 scripts/sync-chrome.py     # push header/footer to every page
        python3 scripts/build-index.py     # refresh the homepage Index counts
-       python3 scripts/stamp-assets.py    # cache-bust changed CSS/JS
 
 3. Check it: `python3 scripts/verify.py` — it fails if any of the above was
    skipped
 4. Refresh your browser
 5. When happy, commit and push (see "Deploying" below)
 
-**Don't skip step 2.** `stamp-assets.py` puts a content hash on every CSS and
-JS URL. Without it, a returning visitor can keep running old code against new
-HTML — the site looks broken to them and fine to you.
+**Don't skip step 2.** `verify.py` fails if any of it was missed.
+
+Cache-busting is **not** in that list any more. Netlify runs `stamp-assets.py`
+at deploy instead (see `netlify.toml`), so the stamps never get committed.
+Doing it locally meant a one-line CSS edit produced a 68-file commit.
 
 ### Adding a new page
 

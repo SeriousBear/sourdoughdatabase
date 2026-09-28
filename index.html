@@ -78,7 +78,7 @@
         />
 
         <!-- ============ SHARED STYLESHEET ============ -->
-        <link rel="stylesheet" href="/assets/css/styles.css?v=5695479f" />
+        <link rel="stylesheet" href="/assets/css/styles.css" />
 
         <script type="application/ld+json">
             {
@@ -253,6 +253,7 @@
                     </div>
                 </div>
 
+                <div class="hero-side">
                 <aside class="idx fade-up d4">
                     <div class="idx-head">Contents &middot; filed to date</div>
                     <ol class="idx-list">
@@ -273,6 +274,33 @@
                     </div>
                     <span class="idx-stamp" aria-hidden="true">Index</span>
                 </aside>
+
+                <!-- ── the trail ────────────────────────────────────────
+                     Three stops from no starter to no recipe, then out.
+                     The waypoint circle is part of its own link — NOT a
+                     <circle> in the SVG — so a dot can never drift away
+                     from the text it belongs to. The SVG carries only the
+                     route, which is decorative and may sit a pixel off.
+                     Coordinates live in the --x/--y on each stop; the path
+                     below is drawn to pass through them. -->
+                <div class="trail">
+                    <svg class="tr-path" viewBox="0 0 470 244" width="470" height="244" aria-hidden="true">
+                        <path class="tr-line" d="M26,28 C43.1,53.9 66.9,64.1 78,106 C89.4,148.9 60.2,145.8 30,184"/>
+                        <path class="tr-tail" d="M30,197 C46.0,220.0 146.0,232.0 250,224"/>
+                        <path class="tr-tip" d="M241.5,218.5 L250,224 L241.5,229.5"/>
+                    </svg>
+                    <a class="tr-stop" href="/starter-school/create-a-starter.html" style="--x: 26px; --y: 28px">
+                        <b class="tr-dot">01</b><span>make a starter</span>
+                    </a>
+                    <a class="tr-stop" href="/recipes/calibration-loaf.html" style="--x: 78px; --y: 106px">
+                        <b class="tr-dot">02</b><span>bake the calibration loaf</span>
+                    </a>
+                    <a class="tr-stop" href="/techniques/reading-the-bulk.html" style="--x: 30px; --y: 184px">
+                        <b class="tr-dot">03</b><span>learn to read the bulk</span>
+                    </a>
+                    <a class="tr-end" href="/recipes/build-your-own.html" style="--x: 264px; --y: 224px">then go off-script</a>
+                </div>
+                </div>
             </div>
         </section>
 
@@ -1453,6 +1481,6 @@
           </footer>
         </div>
 
-        <script src="/assets/js/components.js?v=77bb67f6" defer></script>
+        <script src="/assets/js/components.js" defer></script>
     </body>
 </html>

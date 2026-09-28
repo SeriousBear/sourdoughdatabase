@@ -4,6 +4,9 @@ stamp-assets.py — content-hash cache busting for CSS and JS
 
     python3 scripts/stamp-assets.py            # apply
     python3 scripts/stamp-assets.py --check    # report drift, change nothing
+    python3 scripts/stamp-assets.py --strip    # remove every stamp
+
+    *** This runs at DEPLOY, from netlify.toml -- not by hand. ***
 
 ── Why this exists ──────────────────────────────────────────────────
 
@@ -78,7 +81,8 @@ def html_files():
 
 
 def main():
-    check_only = '--check' in sys.argv
+    check = '--check' in sys.argv
+    strip = '--strip' in sys.argv
 
     # Only stamp files that actually live in a stamped directory. A reference
     # to something outside them is left alone rather than silently skipped.
@@ -100,6 +104,9 @@ def main():
             p = m.group('path')
             if p not in known:
                 return m.group(0)
+            if strip:
+                total += 1
+                return '%s="%s"' % (m.group('attr'), p)
             t = token(p)
             if t is None:
                 missing.add(p)
@@ -113,7 +120,7 @@ def main():
         out = REF.sub(sub, src)
         if out != src:
             changed.append(rel)
-            if not check_only:
+            if not check:
                 with open(path, 'w', encoding='utf-8') as fh:
                     fh.write(out)
 
@@ -128,7 +135,11 @@ def main():
         print('FAIL — no CSS/JS references found in any page. Something is wrong.')
         return 1
 
-    if check_only:
+    if strip:
+        print('%d reference(s) unstamped across %d file(s)' % (total, len(changed)))
+        return 0
+
+    if check:
         if stale:
             print('%d stale or unstamped reference(s) across %d file(s):'
                   % (len(stale), len(changed)))
